@@ -1,7 +1,27 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Chat, MapView, TopBar } from "../../components";
 
 const ChatView = () => {
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => {
+      console.log("resizing");
+
+      setViewportHeight(window.innerHeight);
+    };
+
+    // Add event listener for resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener
+    return () => {
+      console.log("clean up");
+
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const containerRef = useRef(null);
   const isResizingRef = useRef(false);
   const [heights, setHeights] = useState({ top: "40%", bottom: "60%" });
@@ -32,7 +52,14 @@ const ChatView = () => {
     }
   };
 
-  return <div className="w-full h-[100vh] flex flex-col bg-red-500">lior</div>;
+  return (
+    <div
+      className="w-full flex flex-col bg-red-500"
+      style={{ height: `${viewportHeight}px` }}
+    >
+      lior
+    </div>
+  );
 };
 
 export default ChatView;
