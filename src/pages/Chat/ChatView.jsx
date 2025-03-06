@@ -28,8 +28,15 @@ const ChatView = () => {
   const handleMouseDown = () => {
     isResizingRef.current = true;
     document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("touchmove", handleMouseMove);
+
     document.addEventListener(
       "mouseup",
+      () => (isResizingRef.current = false),
+      { once: true }
+    );
+    document.addEventListener(
+      "touchend",
       () => (isResizingRef.current = false),
       { once: true }
     );
@@ -85,6 +92,7 @@ const ChatView = () => {
           <div
             className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize bg-red-500 h-4 "
             onMouseDown={handleMouseDown}
+            onTouchStart={handleMouseDown}
           >
             <div className="w-[7rem] h-[.15rem] bg-black mx-auto mt-1" />
             <div className="w-[5rem] h-[.15rem] bg-black mt-[.1rem] mx-auto" />
