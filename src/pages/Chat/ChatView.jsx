@@ -59,8 +59,6 @@ const ChatView = () => {
   };
 
   const handleMouseUp = () => {
-    console.log("handleMouseUp");
-
     isResizingRef.current = false;
     setTouchStatus("touchUP");
 
@@ -72,7 +70,6 @@ const ChatView = () => {
   };
 
   const handleMouseMove = (event) => {
-    console.log("handleMouseMove");
     event.preventDefault();
     setTouchStatus("touchMove");
     if (!isResizingRef.current) return;
@@ -81,23 +78,15 @@ const ChatView = () => {
     const containerRect = containerRef.current.getBoundingClientRect();
     let clientY = 0;
     if (event.touches) {
-      console.log("touches");
-
       clientY = event.touches[0].clientY;
     } else {
-      console.log("clicks");
       clientY = event.clientY;
     }
-    console.log("clientY : ", clientY);
 
     let newTopHeight = clientY - containerRect.top;
     let newBottomHeight = containerRect.height - newTopHeight - 8;
 
-    console.log("newTopHeight : ", newTopHeight);
-    console.log("newBottomHeight : ", newBottomHeight);
-
     if (newTopHeight > 100 && newBottomHeight > 100) {
-      console.log("333");
       setHeights({
         top: `${newTopHeight}px`,
         bottom: `${newBottomHeight}px`,
