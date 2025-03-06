@@ -35,7 +35,7 @@ const ChatView = () => {
     // Optionally prevent body scroll on mobile devices
     document.body.style.overflow = "hidden";
 
-    event.preventDefault();
+    // event.preventDefault();
 
     setTouchStatus("touchDown");
     isResizingRef.current = true;
