@@ -1,104 +1,38 @@
-import { useState, useRef, useEffect } from "react";
-import { MapView, TopBar } from "../../components";
+import React, { useRef, useState } from "react";
+import { Chat, MapView, TopBar } from "../../components";
 
 const ChatView = () => {
-  // const [topHeight, setTopHeight] = useState("50%");
-  const bottomContainer = useRef(null);
-  const [bottomHeight, setBottomHeight] = useState("50%");
-  const [isResizing, setIsResizing] = useState(false);
+  const containerRef = useRef(null);
+  const isResizingRef = useRef(false);
+  const [heights, setHeights] = useState({ top: "40%", bottom: "60%" });
 
-  const [initPos, setInitPos] = useState(0);
-
-  useEffect(() => {
-    console.log("initPos updated : ", initPos);
-  }, [initPos]);
-
-  const handleMouseDown = (event) => {
-    setInitPos(event.clientY);
-
-    setIsResizing(true);
+  const handleMouseDown = () => {
+    isResizingRef.current = true;
     document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-
-    // get the frame of the rectangle
-    // if (bottomContainer.current) {
-    //   const rect = bottomContainer.current.getBoundingClientRect();
-    //   console.log("rect-top :", rect.top);
-
-    // setBottomHeight(`${rect.height - 10}px`);
-    // }
+    document.addEventListener(
+      "mouseup",
+      () => (isResizingRef.current = false),
+      { once: true }
+    );
   };
 
   const handleMouseMove = (event) => {
-    // console.log("handleMouse - Move");
+    if (!isResizingRef.current) return;
+    if (!containerRef.current) return;
 
-    // if (!isResizing) return;
-    console.log(initPos, event.clientY);
-    // console.log("offsetTop : ", event.target.parentElement.offsetTop);
+    const containerRect = containerRef.current.getBoundingClientRect();
+    let newTopHeight = event.clientY - containerRect.top;
+    let newBottomHeight = containerRect.height - newTopHeight - 8;
 
-    // setBottomHeight(`${event.target.parentElement.offsetTop}px`);
-
-    // setBottomHeight(`${}`)
-
-    // const parentHeight = 500; // Fixed height of the parent div
-    // const newBottomHeight =
-    //   event.clientY - event.target.parentElement.offsetTop;
-    // const newBottomHeight = parentHeight - newTopHeight - 8; // Subtract resizer height (8px)
-    // if (newTopHeight > 50 && newBottomHeight > 50) {
-    //   setTopHeight(`${newTopHeight}px`);
-    //   setBottomHeight(`${newBottomHeight}px`);
-    // }
+    if (newTopHeight > 100 && newBottomHeight > 100) {
+      setHeights({
+        top: `${newTopHeight}px`,
+        bottom: `${newBottomHeight}px`,
+      });
+    }
   };
 
-  const handleMouseUp = () => {
-    setIsResizing(false);
-    document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseup", handleMouseUp);
-  };
-
-  return (
-    <div className="flex flex-col h-screen relative">
-      <TopBar />
-
-      <div className="flex-1 flex flex-col">
-        <div className="w-full flex-1 relative z-0">
-          <MapView />
-        </div>
-
-        <div
-          ref={bottomContainer}
-          className="w-full rounded-tl-2xl rounded-tr-2xl bg-red-200 "
-          style={{ height: bottomHeight }}
-        >
-          <div
-            className="w-full h-4 flex items-center justify-center cursor-pointer"
-            onMouseDown={handleMouseDown}
-          >
-            <div className="flex flex-col justify-center">
-              <div className="w-[10rem] h-[.1rem] bg-black" />
-              <div className="w-[7rem] h-[.1rem] bg-black mt-[.15rem] mx-auto" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full h-12 bg-gray-100">
-        <p className="text-gray-400 h-full text-sm flex items-center pl-4 ">
-          Type your search
-        </p>
-      </div>
-    </div>
-  );
+  return <div className="w-full h-[100vh] flex flex-col bg-red-500">lior</div>;
 };
 
 export default ChatView;
-
-{
-  /* <div className="p-2 flex flex-row gap-2 overflow-auto">
-  <RoomCardMini />
-  <RoomCardMini />
-  <RoomCardMini />
-  <RoomCardMini />
-  <RoomCardMini />
-</div>; */
-}

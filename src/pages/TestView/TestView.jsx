@@ -39,7 +39,7 @@ const TestView = () => {
       <TopBar />
 
       {/* Middle Div (Flexible) */}
-      <div ref={containerRef} className="w-full flex-1 flex flex-col border">
+      <div ref={containerRef} className="w-full flex-1 flex flex-col">
         {/* Top Div */}
         <div className="bg-blue-500" style={{ height: heights.top }}>
           <MapView />
@@ -57,7 +57,7 @@ const TestView = () => {
           </div>
 
           {/* White Space Div Below Slider */}
-          <div className="m-1 flex-1 rounded-xl bg-red-500"></div>
+          <div className="m-1 flex-1 rounded-xl "></div>
         </div>
       </div>
       {/* Bottom Div */}
