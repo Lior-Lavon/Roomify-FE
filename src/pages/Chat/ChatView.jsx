@@ -11,6 +11,8 @@ const ChatView = () => {
 
   const [bottomContainerHeight, setBottomContainerHeight] = useState(0);
 
+  const [touchStatus, setTouchStatus] = useState("touchUP");
+
   useEffect(() => {
     const handleResize = () => {
       setViewportHeight(window.innerHeight);
@@ -26,23 +28,32 @@ const ChatView = () => {
   }, []);
 
   const handleMouseDown = () => {
+    setTouchStatus("touchDown");
     isResizingRef.current = true;
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("touchmove", handleMouseMove);
 
     document.addEventListener(
       "mouseup",
-      () => (isResizingRef.current = false),
+      handleMouseUp,
+      // () => (isResizingRef.current = false),
       { once: true }
     );
     document.addEventListener(
       "touchend",
-      () => (isResizingRef.current = false),
+      handleMouseUp,
+      // () => (isResizingRef.current = false),
       { once: true }
     );
   };
 
+  const handleMouseUp = () => {
+    isResizingRef.current = false;
+    setTouchStatus("touchUP");
+  };
+
   const handleMouseMove = (event) => {
+    setTouchStatus("touchMove");
     if (!isResizingRef.current) return;
     if (!containerRef.current) return;
 
@@ -107,7 +118,7 @@ const ChatView = () => {
       {/* Bottom Div */}
       <div className="w-full h-12 bg-gray-100">
         <p className="text-gray-400 h-full text-sm flex items-center pl-4 ">
-          Type your search
+          `Type your search {touchStatus}`
         </p>
       </div>
     </div>
