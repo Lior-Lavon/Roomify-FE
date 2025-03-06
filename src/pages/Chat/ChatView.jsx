@@ -1,13 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Chat, MapView, TopBar } from "../../components";
 
 const ChatView = () => {
+  const bottomContainerRef = useRef(null);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+
+  const containerRef = useRef(null);
+  const isResizingRef = useRef(false);
+  const [heights, setHeights] = useState({ top: "30%", bottom: "70%" });
+
+  const [bottomContainerHeight, setBottomContainerHeight] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
-      console.log("resizing");
-
       setViewportHeight(window.innerHeight);
     };
 
@@ -19,10 +24,6 @@ const ChatView = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const containerRef = useRef(null);
-  const isResizingRef = useRef(false);
-  const [heights, setHeights] = useState({ top: "40%", bottom: "60%" });
 
   const handleMouseDown = () => {
     isResizingRef.current = true;
@@ -47,17 +48,26 @@ const ChatView = () => {
         top: `${newTopHeight}px`,
         bottom: `${newBottomHeight}px`,
       });
+      setBottomContainerHeight(newBottomHeight);
     }
   };
 
+  useLayoutEffect(() => {
+    // This effect runs after the DOM has been painted, and allows you to measure it
+    if (bottomContainerRef.current) {
+      const containerHeight =
+        bottomContainerRef.current.getBoundingClientRect().height;
+      // setHeight(containerHeight); // Set the height to allow scrolling
+      setBottomContainerHeight(containerHeight);
+    }
+  }, []); // Empty dependency array means this runs only once after the first render
+
   return (
     <div
-      className="w-full flex flex-col bg-red-500"
+      className="w-full flex flex-col "
       style={{ height: `${viewportHeight}px` }}
     >
-      <p className="text-base">{import.meta.env.VITE_GOOGLE_API}</p>
       {/* Top Div */}
-      {/* <div className="bg-red-500" style={{ height: "3rem" }}></div> */}
       <TopBar />
 
       {/* Middle Div (Flexible) */}
@@ -68,10 +78,10 @@ const ChatView = () => {
         </div>
 
         {/* Bottom Div */}
-        <div className="relative flex flex-1 flex-col">
+        <div className="relative flex flex-1 flex-col" ref={bottomContainerRef}>
           {/* Resizer Slider */}
           <div
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize "
+            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize bg-red-500 h-4 "
             onMouseDown={handleMouseDown}
           >
             <div className="w-[7rem] h-[.15rem] bg-black mx-auto mt-1" />
@@ -79,8 +89,8 @@ const ChatView = () => {
           </div>
 
           {/* White Space Div Below Slider */}
-          <div className="m-1 flex-1 rounded-xl ">
-            <Chat />
+          <div className="m-1 rounded-xl bg-blue-500">
+            <Chat height={bottomContainerHeight} />
           </div>
         </div>
       </div>
