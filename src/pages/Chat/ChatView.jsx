@@ -55,10 +55,9 @@ const ChatView = () => {
   useLayoutEffect(() => {
     // This effect runs after the DOM has been painted, and allows you to measure it
     if (bottomContainerRef.current) {
-      const containerHeight =
-        bottomContainerRef.current.getBoundingClientRect().height;
-      // setHeight(containerHeight); // Set the height to allow scrolling
-      setBottomContainerHeight(containerHeight);
+      setBottomContainerHeight(
+        bottomContainerRef.current.getBoundingClientRect().height
+      );
     }
   }, []); // Empty dependency array means this runs only once after the first render
 
@@ -78,7 +77,10 @@ const ChatView = () => {
         </div>
 
         {/* Bottom Div */}
-        <div className="relative flex flex-1 flex-col" ref={bottomContainerRef}>
+        <div
+          className="w-full relative flex flex-1 flex-col"
+          ref={bottomContainerRef}
+        >
           {/* Resizer Slider */}
           <div
             className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize bg-red-500 h-4 "
@@ -89,7 +91,7 @@ const ChatView = () => {
           </div>
 
           {/* White Space Div Below Slider */}
-          <div className="m-1 rounded-xl bg-blue-500">
+          <div className="m-1 rounded-xl ">
             <Chat height={bottomContainerHeight} />
           </div>
         </div>

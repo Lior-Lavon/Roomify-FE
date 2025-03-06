@@ -7,27 +7,15 @@ const Chat = ({ height }) => {
 
   return (
     <div
-      className="w-full bg-amber-300 overflow-y-auto"
+      className="w-full bg-amber-300 overflow-y-auto overflow-x-hidden"
       //   style={{ height: height ? `${height}px` : "auto" }}
       style={{ height: `${height}px` }}
       ref={containerRef}
     >
-      <div className="p-2 mt-4 flex flex-row gap-2">
-        <RoomCardMini />
-        <RoomCardMini />
-      </div>
-      <div className="p-2 mt-4 flex flex-row gap-2">
-        <RoomCardMini />
-      </div>
-      <div className="p-2 mt-4 flex flex-row gap-2">
+      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
         <RoomCardMini />
         <RoomCardMini />
         <RoomCardMini />
-      </div>
-      <div className="p-2 mt-4 flex flex-row gap-2">
-        <RoomCardMini />
-      </div>
-      <div className="p-2 mt-4 flex flex-row gap-2">
         <RoomCardMini />
         <RoomCardMini />
         <RoomCardMini />
@@ -35,8 +23,51 @@ const Chat = ({ height }) => {
         <RoomCardMini />
         <RoomCardMini />
       </div>
-      <div className="p-2 mt-4 flex flex-row gap-2">
+      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
         <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+      </div>
+      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+      </div>
+      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+      </div>
+      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+      </div>
+      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
         <RoomCardMini />
         <RoomCardMini />
         <RoomCardMini />
