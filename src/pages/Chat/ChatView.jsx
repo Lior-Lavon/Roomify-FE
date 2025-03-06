@@ -39,21 +39,11 @@ const ChatView = () => {
 
     setTouchStatus("touchDown");
     isResizingRef.current = true;
-    // document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("touchmove", handleMouseMove);
 
-    // document.addEventListener(
-    //   "mouseup",
-    //   handleMouseUp,
-    //   // () => (isResizingRef.current = false),
-    //   { once: true }
-    // );
-    document.addEventListener(
-      "touchend",
-      handleMouseUp,
-      // () => (isResizingRef.current = false),
-      { once: true }
-    );
+    document.addEventListener("mouseup", handleMouseUp, { once: true });
+    document.addEventListener("touchend", handleMouseUp, { once: true });
   };
 
   const handleMouseUp = () => {
@@ -127,8 +117,8 @@ const ChatView = () => {
         >
           {/* Resizer Slider */}
           <div
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize flex flex-col items-center h-8 bg-red-500 "
-            // onMouseDown={handleMouseDown}
+            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize flex flex-col items-center h-4 bg-red-500 "
+            onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
           >
             <div className="w-[7rem] h-[.15rem] bg-black mx-auto mt-3" />
