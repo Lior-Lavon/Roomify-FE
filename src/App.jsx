@@ -14,7 +14,6 @@ function App() {
     <>
       {/* <HomeView /> */}
 
-      {/* <APIProvider apiKey={"AIzaSyBJaFMdHaiZvVdMsrOVMWbXD8-Up25y_Dg"}> */}
       {/* <MapView center={center} markers={[]} /> */}
       <TestMapView />
       {/* </APIProvider> */}

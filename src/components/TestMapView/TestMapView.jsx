@@ -29,7 +29,7 @@ const TestMapView = () => {
   return (
     <div className="w-full h-[100vh] bg-red-400">
       <APIProvider
-        apiKey={"AIzaSyBJaFMdHaiZvVdMsrOVMWbXD8-Up25y_Dg"}
+        apiKey={import.meta.env.VITE_GOOGLE_API}
         onLoad={() => console.log("Maps API has loaded.")}
       >
         <Map
