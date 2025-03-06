@@ -32,8 +32,6 @@ const ChatView = () => {
   }, []);
 
   const handleMouseDown = (event) => {
-    console.log("handleMouseDown");
-
     // Optionally prevent body scroll on mobile devices
     document.body.style.overflow = "hidden";
 
