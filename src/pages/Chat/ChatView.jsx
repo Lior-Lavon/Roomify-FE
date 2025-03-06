@@ -57,7 +57,12 @@ const ChatView = () => {
       className="w-full flex flex-col bg-red-500"
       style={{ height: `${viewportHeight}px` }}
     >
-      lior2
+      <div className="w-full h-full bg-orange-600">
+        <div className="w-full h-10 fixed top-0 bg-amber-100">Top bar</div>
+        <div className="w-full h-10 fixed bottom-0 bg-amber-100">
+          Bottom bar
+        </div>
+      </div>
     </div>
   );
 };
