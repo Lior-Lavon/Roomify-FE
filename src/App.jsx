@@ -3,6 +3,7 @@ import { HomeView, ChatView } from "./pages";
 import { MapView } from "./components";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import TestMapView from "./components/TestMapView/TestMapView";
+import TestView from "./pages/TestView/TestView";
 
 function App() {
   const center = {
@@ -15,11 +16,10 @@ function App() {
       {/* <HomeView /> */}
 
       {/* <MapView center={center} markers={[]} /> */}
-      <TestMapView />
       {/* </APIProvider> */}
       {/* <ChatView /> */}
+      <TestView />
       {/* <div>
-      
         <div className="sm:hidden">Base</div>
         <div className="hidden sm:block lg:hidden">Small</div>
         <div className="hidden lg:block">Large</div>
