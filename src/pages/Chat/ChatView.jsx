@@ -79,10 +79,15 @@ const ChatView = () => {
     if (!containerRef.current) return;
 
     const containerRect = containerRef.current.getBoundingClientRect();
-    console.log("containerRect :", containerRect);
-    console.log("event.clientY : ", event.clientY);
+    let clientY = 0;
+    if (event.touches) {
+      clientY = event.touches[0];
+    } else {
+      clientY = event.clientY;
+    }
+    console.log("clientY : ", clientY);
 
-    let newTopHeight = event.clientY - containerRect.top;
+    let newTopHeight = clientY - containerRect.top;
     let newBottomHeight = containerRect.height - newTopHeight - 8;
 
     console.log("newTopHeight : ", newTopHeight);
