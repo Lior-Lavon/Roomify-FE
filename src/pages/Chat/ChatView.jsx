@@ -40,7 +40,7 @@ const ChatView = () => {
     setTouchStatus("touchDown");
     isResizingRef.current = true;
     document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("touchmove", handleMouseMove);
+    document.addEventListener("touchmove", handleMouseMove, { passive: false });
 
     document.addEventListener("mouseup", handleMouseUp, { once: true });
     document.addEventListener("touchend", handleMouseUp, { once: true });
