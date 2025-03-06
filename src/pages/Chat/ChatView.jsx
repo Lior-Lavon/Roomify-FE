@@ -16,8 +16,6 @@ const ChatView = () => {
 
     // Cleanup the event listener
     return () => {
-      console.log("clean up");
-
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -57,11 +55,40 @@ const ChatView = () => {
       className="w-full flex flex-col bg-red-500"
       style={{ height: `${viewportHeight}px` }}
     >
-      <div className="w-full h-full bg-orange-600">
-        <div className="w-full h-10 fixed top-0 bg-amber-100">Top bar</div>
-        <div className="w-full h-10 fixed bottom-0 bg-amber-100">
-          Bottom bar
+      <p className="text-base">{import.meta.env.VITE_GOOGLE_API}</p>
+      {/* Top Div */}
+      {/* <div className="bg-red-500" style={{ height: "3rem" }}></div> */}
+      <TopBar />
+
+      {/* Middle Div (Flexible) */}
+      <div ref={containerRef} className="w-full flex-1 flex flex-col">
+        {/* Top Div */}
+        <div className="bg-blue-500" style={{ height: heights.top }}>
+          <MapView />
         </div>
+
+        {/* Bottom Div */}
+        <div className="relative flex flex-1 flex-col">
+          {/* Resizer Slider */}
+          <div
+            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize "
+            onMouseDown={handleMouseDown}
+          >
+            <div className="w-[7rem] h-[.15rem] bg-black mx-auto mt-1" />
+            <div className="w-[5rem] h-[.15rem] bg-black mt-[.1rem] mx-auto" />
+          </div>
+
+          {/* White Space Div Below Slider */}
+          <div className="m-1 flex-1 rounded-xl ">
+            <Chat />
+          </div>
+        </div>
+      </div>
+      {/* Bottom Div */}
+      <div className="w-full h-12 bg-gray-100">
+        <p className="text-gray-400 h-full text-sm flex items-center pl-4 ">
+          Type your search
+        </p>
       </div>
     </div>
   );

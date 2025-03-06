@@ -4,6 +4,7 @@ import { MapView } from "./components";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import TestMapView from "./components/TestMapView/TestMapView";
 import TestView from "./pages/TestView/TestView";
+import { useEffect } from "react";
 
 function App() {
   const center = {
