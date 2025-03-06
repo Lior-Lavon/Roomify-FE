@@ -7,7 +7,7 @@ const ChatView = () => {
 
   const containerRef = useRef(null);
   const isResizingRef = useRef(false);
-  const [heights, setHeights] = useState({ top: "30%", bottom: "70%" });
+  const [heights, setHeights] = useState({ top: "40%", bottom: "60%" });
 
   const [bottomContainerHeight, setBottomContainerHeight] = useState(0);
 
@@ -120,7 +120,7 @@ const ChatView = () => {
         >
           {/* Resizer Slider */}
           <div
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize bg-red-500 h-8 "
+            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize h-2 "
             onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
           >
