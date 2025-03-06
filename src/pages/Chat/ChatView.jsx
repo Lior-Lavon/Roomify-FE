@@ -32,6 +32,8 @@ const ChatView = () => {
   }, []);
 
   const handleMouseDown = (event) => {
+    console.log("handleMouseDown");
+
     // Optionally prevent body scroll on mobile devices
     document.body.style.overflow = "hidden";
 
@@ -39,15 +41,15 @@ const ChatView = () => {
 
     setTouchStatus("touchDown");
     isResizingRef.current = true;
-    document.addEventListener("mousemove", handleMouseMove);
+    // document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("touchmove", handleMouseMove);
 
-    document.addEventListener(
-      "mouseup",
-      handleMouseUp,
-      // () => (isResizingRef.current = false),
-      { once: true }
-    );
+    // document.addEventListener(
+    //   "mouseup",
+    //   handleMouseUp,
+    //   // () => (isResizingRef.current = false),
+    //   { once: true }
+    // );
     document.addEventListener(
       "touchend",
       handleMouseUp,
@@ -57,6 +59,8 @@ const ChatView = () => {
   };
 
   const handleMouseUp = () => {
+    console.log("handleMouseUp");
+
     isResizingRef.current = false;
     setTouchStatus("touchUP");
 
@@ -68,6 +72,7 @@ const ChatView = () => {
   };
 
   const handleMouseMove = (event) => {
+    console.log("handleMouseMove");
     event.preventDefault();
     setTouchStatus("touchMove");
     if (!isResizingRef.current) return;
@@ -121,7 +126,7 @@ const ChatView = () => {
           {/* Resizer Slider */}
           <div
             className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize h-2 "
-            onMouseDown={handleMouseDown}
+            // onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
           >
             <div className="w-[7rem] h-[.15rem] bg-black mx-auto mt-1" />
