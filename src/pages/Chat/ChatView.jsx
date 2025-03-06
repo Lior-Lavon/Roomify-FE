@@ -125,12 +125,12 @@ const ChatView = () => {
         >
           {/* Resizer Slider */}
           <div
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize h-2 "
+            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize flex flex-col items-center h-8 bg-red-500 "
             // onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
           >
-            <div className="w-[7rem] h-[.15rem] bg-black mx-auto mt-1" />
-            <div className="w-[5rem] h-[.15rem] bg-black mt-[.1rem] mx-auto" />
+            <div className="w-[7rem] h-[.15rem] bg-black mx-auto mt-3" />
+            <div className="w-[5rem] h-[.15rem] bg-black mt-[.15rem] mx-auto" />
           </div>
 
           {/* White Space Div Below Slider */}
