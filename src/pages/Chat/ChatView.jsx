@@ -32,7 +32,8 @@ const ChatView = () => {
   }, []);
 
   const handleMouseDown = (event) => {
-    console.log("event : ", event);
+    // Optionally prevent body scroll on mobile devices
+    document.body.style.overflow = "hidden";
 
     event.preventDefault();
 
@@ -61,9 +62,13 @@ const ChatView = () => {
 
     window.removeEventListener("mousemove", handleMouseMove);
     window.removeEventListener("touchmove", handleMouseMove);
+
+    // Reset body overflow back to normal after dragging ends
+    document.body.style.overflow = "auto";
   };
 
   const handleMouseMove = (event) => {
+    event.preventDefault();
     setTouchStatus("touchMove");
     if (!isResizingRef.current) return;
     if (!containerRef.current) return;
