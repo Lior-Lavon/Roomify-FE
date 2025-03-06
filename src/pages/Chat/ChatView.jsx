@@ -13,6 +13,10 @@ const ChatView = () => {
 
   const [touchStatus, setTouchStatus] = useState("touchUP");
 
+  // tmp
+  const [newTopHeight, setNewTopHeight] = useState(0);
+  const [newBottomHeight, setNewBottomHeight] = useState(0);
+
   useEffect(() => {
     const handleResize = () => {
       setViewportHeight(window.innerHeight);
@@ -28,6 +32,8 @@ const ChatView = () => {
   }, []);
 
   const handleMouseDown = (event) => {
+    console.log("event : ", event);
+
     event.preventDefault();
 
     setTouchStatus("touchDown");
@@ -72,6 +78,9 @@ const ChatView = () => {
         bottom: `${newBottomHeight}px`,
       });
       setBottomContainerHeight(newBottomHeight);
+
+      setNewTopHeight(newTopHeight);
+      setNewBottomHeight(newBottomHeight);
     }
   };
 
@@ -123,7 +132,8 @@ const ChatView = () => {
       {/* Bottom Div */}
       <div className="w-full h-12 bg-gray-100">
         <p className="text-gray-400 h-full text-sm flex items-center pl-4 ">
-          `Type your search {touchStatus}`
+          {/* `Type your search` */}`{touchStatus} {newTopHeight}px{" "}
+          {newBottomHeight}px`
         </p>
       </div>
     </div>
