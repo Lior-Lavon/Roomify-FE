@@ -1,34 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
-const TestView = () => {
+const TouchDragComponent = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const dragRef = useRef(null); // Reference to the div we want to drag
 
-  // Handle the start of the drag when touch starts
+  // Handle touch start
   const handleTouchStart = (event) => {
-    // Prevent default to avoid unwanted scrolling
-    event.preventDefault();
-
+    event.preventDefault(); // Prevent scrolling on touch devices
+    const touch = event.touches[0]; // Get the first touch point
     setIsDragging(true);
+    setPosition({
+      x: touch.clientX,
+      y: touch.clientY,
+    });
 
     // Add event listeners for touchmove and touchend
     document.addEventListener("touchmove", handleTouchMove);
     document.addEventListener("touchend", handleTouchEnd);
   };
 
-  // Handle the dragging when touch moves
+  // Handle touch move
   const handleTouchMove = (event) => {
     if (!isDragging) return;
 
-    // Get the touch position from the first touch point
-    const touch = event.touches[0];
+    event.preventDefault(); // Prevent scrolling while dragging
+
+    const touch = event.touches[0]; // Get the first touch point
     setPosition({
       x: touch.clientX,
       y: touch.clientY,
     });
   };
 
-  // Handle the end of the drag when touch ends
+  // Handle touch end
   const handleTouchEnd = () => {
     setIsDragging(false);
 
@@ -40,11 +45,12 @@ const TestView = () => {
   return (
     <div>
       <div
-        onTouchStart={handleTouchStart} // For mobile touch start
+        ref={dragRef}
+        onTouchStart={handleTouchStart} // Trigger touch start
         style={{
           position: "absolute",
-          top: position.y - 50, // Offset to center the div on touch
-          left: position.x - 50, // Offset to center the div on touch
+          top: position.y - 50, // Subtract half of the div's height to center it under the finger
+          left: position.x - 50, // Subtract half of the div's width to center it under the finger
           width: "100px",
           height: "100px",
           backgroundColor: "lightblue",
@@ -57,4 +63,4 @@ const TestView = () => {
   );
 };
 
-export default TestView;
+export default TouchDragComponent;
