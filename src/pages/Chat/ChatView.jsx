@@ -78,13 +78,12 @@ const ChatView = () => {
     if (!isResizingRef.current) return;
     if (!containerRef.current) return;
 
-    console.log("11");
-
     const containerRect = containerRef.current.getBoundingClientRect();
     let newTopHeight = event.clientY - containerRect.top;
     let newBottomHeight = containerRect.height - newTopHeight - 8;
 
-    console.log("22");
+    console.log("newTopHeight : ", newTopHeight);
+    console.log("newBottomHeight : ", newBottomHeight);
 
     if (newTopHeight > 100 && newBottomHeight > 100) {
       console.log("333");
