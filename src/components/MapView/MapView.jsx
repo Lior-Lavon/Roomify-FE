@@ -6,6 +6,8 @@ import {
   AdvancedMarker,
 } from "@vis.gl/react-google-maps";
 
+import markerImage from "../../assets/marker.png";
+
 const locations = [
   { key: "operaHouse", location: { lat: -33.8567844, lng: 151.213108 } },
   { key: "tarongaZoo", location: { lat: -33.8472767, lng: 151.2188164 } },
@@ -60,12 +62,21 @@ const PoiMarkers = (props) => {
   return (
     <>
       {props.pois.map((poi) => (
+        // <AdvancedMarker key={poi.key} position={poi.location}>
+        //   <Pin
+        //     background={"#FBBC04"}
+        //     glyphColor={"#000"}
+        //     borderColor={"#000"}
+        //   />
+        // </AdvancedMarker>
+
         <AdvancedMarker key={poi.key} position={poi.location}>
-          <Pin
-            background={"#FBBC04"}
-            glyphColor={"#000"}
-            borderColor={"#000"}
-          />
+          <div className="relative flex flex-col justify-center">
+            <img src={markerImage} width={50} />
+            <p className="absolute top-0 pt-[.15rem] w-full text-center text-white">
+              $2.000
+            </p>
+          </div>
         </AdvancedMarker>
       ))}
     </>
