@@ -83,7 +83,7 @@ const ChatView = () => {
     if (event.touches) {
       console.log("touches");
 
-      clientY = event.touches[0];
+      clientY = event.touches[0].clientY;
     } else {
       console.log("clicks");
       clientY = event.clientY;
