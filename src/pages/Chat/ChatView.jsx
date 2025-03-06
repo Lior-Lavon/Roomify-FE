@@ -81,8 +81,11 @@ const ChatView = () => {
     const containerRect = containerRef.current.getBoundingClientRect();
     let clientY = 0;
     if (event.touches) {
+      console.log("touches");
+
       clientY = event.touches[0];
     } else {
+      console.log("clicks");
       clientY = event.clientY;
     }
     console.log("clientY : ", clientY);
