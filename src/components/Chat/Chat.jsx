@@ -7,7 +7,7 @@ const Chat = ({ height }) => {
 
   return (
     <div
-      className="w-full bg-amber-300 overflow-y-auto overflow-x-hidden"
+      className="w-full  overflow-y-auto overflow-x-hidden"
       //   style={{ height: height ? `${height}px` : "auto" }}
       style={{ height: `${height}px` }}
       ref={containerRef}

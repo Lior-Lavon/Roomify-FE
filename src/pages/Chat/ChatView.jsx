@@ -52,6 +52,9 @@ const ChatView = () => {
   const handleMouseUp = () => {
     isResizingRef.current = false;
     setTouchStatus("touchUP");
+
+    window.removeEventListener("mousemove", handleMouseMove);
+    window.removeEventListener("touchmove", handleMouseMove);
   };
 
   const handleMouseMove = (event) => {
