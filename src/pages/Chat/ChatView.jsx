@@ -27,7 +27,9 @@ const ChatView = () => {
     };
   }, []);
 
-  const handleMouseDown = () => {
+  const handleMouseDown = (event) => {
+    event.preventDefault();
+
     setTouchStatus("touchDown");
     isResizingRef.current = true;
     document.addEventListener("mousemove", handleMouseMove);

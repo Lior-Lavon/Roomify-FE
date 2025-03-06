@@ -18,8 +18,8 @@ function App() {
 
       {/* <MapView center={center} markers={[]} /> */}
       {/* </APIProvider> */}
-      <ChatView />
-      {/* <TestView /> */}
+      {/* <ChatView /> */}
+      <TestView />
       {/* <div>
         <div className="sm:hidden">Base</div>
         <div className="hidden sm:block lg:hidden">Small</div>
