@@ -101,7 +101,7 @@ const ChatView = () => {
         >
           {/* Resizer Slider */}
           <div
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize bg-red-500 h-4 "
+            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize bg-red-500 h-8 "
             onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
           >
