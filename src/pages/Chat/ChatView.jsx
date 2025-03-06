@@ -50,8 +50,8 @@ const ChatView = () => {
     isResizingRef.current = false;
     setTouchStatus("touchUP");
 
-    window.removeEventListener("mousemove", handleMouseMove);
-    window.removeEventListener("touchmove", handleMouseMove);
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("touchmove", handleMouseMove);
 
     // Reset body overflow back to normal after dragging ends
     document.body.style.overflow = "auto";
