@@ -17,8 +17,8 @@ const ChatView = () => {
   const [touchStatus, setTouchStatus] = useState("touchUP");
 
   // tmp
-  const [newTopHeight, setNewTopHeight] = useState(0);
-  const [newBottomHeight, setNewBottomHeight] = useState(0);
+  // const [newTopHeight, setNewTopHeight] = useState(0);
+  // const [newBottomHeight, setNewBottomHeight] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -84,8 +84,8 @@ const ChatView = () => {
       });
       setBottomContainerHeight(newBottomHeight);
 
-      setNewTopHeight(newTopHeight);
-      setNewBottomHeight(newBottomHeight);
+      // setNewTopHeight(newTopHeight);
+      // setNewBottomHeight(newBottomHeight);
     }
   };
 
@@ -120,12 +120,12 @@ const ChatView = () => {
         >
           {/* Resizer Slider */}
           <div
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize h-6 "
+            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize h-5 "
             onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
           >
-            <div className="w-[7rem] h-[.15rem] bg-black mx-auto mt-2.5" />
-            <div className="w-[5rem] h-[.15rem] bg-black mt-[.15rem] mx-auto" />
+            <div className="w-[2rem] h-[.12rem] bg-gray-400 mx-auto mt-2" />
+            <div className="w-[1.5rem] h-[.12rem] bg-gray-400 mt-[.1rem] mx-auto" />
           </div>
 
           {/* White Space Div Below Slider */}

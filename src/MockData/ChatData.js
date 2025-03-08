@@ -22,4 +22,16 @@ export const ChatData = [
     id: 3,
     type: SearchResult,
   },
+  {
+    id: 4,
+    type: SearchResult,
+  },
+  {
+    id: 5,
+    type: SearchResult,
+  },
+  {
+    id: 6,
+    type: SearchResult,
+  },
 ];
