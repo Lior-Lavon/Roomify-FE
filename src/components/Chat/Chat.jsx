@@ -2,8 +2,13 @@ import ChatLoader from "../ChatLoader/ChatLoader";
 import RoomCardSlider from "../RoomCardSlider/RoomCardSlider";
 
 import ChatMessage from "../ChatMessage/ChatMessage";
+import FilterView from "../FilterView/FilterView";
 
 const Chat = ({ chat_data, room_list, height }) => {
+  const filterSelection = (filterName, value) => {
+    console.log(filterName, value);
+  };
+
   return (
     <div
       className="w-full overflow-y-auto overflow-x-hidden"
@@ -20,6 +25,18 @@ const Chat = ({ chat_data, room_list, height }) => {
               key={chatItem.id}
               room_list={room_list}
               dot_count={4}
+            />
+          );
+        } else if (
+          chatItem.type == "DISTANCE_FILTER" ||
+          chatItem.type == "PROPERTY_SIZE_FILTER" ||
+          chatItem.type == "PROPERTY_TYPE_FILTER"
+        ) {
+          return (
+            <FilterView
+              key={chatItem.id}
+              info={chatItem}
+              userSelection={filterSelection}
             />
           );
         }

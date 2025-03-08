@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
-import { RoomCardMini } from "../../components";
 
-const RoomCardSlider = ({ room_list, dot_count }) => {
+const ImageSlider = ({ imageList, dot_count }) => {
   const scrollRef = useRef(null);
   const [activeDot, setActiveDot] = useState(0);
 
@@ -25,7 +24,7 @@ const RoomCardSlider = ({ room_list, dot_count }) => {
   }, [dot_count]); // Add dot_count as a dependency to handle changes
 
   return (
-    <div className="w-full flex flex-col my-2 ">
+    <div className="w-full flex flex-col ">
       {/* TopDiv with horizontal scrollable cards */}
       <div
         className="w-full overflow-x-auto whitespace-nowrap flex items-center gap-x-2 pb-1"
@@ -36,17 +35,31 @@ const RoomCardSlider = ({ room_list, dot_count }) => {
         }}
         ref={scrollRef}
       >
-        {room_list.map((room) => {
-          return (
-            <div key={room.Id} className="flex items-center justify-center ">
-              <RoomCardMini room_info={room} />
-            </div>
-          );
+        {/* {[...Array(image_count)].map((_, index) => (
+          <div key={index} className="flex items-center justify-center ">
+            <img
+              src={roomImg1}
+              className="min-w-[8.2rem] w-[8.2rem] h-[7rem] object-cover rounded-lg"
+            />
+          </div>
+        ))} */}
+        {imageList.map((image, index) => {
+          console.log("image :", image);
+
+          <div
+            key={index}
+            className="flex items-center justify-center bg-red-400"
+          >
+            <img
+              src={image}
+              className="min-w-[8.2rem] w-[8.2rem] h-[7rem] object-cover rounded-lg"
+            />
+          </div>;
         })}
       </div>
 
       {/* BottomDiv with dynamic dots */}
-      <div className="w-full mt-2 flex items-center justify-center gap-2">
+      <div className="w-full mt-1 flex items-center justify-center gap-2">
         {[...Array(dot_count)].map(
           (
             _,
@@ -65,4 +78,4 @@ const RoomCardSlider = ({ room_list, dot_count }) => {
   );
 };
 
-export default RoomCardSlider;
+export default ImageSlider;

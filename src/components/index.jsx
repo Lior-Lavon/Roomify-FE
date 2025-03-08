@@ -5,6 +5,9 @@ import MapView from "./MapView/MapView";
 import Chat from "./Chat/Chat";
 import ChatLoader from "./ChatLoader/ChatLoader";
 import ChatMessage from "./ChatMessage/ChatMessage";
+import PropertyDetailPage from "./PropertyDetailPage/PropertyDetailPage";
+import ImageSlider from "./ImageSlider/ImageSlider";
+import FilterView from "./FilterView/FilterView";
 
 export {
   RoomCard,
@@ -14,4 +17,7 @@ export {
   Chat,
   ChatLoader,
   ChatMessage,
+  PropertyDetailPage,
+  ImageSlider,
+  FilterView,
 };

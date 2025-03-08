@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Chat, MapView, TopBar } from "../../components";
+import { Chat, MapView, PropertyDetailPage, TopBar } from "../../components";
 
 import { RoomList } from "../../MockData/MockData";
 import { ChatData } from "../../MockData/ChatData";
@@ -7,6 +7,7 @@ import { ChatData } from "../../MockData/ChatData";
 const ChatView = () => {
   const bottomContainerRef = useRef(null);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  const [showPropertyInfoView, setShowPropertyInfoView] = useState(false);
 
   const containerRef = useRef(null);
   const isResizingRef = useRef(false);
@@ -144,6 +145,11 @@ const ChatView = () => {
           Type your search
         </p>
       </div>
+
+      {/* show property view */}
+      {showPropertyInfoView && (
+        <PropertyDetailPage property_info={RoomList[0]} />
+      )}
     </div>
   );
 };
