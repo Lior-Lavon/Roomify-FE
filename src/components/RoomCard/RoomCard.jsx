@@ -1,4 +1,4 @@
-import roomImg1 from "../../assets/room-1.jpeg";
+import roomImg1 from "../../assets/room1.jpeg";
 
 const RoomCard = () => {
   return (
