@@ -8,7 +8,7 @@ const FilterChip = ({ type, value, chip, userSelection }) => {
     setIsDark(true);
     setTimeout(() => {
       userSelection(type, target.id);
-    }, 400); // 1-second delay
+    }, 500); // 1-second delay
   };
 
   const toUpperCase = (str) => {
@@ -20,7 +20,7 @@ const FilterChip = ({ type, value, chip, userSelection }) => {
   return (
     <div
       className={`text-black py-1 px-4 rounded-2xl text-[.8rem] cursor-pointer border border-orange-400 
-        transition-colors duration-1000 ${
+        transition-colors duration-500 ${
           isDark ? "bg-black text-white" : "bg-white text-black"
         }`}
       onClick={handleSelection}
