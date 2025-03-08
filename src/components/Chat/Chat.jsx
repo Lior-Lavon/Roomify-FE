@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import RoomCardMini from "../RoomCard/RoomCardMini";
+import ChatLoader from "../ChatLoader/ChatLoader";
 
 const Chat = ({ height }) => {
   const containerRef = useRef(null);
@@ -12,70 +13,8 @@ const Chat = ({ height }) => {
       style={{ height: `${height}px` }}
       ref={containerRef}
     >
+      <ChatLoader />
       <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-      </div>
-      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-      </div>
-      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-      </div>
-      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-      </div>
-      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-      </div>
-      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
         <RoomCardMini />
       </div>
     </div>
