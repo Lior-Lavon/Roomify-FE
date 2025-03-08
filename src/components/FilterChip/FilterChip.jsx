@@ -28,9 +28,9 @@ const FilterChip = ({ type, value, chip, userSelection }) => {
     >
       {toUpperCase(chip.value)}
       {type == "DISTANCE_FILTER"
-        ? "Km"
+        ? " Km"
         : type == "PROPERTY_SIZE_FILTER"
-        ? "m2"
+        ? " m²"
         : ""}
     </div>
   );
