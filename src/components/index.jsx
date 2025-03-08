@@ -8,6 +8,7 @@ import ChatMessage from "./ChatMessage/ChatMessage";
 import PropertyDetailPage from "./PropertyDetailPage/PropertyDetailPage";
 import ImageSlider from "./ImageSlider/ImageSlider";
 import FilterView from "./FilterView/FilterView";
+import FilterChip from "./FilterChip/FilterChip";
 
 export {
   RoomCard,
@@ -20,4 +21,5 @@ export {
   PropertyDetailPage,
   ImageSlider,
   FilterView,
+  FilterChip,
 };
