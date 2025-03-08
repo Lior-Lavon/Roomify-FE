@@ -134,8 +134,7 @@ const ChatView = () => {
       {/* Bottom Div */}
       <div className="w-full h-12 bg-gray-100">
         <p className="text-gray-400 h-full text-sm flex items-center pl-4 ">
-          {/* `Type your search` */}`{touchStatus} {newTopHeight}px{" "}
-          {newBottomHeight}px`
+          Type your search
         </p>
       </div>
     </div>
