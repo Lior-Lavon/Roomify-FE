@@ -8,7 +8,7 @@ const FilterChip = ({ type, value, chip, userSelection }) => {
     setIsDark(true);
     setTimeout(() => {
       userSelection(type, target.id);
-    }, 600); // 1-second delay
+    }, 400); // 1-second delay
   };
 
   const toUpperCase = (str) => {
