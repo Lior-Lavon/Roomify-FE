@@ -1,6 +1,9 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Chat, MapView, TopBar } from "../../components";
 
+import { RoomList } from "../../MockData/MockData";
+import { ChatData } from "../../MockData/ChatData";
+
 const ChatView = () => {
   const bottomContainerRef = useRef(null);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
@@ -127,7 +130,11 @@ const ChatView = () => {
 
           {/* White Space Div Below Slider */}
           <div className="m-1 rounded-xl ">
-            <Chat height={bottomContainerHeight} />
+            <Chat
+              chat_data={ChatData}
+              room_list={RoomList}
+              height={bottomContainerHeight}
+            />
           </div>
         </div>
       </div>

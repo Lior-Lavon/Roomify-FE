@@ -1,24 +1,66 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import RoomCardMini from "../RoomCard/RoomCardMini";
 import ChatLoader from "../ChatLoader/ChatLoader";
+import RoomCardSlider from "../RoomCardSlider/RoomCardSlider";
 
-const Chat = ({ height }) => {
-  const containerRef = useRef(null);
-  //   const [height, setHeight] = useState(0);
+import ChatMessage from "../ChatMessage/ChatMessage";
 
+const Chat = ({ chat_data, room_list, height }) => {
   return (
     <div
-      className="w-full  overflow-y-auto overflow-x-hidden"
-      //   style={{ height: height ? `${height}px` : "auto" }}
+      className="w-full overflow-y-auto overflow-x-hidden"
       style={{ height: `${height}px` }}
-      ref={containerRef}
     >
-      <ChatLoader />
-      <div className="p-2 mt-4 flex flex-row gap-2 overflow-x-auto">
-        <RoomCardMini />
-      </div>
+      {chat_data.map((chatItem) => {
+        if (chatItem.type == "LOADNING") {
+          return <ChatLoader key={chatItem.id} />;
+        } else if (chatItem.type == "PROMPT") {
+          return <ChatMessage key={chatItem.id} chatItem={chatItem} />;
+        } else if (chatItem.type == "SEARCH_RESULT") {
+          return (
+            <RoomCardSlider
+              key={chatItem.id}
+              room_list={room_list}
+              dot_count={4}
+            />
+          );
+        }
+      })}
     </div>
   );
 };
 
 export default Chat;
+// {chat_data.map((chatItem) => {
+//   if (chatItem.type == "LOADNING") {
+//     return <ChatLoader key={chatItem.id} />;
+//   } else if (chatItem.type == "PROMPT") {
+//     return <ChatMessage kay={chatItem.id} chatItem={chatItem} />;
+//   } else return <div key={chatItem.id}></div>;
+// })}
+
+// else if (chatItem.type == "PROMPT") {
+//   return <ChatMessage kay={index} chatItem={chatItem} />;
+// }
+
+// {chat_data.map((chatItem, index) => {
+//   console.log("chatItem : ", chatItem);
+
+// if (chatItem.type == "LOADNING") {
+//   return <ChatLoader kay={index} />;
+// }
+// return <div key={index}></div>;
+// })}
+
+{
+  /* {chat_data.map((chatItem, index) => {
+        console.log("index : ", index);
+
+        if (chatItem.type == "LOADNING") {
+          return <ChatLoader kay={index} />;
+        } else {
+          return <div kay={index}></div>;
+        }
+      })} */
+}
+{
+  /* <RoomCardSlider room_list={room_list} dot_count={4} /> */
+}
