@@ -5,15 +5,17 @@ import { RoomList } from "../../MockData/RoomList";
 import { ChatOptions } from "../../MockData/ChatOptions";
 
 const ChatView = () => {
-  const ChatInfo = {
+  const [chatFlow, setChatFlow] = useState([]);
+  const [processFilters, setProcessFilters] = useState(false);
+  const [chatInfo, setChatInfo] = useState({
     Prompt: "I am searching for a room in Amsterdam",
     Address: "Amsterdam",
     PropertyType: "",
     Radius: 0,
-    MinPrice: 0,
-    minSize: 0,
-  };
-  const [chatFlow, setChatFlow] = useState([]);
+    // MinPrice: 0,
+    MinSize: 0,
+  });
+
   const bottomContainerRef = useRef(null);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [showPropertyInfoView, setShowPropertyInfoView] = useState(false);
@@ -26,12 +28,10 @@ const ChatView = () => {
 
   const [touchStatus, setTouchStatus] = useState("touchUP");
 
-  const ProcessNextChat = () => {};
-
   useEffect(() => {
     // get the chat object
     const promptChat = ChatOptions.find((c) => c.type === "PROMPT");
-    promptChat.text = ChatInfo.Prompt;
+    promptChat.text = chatInfo.Prompt;
     chatFlow.push(promptChat);
     setChatFlow(chatFlow);
 
@@ -43,12 +43,13 @@ const ChatView = () => {
       let updatedChat = chatFlow.slice();
       // remove loading
       updatedChat = updatedChat.filter((item) => item.type !== "LOADNING");
-      console.log(updatedChat);
 
       // add propertySearch
       const searchResult = ChatOptions.find((c) => c.type === "SEARCH_RESULT");
       updatedChat.push(searchResult);
       setChatFlow(updatedChat);
+
+      setProcessFilters(true);
     }, 2000);
 
     ////////////////////////////////////////////
@@ -64,6 +65,57 @@ const ChatView = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (processFilters == true) {
+      processNextFilter();
+      setProcessFilters(false);
+    }
+  }, [processFilters, chatFlow]);
+
+  const processNextFilter = () => {
+    setTimeout(() => {
+      let charArray = chatFlow.slice();
+      let filterType = null;
+
+      // check if we need to add new filter
+      if (chatInfo.PropertyType == "") {
+        filterType = ChatOptions.find((c) => c.type === "PROPERTY_TYPE_FILTER");
+      } else if (chatInfo.Radius == 0) {
+        filterType = ChatOptions.find((c) => c.type === "DISTANCE_FILTER");
+      } else if (chatInfo.MinSize == 0) {
+        filterType = ChatOptions.find((c) => c.type === "PROPERTY_SIZE_FILTER");
+      }
+      if (filterType != null) {
+        charArray.push(filterType);
+        setChatFlow(charArray);
+      }
+    }, 1500);
+  };
+
+  const filterSelection = (filterName, value) => {
+    console.log("** ", filterName, value);
+    switch (filterName) {
+      case "PROPERTY_TYPE_FILTER": {
+        chatInfo.PropertyType = value;
+        setChatInfo(chatInfo);
+        break;
+      }
+      case "DISTANCE_FILTER": {
+        chatInfo.Radius = value;
+        setChatInfo(chatInfo);
+        break;
+      }
+      case "PROPERTY_SIZE_FILTER": {
+        chatInfo.MinSize = value;
+        setChatInfo(chatInfo);
+        break;
+      }
+    }
+    processNextFilter();
+
+    console.log(chatInfo);
+  };
 
   const handleMouseDown = (event) => {
     // Optionally prevent body scroll on mobile devices
@@ -164,7 +216,7 @@ const ChatView = () => {
             <Chat
               chat_flow={chatFlow}
               room_list={RoomList}
-              processNextChat={ProcessNextChat}
+              filterSelection={filterSelection}
               height={bottomContainerHeight}
             />
           </div>

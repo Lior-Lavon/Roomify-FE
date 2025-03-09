@@ -5,11 +5,7 @@ import ChatMessage from "../ChatMessage/ChatMessage";
 import FilterView from "../FilterView/FilterView";
 import { useEffect } from "react";
 
-const Chat = ({ chat_flow, room_list, processNextChat, height }) => {
-  const filterSelection = (filterName, value) => {
-    console.log(filterName, value);
-  };
-
+const Chat = ({ chat_flow, room_list, filterSelection, height }) => {
   return (
     <div
       className="w-full overflow-y-auto overflow-x-hidden"

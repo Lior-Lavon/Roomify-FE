@@ -115,10 +115,6 @@ export const ChatOptions = [
         },
         {
           id: 3,
-          value: "student-housing",
-        },
-        {
-          id: 4,
           value: "apartment",
         },
       ],

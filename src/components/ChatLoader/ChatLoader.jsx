@@ -28,7 +28,7 @@ const ChatLoader = () => {
   }, []);
 
   return (
-    <div className="w-full flex justify-end pt-6">
+    <div className="w-full flex justify-end py-4">
       <div className="w-16 h-8 bg-gray-900 flex justify-center items-center rounded-2xl mx-2">
         <div className="flex">
           <div className="w-2 h-2 bg-white rounded-full mx-1 animate-dot-1"></div>
