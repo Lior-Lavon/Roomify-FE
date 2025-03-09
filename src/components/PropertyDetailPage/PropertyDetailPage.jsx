@@ -3,14 +3,17 @@ import { IoMdClose } from "react-icons/io";
 import ImageSlider from "../ImageSlider/ImageSlider";
 import { PiDivide } from "react-icons/pi";
 
-const PropertyDetailPage = ({ property_info }) => {
+const PropertyDetailPage = ({ property_info, showPropertyInfo }) => {
   return (
     <div className="w-full h-screen fixed top-0 z-100 flex justify-center items-center sans-regular">
       <div className="max-w-[600px] w-[90%] bg-white rounded-2xl border-[.01rem]">
         <div className="m-4 flex flex-col gap-1">
           <div className="w-full flex flex-row justify-between items-center">
             <div className=" text-base sans-bold">Room name</div>
-            <IoMdClose className="text-2xl text-gray-500 cursor-pointer" />
+            <IoMdClose
+              className="text-2xl text-gray-500 cursor-pointer"
+              onClick={showPropertyInfo}
+            />
           </div>
           <p className="text-[12px]">Address...</p>
           <p className="text-[11px] ">

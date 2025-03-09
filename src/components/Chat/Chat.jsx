@@ -5,7 +5,13 @@ import ChatMessage from "../ChatMessage/ChatMessage";
 import FilterView from "../FilterView/FilterView";
 import { useEffect, useRef } from "react";
 
-const Chat = ({ chat_flow, room_list, filterSelection, height }) => {
+const Chat = ({
+  chat_flow,
+  room_list,
+  filterSelection,
+  showPropertyInfo,
+  height,
+}) => {
   const divRef = useRef();
 
   const randId = () => {
@@ -48,6 +54,7 @@ const Chat = ({ chat_flow, room_list, filterSelection, height }) => {
               key={randId()}
               room_list={room_list}
               dot_count={4}
+              showPropertyInfo={showPropertyInfo}
             />
           );
         } else if (

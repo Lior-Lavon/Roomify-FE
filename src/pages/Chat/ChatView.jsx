@@ -183,6 +183,10 @@ const ChatView = () => {
     }
   }, []); // Empty dependency array means this runs only once after the first render
 
+  const showPropertyInfo = () => {
+    setShowPropertyInfoView(showPropertyInfoView ? false : true);
+  };
+
   return (
     <div
       className="w-full flex flex-col "
@@ -219,6 +223,7 @@ const ChatView = () => {
               chat_flow={chatFlow}
               room_list={RoomList}
               filterSelection={filterSelection}
+              showPropertyInfo={showPropertyInfo}
               height={bottomContainerHeight}
             />
           </div>
@@ -233,7 +238,10 @@ const ChatView = () => {
 
       {/* show property view */}
       {showPropertyInfoView && (
-        <PropertyDetailPage property_info={RoomList[0]} />
+        <PropertyDetailPage
+          property_info={RoomList[0]}
+          showPropertyInfo={showPropertyInfo}
+        />
       )}
     </div>
   );

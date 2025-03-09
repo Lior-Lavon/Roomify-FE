@@ -35,26 +35,15 @@ const ImageSlider = ({ imageList, dot_count }) => {
         }}
         ref={scrollRef}
       >
-        {/* {[...Array(image_count)].map((_, index) => (
-          <div key={index} className="flex items-center justify-center ">
-            <img
-              src={roomImg1}
-              className="min-w-[8.2rem] w-[8.2rem] h-[7rem] object-cover rounded-lg"
-            />
-          </div>
-        ))} */}
         {imageList.map((image, index) => {
-          console.log("image :", image);
-
-          <div
-            key={index}
-            className="flex items-center justify-center bg-red-400"
-          >
-            <img
-              src={image}
-              className="min-w-[8.2rem] w-[8.2rem] h-[7rem] object-cover rounded-lg"
-            />
-          </div>;
+          return (
+            <div key={index} className="flex items-center justify-center ">
+              <img
+                src={image}
+                className="min-w-[8.2rem] w-[8.2rem] h-[7rem] object-cover rounded-lg"
+              />
+            </div>
+          );
         })}
       </div>
 

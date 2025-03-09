@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { RoomCardMini } from "../../components";
 
-const RoomCardSlider = ({ room_list, dot_count }) => {
+const RoomCardSlider = ({ room_list, dot_count, showPropertyInfo }) => {
   const scrollRef = useRef(null);
   const [activeDot, setActiveDot] = useState(0);
 
@@ -25,7 +25,7 @@ const RoomCardSlider = ({ room_list, dot_count }) => {
   }, [dot_count]); // Add dot_count as a dependency to handle changes
 
   return (
-    <div className="w-full flex flex-col my-4 ">
+    <div className="w-full flex flex-col my-4 " onClick={showPropertyInfo}>
       {/* TopDiv with horizontal scrollable cards */}
       <div
         className="w-full overflow-x-auto whitespace-nowrap flex items-center gap-x-2 pb-1"
