@@ -25,7 +25,7 @@ const RoomCardSlider = ({ room_list, dot_count }) => {
   }, [dot_count]); // Add dot_count as a dependency to handle changes
 
   return (
-    <div className="w-full flex flex-col my-2 ">
+    <div className="w-full flex flex-col my-6 ">
       {/* TopDiv with horizontal scrollable cards */}
       <div
         className="w-full overflow-x-auto whitespace-nowrap flex items-center gap-x-2 pb-1"

@@ -9,7 +9,7 @@ const Owner = {
   System: "SYSTEM",
 };
 
-export const ChatData = [
+export const ChatOptions = [
   {
     id: 1,
     type: Loading,
@@ -19,7 +19,7 @@ export const ChatData = [
     id: 2,
     type: Prompt,
     owner: Owner.User,
-    text: "I am searching for a room in Amsterdam North, up to 800 euros per month, with immediate entry",
+    text: "",
   },
   {
     id: 3,

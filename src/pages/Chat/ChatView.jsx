@@ -1,10 +1,19 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Chat, MapView, PropertyDetailPage, TopBar } from "../../components";
 
-import { RoomList } from "../../MockData/MockData";
-import { ChatData } from "../../MockData/ChatData";
+import { RoomList } from "../../MockData/RoomList";
+import { ChatOptions } from "../../MockData/ChatOptions";
 
 const ChatView = () => {
+  const ChatInfo = {
+    Prompt: "I am searching for a room in Amsterdam",
+    Address: "Amsterdam",
+    PropertyType: "",
+    Radius: 0,
+    MinPrice: 0,
+    minSize: 0,
+  };
+  const [chatFlow, setChatFlow] = useState([]);
   const bottomContainerRef = useRef(null);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [showPropertyInfoView, setShowPropertyInfoView] = useState(false);
@@ -17,11 +26,32 @@ const ChatView = () => {
 
   const [touchStatus, setTouchStatus] = useState("touchUP");
 
-  // tmp
-  // const [newTopHeight, setNewTopHeight] = useState(0);
-  // const [newBottomHeight, setNewBottomHeight] = useState(0);
+  const ProcessNextChat = () => {};
 
   useEffect(() => {
+    // get the chat object
+    const promptChat = ChatOptions.find((c) => c.type === "PROMPT");
+    promptChat.text = ChatInfo.Prompt;
+    chatFlow.push(promptChat);
+    setChatFlow(chatFlow);
+
+    const loadingChatItem = ChatOptions.find((c) => c.type === "LOADNING");
+    chatFlow.push(loadingChatItem);
+    setChatFlow(chatFlow);
+
+    setTimeout(() => {
+      let updatedChat = chatFlow.slice();
+      // remove loading
+      updatedChat = updatedChat.filter((item) => item.type !== "LOADNING");
+      console.log(updatedChat);
+
+      // add propertySearch
+      const searchResult = ChatOptions.find((c) => c.type === "SEARCH_RESULT");
+      updatedChat.push(searchResult);
+      setChatFlow(updatedChat);
+    }, 2000);
+
+    ////////////////////////////////////////////
     const handleResize = () => {
       setViewportHeight(window.innerHeight);
     };
@@ -132,8 +162,9 @@ const ChatView = () => {
           {/* White Space Div Below Slider */}
           <div className="m-1 rounded-xl ">
             <Chat
-              chat_data={ChatData}
+              chat_flow={chatFlow}
               room_list={RoomList}
+              processNextChat={ProcessNextChat}
               height={bottomContainerHeight}
             />
           </div>
