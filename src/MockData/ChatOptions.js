@@ -30,7 +30,7 @@ export const ChatOptions = [
     type: DistanceFilter,
     owner: Owner.SYSTEM,
     filterInfo: {
-      text: `Please select the distance from Amsterdam North:`,
+      text: `In which radius would you like to search? `,
       options: [
         {
           id: 1,
@@ -65,7 +65,7 @@ export const ChatOptions = [
     type: PropertySizeFilter,
     owner: Owner.SYSTEM,
     filterInfo: {
-      text: `Please select preferred room size:`,
+      text: `What is the room size? (If chose room)`,
       options: [
         {
           id: 1,
@@ -103,7 +103,7 @@ export const ChatOptions = [
     type: PropertyTypeFilter,
     owner: Owner.SYSTEM,
     filterInfo: {
-      text: `Please select property type:`,
+      text: `Which property type are you looking for?`,
       options: [
         {
           id: 1,

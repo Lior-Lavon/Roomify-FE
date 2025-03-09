@@ -20,8 +20,6 @@ const Chat = ({
   };
 
   const scrollToBottom = () => {
-    console.log("scrollToBottom");
-
     if (divRef.current) {
       // divRef.current.scrollIntoView({ behavior: "smooth" });
       setTimeout(() => {
