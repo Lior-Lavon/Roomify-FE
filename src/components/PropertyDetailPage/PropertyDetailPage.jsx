@@ -6,7 +6,7 @@ import { PiDivide } from "react-icons/pi";
 const PropertyDetailPage = ({ property_info, showPropertyInfo }) => {
   return (
     <div className="w-full h-screen fixed top-0 z-100 flex justify-center items-center sans-regular">
-      <div className="max-w-[600px] w-[90%] bg-white rounded-2xl border-[.01rem]">
+      <div className="max-w-[600px] w-[90%] bg-white rounded-2xl border-[.02rem] border-black shadow-[10px_2px_12px_rgba(0,0,0,.3)]">
         <div className="m-4 flex flex-col gap-1">
           <div className="w-full flex flex-row justify-between items-center">
             <div className=" text-base sans-bold">Room name</div>
