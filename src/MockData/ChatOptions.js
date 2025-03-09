@@ -65,7 +65,7 @@ export const ChatOptions = [
     type: PropertySizeFilter,
     owner: Owner.SYSTEM,
     filterInfo: {
-      text: `What is the room size? (If chose room)`,
+      text: `What is the room size?`,
       options: [
         {
           id: 1,
