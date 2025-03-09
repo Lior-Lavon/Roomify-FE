@@ -35,22 +35,7 @@ const ChatView = () => {
     chatFlow.push(promptChat);
     setChatFlow(chatFlow);
 
-    const loadingChatItem = ChatOptions.find((c) => c.type === "LOADNING");
-    chatFlow.push(loadingChatItem);
-    setChatFlow(chatFlow);
-
-    setTimeout(() => {
-      let updatedChat = chatFlow.slice();
-      // remove loading
-      updatedChat = updatedChat.filter((item) => item.type !== "LOADNING");
-
-      // add propertySearch
-      const searchResult = ChatOptions.find((c) => c.type === "SEARCH_RESULT");
-      updatedChat.push(searchResult);
-      setChatFlow(updatedChat);
-
-      setProcessFilters(true);
-    }, 2000);
+    fetchProperties();
 
     ////////////////////////////////////////////
     const handleResize = () => {
@@ -94,7 +79,6 @@ const ChatView = () => {
   };
 
   const filterSelection = (filterName, value) => {
-    console.log("** ", filterName, value);
     switch (filterName) {
       case "PROPERTY_TYPE_FILTER": {
         chatInfo.PropertyType = value;
@@ -112,9 +96,27 @@ const ChatView = () => {
         break;
       }
     }
-    processNextFilter();
+    fetchProperties();
+  };
 
-    console.log(chatInfo);
+  const fetchProperties = () => {
+    let charArray = chatFlow.slice();
+
+    const loadingChatItem = ChatOptions.find((c) => c.type === "LOADNING");
+    charArray.push(loadingChatItem);
+    setChatFlow(charArray);
+
+    setTimeout(() => {
+      // remove loading
+      charArray = charArray.filter((item) => item.type !== "LOADNING");
+
+      // add propertySearch
+      const searchResult = ChatOptions.find((c) => c.type === "SEARCH_RESULT");
+      charArray.push(searchResult);
+      setChatFlow(charArray);
+
+      setProcessFilters(true);
+    }, 2000);
   };
 
   const handleMouseDown = (event) => {
