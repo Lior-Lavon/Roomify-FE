@@ -261,6 +261,22 @@ const ChatView = () => {
     setVisibleCardId(visibleAdvertId);
   };
 
+  const setActiveSlider = (activeSliderId) => {
+    // console.log("setActiveSlider : ", activeSliderId);
+    // let tmpFlow = [...chatFlow];
+    // for (let i = 0; i < tmpFlow.length; i++) {
+    //   if (tmpFlow[i].type == "SEARCH_RESULT") {
+    //     if (tmpFlow[i].id == activeSliderId) {
+    //       tmpFlow[i].activeSlider = true;
+    //     } else {
+    //       tmpFlow[i].activeSlider = false;
+    //     }
+    //   }
+    // }
+    // console.log("tmpFlow : ", tmpFlow);
+    // setChatFlow(tmpFlow);
+  };
+
   return (
     <div
       className="w-full flex flex-col "
@@ -300,6 +316,7 @@ const ChatView = () => {
               onCardVisible={onCardVisible}
               filterSelection={filterSelection}
               showPropertyInfo={showPropertyInfo}
+              setActiveSlider={setActiveSlider}
               height={bottomContainerHeight}
             />
           </div>

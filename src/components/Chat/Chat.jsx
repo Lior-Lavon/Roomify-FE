@@ -3,7 +3,7 @@ import ChatLoader from "../ChatLoader/ChatLoader";
 
 import ChatMessage from "../ChatMessage/ChatMessage";
 import FilterView from "../FilterView/FilterView";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Chat = ({
   chat_flow,
@@ -12,6 +12,7 @@ const Chat = ({
   filterSelection,
   showPropertyInfo,
   onCardVisible,
+  setActiveSlider,
   height,
 }) => {
   const divRef = useRef();
@@ -36,21 +37,6 @@ const Chat = ({
   useEffect(() => {
     scrollToBottom();
   }, [chat_flow]);
-
-  const setActiveSlider = (activeSliderId) => {
-    console.log("activeSliderId : ", activeSliderId);
-    for (let i = 0; i < chat_flow.length; i++) {
-      if (chat_flow[i].type == "SEARCH_RESULT") {
-        if (chat_flow[i].id == activeSliderId) {
-          chat_flow[i].activeSlider = true;
-        } else {
-          chat_flow[i].activeSlider = false;
-        }
-      }
-    }
-
-    console.log("chat_flow : ", chat_flow);
-  };
 
   return (
     <div
