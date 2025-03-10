@@ -1,5 +1,5 @@
+import { RoomCardSlider } from "..";
 import ChatLoader from "../ChatLoader/ChatLoader";
-import RoomCardSlider from "../RoomCardSlider/RoomCardSlider";
 
 import ChatMessage from "../ChatMessage/ChatMessage";
 import FilterView from "../FilterView/FilterView";
@@ -11,6 +11,7 @@ const Chat = ({
   chat_info,
   filterSelection,
   showPropertyInfo,
+  onCardVisible,
   height,
 }) => {
   const divRef = useRef();
@@ -53,6 +54,8 @@ const Chat = ({
               key={randId()}
               room_list={room_list}
               dot_count={4}
+              chatItem={chatItem}
+              onCardVisible={onCardVisible}
               showPropertyInfo={showPropertyInfo}
             />
           );

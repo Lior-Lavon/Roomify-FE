@@ -9,6 +9,7 @@ import PropertyDetailPage from "./PropertyDetailPage/PropertyDetailPage";
 import ImageSlider from "./ImageSlider/ImageSlider";
 import FilterView from "./FilterView/FilterView";
 import FilterChip from "./FilterChip/FilterChip";
+import RoomCardSlider from "./RoomCardSlider/RoomCardSlider";
 
 export {
   RoomCard,
@@ -22,4 +23,5 @@ export {
   ImageSlider,
   FilterView,
   FilterChip,
+  RoomCardSlider,
 };

@@ -30,7 +30,9 @@ const TestMapView = () => {
     <div className="w-full h-[100vh] bg-red-400">
       <APIProvider
         apiKey={import.meta.env.VITE_GOOGLE_API}
-        onLoad={() => console.log("Maps API has loaded.")}
+        onLoad={() => {
+          // console.log("Maps API has loaded.")
+        }}
       >
         <Map
           defaultZoom={13}

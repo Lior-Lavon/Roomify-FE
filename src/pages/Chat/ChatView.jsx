@@ -23,6 +23,7 @@ const ChatView = () => {
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [showPropertyInfoView, setShowPropertyInfoView] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
+  const [visibleCardId, setVisibleCardId] = useState(null);
 
   const containerRef = useRef(null);
   const isResizingRef = useRef(false);
@@ -261,6 +262,10 @@ const ChatView = () => {
     setShowPropertyInfoView(showPropertyInfoView ? false : true);
   };
 
+  const onCardVisible = (visibleAdvertId) => {
+    setVisibleCardId(visibleAdvertId);
+  };
+
   return (
     <div
       className="w-full flex flex-col "
@@ -273,7 +278,7 @@ const ChatView = () => {
       <div ref={containerRef} className="w-full flex-1 flex flex-col">
         {/* Top Div */}
         <div className="bg-blue-500" style={{ height: heights.top }}>
-          <MapView properties={RoomList} />
+          <MapView properties={RoomList} visibleCardId={visibleCardId} />
         </div>
 
         {/* Bottom Div */}
@@ -297,6 +302,7 @@ const ChatView = () => {
               chat_flow={chatFlow}
               room_list={RoomList}
               chat_info={chatInfo}
+              onCardVisible={onCardVisible}
               filterSelection={filterSelection}
               showPropertyInfo={showPropertyInfo}
               height={bottomContainerHeight}

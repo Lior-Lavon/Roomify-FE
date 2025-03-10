@@ -1,12 +1,20 @@
 import { useRef, useState, useEffect } from "react";
 import { RoomCardMini } from "../../components";
 
-const RoomCardSlider = ({ room_list, dot_count, showPropertyInfo }) => {
+const RoomCardSlider = ({
+  room_list,
+  dot_count,
+  chatItem,
+  showPropertyInfo,
+  onCardVisible,
+}) => {
   const scrollRef = useRef(null);
   const [activeDot, setActiveDot] = useState(0);
 
   const handleScroll = () => {
     if (scrollRef.current) {
+      chatItem.scrollPosition = scrollRef.current.scrollLeft;
+
       const scrollLeft = scrollRef.current.scrollLeft;
       const scrollWidth =
         scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
@@ -17,12 +25,22 @@ const RoomCardSlider = ({ room_list, dot_count, showPropertyInfo }) => {
   };
 
   useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = chatItem.scrollPosition;
+    }
+  }, []); // ✅ Runs only once after initial render
+
+  useEffect(() => {
     const scrollElement = scrollRef.current;
     if (scrollElement) {
       scrollElement.addEventListener("scroll", handleScroll);
       return () => scrollElement.removeEventListener("scroll", handleScroll);
     }
   }, [dot_count]); // Add dot_count as a dependency to handle changes
+
+  const handleCardVisible = (id) => {
+    onCardVisible(id);
+  };
 
   return (
     <div className="w-full flex flex-col my-4 " onClick={showPropertyInfo}>
@@ -39,7 +57,7 @@ const RoomCardSlider = ({ room_list, dot_count, showPropertyInfo }) => {
         {room_list.map((room) => {
           return (
             <div key={room.Id} className="flex items-center justify-center ">
-              <RoomCardMini room_info={room} />
+              <RoomCardMini room_info={room} onVisible={handleCardVisible} />
             </div>
           );
         })}

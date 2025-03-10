@@ -12,6 +12,10 @@ function App() {
     lng: 4.97705,
   };
 
+  useEffect(() => {
+    console.log("App rendered");
+  });
+
   return (
     <>
       {/* <HomeView /> */}

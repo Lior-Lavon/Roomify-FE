@@ -26,6 +26,7 @@ export const ChatOptions = [
   {
     id: 3,
     type: SearchResult,
+    scrollPosition: 0,
   },
   {
     id: 4,
