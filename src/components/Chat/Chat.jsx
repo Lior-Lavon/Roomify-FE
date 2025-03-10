@@ -8,6 +8,7 @@ import { useEffect, useRef } from "react";
 const Chat = ({
   chat_flow,
   room_list,
+  chat_info,
   filterSelection,
   showPropertyInfo,
   height,
@@ -66,6 +67,15 @@ const Chat = ({
               info={chatItem}
               userSelection={filterSelection}
             />
+          );
+        } else if (chatItem.type == "FILTER_SELECTION") {
+          //  show only the user selection
+          return (
+            <div className="w-full flex gap-1 mt-1" key={randId()}>
+              <p className="inline-block bg-black text-white py-1 px-4 rounded-full">
+                {chatItem.text.charAt(0).toUpperCase() + chatItem.text.slice(1)}
+              </p>
+            </div>
           );
         }
       })}

@@ -4,6 +4,7 @@ const DistanceFilter = "DISTANCE_FILTER";
 const PropertySizeFilter = "PROPERTY_SIZE_FILTER";
 const PropertyTypeFilter = "PROPERTY_TYPE_FILTER";
 const SearchResult = "SEARCH_RESULT";
+const FilterSelection = "FILTER_SELECTION";
 const Owner = {
   User: "USER",
   System: "SYSTEM",
@@ -119,5 +120,11 @@ export const ChatOptions = [
         },
       ],
     },
+  },
+  {
+    id: 7,
+    type: FilterSelection,
+    owner: Owner.SYSTEM,
+    text: "",
   },
 ];
