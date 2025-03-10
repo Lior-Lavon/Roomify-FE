@@ -3,11 +3,20 @@ import React, { useState } from "react";
 const FilterChip = ({ type, value, chip, userSelection }) => {
   const [isDark, setIsDark] = useState(false);
 
+  const extractPrice = (inputText) => {
+    const match = inputText.match(/\d+/);
+    return match ? parseInt(match[0], 10) : null;
+  };
+
   const handleSelection = (e) => {
     const target = e.currentTarget;
     setIsDark(true);
     setTimeout(() => {
-      userSelection(type, target.id);
+      let value = target.id;
+      if (type == "PRICE_FILTER") {
+        value = extractPrice(value);
+      }
+      userSelection(type, value);
     }, 500); // 1-second delay
   };
 

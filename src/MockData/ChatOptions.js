@@ -3,6 +3,7 @@ const Prompt = "PROMPT";
 const DistanceFilter = "DISTANCE_FILTER";
 const PropertySizeFilter = "PROPERTY_SIZE_FILTER";
 const PropertyTypeFilter = "PROPERTY_TYPE_FILTER";
+const PriceFilter = "PRICE_FILTER";
 const SearchResult = "SEARCH_RESULT";
 const FilterSelection = "FILTER_SELECTION";
 const Owner = {
@@ -123,6 +124,32 @@ export const ChatOptions = [
   },
   {
     id: 7,
+    type: PriceFilter,
+    owner: Owner.SYSTEM,
+    filterInfo: {
+      text: `What is your monthly budget?`,
+      options: [
+        {
+          id: 1,
+          value: "Up to 500 €",
+        },
+        {
+          id: 2,
+          value: "Up to 1000 €",
+        },
+        {
+          id: 3,
+          value: "Up to 1500 €",
+        },
+        {
+          id: 4,
+          value: "Up to 2000 €",
+        },
+      ],
+    },
+  },
+  {
+    id: 8,
     type: FilterSelection,
     owner: Owner.SYSTEM,
     text: "",

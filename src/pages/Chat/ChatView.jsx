@@ -14,7 +14,8 @@ const ChatView = () => {
     Address: "Amsterdam",
     PropertyType: "",
     Radius: 0,
-    // MinPrice: 0,
+    MinPrice: 0,
+    MaxPrice: 0,
     MinSize: 0,
   });
 
@@ -98,6 +99,8 @@ const ChatView = () => {
       // check if we need to add new filter
       if (chatInfo.PropertyType == "") {
         filterType = ChatOptions.find((c) => c.type === "PROPERTY_TYPE_FILTER");
+      } else if (chatInfo.MaxPrice == 0) {
+        filterType = ChatOptions.find((c) => c.type === "PRICE_FILTER");
       } else if (chatInfo.Radius == 0) {
         filterType = ChatOptions.find((c) => c.type === "DISTANCE_FILTER");
       } else if (chatInfo.MinSize == 0) {
@@ -117,8 +120,6 @@ const ChatView = () => {
     chatArray = chatFlow.slice();
     chatArray = chatArray.filter((item) => item.type !== filterName);
 
-    console.log("11 - ", chatArray);
-
     switch (filterName) {
       case "PROPERTY_TYPE_FILTER": {
         chatInfo.PropertyType = value;
@@ -131,6 +132,20 @@ const ChatView = () => {
         chatArray.push(userFilter);
 
         setChatFlow(chatArray);
+        break;
+      }
+      case "PRICE_FILTER": {
+        chatInfo.MaxPrice = value;
+        setChatInfo(chatInfo);
+
+        // show the answer
+        let userFilter = ChatOptions.find((c) => c.type === "FILTER_SELECTION");
+        userFilter = { ...userFilter };
+        userFilter.text = `${value} €`;
+        chatArray.push(userFilter);
+
+        setChatFlow(chatArray);
+
         break;
       }
       case "DISTANCE_FILTER": {

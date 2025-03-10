@@ -58,6 +58,7 @@ const Chat = ({
           );
         } else if (
           chatItem.type == "DISTANCE_FILTER" ||
+          chatItem.type == "PRICE_FILTER" ||
           chatItem.type == "PROPERTY_SIZE_FILTER" ||
           chatItem.type == "PROPERTY_TYPE_FILTER"
         ) {
@@ -71,7 +72,7 @@ const Chat = ({
         } else if (chatItem.type == "FILTER_SELECTION") {
           //  show only the user selection
           return (
-            <div className="w-full flex gap-1 mt-1" key={randId()}>
+            <div className="w-full flex gap-1 mb-4" key={randId()}>
               <p className="inline-block bg-black text-white py-1 px-4 rounded-full">
                 {chatItem.text.charAt(0).toUpperCase() + chatItem.text.slice(1)}
               </p>
