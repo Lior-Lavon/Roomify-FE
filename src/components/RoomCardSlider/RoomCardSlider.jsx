@@ -7,6 +7,7 @@ const RoomCardSlider = ({
   chatItem,
   showPropertyInfo,
   onCardVisible,
+  setActiveSlider,
 }) => {
   const scrollRef = useRef(null);
   const [activeDot, setActiveDot] = useState(0);
@@ -14,6 +15,12 @@ const RoomCardSlider = ({
   const handleScroll = () => {
     if (scrollRef.current) {
       chatItem.scrollPosition = scrollRef.current.scrollLeft;
+
+      if (!chatItem.activeSlider) {
+        // console.log("chatItem : ", chatItem);
+        chatItem.activeSlider = true;
+        setActiveSlider(chatItem.id);
+      }
 
       const scrollLeft = scrollRef.current.scrollLeft;
       const scrollWidth =
@@ -39,7 +46,9 @@ const RoomCardSlider = ({
   }, [dot_count]); // Add dot_count as a dependency to handle changes
 
   const handleCardVisible = (id) => {
-    onCardVisible(id);
+    if (chatItem.activeSlider) {
+      onCardVisible(id);
+    }
   };
 
   return (

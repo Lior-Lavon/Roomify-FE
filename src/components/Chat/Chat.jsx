@@ -37,6 +37,20 @@ const Chat = ({
     scrollToBottom();
   }, [chat_flow]);
 
+  const setActiveSlider = (activeSliderId) => {
+    for (let i = 0; i < chat_flow.length; i++) {
+      if (chat_flow[i].type == "SEARCH_RESULT") {
+        if (chat_flow[i].id == activeSliderId) {
+          chat_flow[i].activeSlider = true;
+        } else {
+          chat_flow[i].activeSlider = false;
+        }
+      }
+    }
+
+    console.log("chat_flow : ", chat_flow);
+  };
+
   return (
     <div
       className="w-full overflow-y-auto overflow-x-hidden"
@@ -49,14 +63,16 @@ const Chat = ({
         } else if (chatItem.type == "PROMPT") {
           return <ChatMessage key={chatItem.id} chatItem={chatItem} />;
         } else if (chatItem.type == "SEARCH_RESULT") {
+          chatItem.id = randId();
           return (
             <RoomCardSlider
-              key={randId()}
+              key={chatItem.id}
               room_list={room_list}
               dot_count={4}
               chatItem={chatItem}
               onCardVisible={onCardVisible}
               showPropertyInfo={showPropertyInfo}
+              setActiveSlider={setActiveSlider}
             />
           );
         } else if (
