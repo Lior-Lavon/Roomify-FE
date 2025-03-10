@@ -47,7 +47,10 @@ const RoomCardSlider = ({
 
   const handleCardVisible = (id) => {
     if (chatItem.activeSlider) {
+      console.log("handleCardVisible true");
       onCardVisible(id);
+    } else {
+      console.log("handleCardVisible false");
     }
   };
 

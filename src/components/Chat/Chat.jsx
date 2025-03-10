@@ -38,6 +38,7 @@ const Chat = ({
   }, [chat_flow]);
 
   const setActiveSlider = (activeSliderId) => {
+    console.log("activeSliderId : ", activeSliderId);
     for (let i = 0; i < chat_flow.length; i++) {
       if (chat_flow[i].type == "SEARCH_RESULT") {
         if (chat_flow[i].id == activeSliderId) {
