@@ -31,8 +31,6 @@ const ChatView = () => {
 
   const [bottomContainerHeight, setBottomContainerHeight] = useState(0);
 
-  const [touchStatus, setTouchStatus] = useState("touchUP");
-
   useEffect(() => {
     // get the chat object
     const promptChat = ChatOptions.find((c) => c.type === "PROMPT");
@@ -79,9 +77,9 @@ const ChatView = () => {
         chatArray = chatArray.filter((item) => item.type !== "LOADNING");
 
         // add propertySearch
-        const searchResult = ChatOptions.find(
-          (c) => c.type === "SEARCH_RESULT"
-        );
+        const searchResult = {
+          ...ChatOptions.find((c) => c.type === "SEARCH_RESULT"),
+        };
         chatArray.push(searchResult);
         setChatFlow(chatArray);
 
@@ -200,7 +198,6 @@ const ChatView = () => {
 
     event.preventDefault();
 
-    setTouchStatus("touchDown");
     isResizingRef.current = true;
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("touchmove", handleMouseMove, { passive: false });
@@ -211,7 +208,6 @@ const ChatView = () => {
 
   const handleMouseUp = () => {
     isResizingRef.current = false;
-    setTouchStatus("touchUP");
 
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("touchmove", handleMouseMove);
@@ -222,7 +218,6 @@ const ChatView = () => {
 
   const handleMouseMove = (event) => {
     event.preventDefault();
-    setTouchStatus("touchMove");
     if (!isResizingRef.current) return;
     if (!containerRef.current) return;
 

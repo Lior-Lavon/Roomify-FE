@@ -7,7 +7,8 @@ import {
   useMap,
 } from "@vis.gl/react-google-maps";
 
-import markerImage from "../../assets/marker.png";
+import OrangeMarker from "../../assets/orangeMarker.png";
+import BlackMarker from "../../assets/blackMarker.png";
 
 const MapView = ({ properties, visibleCardId }) => {
   const [mapCenter, setMapCenter] = useState({
@@ -25,24 +26,6 @@ const MapView = ({ properties, visibleCardId }) => {
 
   return (
     <div className="w-full h-full bg-red-400">
-      {/* <APIProvider
-        apiKey={import.meta.env.VITE_GOOGLE_API}
-        onLoad={() => {
-          // console.log("Maps API has loaded.")
-        }}
-      >
-        <Map
-          zoom={13}
-          center={{ lat: mapCenter.lat, lng: mapCenter.lng }}
-          mapId="DEMO_MAP_ID"
-          mapTypeControl={false}
-          disableDefaultUI={true}
-          onCameraChanged={(ev) => {}}
-        >
-          <PoiMarkers properties={properties} />
-        </Map>
-      </APIProvider> */}
-
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API}>
         <MapComponent properties={properties} visibleCardId={visibleCardId} />
       </APIProvider>
@@ -66,7 +49,7 @@ const MapComponent = ({ properties, visibleCardId }) => {
     if (advert && map) {
       const newCenter = { lat: advert.Location.lat, lng: advert.Location.lng };
       let newZoom = 13;
-      if (!firstLoad) newZoom = 15;
+      // if (!firstLoad) newZoom = 15;
 
       // Smoothly pan to the new location
       animatePan(map, mapCenter, newCenter, zoom, newZoom, 500); // 500ms smooth pan
@@ -86,7 +69,7 @@ const MapComponent = ({ properties, visibleCardId }) => {
       mapTypeControl={false}
       disableDefaultUI={true}
     >
-      <PoiMarkers properties={properties} />
+      <PoiMarkers properties={properties} visibleCardId={visibleCardId} />
     </Map>
   );
 };
@@ -102,7 +85,7 @@ const animatePan = (map, from, to, fromZoom, toZoom, duration) => {
     const zoom = fromZoom + (toZoom - fromZoom) * progress;
 
     map.setCenter({ lat, lng });
-    map.setZoom(zoom);
+    // map.setZoom(zoom);
 
     if (progress < 1) {
       requestAnimationFrame(animate);
@@ -112,21 +95,16 @@ const animatePan = (map, from, to, fromZoom, toZoom, duration) => {
   requestAnimationFrame(animate);
 };
 
-const PoiMarkers = ({ properties }) => {
+const PoiMarkers = ({ properties, visibleCardId }) => {
   return (
     <>
       {properties.map((poi) => (
-        // <AdvancedMarker key={poi.key} position={poi.location}>
-        //   <Pin
-        //     background={"#FBBC04"}
-        //     glyphColor={"#000"}
-        //     borderColor={"#000"}
-        //   />
-        // </AdvancedMarker>
-
         <AdvancedMarker key={poi.Id} position={poi.Location}>
           <div className="relative flex flex-col justify-center">
-            <img src={markerImage} width={50} />
+            <img
+              src={poi.Id != visibleCardId ? OrangeMarker : BlackMarker}
+              width={50}
+            />
             <p className="absolute top-0 pt-[.15rem] w-full text-center text-white">
               ${poi.Price}
             </p>
