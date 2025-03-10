@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   APIProvider,
   Map,
-  Pin,
   AdvancedMarker,
   useMap,
 } from "@vis.gl/react-google-maps";
@@ -23,54 +22,45 @@ const MapView = ({ properties, visibleCardId }) => {
 export default MapView;
 
 const MapComponent = ({ properties, visibleCardId }) => {
-  const map = useMap();
-  const [zoom, setZoom] = useState(13);
-  const mapCenterRef = useRef({ lat: 52.377956, lng: 4.89707 }); // Prevent re-renders
+  const map = useMap(); // Get the map instance
+  const isUserInteracting = useRef(false); // Track manual movement
+  const defaultCenter = { lat: 52.377956, lng: 4.89707 };
 
+  // Handle user moving the map manually
+  const handleCameraChanged = () => {
+    isUserInteracting.current = true; // Prevent overriding manual moves
+  };
+
+  // Update center when `visibleCardId` changes
   useEffect(() => {
-    if (!map || !visibleCardId) return;
+    if (!map) return; // Ensure map is loaded
 
     const advert = properties.find((c) => c.Id === visibleCardId);
-    if (advert) {
-      // const newCenter = { lat: advert.Location.lat, lng: advert.Location.lng };
-      // mapCenterRef.current = newCenter; // Store new center
-      // animatePan(map, newCenter, zoom, 14, 500); // Smoothly pan & zoom
+    if (advert && isUserInteracting.current) {
+      const newCenter = { lat: advert.Location.lat, lng: advert.Location.lng };
+
+      // Reset user interaction flag so next move can happen
+      isUserInteracting.current = false;
+
+      // Use requestAnimationFrame for smooth animation
+      requestAnimationFrame(() => {
+        map.panTo(newCenter); // Smoothly pan to new location
+      });
     }
   }, [visibleCardId, properties, map]);
 
   return (
     <Map
-      zoom={zoom}
-      center={mapCenterRef.current} // Center controlled by useRef
+      defaultZoom={13}
+      defaultCenter={defaultCenter}
       mapId="DEMO_MAP_ID"
       mapTypeControl={false}
       disableDefaultUI={true}
+      onCameraChanged={handleCameraChanged} // Detect manual user movement
     >
       <PoiMarkers properties={properties} visibleCardId={visibleCardId} />
     </Map>
   );
-};
-
-// Smoothly animate panning & zoom
-const animatePan = (map, to, fromZoom, toZoom, duration) => {
-  const start = performance.now();
-  const from = map.getCenter();
-
-  const animate = (time) => {
-    const progress = Math.min((time - start) / duration, 1);
-    const lat = from.lat() + (to.lat - from.lat()) * progress;
-    const lng = from.lng() + (to.lng - from.lng()) * progress;
-    const zoom = fromZoom + (toZoom - fromZoom) * progress;
-
-    map.setCenter({ lat, lng });
-    map.setZoom(zoom);
-
-    if (progress < 1) {
-      requestAnimationFrame(animate);
-    }
-  };
-
-  requestAnimationFrame(animate);
 };
 
 const PoiMarkers = ({ properties, visibleCardId }) => {
