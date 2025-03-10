@@ -69,7 +69,7 @@ const MapComponent = ({ properties, visibleCardId }) => {
       if (!firstLoad) newZoom = 15;
 
       // Smoothly pan to the new location
-      animatePan(map, mapCenter, newCenter, zoom, newZoom, 200); // 500ms smooth pan
+      animatePan(map, mapCenter, newCenter, zoom, newZoom, 500); // 500ms smooth pan
 
       // Optional: Update state for potential external tracking
       setMapCenter(newCenter);
