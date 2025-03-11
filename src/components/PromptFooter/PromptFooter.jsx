@@ -32,7 +32,10 @@ const PromptFooter = ({ pageType }) => {
   };
 
   const submitPrompt = () => {
-    navigate("/chat");
+    setIsFocused(false);
+    setTimeout(() => {
+      navigate("/chat");
+    }, 500);
   };
 
   return (
@@ -54,7 +57,7 @@ const PromptFooter = ({ pageType }) => {
           <p className="text-gray-500 text-[12px] py-2">Type your search</p>
         )}
 
-        <div className="relative" onClick={submitPrompt}>
+        <div className="relative">
           <textarea
             onChange={handleChange}
             value={text}
@@ -66,8 +69,8 @@ const PromptFooter = ({ pageType }) => {
               maxHeight: isFocused ? "70px" : "30px",
               height: isFocused ? "70px" : "30px",
             }}
-            // onFocus={() => setIsFocused(true)}
-            // onBlur={() => setIsFocused(false)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           />
 
           <div

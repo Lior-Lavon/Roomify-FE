@@ -16,7 +16,7 @@ const TopBar = () => {
         >
           ROOM<span className="text-orange-600">UFI</span>
         </p>
-        <p className="text-[10px]">V1.3</p>
+        <p className="text-[10px]">V1.5</p>
       </div>
 
       <BsChat className="cursor-pointer" />
