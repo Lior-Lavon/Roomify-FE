@@ -13,6 +13,7 @@
     "@react-google-maps/api": "^2.20.6",
     "@tailwindcss/vite": "^4.0.9",
     "@vis.gl/react-google-maps": "^1.5.1",
+    "bcryptjs": "^3.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",

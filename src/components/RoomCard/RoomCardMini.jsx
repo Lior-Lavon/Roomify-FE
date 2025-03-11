@@ -35,7 +35,7 @@ const RoomCardMini = ({ room_info, onVisible }) => {
       <div className="flex flex-col items-center justify-between w-full  text-left ">
         <div className="w-full flex flex-col gap-[.05rem]">
           <p className="font-bold">{room_info.Title}</p>
-          <p className="text-[10px]">Full address ...</p>
+          <p className="text-[10px]">{room_info.Address}</p>
         </div>
         <p className="text-[10px] w-full mt-1">
           <span className="text-orange-600 text-[16px] sans-bold">
