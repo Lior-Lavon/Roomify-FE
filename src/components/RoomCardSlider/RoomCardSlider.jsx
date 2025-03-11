@@ -7,19 +7,15 @@ const RoomCardSlider = ({
   chatItem,
   showPropertyInfo,
   onCardVisible,
-  setActiveSlider,
 }) => {
   const scrollRef = useRef(null);
   const [activeDot, setActiveDot] = useState(0);
+  // const timeOutRef = useRef(0);
+  // const scrollStarted = useRef(false);
 
   const handleScroll = () => {
     if (scrollRef.current) {
       chatItem.scrollPosition = scrollRef.current.scrollLeft;
-
-      if (!chatItem.activeSlider) {
-        chatItem.activeSlider = true;
-        setActiveSlider(chatItem.id);
-      }
 
       const scrollLeft = scrollRef.current.scrollLeft;
       const scrollWidth =
@@ -45,19 +41,14 @@ const RoomCardSlider = ({
   }, [dot_count]); // Add dot_count as a dependency to handle changes
 
   const handleCardVisible = (id) => {
-    if (chatItem.activeSlider) {
-      onCardVisible(id);
-    }
+    onCardVisible(id);
   };
 
   return (
     <div className="w-full flex flex-col my-4 " onClick={showPropertyInfo}>
       {/* TopDiv with horizontal scrollable cards */}
       <div
-        className={`w-full overflow-x-auto whitespace-nowrap flex items-center gap-x-2 pb-1`}
-        // className={`w-full overflow-x-auto whitespace-nowrap flex items-center gap-x-2 pb-1 ${
-        //   chatItem.activeSlider ? "bg-green-500" : "bg-gray-600"
-        // }`}
+        className="w-full overflow-x-auto whitespace-nowrap flex items-center gap-x-2 pb-1"
         style={{
           WebkitOverflowScrolling: "touch",
           scrollbarWidth: "none", // for Firefox

@@ -1,5 +1,11 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Chat, MapView, PropertyDetailPage, TopBar } from "../../components";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { MapView, Chat, PropertyDetailPage, TopBar } from "../../components";
 
 import { RoomList } from "../../MockData/RoomList";
 import { ChatOptions } from "../../MockData/ChatOptions";
@@ -30,6 +36,8 @@ const ChatView = () => {
   const [heights, setHeights] = useState({ top: "40%", bottom: "60%" });
 
   const [bottomContainerHeight, setBottomContainerHeight] = useState(0);
+  // const timeoutId = useRef(null);
+  const [activeAdvertArr, setActiveAdvertArr] = useState([]);
 
   useEffect(() => {
     // get the chat object
@@ -72,13 +80,19 @@ const ChatView = () => {
     if (showLoading) {
       // load the data from the server
       setTimeout(() => {
-        let chatArray = chatFlow.slice();
+        let chatArray = [...chatFlow];
         // remove loading
         chatArray = chatArray.filter((item) => item.type !== "LOADNING");
 
         // add propertySearch
+        // const searchResultOriginal = ChatOptions.find(
+        //   (c) => c.type === "SEARCH_RESULT"
+        // );
+        // const searchResult = Object.assign({}, searchResultOriginal);
         const searchResult = {
-          ...ChatOptions.find((c) => c.type === "SEARCH_RESULT"),
+          id: 3,
+          type: "SEARCH_RESULT",
+          scrollPosition: 0,
         };
         chatArray.push(searchResult);
         setChatFlow(chatArray);
@@ -92,7 +106,7 @@ const ChatView = () => {
 
   const processNextFilter = () => {
     setTimeout(() => {
-      let charArray = chatFlow.slice();
+      let charArray = [...chatFlow];
       let filterType = null;
 
       // check if we need to add new filter
@@ -116,7 +130,7 @@ const ChatView = () => {
     let chatArray = null;
 
     // remove the question from chatFlow
-    chatArray = chatFlow.slice();
+    chatArray = [...chatFlow];
     chatArray = chatArray.filter((item) => item.type !== filterName);
 
     switch (filterName) {
@@ -181,7 +195,7 @@ const ChatView = () => {
   };
 
   const fetchProperties = () => {
-    let chatArray = chatFlow.slice();
+    let chatArray = [...chatFlow];
 
     setTimeout(() => {
       const loadingChatItem = ChatOptions.find((c) => c.type === "LOADNING");
@@ -257,25 +271,9 @@ const ChatView = () => {
     setShowPropertyInfoView(showPropertyInfoView ? false : true);
   };
 
-  const onCardVisible = (visibleAdvertId) => {
+  const onCardVisible = useCallback((visibleAdvertId) => {
     setVisibleCardId(visibleAdvertId);
-  };
-
-  const setActiveSlider = (activeSliderId) => {
-    // console.log("setActiveSlider : ", activeSliderId);
-    // let tmpFlow = [...chatFlow];
-    // for (let i = 0; i < tmpFlow.length; i++) {
-    //   if (tmpFlow[i].type == "SEARCH_RESULT") {
-    //     if (tmpFlow[i].id == activeSliderId) {
-    //       tmpFlow[i].activeSlider = true;
-    //     } else {
-    //       tmpFlow[i].activeSlider = false;
-    //     }
-    //   }
-    // }
-    // console.log("tmpFlow : ", tmpFlow);
-    // setChatFlow(tmpFlow);
-  };
+  }, []);
 
   return (
     <div
@@ -316,7 +314,6 @@ const ChatView = () => {
               onCardVisible={onCardVisible}
               filterSelection={filterSelection}
               showPropertyInfo={showPropertyInfo}
-              setActiveSlider={setActiveSlider}
               height={bottomContainerHeight}
             />
           </div>

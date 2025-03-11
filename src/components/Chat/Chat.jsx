@@ -3,7 +3,7 @@ import ChatLoader from "../ChatLoader/ChatLoader";
 
 import ChatMessage from "../ChatMessage/ChatMessage";
 import FilterView from "../FilterView/FilterView";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
 const Chat = ({
   chat_flow,
@@ -12,7 +12,6 @@ const Chat = ({
   filterSelection,
   showPropertyInfo,
   onCardVisible,
-  setActiveSlider,
   height,
 }) => {
   const divRef = useRef();
@@ -50,16 +49,14 @@ const Chat = ({
         } else if (chatItem.type == "PROMPT") {
           return <ChatMessage key={chatItem.id} chatItem={chatItem} />;
         } else if (chatItem.type == "SEARCH_RESULT") {
-          chatItem.id = randId();
           return (
             <RoomCardSlider
-              key={chatItem.id}
+              key={randId()}
               room_list={room_list}
               dot_count={4}
               chatItem={chatItem}
               onCardVisible={onCardVisible}
               showPropertyInfo={showPropertyInfo}
-              setActiveSlider={setActiveSlider}
             />
           );
         } else if (
@@ -90,4 +87,4 @@ const Chat = ({
   );
 };
 
-export default Chat;
+export default memo(Chat);
