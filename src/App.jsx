@@ -1,5 +1,5 @@
 import { FaBeer } from "react-icons/fa";
-import { HomeView, ChatView } from "./pages";
+import { HomeView, ChatView, NotFound, ProtectiveRoute } from "./pages";
 import { CoverView, MapView } from "./components";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import TestMapView from "./components/TestMapView/TestMapView";
@@ -7,6 +7,14 @@ import TestView from "./pages/TestView/TestView";
 import { useEffect, useState } from "react";
 import { getSecurityTokenFromLocalStorage } from "./utils/localStorage";
 import bcrypt from "bcryptjs";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  unstable_HistoryRouter as HistoryRouter,
+} from "react-router-dom";
+
+import history from "./utils/history";
 
 function App() {
   const [isCover, setIsCover] = useState(false);
@@ -35,19 +43,36 @@ function App() {
   };
 
   return (
-    <>
-      <HomeView />
+    <HistoryRouter history={history}>
+      <Routes>
+        <Route
+          path="/"
+          element={<ProtectiveRoute>{/* <Dashboard /> */}</ProtectiveRoute>}
+        ></Route>
 
-      {/* <ChatView /> */}
-      {/* <TestView /> */}
-      {/* <div>
-        <div className="sm:hidden">Base</div>
-        <div className="hidden sm:block lg:hidden">Small</div>
-        <div className="hidden lg:block">Large</div>
-      </div> */}
-      {isCover && <CoverView removeSecurityHandler={removeSecurityHandler} />}
-    </>
+        <Route path="/landing" element={<HomeView />} />
+        <Route path="/chat" element={<ChatView />} />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </HistoryRouter>
   );
+
+  // return (
+
+  // <>
+  //   <HomeView />
+
+  //   {/* <ChatView /> */}
+  //   {/* <TestView /> */}
+  //   {/* <div>
+  //     <div className="sm:hidden">Base</div>
+  //     <div className="hidden sm:block lg:hidden">Small</div>
+  //     <div className="hidden lg:block">Large</div>
+  //   </div> */}
+  //   {isCover && <CoverView removeSecurityHandler={removeSecurityHandler} />}
+  // </>
+  // );
 }
 
 export default App;

@@ -1,6 +1,12 @@
 import { RoomCard, TopBar } from "../../components";
+import { useNavigate } from "react-router-dom";
 
 const HomeView = () => {
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    navigate("/chat");
+  };
+
   return (
     <div className="base:hidden sm:block md:hidden w-full h-[100vh] text-3xl sans-regular">
       <TopBar />
@@ -31,7 +37,10 @@ const HomeView = () => {
           <p className="text-gray-500 text-[10px] pt-3 pb-1">
             Type your search
           </p>
-          <button className="text-sm bg-gray-300 w-full text-[14px] text-gray-500 rounded-full py-2 cursor-pointer">
+          <button
+            onClick={handleSearch}
+            className="text-sm bg-gray-300 w-full text-[14px] text-gray-500 rounded-full py-2 cursor-pointer"
+          >
             Search
           </button>
         </div>
