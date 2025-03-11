@@ -54,7 +54,7 @@ const PromptFooter = ({ pageType }) => {
           <p className="text-gray-500 text-[12px] py-2">Type your search</p>
         )}
 
-        <div className="relative">
+        <div className="relative" onClick={submitPrompt}>
           <textarea
             onChange={handleChange}
             value={text}
@@ -66,8 +66,8 @@ const PromptFooter = ({ pageType }) => {
               maxHeight: isFocused ? "70px" : "30px",
               height: isFocused ? "70px" : "30px",
             }}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
+            // onFocus={() => setIsFocused(true)}
+            // onBlur={() => setIsFocused(false)}
           />
 
           <div
