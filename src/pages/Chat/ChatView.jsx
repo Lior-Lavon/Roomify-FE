@@ -5,7 +5,13 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { MapView, Chat, PropertyDetailPage, TopBar } from "../../components";
+import {
+  MapView,
+  Chat,
+  PropertyDetailPage,
+  TopBar,
+  PromptFooter,
+} from "../../components";
 
 import { RoomList } from "../../MockData/RoomList";
 import { ChatOptions } from "../../MockData/ChatOptions";
@@ -272,8 +278,6 @@ const ChatView = () => {
   };
 
   const onCardVisible = useCallback((visibleAdvertId) => {
-    console.log("visibleAdvertId");
-
     setVisibleCardId(visibleAdvertId);
   }, []);
 
@@ -322,11 +326,12 @@ const ChatView = () => {
         </div>
       </div>
       {/* Bottom Div */}
-      <div className="w-full h-12 bg-gray-100">
-        <p className="text-gray-400 h-full text-sm flex items-center pl-4 ">
+      {/* <div className="w-[50%] h-12 bg-gray-100 "> */}
+      {/* <p className="text-gray-400 h-full text-sm flex items-center pl-4 ">
           Type your search
-        </p>
-      </div>
+        </p> */}
+      {/* </div> */}
+      <PromptFooter pageType={"chat"} />
 
       {/* show property view */}
       {showPropertyInfoView && (
