@@ -3,12 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+
+    <!-- Meta tag to block zooming -->
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,9 +19,38 @@
     />
 
     <title>Vite + React</title>
+
+    <!-- CSS to block touch gestures -->
+    <style>
+      html,
+      body {
+        touch-action: none;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- JavaScript to block zoom and double tap zoom -->
+    <script>
+      // Prevent pinch zooming, double-tap zoom, and touch gestures
+      if (window.innerWidth == screen.width) {
+        document.addEventListener(
+          "touchstart",
+          function (event) {
+            if (event.touches.length > 1) {
+              event.preventDefault();
+            }
+          },
+          { passive: false }
+        );
+
+        document.addEventListener("gesturestart", function (event) {
+          event.preventDefault();
+        });
+      }
+    </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
