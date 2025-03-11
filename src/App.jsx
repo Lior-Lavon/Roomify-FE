@@ -36,11 +36,9 @@ function App() {
 
   return (
     <>
-      {/* <HomeView /> */}
+      <HomeView />
 
-      {/* <MapView center={center} markers={[]} /> */}
-      {/* </APIProvider> */}
-      <ChatView />
+      {/* <ChatView /> */}
       {/* <TestView /> */}
       {/* <div>
         <div className="sm:hidden">Base</div>
