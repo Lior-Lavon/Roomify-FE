@@ -288,7 +288,7 @@ const ChatView = () => {
       {/* Middle Div (Flexible) */}
       <div ref={containerRef} className="w-full flex-1 flex flex-col">
         {/* Top Div */}
-        <div className="bg-blue-500" style={{ height: heights.top }}>
+        <div className="" style={{ height: heights.top }}>
           <MapView properties={RoomList} visibleCardId={visibleCardId} />
         </div>
 
