@@ -272,6 +272,8 @@ const ChatView = () => {
   };
 
   const onCardVisible = useCallback((visibleAdvertId) => {
+    console.log("visibleAdvertId");
+
     setVisibleCardId(visibleAdvertId);
   }, []);
 

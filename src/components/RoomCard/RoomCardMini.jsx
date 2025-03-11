@@ -46,7 +46,7 @@ const RoomCardMini = ({ room_info, onVisible }) => {
       </div>
       <img
         src={room_info.Images[0]}
-        className="w-[5.2rem] h-[4rem] object-cover rounded-lg"
+        className="w-[6.2rem] h-[5rem] object-cover rounded-lg"
       />
     </div>
   );
