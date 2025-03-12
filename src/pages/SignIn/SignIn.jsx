@@ -43,7 +43,7 @@ const SignIn = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-2 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
+              className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 "
               required
             />
             {!isLogin && (
@@ -52,7 +52,7 @@ const SignIn = () => {
                 placeholder="Confirm"
                 value={confirmEmail}
                 onChange={(e) => setConfirmEmail(e.target.value)}
-                className="w-full px-2 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
+                className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
                 required
               />
             )}
@@ -61,7 +61,7 @@ const SignIn = () => {
               placeholder="Confirm Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-2 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
+              className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
               required
             />
             <button
