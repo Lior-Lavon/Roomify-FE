@@ -306,7 +306,7 @@ const ChatView = () => {
         >
           {/* Resizer Slider */}
           <div
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full cursor-row-resize h-5 "
+            className="w-full absolute top-0 left-1/2 transform -translate-x-1/2  cursor-row-resize h-5"
             onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
           >
@@ -315,7 +315,10 @@ const ChatView = () => {
           </div>
 
           {/* White Space Div Below Slider */}
-          <div className="m-1 rounded-xl ">
+          <div
+            className="w-full absolute top-[1.25rem] "
+            style={{ height: `${bottomContainerHeight - 16}px` }}
+          >
             <Chat
               chat_flow={chatFlow}
               room_list={RoomList}
@@ -323,17 +326,11 @@ const ChatView = () => {
               onCardVisible={onCardVisible}
               filterSelection={filterSelection}
               showPropertyInfo={showPropertyInfo}
-              height={bottomContainerHeight}
             />
           </div>
         </div>
       </div>
       {/* Bottom Div */}
-      {/* <div className="w-[50%] h-12 bg-gray-100 "> */}
-      {/* <p className="text-gray-400 h-full text-sm flex items-center pl-4 ">
-          Type your search
-        </p> */}
-      {/* </div> */}
       <PromptFooter pageType={"chat"} />
 
       {/* show property view */}

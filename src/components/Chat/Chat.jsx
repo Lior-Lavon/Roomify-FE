@@ -12,7 +12,6 @@ const Chat = ({
   filterSelection,
   showPropertyInfo,
   onCardVisible,
-  height,
 }) => {
   const divRef = useRef();
 
@@ -39,8 +38,7 @@ const Chat = ({
 
   return (
     <div
-      className="w-full overflow-y-auto overflow-x-hidden"
-      style={{ height: `${height}px` }}
+      className="w-full h-full overflow-y-auto overflow-x-hidden"
       ref={divRef}
     >
       {chat_flow.map((chatItem) => {

@@ -21,6 +21,18 @@ const MapView = ({ properties, visibleCardId }) => {
 
 export default MapView;
 
+const mapStyle = [
+  {
+    featureType: "water",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "#b9c8df",
+      },
+    ],
+  },
+];
+
 const MapComponent = ({ properties, visibleCardId }) => {
   const map = useMap(); // Get the map instance
   const isUserInteracting = useRef(false); // Track manual movement
@@ -56,6 +68,7 @@ const MapComponent = ({ properties, visibleCardId }) => {
       mapId="DEMO_MAP_ID"
       mapTypeControl={false}
       disableDefaultUI={true}
+      // styles={mapStyle}
       onCameraChanged={handleCameraChanged} // Detect manual user movement
     >
       <PoiMarkers properties={properties} visibleCardId={visibleCardId} />
