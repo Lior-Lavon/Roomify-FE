@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import roomImg1 from "../../assets/room1.jpeg";
 
-const RoomCardMini = ({ room_info, onVisible }) => {
+const RoomCardMini = memo(({ room_info, onVisible }) => {
   const cardRef = useRef(null);
 
   useEffect(() => {
@@ -44,12 +44,14 @@ const RoomCardMini = ({ room_info, onVisible }) => {
           / month
         </p>
       </div>
-      <img
-        src={room_info.Images[0]}
-        className="w-[6.2rem] h-[5rem] object-cover rounded-lg"
-      />
+      {room_info.Images.length >= 1 && (
+        <img
+          src={room_info.Images[0]}
+          className="w-[6.2rem] h-[5rem] object-cover rounded-lg"
+        />
+      )}
     </div>
   );
-};
+});
 
 export default RoomCardMini;
