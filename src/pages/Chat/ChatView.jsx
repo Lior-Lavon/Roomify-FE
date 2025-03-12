@@ -12,7 +12,7 @@ import {
   TopBar,
   PromptFooter,
 } from "../../components";
-
+import { useSelector } from "react-redux";
 import { RoomList } from "../../MockData/RoomList";
 import { ChatOptions } from "../../MockData/ChatOptions";
 
@@ -21,8 +21,11 @@ const ChatView = () => {
   const [processFilters, setProcessFilters] = useState(false);
   const [filterUpdate, setFilterUpdate] = useState(false);
 
+  const { userPrompt } = useSelector((store) => store.chat);
+  console.log("userPrompt : ", userPrompt);
+
   const [chatInfo, setChatInfo] = useState({
-    Prompt: "I am searching for a room in Amsterdam",
+    Prompt: "chat.userPrompt",
     Address: "Amsterdam",
     PropertyType: "",
     Radius: 0,
@@ -287,7 +290,7 @@ const ChatView = () => {
       style={{ height: `${viewportHeight}px` }}
     >
       {/* Top Div */}
-      <TopBar />
+      <TopBar showAvatar={true} showLogin={true} />
 
       {/* Middle Div (Flexible) */}
       <div ref={containerRef} className="w-full flex-1 flex flex-col">

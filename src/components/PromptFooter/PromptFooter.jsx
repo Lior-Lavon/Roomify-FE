@@ -1,6 +1,8 @@
 import React, { useState, useEffect, memo } from "react";
 import { VscTriangleRight } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserPrompt } from "../../features/chat/chatSlice";
 
 const placeholders = [
   "I am searching for a room ...",
@@ -9,6 +11,7 @@ const placeholders = [
 ];
 
 const PromptFooter = ({ pageType }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isFocused, setIsFocused] = useState(false);
   const [text, setText] = useState("");
@@ -33,6 +36,12 @@ const PromptFooter = ({ pageType }) => {
 
   const submitPrompt = () => {
     setIsFocused(false);
+
+    console.log("submitPrompt");
+
+    // update the store
+    dispatch(setUserPrompt(text));
+
     setTimeout(() => {
       navigate("/chat");
     }, 600);

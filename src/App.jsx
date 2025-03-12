@@ -1,5 +1,5 @@
 import { FaBeer } from "react-icons/fa";
-import { HomeView, ChatView, NotFound, ProtectiveRoute } from "./pages";
+import { HomeView, ChatView, NotFound, ProtectiveRoute, SignIn } from "./pages";
 import { CoverView, MapView } from "./components";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import TestMapView from "./components/TestMapView/TestMapView";
@@ -7,6 +7,7 @@ import TestView from "./pages/TestView/TestView";
 import { useEffect, useState } from "react";
 import { getSecurityTokenFromLocalStorage } from "./utils/localStorage";
 import bcrypt from "bcryptjs";
+import { store } from "./store.js";
 import {
   BrowserRouter,
   Route,
@@ -15,6 +16,7 @@ import {
 } from "react-router-dom";
 
 import history from "./utils/history";
+import { Provider } from "react-redux";
 
 function App() {
   const [isCover, setIsCover] = useState(false);
@@ -44,17 +46,20 @@ function App() {
 
   return (
     <HistoryRouter history={history}>
-      <Routes>
-        <Route
-          path="/"
-          element={<ProtectiveRoute>{/* <Dashboard /> */}</ProtectiveRoute>}
-        ></Route>
+      <Provider store={store}>
+        <Routes>
+          <Route
+            path="/"
+            element={<ProtectiveRoute>{/* <Dashboard /> */}</ProtectiveRoute>}
+          ></Route>
 
-        <Route path="/landing" element={<HomeView />} />
-        <Route path="/chat" element={<ChatView />} />
+          <Route path="/landing" element={<HomeView />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/chat" element={<ChatView />} />
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Provider>
     </HistoryRouter>
   );
 
