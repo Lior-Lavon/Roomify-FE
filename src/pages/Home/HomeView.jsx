@@ -3,12 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const HomeView = () => {
   const navigate = useNavigate();
-  // const handleSearch = () => {
-  //   navigate("/chat");
-  // };
 
   return (
-    <div className="base:hidden sm:block md:hidden w-full h-[100vh] text-3xl sans-regular">
+    <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular">
       <TopBar />
       <div className="mt-3 inline-block w-full text-center">
         <h1 className="text-black sans-bold">Welcome to</h1>

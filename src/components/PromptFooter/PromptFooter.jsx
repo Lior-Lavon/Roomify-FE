@@ -35,7 +35,7 @@ const PromptFooter = ({ pageType }) => {
     setIsFocused(false);
     setTimeout(() => {
       navigate("/chat");
-    }, 500);
+    }, 600);
   };
 
   return (
