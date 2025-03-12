@@ -45,7 +45,7 @@ const RoomCardSlider = ({
   };
 
   return (
-    <div className="w-full flex flex-col my-4 " onClick={showPropertyInfo}>
+    <div className="w-full flex flex-col my-2 mx-1 " onClick={showPropertyInfo}>
       {/* TopDiv with horizontal scrollable cards */}
       <div
         className="w-full overflow-x-auto whitespace-nowrap flex items-center gap-x-2 pb-1"
