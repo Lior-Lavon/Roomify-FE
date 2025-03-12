@@ -38,7 +38,7 @@ const Chat = ({
 
   return (
     <div
-      className="w-full h-full overflow-y-auto overflow-x-hidden"
+      className="w-full h-full px-1 overflow-y-auto overflow-x-hidden"
       ref={divRef}
     >
       {chat_flow.map((chatItem) => {
