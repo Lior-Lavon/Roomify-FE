@@ -6,7 +6,7 @@ const SignIn = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmEmail, setConfirmEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
@@ -48,10 +48,10 @@ const SignIn = () => {
             />
             {!isLogin && (
               <input
-                type="email"
-                placeholder="Confirm"
-                value={confirmEmail}
-                onChange={(e) => setConfirmEmail(e.target.value)}
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
                 required
               />
@@ -59,11 +59,12 @@ const SignIn = () => {
             <input
               type="password"
               placeholder="Confirm Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={confirmPassword}
+              onChange={(e) => setConfirmEmail(e.target.value)}
               className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
               required
             />
+
             <button
               type="submit"
               className="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition"
