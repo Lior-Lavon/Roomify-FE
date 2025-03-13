@@ -43,10 +43,10 @@ const HomeView = () => {
         </div>
       </div>
 
-      {/* <div className="text-sm">
+      <div className="text-sm">
         <p>Keyboard Open: {isKeyboardOpen ? "Yes" : "No"}</p>
         <p>Keyboard Height: {keyboardHeight}px</p>
-      </div> */}
+      </div>
 
       <p className="text-center mt-2 text-[12px] text-sm text-gray-400">
         Available rooms to rent near you
