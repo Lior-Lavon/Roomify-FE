@@ -21,7 +21,7 @@ const HomeView = () => {
     >
       <TopBar showAvatar={true} showLogin={true} />
 
-      <div className="mt-15 inline-block w-full text-center ">
+      <div className="mt-18 inline-block w-full text-center ">
         <h1 className="text-transparent bg-gradient-to-r from-[#261a18] to-[#ff5733] bg-clip-text font-bold text-2lg">
           Welcome to Roomify
         </h1>
@@ -33,11 +33,9 @@ const HomeView = () => {
 
       <PromptFooter pageType={"home"} />
 
-      <p className="text-center mt-2 text-[12px] text-sm text-gray-400">
-        Available rooms to rent near you
-      </p>
-
       <div className="mt-10">
+        <p className="text-left px-2 text-lg text-gray-400">Resent listings</p>
+
         <div className="p-2 flex flex-row gap-2 overflow-auto">
           <RoomCard />
           <RoomCard />

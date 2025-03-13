@@ -47,7 +47,7 @@ const PromptFooter = ({ pageType }) => {
 
   return (
     <div
-      className={`w-full rounded-tl-2xl rounded-tr-2xl transition-all duration-500 mt-24`}
+      className={`w-full rounded-tl-2xl rounded-tr-2xl transition-all duration-500 mt-20`}
     >
       {/* className={`w-full ${
         pageType == "home" && "fixed bottom-0"
@@ -62,10 +62,6 @@ const PromptFooter = ({ pageType }) => {
       } bg-gray-100`}
     > */}
       <div className="mx-8 relative">
-        {pageType != "chat" && (
-          <p className="text-gray-500 text-[12px] py-2">Type your search</p>
-        )}
-
         <div className="relative">
           <textarea
             onChange={handleChange}
