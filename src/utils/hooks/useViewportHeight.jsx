@@ -3,26 +3,28 @@ import { useState, useEffect } from "react";
 const useKeyboardStatus = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  let timeoutId = null;
+  const [lastViewportHeight, setLastViewportHeight] = useState(
+    window.visualViewport?.height || window.innerHeight
+  );
 
   useEffect(() => {
     const handleResize = () => {
       if (window.visualViewport) {
-        const heightDiff = window.innerHeight - window.visualViewport.height;
+        const newViewportHeight = window.visualViewport.height;
+        const heightDiff = window.innerHeight - newViewportHeight;
 
-        // Ignore small height differences (to prevent false triggers)
+        // If the viewport height decreased significantly, assume the keyboard opened
         if (heightDiff > 100) {
-          clearTimeout(timeoutId);
           setIsKeyboardOpen(true);
           setKeyboardHeight(heightDiff);
-        } else if (isKeyboardOpen) {
-          // If keyboard was previously open, wait before resetting (ignoring quick events)
-          clearTimeout(timeoutId);
-          timeoutId = setTimeout(() => {
-            setIsKeyboardOpen(false);
-            setKeyboardHeight(0);
-          }, 500); // Delay to prevent false resets
         }
+        // Only reset if the new height is very close to the original full height
+        else if (newViewportHeight >= lastViewportHeight - 10) {
+          setIsKeyboardOpen(false);
+          setKeyboardHeight(0);
+        }
+
+        setLastViewportHeight(newViewportHeight);
       }
     };
 
@@ -34,9 +36,8 @@ const useKeyboardStatus = () => {
       if (window.visualViewport) {
         window.visualViewport.removeEventListener("resize", handleResize);
       }
-      clearTimeout(timeoutId);
     };
-  }, [isKeyboardOpen]); // Depend on isKeyboardOpen to prevent unnecessary resets
+  }, [lastViewportHeight]); // Track lastViewportHeight changes to stabilize detection
 
   return { isKeyboardOpen, keyboardHeight };
 };
