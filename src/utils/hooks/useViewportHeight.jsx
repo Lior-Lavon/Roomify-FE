@@ -12,21 +12,15 @@ const useKeyboardStatus = () => {
         const heightDiff = window.innerHeight - window.visualViewport.height;
 
         // Ignore small height differences (to prevent false triggers)
-        console.log("heightDiff : ", heightDiff);
-        console.log("isDelayRef : ", isDelayRef.current);
-
         if (heightDiff > 100) {
-          console.log("opening");
           isDelayRef.current = true;
           setIsKeyboardOpen(true);
           setKeyboardHeight(heightDiff);
 
           setTimeout(() => {
             isDelayRef.current = false;
-          }, 1000);
+          }, 200);
         } else if (!isDelayRef.current) {
-          console.log("closing");
-
           // If keyboard was previously open, wait before resetting (ignoring quick events)
           setIsKeyboardOpen(false);
           setKeyboardHeight(0);
