@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import { PromptFooter, RoomCard, TopBar } from "../../components";
+import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 
 // fixed top-[17rem]
 const HomeView = () => {
+  const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
+
   useEffect(() => {
-    const handleResize = () => {
-      // setViewportHeight(window.innerHeight);
-      console.log("handleResize is called");
-    };
-    // Listen to resize event
-    window.addEventListener("resize", handleResize);
-    // Clean up the event listener
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    console.log("isKeyboardOpen : ", isKeyboardOpen);
+    console.log("keyboardHeight : ", keyboardHeight);
+  }, [isKeyboardOpen, keyboardHeight]);
 
   return (
     <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white ">
@@ -28,7 +23,10 @@ const HomeView = () => {
         </p>
         <p className="text-black text-sm">rooms for rent today</p>
       </div>
-      {/* <p className="text-sm">{`doc : ${viewportHeight}`}</p> */}
+      <div className="text-sm">
+        <p>Keyboard Open: {isKeyboardOpen ? "Yes" : "No"}</p>
+        <p>Keyboard Height: {keyboardHeight}px</p>
+      </div>
 
       <div className="mt-2">
         <div className="p-2 flex flex-row gap-2 overflow-auto">

@@ -1,27 +1,36 @@
 import { useState, useEffect } from "react";
 
-const useViewportHeight = () => {
-  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+const useKeyboardStatus = () => {
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
 
   useEffect(() => {
-    console.log("11");
-
     const handleResize = () => {
-      console.log("222");
-      setViewportHeight(window.innerHeight);
+      if (window.visualViewport) {
+        const heightDiff = window.innerHeight - window.visualViewport.height;
+        if (heightDiff > 100) {
+          // Keyboard is open (adjust threshold if needed)
+          setIsKeyboardOpen(true);
+          setKeyboardHeight(heightDiff);
+        } else {
+          setIsKeyboardOpen(false);
+          setKeyboardHeight(0);
+        }
+      }
     };
-    console.log("333");
-    // Listen to resize event
-    window.addEventListener("resize", handleResize);
-    console.log("444");
-    // Clean up the event listener
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", handleResize);
+    }
+
     return () => {
-      console.log("555");
-      window.removeEventListener("resize", handleResize);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", handleResize);
+      }
     };
   }, []);
 
-  return viewportHeight;
+  return { isKeyboardOpen, keyboardHeight };
 };
 
-export default useViewportHeight;
+export default useKeyboardStatus;
