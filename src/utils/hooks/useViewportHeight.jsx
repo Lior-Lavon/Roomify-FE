@@ -3,24 +3,29 @@ import { useState, useEffect } from "react";
 const useKeyboardStatus = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
+  let timeoutId = null;
 
   useEffect(() => {
     const handleResize = () => {
-      console.log("handleResize is called");
-
       if (window.visualViewport) {
-        console.log("window.visualViewport");
-
         const heightDiff = window.innerHeight - window.visualViewport.height;
+
+        // If heightDiff > threshold, keyboard is open
         if (heightDiff > 100) {
           console.log("heightDiff > 100");
-          // Keyboard is open (adjust threshold if needed)
-          setIsKeyboardOpen(true);
-          setKeyboardHeight(heightDiff);
+
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            setIsKeyboardOpen(true);
+            setKeyboardHeight(heightDiff);
+          }, 200); // Small delay to stabilize the event
         } else {
-          console.log("heightDiff < 100");
-          setIsKeyboardOpen(false);
-          setKeyboardHeight(0);
+          console.log("heightDiff <=0");
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            setIsKeyboardOpen(false);
+            setKeyboardHeight(0);
+          }, 200); // Delay to prevent flickering
         }
       }
     };
@@ -31,8 +36,11 @@ const useKeyboardStatus = () => {
 
     return () => {
       if (window.visualViewport) {
+        console.log("removeEventListener called");
+
         window.visualViewport.removeEventListener("resize", handleResize);
       }
+      clearTimeout(timeoutId);
     };
   }, []);
 
