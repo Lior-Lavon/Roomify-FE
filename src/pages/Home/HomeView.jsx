@@ -3,7 +3,7 @@ import { PromptFooter, RoomCard, TopBar } from "../../components";
 
 const HomeView = () => {
   return (
-    <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular fixed top-64">
+    <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed top-[17rem]">
       <TopBar showAvatar={true} showLogin={true} />
 
       <div className="mt-3 inline-block w-full text-center">

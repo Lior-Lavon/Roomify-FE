@@ -5,6 +5,12 @@
 
 @import "tailwindcss";
 
+body {
+  padding: 0;
+  margin: 0;
+  background: red;
+}
+
 @theme {
   --breakpoint-*: initial;
   --breakpoint-base: 1px;
