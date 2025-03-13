@@ -7,8 +7,8 @@ const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
 
   useEffect(() => {
-    console.log("isKeyboardOpen : ", isKeyboardOpen);
-    console.log("keyboardHeight : ", keyboardHeight);
+    console.log("isKeyboardOpen !: ", isKeyboardOpen);
+    console.log("keyboardHeight !: ", keyboardHeight);
   }, [isKeyboardOpen, keyboardHeight]);
 
   return (
@@ -23,10 +23,6 @@ const HomeView = () => {
         </p>
         <p className="text-black text-sm">rooms for rent today</p>
       </div>
-      <div className="text-sm">
-        <p>Keyboard Open: {isKeyboardOpen ? "Yes" : "No"}</p>
-        <p>Keyboard Height: {keyboardHeight}px</p>
-      </div>
 
       <div className="mt-2">
         <div className="p-2 flex flex-row gap-2 overflow-auto">
@@ -39,6 +35,12 @@ const HomeView = () => {
           <RoomCard />
         </div>
       </div>
+
+      <div className="text-sm">
+        <p>Keyboard Open: {isKeyboardOpen ? "Yes" : "No"}</p>
+        <p>Keyboard Height: {keyboardHeight}px</p>
+      </div>
+
       <p className="text-center mt-2 text-[12px] text-sm text-gray-400">
         Available rooms to rent near you
       </p>
