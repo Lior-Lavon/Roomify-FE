@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { PromptFooter, RoomCard, TopBar } from "../../components";
-import useViewportHeight from "../../utils//hooks/useViewportHeight";
 
 // fixed top-[17rem]
 const HomeView = () => {
