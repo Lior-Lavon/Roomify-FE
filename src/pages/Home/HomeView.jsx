@@ -22,7 +22,7 @@ const HomeView = () => {
       <TopBar showAvatar={true} showLogin={true} />
 
       <div className="mt-15 inline-block w-full text-center ">
-        <h1 className="text-transparent bg-gradient-to-r from-[#261a18] to-[#ff5733] bg-clip-text font-bold text-lg">
+        <h1 className="text-transparent bg-gradient-to-r from-[#261a18] to-[#ff5733] bg-clip-text font-bold text-2lg">
           Welcome to Roomify
         </h1>
         <p className="text-[#7b7b7b] text-[15px] mt-2">
