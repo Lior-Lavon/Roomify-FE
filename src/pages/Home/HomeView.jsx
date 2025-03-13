@@ -17,7 +17,7 @@ const HomeView = () => {
     const val = 400;
     console.log("val : ", val);
 
-    return `top-[${val}px]`;
+    return `top-[350px]`;
   };
 
   return (
@@ -37,7 +37,7 @@ const HomeView = () => {
 
       <div
         className={`absolute ${
-          isKeyboardOpen ? "top-[350px]" : ""
+          isKeyboardOpen ? getKeyboardHeight() : ""
         } w-full bg-yellow-200 `}
       >
         <Prompt />

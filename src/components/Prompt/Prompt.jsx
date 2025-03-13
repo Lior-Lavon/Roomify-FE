@@ -46,7 +46,7 @@ const Prompt = () => {
         value={text}
         rows={3}
         placeholder={placeholders[placeholderIndex]}
-        className={`w-full h-[4.3rem] max-h-[4.3rem]  bg-white px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 resize-none leading-tight`}
+        className={`w-full h-[4.3rem] max-h-[4.3rem] bg-white px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 resize-none leading-tight`}
         // onFocus={() => setIsFocused(true)}
         // onBlur={() => setIsFocused(false)}
       />
