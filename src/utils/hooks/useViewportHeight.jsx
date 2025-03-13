@@ -19,7 +19,7 @@ const useKeyboardStatus = () => {
 
           setTimeout(() => {
             isDelayRef.current = false;
-          }, 500);
+          }, 700);
         } else if (!isDelayRef.current) {
           // If keyboard was previously open, wait before resetting (ignoring quick events)
           setIsKeyboardOpen(false);
