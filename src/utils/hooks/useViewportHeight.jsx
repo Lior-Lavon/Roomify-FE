@@ -11,6 +11,7 @@ const useKeyboardStatus = () => {
         const heightDiff = window.innerHeight - window.visualViewport.height;
 
         // If heightDiff > threshold, keyboard is open
+        console.log("heightDiff : ", heightDiff);
         if (heightDiff > 100) {
           console.log("heightDiff > 100");
 
