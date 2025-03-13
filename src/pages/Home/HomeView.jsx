@@ -14,7 +14,7 @@ const HomeView = () => {
   const getKeyboardHeight = () => {
     console.log("window.innerHeight : ", window.innerHeight);
     console.log("keyboardHeight : ", keyboardHeight);
-    const val = window.innerHeight - keyboardHeight;
+    const val = 400;
     console.log("val : ", val);
 
     return `top-[${val}px]`;
