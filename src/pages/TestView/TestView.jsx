@@ -4,33 +4,38 @@ const HomeView = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   useEffect(() => {
-    const checkForKeyboard = () => {
-      const viewportHeight = window.innerHeight;
-      const documentHeight = document.documentElement.clientHeight;
-      const keyboardVisible = viewportHeight < documentHeight - 100; // Adjust threshold if needed
+    const handleResize = () => {
+      if (window.visualViewport) {
+        const keyboardVisible =
+          window.visualViewport.height < window.innerHeight;
+        setIsKeyboardOpen(keyboardVisible);
 
-      setIsKeyboardOpen(keyboardVisible);
-
-      if (keyboardVisible) {
-        document.body.style.overflow = "hidden"; // Prevent scrolling
-      } else {
-        document.body.style.overflow = ""; // Restore scrolling
+        if (keyboardVisible) {
+          document.body.style.overflow = "hidden"; // Prevents scrolling
+        } else {
+          document.body.style.overflow = "";
+        }
       }
     };
 
-    window.addEventListener("resize", checkForKeyboard);
-    return () => window.removeEventListener("resize", checkForKeyboard);
+    window.visualViewport?.addEventListener("resize", handleResize);
+    return () =>
+      window.visualViewport?.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-full bg-white overflow-hidden">
+    <div className="body fixed top-0 left-0 right-0 h-full bg-white overflow-hidden">
       {/* This ensures the content stays in place */}
-      <div className="flex flex-col items-center justify-center h-full">
+      <div className="topBar fixed top-0 w-full h-12 flex items-center justify-center bg-blue-200">
         <h1 className="text-center text-2xl">Welcome to Roomufy</h1>
       </div>
 
-      {/* Input stays fixed at the bottom */}
-      <div className="fixed bottom-4 left-0 right-0 px-4">
+      {/* Input stays fixed at the bottom and moves above keyboard when opened */}
+      <div
+        className={`footer fixed left-0 right-0 px-4 transition-transform duration-300 ${
+          isKeyboardOpen ? "bottom-[calc(100vh-100%)]" : "bottom-4"
+        }`}
+      >
         <input
           type="text"
           placeholder="Enter something..."
