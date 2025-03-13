@@ -35,7 +35,7 @@ const HomeView = () => {
         </p>
       </div>
 
-      <div className={`absolute  ${getKeyboardHeight()} w-full bg-yellow-200 `}>
+      <div className={`absolute top-400 w-full bg-yellow-200 `}>
         <Prompt />
       </div>
 
