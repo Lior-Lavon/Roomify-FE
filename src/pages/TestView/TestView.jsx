@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const HomeView = () => {
   const [footerBottom, setFooterBottom] = useState("1rem"); // Default bottom spacing
-  const [topBarTop, setTopBarTop] = useState("0px"); // Default position for topBar
+  const [bodyPaddingTop, setBodyPaddingTop] = useState("0px"); // Default padding for body
 
   useEffect(() => {
     const handleResize = () => {
@@ -11,24 +11,27 @@ const HomeView = () => {
           window.innerHeight - window.visualViewport.height;
 
         if (keyboardHeight > 0) {
-          // When keyboard appears, adjust the `topBar`'s position
-          setTopBarTop(`${keyboardHeight}px`); // Push `topBar` down by keyboard height
+          // When keyboard is visible, adjust the padding of the body
+          setBodyPaddingTop(`${keyboardHeight}px`); // Move the body down by the keyboard height
 
-          // Move footer above the keyboard
-          setFooterBottom(`${keyboardHeight + 16}px`); // Add some extra padding to the footer
-          document.body.style.overflow = "hidden"; // Prevent body scrolling
+          // Adjust footer to be above the keyboard
+          setFooterBottom(`${keyboardHeight + 16}px`); // Add padding to footer to sit above the keyboard
+
+          // Prevent scrolling during keyboard visibility
+          document.body.style.overflow = "hidden"; // Disable scroll
         } else {
-          // Reset the `topBar` and footer when the keyboard is hidden
-          setTopBarTop("0px");
+          // Reset the body padding and footer position when the keyboard is hidden
+          setBodyPaddingTop("0px");
           setFooterBottom("1rem");
-          document.body.style.overflow = ""; // Allow scrolling when keyboard is hidden
+          document.body.style.overflow = ""; // Allow scrolling again
         }
       }
     };
 
-    // Listen for changes in visualViewport size (keyboard show/hide)
+    // Add event listener for viewport resize (keyboard appears/disappears)
     window.visualViewport?.addEventListener("resize", handleResize);
 
+    // Cleanup on unmount
     return () => {
       window.visualViewport?.removeEventListener("resize", handleResize);
     };
@@ -36,24 +39,21 @@ const HomeView = () => {
 
   return (
     <div className="relative h-screen bg-white">
-      {/* Top bar adjusts its position based on keyboard visibility */}
-      <div
-        className="topBar fixed left-0 right-0 h-12 flex items-center justify-center bg-blue-200 z-10"
-        style={{ top: topBarTop }}
-      >
+      {/* Top bar stays fixed */}
+      <div className="topBar fixed top-0 left-0 right-0 h-12 flex items-center justify-center bg-blue-200 z-10">
         <h1 className="text-center text-2xl">Welcome to Roomufy</h1>
       </div>
 
-      {/* Main content */}
-      <div className="flex flex-col justify-between h-full pt-16 pb-16">
-        {/* Content */}
-        <div className="content flex-grow flex justify-center items-center">
+      {/* Main content with dynamic padding to avoid layout shifting */}
+      <div className="body" style={{ paddingTop: bodyPaddingTop }}>
+        {/* Content goes here */}
+        <div className="content flex-grow flex justify-center items-center pt-12 pb-16">
           <p>Content goes here</p>
         </div>
 
         {/* Footer moves above the keyboard */}
         <div
-          className="footer fixed left-0 right-0 px-4 transition-all duration-300 z-20"
+          className="footer absolute left-0 right-0 px-4 transition-all duration-300 z-20"
           style={{ bottom: footerBottom }}
         >
           <input
