@@ -7,7 +7,8 @@ const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
 
   useEffect(() => {
-    // heightRef.current = `top-[${keyboardHeight}px]`;
+    console.log(`top-[${keyboardHeight}px]`);
+
     console.log("isKeyboardOpen !: ", isKeyboardOpen);
     console.log("keyboardHeight !: ", Math.floor(keyboardHeight));
   }, [isKeyboardOpen, keyboardHeight]);
@@ -15,12 +16,12 @@ const HomeView = () => {
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed   transition-all duration-250 ${
-        !isKeyboardOpen ? "top-0" : "top-[267px]"
+        !isKeyboardOpen ? "top-0" : "top-[0px]"
       }`}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
-      <div className="mt-4 inline-block w-full text-center mt-10">
+      <div className="mt-10 inline-block w-full text-center ">
         <h1 className="text-black sans-bold">Welcome to</h1>
         <h1 className="text-orange-600 sans-bold">Roomufy</h1>
         <p className="text-black text-sm mt-2">
