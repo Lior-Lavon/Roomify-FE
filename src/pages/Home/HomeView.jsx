@@ -12,6 +12,15 @@ const HomeView = () => {
     console.log("keyboardHeight : ", keyboardHeight);
   }, [isKeyboardOpen, keyboardHeight]);
 
+  const getKeyboardHeight = () => {
+    console.log("window.innerHeight : ", window.innerHeight);
+    console.log("keyboardHeight : ", keyboardHeight);
+    const rel = calc(window.innerHeight - keyboardHeight);
+    console.log("rel :", rel);
+
+    return rel;
+  };
+
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[350px] relative text-3xl sans-regular bg-red-500`}
@@ -29,7 +38,7 @@ const HomeView = () => {
 
       <div
         className={`absolute w-full bg-yellow-200 ${
-          keyboardHeight > 0 ? `top-[200px]` : ""
+          keyboardHeight > 0 ? `top-[${getKeyboardHeight()}px]` : ""
         }`}
         // style={{
         //   top: keyboardHeight > 0 ? `calc(0.5rem - ${keyboardHeight}px)` : "",
