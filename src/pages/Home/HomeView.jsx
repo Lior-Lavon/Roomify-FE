@@ -3,35 +3,8 @@ import { PromptFooter, RoomCard, TopBar } from "../../components";
 import { useNavigate } from "react-router-dom";
 
 const HomeView = () => {
-  const navigate = useNavigate();
-
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-
-  useEffect(() => {
-    const handleFocus = () => setIsKeyboardOpen(true);
-    const handleBlur = () => setIsKeyboardOpen(false);
-
-    const input = document.querySelector("input, textarea");
-    if (input) {
-      input.addEventListener("focus", handleFocus);
-      input.addEventListener("blur", handleBlur);
-    }
-
-    return () => {
-      if (input) {
-        input.removeEventListener("focus", handleFocus);
-        input.removeEventListener("blur", handleBlur);
-      }
-    };
-  }, []);
-
   return (
-    <div
-      className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular"
-      style={{
-        transform: isKeyboardOpen ? "translateY(-100px)" : "translateY(0)",
-      }}
-    >
+    <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular fixed top-0 left-0 ">
       <TopBar showAvatar={true} showLogin={true} />
 
       <div className="mt-3 inline-block w-full text-center">

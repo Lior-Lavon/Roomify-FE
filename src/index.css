@@ -5,6 +5,11 @@
 
 @import "tailwindcss";
 
+body {
+  height: 100%;
+  overflow: hidden; /* Prevent the body from shifting */
+}
+
 @theme {
   --breakpoint-*: initial;
   --breakpoint-base: 1px;
