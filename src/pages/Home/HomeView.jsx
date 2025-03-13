@@ -1,23 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { PromptFooter, RoomCard, TopBar } from "../../components";
-import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
-
+import { Prompt, PromptFooter, RoomCard, TopBar } from "../../components";
 // fixed top-[17rem]
 const HomeView = () => {
-  const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
-
-  useEffect(() => {
-    console.log(`top-[${keyboardHeight}px]`);
-
-    console.log("isKeyboardOpen !: ", isKeyboardOpen);
-    console.log("keyboardHeight !: ", Math.floor(keyboardHeight));
-  }, [isKeyboardOpen, keyboardHeight]);
-
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[350px] text-3xl sans-regular bg-red-500 fixed ${
-        !isKeyboardOpen ? "top-0" : "top-[0px]"
-      } `}
+      className={`base:hidden sm:block md:hidden w-full h-[350px] text-3xl sans-regular bg-red-500 fixed top-0`}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
@@ -30,7 +17,7 @@ const HomeView = () => {
         </p>
       </div>
 
-      <PromptFooter pageType={"home"} />
+      <Prompt />
 
       {/* <div className="mt-10">
         <p className="text-center px-2 text-lg text-black">Recent listings</p>
