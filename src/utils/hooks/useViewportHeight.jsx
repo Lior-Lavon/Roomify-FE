@@ -13,6 +13,7 @@ const useKeyboardStatus = () => {
 
         // Ignore small height differences (to prevent false triggers)
         console.log("heightDiff : ", heightDiff);
+        console.log("isDelay : ", isDelay);
 
         if (heightDiff > 100) {
           setIsKeyboardOpen(true);
