@@ -1,20 +1,46 @@
 import { useEffect, useState } from "react";
 import { PromptFooter, RoomCard, TopBar } from "../../components";
-import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 
-const HomeView = () => {
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-  const keyboardHeight = useKeyboardStatus(); // Assuming this hook detects keyboard visibility and height
+// Custom hook to track keyboard visibility and viewport height
+const useKeyboardHeight = () => {
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
 
   useEffect(() => {
-    setIsKeyboardOpen(keyboardHeight > 0); // Set keyboard status based on height
-  }, [keyboardHeight]);
+    const handleResize = () => {
+      // Set height to 0 if the keyboard is not open
+      if (window.innerHeight < document.documentElement.clientHeight) {
+        setKeyboardHeight(
+          document.documentElement.clientHeight - window.innerHeight
+        );
+      } else {
+        setKeyboardHeight(0);
+      }
+    };
+
+    // Add event listeners for keyboard opening and closing
+    window.addEventListener("resize", handleResize);
+
+    // Initialize on load
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return keyboardHeight;
+};
+
+const HomeView = () => {
+  const keyboardHeight = useKeyboardHeight(); // Custom hook to track keyboard height
 
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white ${
-        isKeyboardOpen ? "pb-[calc(${keyboardHeight}px)]" : ""
-      }`}
+      className={`base:hidden sm:block md:hidden w-full text-3xl sans-regular bg-white`}
+      style={{
+        minHeight: `100dvh`,
+        paddingBottom: keyboardHeight ? `${keyboardHeight}px` : "0px", // Adjust bottom padding when keyboard is open
+      }}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
@@ -47,9 +73,10 @@ const HomeView = () => {
 
       {/* Prevent content from shifting when keyboard is open */}
       <div
-        className={`fixed bottom-0 w-full bg-white ${
-          isKeyboardOpen ? `pb-[${keyboardHeight}px]` : ""
-        }`}
+        className="fixed bottom-0 w-full bg-white"
+        style={{
+          paddingBottom: keyboardHeight ? `${keyboardHeight}px` : "0px",
+        }}
       >
         {/* Content here will be kept fixed */}
       </div>
