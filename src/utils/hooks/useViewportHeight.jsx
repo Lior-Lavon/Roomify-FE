@@ -13,6 +13,8 @@ const useKeyboardStatus = () => {
 
         // Ignore small height differences (to prevent false triggers)
         if (heightDiff > 100) {
+          document.body.style.overflow = "hidden"; // Prevent scrolling
+
           isDelayRef.current = true;
           setIsKeyboardOpen(true);
           setKeyboardHeight(heightDiff);
@@ -22,6 +24,9 @@ const useKeyboardStatus = () => {
           }, 700);
         } else if (!isDelayRef.current) {
           // If keyboard was previously open, wait before resetting (ignoring quick events)
+
+          document.body.style.overflow = ""; // Restore scrolling
+
           setIsKeyboardOpen(false);
           setKeyboardHeight(0);
         }
