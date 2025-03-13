@@ -10,23 +10,18 @@ const useKeyboardStatus = () => {
       if (window.visualViewport) {
         const heightDiff = window.innerHeight - window.visualViewport.height;
 
-        // If heightDiff > threshold, keyboard is open
-        console.log("heightDiff : ", heightDiff);
+        // Ignore small height differences (to prevent false triggers)
         if (heightDiff > 100) {
-          console.log("heightDiff > 100");
-
           clearTimeout(timeoutId);
-          timeoutId = setTimeout(() => {
-            setIsKeyboardOpen(true);
-            setKeyboardHeight(heightDiff);
-          }, 200); // Small delay to stabilize the event
-        } else {
-          console.log("heightDiff <=0");
+          setIsKeyboardOpen(true);
+          setKeyboardHeight(heightDiff);
+        } else if (isKeyboardOpen) {
+          // If keyboard was previously open, wait before resetting (ignoring quick events)
           clearTimeout(timeoutId);
           timeoutId = setTimeout(() => {
             setIsKeyboardOpen(false);
             setKeyboardHeight(0);
-          }, 200); // Delay to prevent flickering
+          }, 500); // Delay to prevent false resets
         }
       }
     };
@@ -37,13 +32,11 @@ const useKeyboardStatus = () => {
 
     return () => {
       if (window.visualViewport) {
-        console.log("removeEventListener called");
-
         window.visualViewport.removeEventListener("resize", handleResize);
       }
       clearTimeout(timeoutId);
     };
-  }, []);
+  }, [isKeyboardOpen]); // Depend on isKeyboardOpen to prevent unnecessary resets
 
   return { isKeyboardOpen, keyboardHeight };
 };
