@@ -61,13 +61,13 @@ const PromptFooter = ({ pageType }) => {
           : "h-12"
       } bg-gray-100`}
     > */}
-      <div className="mx-8 relative">
+      <div className="mx-2 relative">
         <div className="relative">
           <textarea
             onChange={handleChange}
             value={text}
             placeholder={!isFocused ? placeholders[placeholderIndex] : ""}
-            className={`w-full bg-white px-2 py-1 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all duration-500 resize-none leading-tight pr-10 ${
+            className={`w-full bg-white py-1 px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all duration-500 resize-none leading-tight pr-10 ${
               pageType == "chat" && "mt-2"
             }`}
             style={{

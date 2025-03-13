@@ -34,7 +34,7 @@ const HomeView = () => {
       <PromptFooter pageType={"home"} />
 
       <div className="mt-10">
-        <p className="text-left px-2 text-lg text-gray-400">Resent listings</p>
+        <p className="text-center px-2 text-lg text-black">Recent listings</p>
 
         <div className="p-2 flex flex-row gap-2 overflow-auto">
           <RoomCard />
