@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const TestView = () => {
+const HomeView = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   useEffect(() => {
@@ -23,14 +23,13 @@ const TestView = () => {
   }, []);
 
   return (
-    <div
-      className={`w-full h-[100dvh] bg-white overflow-hidden ${
-        isKeyboardOpen ? "fixed" : ""
-      }`}
-    >
-      <h1 className="text-center text-2xl">Welcome to Roomufy</h1>
-      lior
-      {/* Input Field */}
+    <div className="fixed top-0 left-0 right-0 h-full bg-white overflow-hidden">
+      {/* This ensures the content stays in place */}
+      <div className="flex flex-col items-center justify-center h-full">
+        <h1 className="text-center text-2xl">Welcome to Roomufy</h1>
+      </div>
+
+      {/* Input stays fixed at the bottom */}
       <div className="fixed bottom-4 left-0 right-0 px-4">
         <input
           type="text"
@@ -42,4 +41,4 @@ const TestView = () => {
   );
 };
 
-export default TestView;
+export default HomeView;
