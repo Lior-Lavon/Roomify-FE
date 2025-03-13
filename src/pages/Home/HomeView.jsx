@@ -16,7 +16,7 @@ const HomeView = () => {
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed   transition-all duration-250 ${
-        !isKeyboardOpen ? "top-0" : "top-[0px]"
+        !isKeyboardOpen ? "top-0" : "top-[6px]"
       }`}
     >
       <TopBar showAvatar={true} showLogin={true} />
@@ -36,7 +36,7 @@ const HomeView = () => {
         Available rooms to rent near you
       </p>
 
-      <div className="mt-6">
+      <div className="mt-10">
         <div className="p-2 flex flex-row gap-2 overflow-auto">
           <RoomCard />
           <RoomCard />
