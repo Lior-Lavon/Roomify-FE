@@ -36,12 +36,14 @@ const HomeView = () => {
 
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full text-3xl sans-regular bg-white`}
+      className={`base:hidden sm:block md:hidden w-full text-3xl sans-regular bg-white fixed top-0`}
+    >
+      {/* className={`base:hidden sm:block md:hidden w-full text-3xl sans-regular bg-white`}
       style={{
         minHeight: `100dvh`,
         paddingBottom: keyboardHeight ? `${keyboardHeight}px` : "0px", // Adjust bottom padding when keyboard is open
       }}
-    >
+    > */}
       <TopBar showAvatar={true} showLogin={true} />
 
       <div className="mt-4 inline-block w-full text-center">
