@@ -5,10 +5,11 @@ import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 // fixed top-[17rem]
 const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
-  let heightRef = useRef("");
+  let heightRef = useRef("top-[0]");
 
   useEffect(() => {
-    heightRef.current = `top-[${keyboardHeight}px]`;
+    // heightRef.current = `top-[${keyboardHeight}px]`;
+    heightRef.current = `top-[267px]`;
     console.log("heightRef.current : ", heightRef.current);
 
     console.log("isKeyboardOpen !: ", isKeyboardOpen);
