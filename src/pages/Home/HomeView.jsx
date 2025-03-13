@@ -13,9 +13,7 @@ const HomeView = () => {
 
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed top-[${
-        isKeyboardOpen ? keyboardHeight + "px" : "0px"
-      }]`}
+      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed top-[267px]`}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
