@@ -24,7 +24,7 @@ const useKeyboardStatus = () => {
           setTimeout(() => {
             isDelayRef.current = false;
           }, 1000);
-        } else if (!isDelay.current) {
+        } else if (!isDelayRef.current) {
           console.log("closing");
 
           // If keyboard was previously open, wait before resetting (ignoring quick events)
