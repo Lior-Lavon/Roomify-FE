@@ -9,11 +9,12 @@ const HomeView = () => {
 
   useEffect(() => {
     // heightRef.current = `top-[${keyboardHeight}px]`;
-    heightRef.current = `top-[267px]`;
+    const val = Math.floor(keyboardHeight);
+    heightRef.current = `top-[${val}px]`;
     console.log("heightRef.current : ", heightRef.current);
 
     console.log("isKeyboardOpen !: ", isKeyboardOpen);
-    console.log("keyboardHeight !: ", Math.floor(keyboardHeight));
+    console.log("keyboardHeight !: ", val);
   }, [isKeyboardOpen, keyboardHeight]);
 
   return (
