@@ -5,22 +5,17 @@ import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 // fixed top-[17rem]
 const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
-  let heightRef = useRef("top-[0]");
 
   useEffect(() => {
     // heightRef.current = `top-[${keyboardHeight}px]`;
-    const val = Math.floor(keyboardHeight);
-    heightRef.current = `top-[${val}px]`;
-    console.log("heightRef.current : ", heightRef.current);
-
     console.log("isKeyboardOpen !: ", isKeyboardOpen);
-    console.log("keyboardHeight !: ", val);
+    console.log("keyboardHeight !: ", Math.floor(keyboardHeight));
   }, [isKeyboardOpen, keyboardHeight]);
 
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed ${
-        !isKeyboardOpen ? "top-0" : heightRef.current
+        !isKeyboardOpen ? "top-0" : "top-[267px]"
       }`}
     >
       <TopBar showAvatar={true} showLogin={true} />
