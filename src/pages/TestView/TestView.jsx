@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
 const HomeView = () => {
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const [footerBottom, setFooterBottom] = useState("1rem"); // Default bottom spacing
 
   useEffect(() => {
     const handleResize = () => {
       if (window.visualViewport) {
-        const keyboardVisible =
-          window.visualViewport.height < window.innerHeight;
-        setIsKeyboardOpen(keyboardVisible);
-
-        if (keyboardVisible) {
-          document.body.style.overflow = "hidden"; // Prevents scrolling
+        const keyboardHeight =
+          window.innerHeight - window.visualViewport.height;
+        if (keyboardHeight > 0) {
+          setFooterBottom(`${keyboardHeight + 16}px`); // Move footer above keyboard
+          document.body.style.overflow = "hidden"; // Prevent scrolling
         } else {
+          setFooterBottom("1rem"); // Reset footer position
           document.body.style.overflow = "";
         }
       }
@@ -24,17 +24,16 @@ const HomeView = () => {
   }, []);
 
   return (
-    <div className="body fixed top-0 left-0 right-0 h-full bg-white overflow-hidden">
-      {/* This ensures the content stays in place */}
+    <div className="body fixed top-0 left-0 right-0 h-[100vh] bg-white overflow-hidden">
+      {/* Top bar stays fixed */}
       <div className="topBar fixed top-0 w-full h-12 flex items-center justify-center bg-blue-200">
         <h1 className="text-center text-2xl">Welcome to Roomufy</h1>
       </div>
 
-      {/* Input stays fixed at the bottom and moves above keyboard when opened */}
+      {/* Footer moves above keyboard dynamically */}
       <div
-        className={`footer fixed left-0 right-0 px-4 transition-transform duration-300 ${
-          isKeyboardOpen ? "bottom-[calc(100vh-100%)]" : "bottom-4"
-        }`}
+        className="footer absolute left-0 right-0 px-4 transition-all duration-300"
+        style={{ bottom: footerBottom }}
       >
         <input
           type="text"
