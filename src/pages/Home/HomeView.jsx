@@ -38,7 +38,7 @@ const HomeView = () => {
       <div
         className={`absolute ${
           isKeyboardOpen ? getKeyboardHeight() : ""
-        } w-full bg-yellow-200 `}
+        } w-full bg-yellow-200 transition-all duration-200`}
       >
         <Prompt />
       </div>
