@@ -10,7 +10,7 @@ const placeholders = [
   "@Lior, please send me some  ",
 ];
 
-const PromptFooter = ({ pageType }) => {
+const PromptFooter = ({ pageType, isKeyboardOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isFocused, setIsFocused] = useState(false);
@@ -37,8 +37,6 @@ const PromptFooter = ({ pageType }) => {
   const submitPrompt = () => {
     setIsFocused(false);
 
-    console.log("submitPrompt");
-
     // update the store
     dispatch(setUserPrompt(text));
 
@@ -49,8 +47,8 @@ const PromptFooter = ({ pageType }) => {
 
   return (
     <div
-      className={`w-full ${
-        pageType == "home" && "fixed bottom-0"
+      className={`w-full ${pageType == "home" && "fixed bottom-0"} ${
+        isKeyboardOpen ? "adjust" : ""
       } rounded-tl-2xl rounded-tr-2xl transition-all duration-500 ${
         isFocused
           ? pageType == "home"
@@ -78,8 +76,8 @@ const PromptFooter = ({ pageType }) => {
               maxHeight: isFocused ? "70px" : "30px",
               height: isFocused ? "70px" : "30px",
             }}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
+            // onFocus={() => setIsFocused(true)}
+            // onBlur={() => setIsFocused(false)}
           />
 
           <div
