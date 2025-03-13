@@ -76,8 +76,8 @@ const PromptFooter = ({ pageType }) => {
               maxHeight: isFocused ? "70px" : "30px",
               height: isFocused ? "70px" : "30px",
             }}
-            // onFocus={() => setIsFocused(true)}
-            // onBlur={() => setIsFocused(false)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           />
 
           <div
