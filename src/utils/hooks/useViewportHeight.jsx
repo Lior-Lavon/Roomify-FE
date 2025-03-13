@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const useKeyboardStatus = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-  const [isDelay, setIsDelay] = useState(false);
+  const isDelayRef = useRef(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   let timeoutId = null;
 
@@ -13,23 +13,20 @@ const useKeyboardStatus = () => {
 
         // Ignore small height differences (to prevent false triggers)
         console.log("heightDiff : ", heightDiff);
-        console.log("isDelay : ", isDelay);
+        console.log("isDelayRef : ", isDelayRef.current);
 
         if (heightDiff > 100) {
+          console.log("opening");
+          isDelayRef.current = true;
           setIsKeyboardOpen(true);
           setKeyboardHeight(heightDiff);
 
           setTimeout(() => {
-            // det the flag
-            setIsDelay(true);
-
-            // create the flag
-            setTimeout(() => {
-              setIsDelay(false);
-            }, 1000);
+            isDelayRef.current = false;
           }, 1000);
-        }
-        if (isDelay) {
+        } else if (!isDelay.current) {
+          console.log("closing");
+
           // If keyboard was previously open, wait before resetting (ignoring quick events)
           setIsKeyboardOpen(false);
           setKeyboardHeight(0);
