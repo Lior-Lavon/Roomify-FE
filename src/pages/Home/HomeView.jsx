@@ -4,7 +4,18 @@ import useViewportHeight from "../../utils//hooks/useViewportHeight";
 
 // fixed top-[17rem]
 const HomeView = () => {
-  const viewportHeight = useViewportHeight();
+  useEffect(() => {
+    const handleResize = () => {
+      // setViewportHeight(window.innerHeight);
+      console.log("handleResize is called");
+    };
+    // Listen to resize event
+    window.addEventListener("resize", handleResize);
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white ">
@@ -18,7 +29,7 @@ const HomeView = () => {
         </p>
         <p className="text-black text-sm">rooms for rent today</p>
       </div>
-      <p className="text-sm">{`doc : ${viewportHeight}`}</p>
+      {/* <p className="text-sm">{`doc : ${viewportHeight}`}</p> */}
 
       <div className="mt-2">
         <div className="p-2 flex flex-row gap-2 overflow-auto">
