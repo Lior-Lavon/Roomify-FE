@@ -2,52 +2,45 @@ import { useEffect, useState } from "react";
 
 const HomeView = () => {
   const [footerBottom, setFooterBottom] = useState("1rem"); // Default bottom spacing
-  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  const [topBarTop, setTopBarTop] = useState("0px"); // Default position for topBar
 
   useEffect(() => {
-    // Lock the viewport height to the initial size
     const handleResize = () => {
-      // Set a fixed height for body to prevent resizing due to keyboard
-      setViewportHeight(window.innerHeight);
-      // Reset the overflow style to allow scrolling again when keyboard is hidden
-      document.body.style.overflow = "hidden";
-    };
+      if (window.visualViewport) {
+        const keyboardHeight =
+          window.innerHeight - window.visualViewport.height;
 
-    // Update the height when the visual viewport changes (keyboard opens/closes)
-    const handleVisualResize = () => {
-      const keyboardHeight = window.innerHeight - window.visualViewport.height;
+        if (keyboardHeight > 0) {
+          // When keyboard appears, adjust the `topBar`'s position
+          setTopBarTop(`${keyboardHeight}px`); // Push `topBar` down by keyboard height
 
-      if (keyboardHeight > 0) {
-        // The keyboard is open, so we calculate its height and move the footer above it
-        setFooterBottom(`${keyboardHeight + 16}px`);
-        document.body.style.overflow = "hidden"; // Prevent scrolling during keyboard visibility
-      } else {
-        // Reset footer position and allow scrolling again when keyboard is hidden
-        setFooterBottom("1rem");
-        document.body.style.overflow = ""; // Allow scrolling after keyboard is hidden
+          // Move footer above the keyboard
+          setFooterBottom(`${keyboardHeight + 16}px`); // Add some extra padding to the footer
+          document.body.style.overflow = "hidden"; // Prevent body scrolling
+        } else {
+          // Reset the `topBar` and footer when the keyboard is hidden
+          setTopBarTop("0px");
+          setFooterBottom("1rem");
+          document.body.style.overflow = ""; // Allow scrolling when keyboard is hidden
+        }
       }
     };
 
-    // Attach event listeners to handle resizing and keyboard visibility
-    window.addEventListener("resize", handleResize); // For when window size changes
-    window.visualViewport?.addEventListener("resize", handleVisualResize); // For when visualViewport changes due to keyboard
+    // Listen for changes in visualViewport size (keyboard show/hide)
+    window.visualViewport?.addEventListener("resize", handleResize);
 
-    // Cleanup event listeners on component unmount
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.visualViewport?.removeEventListener("resize", handleVisualResize);
+      window.visualViewport?.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  // Lock the body height to the viewport height to avoid layout shifts
-  useEffect(() => {
-    document.body.style.height = `${viewportHeight}px`;
-  }, [viewportHeight]);
-
   return (
-    <div className="relative h-full bg-white">
-      {/* Top bar stays fixed */}
-      <div className="topBar fixed top-0 left-0 right-0 h-12 flex items-center justify-center bg-blue-200 z-10">
+    <div className="relative h-screen bg-white">
+      {/* Top bar adjusts its position based on keyboard visibility */}
+      <div
+        className="topBar fixed left-0 right-0 h-12 flex items-center justify-center bg-blue-200 z-10"
+        style={{ top: topBarTop }}
+      >
         <h1 className="text-center text-2xl">Welcome to Roomufy</h1>
       </div>
 
