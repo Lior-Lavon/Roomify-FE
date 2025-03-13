@@ -1,23 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { PromptFooter, RoomCard, TopBar } from "../../components";
 import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 
-// fixed top-[17rem]
 const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
 
   useEffect(() => {
-    // heightRef.current = `top-[${keyboardHeight}px]`;
-    console.log("isKeyboardOpen !: ", isKeyboardOpen);
-    console.log("keyboardHeight !: ", Math.floor(keyboardHeight));
+    // You can monitor keyboard state and log if necessary
+    console.log("isKeyboardOpen:", isKeyboardOpen);
+    console.log("keyboardHeight:", Math.floor(keyboardHeight));
   }, [isKeyboardOpen, keyboardHeight]);
 
   return (
-    <div
-      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed  transition-all duration-250 ${
-        !isKeyboardOpen ? "top-0" : "top-[267px]"
-      }`}
-    >
+    <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed top-0">
       <TopBar showAvatar={true} showLogin={true} />
 
       <div className="mt-4 inline-block w-full text-center">
@@ -41,16 +36,18 @@ const HomeView = () => {
         </div>
       </div>
 
-      {/* <div className="text-sm">
-        <p>Keyboard Open: {isKeyboardOpen ? "Yes" : "No"}</p>
-        <p>Keyboard Height: {keyboardHeight}px</p>
-      </div>
- */}
       <p className="text-center mt-2 text-[12px] text-sm text-gray-400">
         Available rooms to rent near you
       </p>
 
-      <PromptFooter pageType={"home"} />
+      {/* Apply only to the footer */}
+      <div
+        className={`transition-all duration-250 ${
+          isKeyboardOpen ? `mt-[${keyboardHeight}px]` : ""
+        }`}
+      >
+        <PromptFooter pageType={"home"} />
+      </div>
     </div>
   );
 };
