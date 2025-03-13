@@ -37,7 +37,7 @@ const HomeView = () => {
 
       <div
         className={`absolute ${
-          isKeyboardOpen ? "top-[400px]" : ""
+          isKeyboardOpen ? "top-[350px]" : ""
         } w-full bg-yellow-200 `}
       >
         <Prompt />
