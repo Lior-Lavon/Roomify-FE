@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PromptFooter, RoomCard, TopBar } from "../../components";
 import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 
 // fixed top-[17rem]
 const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
-  const height = 267;
+  let heightRef = useRef("");
 
   useEffect(() => {
+    heightRef.current = `top-[${keyboardHeight}px]`;
+    console.log("heightRef.current : ", heightRef.current);
+
     console.log("isKeyboardOpen !: ", isKeyboardOpen);
     console.log("keyboardHeight !: ", Math.floor(keyboardHeight));
   }, [isKeyboardOpen, keyboardHeight]);
@@ -15,7 +18,7 @@ const HomeView = () => {
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed ${
-        !isKeyboardOpen ? "top-0" : `top-[${keyboardHeight}px]`
+        !isKeyboardOpen ? "top-0" : heightRef.current
       }`}
     >
       <TopBar showAvatar={true} showLogin={true} />
