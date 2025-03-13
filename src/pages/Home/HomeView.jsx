@@ -5,6 +5,7 @@ import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 // fixed top-[17rem]
 const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
+  const height = 267;
 
   useEffect(() => {
     console.log("isKeyboardOpen !: ", isKeyboardOpen);
@@ -14,7 +15,7 @@ const HomeView = () => {
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed ${
-        !isKeyboardOpen ? "top-0" : "top-[" + keyboardHeight + "px]"
+        !isKeyboardOpen ? "top-0" : "top-[" + height + "px]"
       }`}
     >
       <TopBar showAvatar={true} showLogin={true} />
