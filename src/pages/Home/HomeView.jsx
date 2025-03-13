@@ -36,7 +36,7 @@ const HomeView = () => {
 
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full text-3xl sans-regular bg-white fixed top-0`}
+      className={`base:hidden sm:block md:hidden w-full text-3xl sans-regular bg-white fixed top-[100px]`}
     >
       {/* className={`base:hidden sm:block md:hidden w-full text-3xl sans-regular bg-white`}
       style={{
