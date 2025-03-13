@@ -5,7 +5,6 @@ import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 // fixed top-[17rem]
 const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
-  const textareaRef = useRef(null);
 
   useEffect(() => {
     console.log("isKeyboardOpen : ", isKeyboardOpen);
@@ -13,12 +12,12 @@ const HomeView = () => {
   }, [isKeyboardOpen, keyboardHeight]);
 
   const getKeyboardHeight = () => {
-    // console.log("window.innerHeight : ", window.innerHeight);
-    // console.log("keyboardHeight : ", keyboardHeight);
-    // const rel = window.innerHeight - keyboardHeight;
-    // console.log("rel :", rel);
+    console.log("window.innerHeight : ", window.innerHeight);
+    console.log("keyboardHeight : ", keyboardHeight);
+    const val = window.innerHeight - keyboardHeight;
+    console.log("val : ", val);
 
-    return 500;
+    return `top-[${val}px]`;
   };
 
   return (
@@ -36,15 +35,7 @@ const HomeView = () => {
         </p>
       </div>
 
-      <div
-        className={`absolute w-full bg-yellow-200 ${
-          keyboardHeight > 0 ? `top-[${getKeyboardHeight()}px]` : ""
-        }`}
-        // style={{
-        //   top: keyboardHeight > 0 ? `calc(0.5rem - ${keyboardHeight}px)` : "",
-        // }}
-        ref={textareaRef}
-      >
+      <div className={`absolute  ${getKeyboardHeight()} w-full bg-yellow-200 `}>
         <Prompt />
       </div>
 
@@ -72,3 +63,7 @@ const HomeView = () => {
 };
 
 export default HomeView;
+
+// ${
+//           keyboardHeight > 0 ? `top-[${getKeyboardHeight()}px]` : ""
+//         }
