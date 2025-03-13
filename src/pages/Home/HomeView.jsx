@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { PromptFooter, RoomCard, TopBar } from "../../components";
+import useViewportHeight from "../../utils//hooks/useViewportHeight";
 
 // fixed top-[17rem]
 const HomeView = () => {
+  const viewportHeight = useViewportHeight();
+
   return (
     <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white ">
       <TopBar showAvatar={true} showLogin={true} />
@@ -15,7 +18,7 @@ const HomeView = () => {
         </p>
         <p className="text-black text-sm">rooms for rent today</p>
       </div>
-      {/* <p>{`doc : ${document.innerHeight}`}</p> */}
+      <p className="text-sm">{`doc : ${viewportHeight}`}</p>
 
       <div className="mt-2">
         <div className="p-2 flex flex-row gap-2 overflow-auto">
