@@ -1,68 +1,56 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { PromptFooter, RoomCard, TopBar } from "../../components";
+import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 
+// fixed top-[17rem]
 const HomeView = () => {
-  const [footerBottom, setFooterBottom] = useState("1rem"); // Default bottom spacing
-  const [bodyPaddingTop, setBodyPaddingTop] = useState("0px"); // Default padding for body
+  const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.visualViewport) {
-        const keyboardHeight =
-          window.innerHeight - window.visualViewport.height;
-
-        if (keyboardHeight > 0) {
-          // When keyboard is visible, adjust the padding of the body
-          setBodyPaddingTop(`${keyboardHeight}px`); // Move the body down by the keyboard height
-
-          // Adjust footer to be above the keyboard
-          setFooterBottom(`${keyboardHeight + 16}px`); // Add padding to footer to sit above the keyboard
-
-          // Prevent scrolling during keyboard visibility
-          document.body.style.overflow = "hidden"; // Disable scroll
-        } else {
-          // Reset the body padding and footer position when the keyboard is hidden
-          setBodyPaddingTop("0px");
-          setFooterBottom("1rem");
-          document.body.style.overflow = ""; // Allow scrolling again
-        }
-      }
-    };
-
-    // Add event listener for viewport resize (keyboard appears/disappears)
-    window.visualViewport?.addEventListener("resize", handleResize);
-
-    // Cleanup on unmount
-    return () => {
-      window.visualViewport?.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    // heightRef.current = `top-[${keyboardHeight}px]`;
+    console.log("isKeyboardOpen !: ", isKeyboardOpen);
+    console.log("keyboardHeight !: ", Math.floor(keyboardHeight));
+  }, [isKeyboardOpen, keyboardHeight]);
 
   return (
-    <div className="relative h-screen bg-white">
-      {/* Top bar stays fixed */}
-      <div className="topBar fixed top-0 left-0 right-0 h-12 flex items-center justify-center bg-blue-200 z-10">
-        <h1 className="text-center text-2xl">Welcome to Roomufy</h1>
+    <div
+      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed  transition-all duration-250 ${
+        !isKeyboardOpen ? "top-0" : "top-[267px]"
+      }`}
+    >
+      <TopBar showAvatar={true} showLogin={true} />
+
+      <div className="mt-4 inline-block w-full text-center">
+        <h1 className="text-black sans-bold">Welcome to</h1>
+        <h1 className="text-orange-600 sans-bold">Roomufy</h1>
+        <p className="text-black text-sm mt-2">
+          The <span className="text-orange-600 ">new way to search</span> for
+        </p>
+        <p className="text-black text-sm">rooms for rent today</p>
       </div>
 
-      {/* Main content with dynamic padding to avoid layout shifting */}
-      <div className="body" style={{ paddingTop: bodyPaddingTop }}>
-        {/* Content goes here */}
-        <div className="content flex-grow flex justify-center items-center pt-16 pb-16">
-          <p>Content goes here</p>
+      <div className="mt-2">
+        <div className="p-2 flex flex-row gap-2 overflow-auto">
+          <RoomCard />
+          <RoomCard />
+          <RoomCard />
+          <RoomCard />
+          <RoomCard />
+          <RoomCard />
+          <RoomCard />
         </div>
       </div>
 
-      {/* Footer moves above the keyboard */}
-      <div
-        className="footer fixed left-0 right-0 bottom-0 px-4 transition-all duration-300 z-20"
-        style={{ bottom: footerBottom }}
-      >
-        <input
-          type="text"
-          placeholder="Enter something..."
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
-        />
+      {/* <div className="text-sm">
+        <p>Keyboard Open: {isKeyboardOpen ? "Yes" : "No"}</p>
+        <p>Keyboard Height: {keyboardHeight}px</p>
       </div>
+ */}
+      <p className="text-center mt-2 text-[12px] text-sm text-gray-400">
+        Available rooms to rent near you
+      </p>
+
+      <PromptFooter pageType={"home"} />
     </div>
   );
 };
