@@ -7,6 +7,8 @@ const HomeView = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const keyboardHeight = useKeyboardStatus(); // Assuming this hook detects keyboard visibility and height
 
+  console.log("111");
+
   useEffect(() => {
     console.log("keyboardHeight : ", keyboardHeight);
 
