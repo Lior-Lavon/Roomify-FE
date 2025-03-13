@@ -10,7 +10,7 @@ const placeholders = [
   "@Lior, please send me some  ",
 ];
 
-const PromptFooter = ({ pageType, isKeyboardOpen }) => {
+const PromptFooter = ({ pageType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isFocused, setIsFocused] = useState(false);
@@ -47,9 +47,9 @@ const PromptFooter = ({ pageType, isKeyboardOpen }) => {
 
   return (
     <div
-      className={`w-full ${pageType == "home" && "fixed bottom-0"} ${
-        isKeyboardOpen ? "adjust" : ""
-      } rounded-tl-2xl rounded-tr-2xl transition-all duration-500 ${
+      className={`w-full ${
+        pageType == "home" && "fixed bottom-0"
+      }  rounded-tl-2xl rounded-tr-2xl transition-all duration-500 ${
         isFocused
           ? pageType == "home"
             ? "h-28"
