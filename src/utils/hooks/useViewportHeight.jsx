@@ -6,13 +6,19 @@ const useKeyboardStatus = () => {
 
   useEffect(() => {
     const handleResize = () => {
+      console.log("handleResize is called");
+
       if (window.visualViewport) {
+        console.log("window.visualViewport");
+
         const heightDiff = window.innerHeight - window.visualViewport.height;
         if (heightDiff > 100) {
+          console.log("heightDiff > 100");
           // Keyboard is open (adjust threshold if needed)
           setIsKeyboardOpen(true);
           setKeyboardHeight(heightDiff);
         } else {
+          console.log("heightDiff < 100");
           setIsKeyboardOpen(false);
           setKeyboardHeight(0);
         }
