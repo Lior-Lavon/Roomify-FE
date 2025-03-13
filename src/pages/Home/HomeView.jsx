@@ -1,22 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { PromptFooter, RoomCard, TopBar } from "../../components";
 import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 
-// fixed top-[17rem]
 const HomeView = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const keyboardHeight = useKeyboardStatus(); // Assuming this hook detects keyboard visibility and height
 
   useEffect(() => {
-    console.log("keyboardHeight : ", keyboardHeight);
-
     setIsKeyboardOpen(keyboardHeight > 0); // Set keyboard status based on height
   }, [keyboardHeight]);
 
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white`}
-      style={{ paddingBottom: isKeyboardOpen ? "267px" : "0px" }} // Adjust padding on keyboard open
+      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white ${
+        isKeyboardOpen ? "pb-[calc(${keyboardHeight}px)]" : ""
+      }`}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
@@ -49,10 +47,9 @@ const HomeView = () => {
 
       {/* Prevent content from shifting when keyboard is open */}
       <div
-        className="fixed bottom-0 w-full bg-white"
-        style={{
-          paddingBottom: isKeyboardOpen ? `${keyboardHeight}px` : "0px",
-        }}
+        className={`fixed bottom-0 w-full bg-white ${
+          isKeyboardOpen ? `pb-[${keyboardHeight}px]` : ""
+        }`}
       >
         {/* Content here will be kept fixed */}
       </div>
