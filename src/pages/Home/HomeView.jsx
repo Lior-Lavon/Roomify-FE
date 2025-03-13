@@ -1,17 +1,10 @@
 import { useEffect, useState } from "react";
 import { PromptFooter, RoomCard, TopBar } from "../../components";
-import { useNavigate } from "react-router-dom";
-import useKeyboardHeight from "./useKeyboardHeight";
 
 const HomeView = () => {
-  const { keyboardHeight } = useKeyboardHeight();
-
   return (
-    <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular">
-      {/* <TopBar showAvatar={true} showLogin={true} /> */}
-      <div>
-        <p>Keyboard Height: {keyboardHeight}px</p>
-      </div>
+    <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular fixed top-52">
+      <TopBar showAvatar={true} showLogin={true} />
 
       <div className="mt-3 inline-block w-full text-center">
         <h1 className="text-black sans-bold">Welcome to</h1>
