@@ -5,19 +5,32 @@ import { useNavigate } from "react-router-dom";
 const HomeView = () => {
   const navigate = useNavigate();
 
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setScreenHeight(window.innerHeight);
+    const handleFocus = () => setIsKeyboardOpen(true);
+    const handleBlur = () => setIsKeyboardOpen(false);
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const input = document.querySelector("input, textarea");
+    if (input) {
+      input.addEventListener("focus", handleFocus);
+      input.addEventListener("blur", handleBlur);
+    }
+
+    return () => {
+      if (input) {
+        input.removeEventListener("focus", handleFocus);
+        input.removeEventListener("blur", handleBlur);
+      }
+    };
   }, []);
 
   return (
     <div
       className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular"
-      style={{ height: `${screenHeight}px` }}
+      style={{
+        transform: isKeyboardOpen ? "translateY(-100px)" : "translateY(0)",
+      }}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
