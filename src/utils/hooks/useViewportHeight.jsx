@@ -12,18 +12,18 @@ const useKeyboardStatus = () => {
         const heightDiff = window.innerHeight - window.visualViewport.height;
 
         // Ignore small height differences (to prevent false triggers)
+        console.log("heightDiff : ", heightDiff);
+
         if (heightDiff > 100) {
           setIsKeyboardOpen(true);
           setKeyboardHeight(heightDiff);
 
           setTimeout(() => {
             // det the flag
-            console.log("setIsDelay(true);");
             setIsDelay(true);
 
             // create the flag
             setTimeout(() => {
-              console.log("setIsDelay(false);");
               setIsDelay(false);
             }, 1000);
           }, 1000);
