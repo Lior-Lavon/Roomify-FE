@@ -14,7 +14,7 @@ const HomeView = () => {
 
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed  transition-all duration-250 delay-200  ${
+      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed  transition-all duration-250 ${
         !isKeyboardOpen ? "top-0" : "top-[267px]"
       }`}
     >

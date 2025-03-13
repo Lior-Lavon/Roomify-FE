@@ -53,8 +53,7 @@ function App() {
             element={<ProtectiveRoute>{/* <Dashboard /> */}</ProtectiveRoute>}
           ></Route>
 
-          {/* <Route path="/landing" element={<HomeView />} /> */}
-          <Route path="/landing" element={<TestView />} />
+          <Route path="/landing" element={<HomeView />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/chat" element={<ChatView />} />
 
