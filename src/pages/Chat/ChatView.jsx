@@ -316,7 +316,7 @@ const ChatView = () => {
 
           {/* White Space Div Below Slider */}
           <div
-            className="w-full absolute top-[1.25rem] "
+            className="w-full absolute top-[1.25rem]"
             style={{ height: `${bottomContainerHeight - 16}px` }}
           >
             <Chat

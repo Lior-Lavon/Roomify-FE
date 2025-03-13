@@ -27,12 +27,19 @@ const RoomCardMini = memo(({ room_info, onVisible }) => {
     };
   }, [room_info.Id, onVisible]);
 
+  // const getWidth = () => {
+  //   let width = window.innerWidth;
+  //   const ret = width + "px";
+  //   console.log("ret : ", ret);
+  //   return ret;
+  // };
+
   return (
     <div
       ref={cardRef}
-      className="min-w-[280px] w-[280px] border border-orange-200 rounded-xl p-1 px-2 flex flex-row gap-2 items-center justify-between shadow-[10px_2px_12px_rgba(0,0,0,.1)] "
+      className={`min-w-[280px] w-[280px] border border-orange-200 rounded-xl flex flex-row gap-2 items-center justify-between shadow-[10px_2px_12px_rgba(0,0,0,.1)]`}
     >
-      <div className="flex flex-col items-center justify-between w-full  text-left ">
+      <div className="flex flex-col items-center justify-between w-full text-left ">
         <div className="w-full flex flex-col gap-[.05rem]">
           <p className="font-bold">{room_info.Title}</p>
           <p className="text-[10px]">{room_info.Address}</p>
@@ -47,7 +54,7 @@ const RoomCardMini = memo(({ room_info, onVisible }) => {
       {room_info.Images.length >= 1 && (
         <img
           src={room_info.Images[0]}
-          className="w-[6.2rem] h-[5rem] object-cover rounded-lg"
+          className="w-[9.2rem] h-[8rem] object-cover rounded-lg"
         />
       )}
     </div>
