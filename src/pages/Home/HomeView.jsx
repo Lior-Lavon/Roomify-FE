@@ -14,13 +14,13 @@ const HomeView = () => {
 
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed  transition-all duration-250 ${
+      className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed   transition-all duration-250 ${
         !isKeyboardOpen ? "top-0" : "top-[267px]"
       }`}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
-      <div className="mt-4 inline-block w-full text-center">
+      <div className="mt-4 inline-block w-full text-center mt-10">
         <h1 className="text-black sans-bold">Welcome to</h1>
         <h1 className="text-orange-600 sans-bold">Roomufy</h1>
         <p className="text-black text-sm mt-2">
@@ -29,7 +29,13 @@ const HomeView = () => {
         <p className="text-black text-sm">rooms for rent today</p>
       </div>
 
-      <div className="mt-2">
+      <PromptFooter pageType={"home"} />
+
+      <p className="text-center mt-2 text-[12px] text-sm text-gray-400">
+        Available rooms to rent near you
+      </p>
+
+      <div className="mt-6">
         <div className="p-2 flex flex-row gap-2 overflow-auto">
           <RoomCard />
           <RoomCard />
@@ -46,11 +52,6 @@ const HomeView = () => {
         <p>Keyboard Height: {keyboardHeight}px</p>
       </div>
  */}
-      <p className="text-center mt-2 text-[12px] text-sm text-gray-400">
-        Available rooms to rent near you
-      </p>
-
-      <PromptFooter pageType={"home"} />
     </div>
   );
 };
