@@ -7,8 +7,6 @@ const HomeView = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const keyboardHeight = useKeyboardStatus(); // Assuming this hook detects keyboard visibility and height
 
-  console.log("111");
-
   useEffect(() => {
     console.log("keyboardHeight : ", keyboardHeight);
 
@@ -18,7 +16,7 @@ const HomeView = () => {
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white`}
-      style={{ paddingBottom: isKeyboardOpen ? `267px` : "0px" }} // Adjust padding on keyboard open
+      style={{ paddingBottom: isKeyboardOpen ? "267px" : "0px" }} // Adjust padding on keyboard open
     >
       <TopBar showAvatar={true} showLogin={true} />
 
