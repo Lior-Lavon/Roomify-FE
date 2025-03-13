@@ -6,7 +6,7 @@ const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
 
   useEffect(() => {
-    // You can monitor keyboard state and log if necessary
+    // Monitor keyboard state and log if necessary
     console.log("isKeyboardOpen:", isKeyboardOpen);
     console.log("keyboardHeight:", Math.floor(keyboardHeight));
   }, [isKeyboardOpen, keyboardHeight]);
@@ -40,10 +40,12 @@ const HomeView = () => {
         Available rooms to rent near you
       </p>
 
-      {/* Apply only to the footer */}
+      {/* Footer will shift above the keyboard when it's open */}
       <div
         className={`transition-all duration-250 ${
-          isKeyboardOpen ? `mt-[${keyboardHeight}px]` : ""
+          isKeyboardOpen
+            ? `fixed bottom-0 left-0 w-full mt-[${keyboardHeight}px]`
+            : ""
         }`}
       >
         <PromptFooter pageType={"home"} />
