@@ -47,21 +47,21 @@ const HomeView = () => {
       {/* Main content with dynamic padding to avoid layout shifting */}
       <div className="body" style={{ paddingTop: bodyPaddingTop }}>
         {/* Content goes here */}
-        <div className="content flex-grow flex justify-center items-center pt-12 pb-16">
+        <div className="content flex-grow flex justify-center items-center pt-16 pb-16">
           <p>Content goes here</p>
         </div>
+      </div>
 
-        {/* Footer moves above the keyboard */}
-        <div
-          className="footer absolute left-0 right-0 px-4 transition-all duration-300 z-20"
-          style={{ bottom: footerBottom }}
-        >
-          <input
-            type="text"
-            placeholder="Enter something..."
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
-          />
-        </div>
+      {/* Footer moves above the keyboard */}
+      <div
+        className="footer fixed left-0 right-0 bottom-0 px-4 transition-all duration-300 z-20"
+        style={{ bottom: footerBottom }}
+      >
+        <input
+          type="text"
+          placeholder="Enter something..."
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
+        />
       </div>
     </div>
   );
