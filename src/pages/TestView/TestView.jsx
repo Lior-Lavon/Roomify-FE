@@ -4,26 +4,44 @@ const HomeView = () => {
   const [footerBottom, setFooterBottom] = useState("1rem"); // Default bottom spacing
 
   useEffect(() => {
+    // Store the initial viewport height
+    const initialViewportHeight = window.innerHeight;
+
+    // Lock the viewport height to prevent resizing on keyboard open
+    const lockViewport = () => {
+      // Set the body height to 100vh based on initial height, overriding dynamic viewport changes
+      document.body.style.height = `${initialViewportHeight}px`;
+
+      // Prevent body scrolling when the keyboard is open
+      document.body.style.overflow = "hidden";
+    };
+
+    // Reset the body height and allow scrolling when the keyboard is closed
+    const unlockViewport = () => {
+      document.body.style.height = "";
+      document.body.style.overflow = "";
+    };
+
+    // Adjust footer position dynamically when keyboard appears
     const handleResize = () => {
       if (window.visualViewport) {
         const keyboardHeight =
           window.innerHeight - window.visualViewport.height;
 
-        // When the keyboard opens, move the footer above the keyboard
         if (keyboardHeight > 0) {
-          setFooterBottom(`${keyboardHeight + 16}px`); // Add extra space to avoid overlap
-          document.body.style.overflow = "hidden"; // Prevent body scroll when keyboard is open
+          setFooterBottom(`${keyboardHeight + 16}px`); // Move footer above the keyboard
+          lockViewport(); // Lock the viewport when keyboard opens
         } else {
-          setFooterBottom("1rem"); // Reset footer when keyboard closes
-          document.body.style.overflow = ""; // Allow body scrolling when keyboard is closed
+          setFooterBottom("1rem"); // Reset footer position when keyboard closes
+          unlockViewport(); // Unlock the viewport when keyboard closes
         }
       }
     };
 
-    // Add resize event listener
+    // Add resize event listener for detecting keyboard visibility
     window.visualViewport?.addEventListener("resize", handleResize);
 
-    // Cleanup listener on component unmount
+    // Cleanup on component unmount
     return () =>
       window.visualViewport?.removeEventListener("resize", handleResize);
   }, []);
@@ -37,7 +55,7 @@ const HomeView = () => {
 
       {/* Main body */}
       <div className="body flex flex-col justify-between h-full pt-16 pb-16">
-        {/* Content (this could be more complex as needed) */}
+        {/* Content */}
         <div className="content flex-grow flex justify-center items-center">
           <p>Content goes here</p>
         </div>
