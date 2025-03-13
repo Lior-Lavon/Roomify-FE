@@ -16,18 +16,19 @@ const HomeView = () => {
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white fixed   transition-all duration-250 ${
-        !isKeyboardOpen ? "top-0" : "top-[6px]"
+        !isKeyboardOpen ? "top-0" : "top-[100px]"
       }`}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
-      <div className="mt-10 inline-block w-full text-center ">
-        <h1 className="text-black sans-bold">Welcome to</h1>
-        <h1 className="text-orange-600 sans-bold">Roomufy</h1>
-        <p className="text-black text-sm mt-2">
-          The <span className="text-orange-600 ">new way to search</span> for
+      <div className="mt-15 inline-block w-full text-center ">
+        <h1 className="text-transparent bg-gradient-to-r from-[#261a18] to-[#ff5733] bg-clip-text font-bold text-lg">
+          Welcome to Roomify
+        </h1>
+        <p className="text-[#7b7b7b] text-[15px] mt-2">
+          Find your perfect rental.
         </p>
-        <p className="text-black text-sm">rooms for rent today</p>
+        {/* <p className="text-black text-sm">rooms for rent today</p> */}
       </div>
 
       <PromptFooter pageType={"home"} />

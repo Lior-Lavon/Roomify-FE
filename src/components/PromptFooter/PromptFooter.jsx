@@ -47,7 +47,7 @@ const PromptFooter = ({ pageType }) => {
 
   return (
     <div
-      className={`w-full rounded-tl-2xl rounded-tr-2xl transition-all duration-500 mt-2`}
+      className={`w-full rounded-tl-2xl rounded-tr-2xl transition-all duration-500 mt-10`}
     >
       {/* className={`w-full ${
         pageType == "home" && "fixed bottom-0"
