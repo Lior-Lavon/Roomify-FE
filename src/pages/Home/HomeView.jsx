@@ -14,6 +14,8 @@ const HomeView = () => {
         </p>
         <p className="text-black text-sm">rooms for rent today</p>
       </div>
+      <p>{`height : ${window.innerHeight}`}</p>
+
       <div className="mt-2">
         <div className="p-2 flex flex-row gap-2 overflow-auto">
           <RoomCard />
