@@ -13,7 +13,7 @@ const placeholders = [
 const PromptFooter = ({ pageType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(true);
   const [text, setText] = useState("");
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
@@ -35,7 +35,7 @@ const PromptFooter = ({ pageType }) => {
   };
 
   const submitPrompt = () => {
-    setIsFocused(false);
+    // setIsFocused(false);
 
     // update the store
     dispatch(setUserPrompt(text));
@@ -71,15 +71,15 @@ const PromptFooter = ({ pageType }) => {
             onChange={handleChange}
             value={text}
             placeholder={!isFocused ? placeholders[placeholderIndex] : ""}
-            className={`w-full bg-white px-2 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all duration-500 resize-none leading-tight pr-10 ${
+            className={`w-full bg-white px-2 py-1 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all duration-500 resize-none leading-tight pr-10 ${
               pageType == "chat" && "mt-2"
             }`}
             style={{
               maxHeight: isFocused ? "70px" : "30px",
               height: isFocused ? "70px" : "30px",
             }}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
+            // onFocus={() => setIsFocused(true)}
+            // onBlur={() => setIsFocused(false)}
           />
 
           <div
