@@ -16,7 +16,7 @@ const HomeView = () => {
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular bg-white`}
-      style={{ paddingBottom: isKeyboardOpen ? `${keyboardHeight}px` : "0px" }} // Adjust padding on keyboard open
+      style={{ paddingBottom: isKeyboardOpen ? `267px` : "0px" }} // Adjust padding on keyboard open
     >
       <TopBar showAvatar={true} showLogin={true} />
 
