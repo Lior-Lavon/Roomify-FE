@@ -5,18 +5,27 @@ const HomeView = () => {
 
   useEffect(() => {
     const handleResize = () => {
+      // Check if the visualViewport API is available (works on modern browsers)
       if (window.visualViewport) {
+        // Calculate keyboard height by comparing the window inner height and visual viewport height
         const keyboardHeight =
           window.innerHeight - window.visualViewport.height;
+
+        // If the keyboard is open, adjust the footer's bottom position
         if (keyboardHeight > 0) {
-          setFooterBottom(`${keyboardHeight + 16}px`); // Move footer above keyboard
+          setFooterBottom(`${keyboardHeight + 16}px`); // Add a small gap for styling
+          document.body.style.overflow = "hidden"; // Prevent body scroll while the keyboard is open
         } else {
-          setFooterBottom("1rem"); // Reset footer position
+          setFooterBottom("1rem"); // Reset footer position when the keyboard is closed
+          document.body.style.overflow = ""; // Restore scroll behavior
         }
       }
     };
 
+    // Attach the resize event listener to detect when the keyboard is opened or closed
     window.visualViewport?.addEventListener("resize", handleResize);
+
+    // Cleanup event listener when the component is unmounted
     return () =>
       window.visualViewport?.removeEventListener("resize", handleResize);
   }, []);
@@ -24,14 +33,14 @@ const HomeView = () => {
   return (
     <div className="body fixed top-0 left-0 right-0 h-[100vh] bg-white">
       {/* Top bar stays fixed */}
-      <div className="topBar fixed top-0 w-full h-12 flex items-center justify-center bg-blue-200 z-10">
+      <div className="topBar fixed top-0 left-0 right-0 h-12 flex items-center justify-center bg-blue-200 z-10">
         <h1 className="text-center text-2xl">Welcome to Roomufy</h1>
       </div>
 
       {/* Footer moves above keyboard dynamically */}
       <div
         className="footer fixed left-0 right-0 px-4 transition-all duration-300 z-20"
-        style={{ bottom: footerBottom }}
+        style={{ bottom: footerBottom }} // Dynamically adjusts the position based on keyboard height
       >
         <input
           type="text"
