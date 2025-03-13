@@ -3,7 +3,6 @@ import { VscTriangleRight } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserPrompt } from "../../features/chat/chatSlice";
-import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 
 const placeholders = [
   "I am searching for a room ...",
@@ -14,9 +13,7 @@ const placeholders = [
 const Prompt = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
 
-  const textareaRef = useRef(null);
   const [text, setText] = useState("");
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
@@ -28,10 +25,6 @@ const Prompt = () => {
 
     return () => clearInterval(interval); // Cleanup interval on unmount
   }, []);
-
-  useEffect(() => {
-    console.log("isKeyboardOpen : ", isKeyboardOpen);
-  }, [isKeyboardOpen, keyboardHeight]);
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -47,28 +40,22 @@ const Prompt = () => {
   };
 
   return (
-    <div
-      className={`w-full rounded-tl-2xl rounded-tr-2xl transition-all duration-500 mt-20`}
-      ref={textareaRef}
-    >
-      <div className="mx-2 relative">
-        <div className="relative">
-          <textarea
-            onChange={handleChange}
-            value={text}
-            placeholder={placeholders[placeholderIndex]}
-            className={`w-full h-[4.3rem] max-h-[4.3rem]  bg-white py-1 px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all duration-500 resize-none leading-tight pr-10`}
-            // onFocus={() => setIsFocused(true)}
-            // onBlur={() => setIsFocused(false)}
-          />
+    <div className="mx-2 relative">
+      <textarea
+        onChange={handleChange}
+        value={text}
+        rows={3}
+        placeholder={placeholders[placeholderIndex]}
+        className={`w-full h-[4.3rem] max-h-[4.3rem]  bg-white px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 resize-none leading-tight`}
+        // onFocus={() => setIsFocused(true)}
+        // onBlur={() => setIsFocused(false)}
+      />
 
-          <div
-            onClick={submitPrompt}
-            className={`absolute bottom-3 right-1 w-8 h-6 flex items-center justify-center rounded-xl bg-orange-600 transition-all duration-500 opacity-100 scale-100 `}
-          >
-            <VscTriangleRight className="text-[18px] text-white" />
-          </div>
-        </div>
+      <div
+        onClick={submitPrompt}
+        className={`absolute bottom-3 right-1 w-8 h-6 flex items-center justify-center rounded-xl bg-orange-600 transition-all duration-500 opacity-100 scale-100 `}
+      >
+        <VscTriangleRight className="text-[18px] text-white" />
       </div>
     </div>
   );

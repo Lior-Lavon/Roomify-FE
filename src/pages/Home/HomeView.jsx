@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { Prompt, PromptFooter, RoomCard, TopBar } from "../../components";
+import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
+
 // fixed top-[17rem]
 const HomeView = () => {
+  const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    console.log("isKeyboardOpen : ", isKeyboardOpen);
+    console.log("keyboardHeight : ", keyboardHeight);
+  }, [isKeyboardOpen, keyboardHeight]);
+
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[350px] text-3xl sans-regular bg-red-500 fixed top-0`}
+      className={`base:hidden sm:block md:hidden w-full h-[350px] relative text-3xl sans-regular bg-red-500`}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
@@ -17,7 +27,17 @@ const HomeView = () => {
         </p>
       </div>
 
-      <Prompt />
+      <div
+        className={`absolute w-full bg-yellow-200 ${
+          keyboardHeight > 0 ? `top-[200px]` : ""
+        }`}
+        // style={{
+        //   top: keyboardHeight > 0 ? `calc(0.5rem - ${keyboardHeight}px)` : "",
+        // }}
+        ref={textareaRef}
+      >
+        <Prompt />
+      </div>
 
       {/* <div className="mt-10">
         <p className="text-center px-2 text-lg text-black">Recent listings</p>
