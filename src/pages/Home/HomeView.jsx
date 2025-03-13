@@ -1,11 +1,24 @@
+import { useEffect, useState } from "react";
 import { PromptFooter, RoomCard, TopBar } from "../../components";
 import { useNavigate } from "react-router-dom";
 
 const HomeView = () => {
   const navigate = useNavigate();
 
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => setScreenHeight(window.innerHeight);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular">
+    <div
+      className="base:hidden sm:block md:hidden w-full h-[100dvh] text-3xl sans-regular"
+      style={{ height: `${screenHeight}px` }}
+    >
       <TopBar showAvatar={true} showLogin={true} />
 
       <div className="mt-3 inline-block w-full text-center">
