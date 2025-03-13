@@ -15,6 +15,7 @@ const Prompt = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
+
   const textareaRef = useRef(null);
   const [text, setText] = useState("");
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
@@ -30,7 +31,6 @@ const Prompt = () => {
 
   useEffect(() => {
     console.log("isKeyboardOpen : ", isKeyboardOpen);
-    console.log("keyboardHeight : ", keyboardHeight);
   }, [isKeyboardOpen, keyboardHeight]);
 
   const handleChange = (e) => {
