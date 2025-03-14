@@ -22,6 +22,7 @@ const ChatView = () => {
   const [filterUpdate, setFilterUpdate] = useState(false);
 
   const { userPrompt } = useSelector((store) => store.chat);
+  console.log("userPrompt : ", userPrompt);
 
   const [chatInfo, setChatInfo] = useState({
     Prompt: "chat.userPrompt",
@@ -91,6 +92,12 @@ const ChatView = () => {
         let chatArray = [...chatFlow];
         // remove loading
         chatArray = chatArray.filter((item) => item.type !== "LOADNING");
+
+        // add propertySearch
+        // const searchResultOriginal = ChatOptions.find(
+        //   (c) => c.type === "SEARCH_RESULT"
+        // );
+        // const searchResult = Object.assign({}, searchResultOriginal);
         const searchResult = {
           id: 3,
           type: "SEARCH_RESULT",
@@ -209,6 +216,8 @@ const ChatView = () => {
   };
 
   const handleMouseDown = (event) => {
+    console.log("handleMouseDown");
+
     // Optionally prevent body scroll on mobile devices
     document.body.style.overflow = "hidden";
 
@@ -223,6 +232,7 @@ const ChatView = () => {
   };
 
   const handleMouseUp = () => {
+    console.log("handleMouseUp");
     isResizingRef.current = false;
 
     document.removeEventListener("mousemove", handleMouseMove);
@@ -248,7 +258,10 @@ const ChatView = () => {
     let newTopHeight = clientY - containerRect.top;
     let newBottomHeight = containerRect.height - newTopHeight - 8;
 
+    console.log("111");
+
     if (newTopHeight > 100 && newBottomHeight > 100) {
+      console.log("222");
       setHeights({
         top: `${newTopHeight}px`,
         bottom: `${newBottomHeight}px`,
@@ -278,35 +291,37 @@ const ChatView = () => {
   }, []);
 
   return (
-    <div
-      className="w-full flex flex-col"
-      style={{ height: `${viewportHeight}px` }}
-    >
-      {/* Top Div */}
+    <div className=" w-full h-screen flex flex-col">
+      {/* Top Bar */}
+      {/* <div className="h-14 flex items-center justify-center text-white text-lg font-bold">
+        Top Bar
+      </div> */}
       <TopBar showAvatar={true} showLogin={true} />
 
-      {/* Middle Div (Flexible) */}
-      <div className="w-full flex-1 flex flex-col" ref={containerRef}>
-        {/* Top Div */}
-        <div className="" style={{ height: heights.top }}>
+      {/* Middle Section */}
+      <div className="w-full flex-1 flex flex-col bg-amber-200">
+        {/* Top */}
+        <div className="w-full" style={{ height: heights.top }}>
           <MapView properties={RoomList} visibleCardId={visibleCardId} />
         </div>
 
-        <div
-          className="w-full relative flex flex-1 flex-col"
-          ref={bottomContainerRef}
-        >
+        {/* ChatDiv */}
+
+        <div className="w-full flex-1" ref={bottomContainerRef}>
           <div
-            className="w-full absolute top-0 left-1/2 transform -translate-x-1/2  cursor-row-resize h-5"
+            className="w-full h-5 flex flex-col items-center justify-center bg-white"
             onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
+            onClick={() => {
+              console.log("click");
+            }}
           >
-            <div className="w-[2rem] h-[.12rem] bg-gray-400 mx-auto mt-2" />
+            <div className="w-[2rem] h-[.12rem] bg-gray-400 mx-auto" />
             <div className="w-[1.5rem] h-[.12rem] bg-gray-400 mt-[.1rem] mx-auto" />
           </div>
 
           <div
-            className="w-full flex-1 absolute top-[1.25rem] "
+            className="w-full flex-1 bg-orange-400"
             style={{ height: `${bottomContainerHeight - 16}px` }}
           >
             <Chat
@@ -321,16 +336,11 @@ const ChatView = () => {
         </div>
       </div>
 
-      {/* Bottom Div */}
+      {/* Footer */}
+      {/* <div className="h-12 bg-blue-500 flex items-center justify-center text-white text-lg font-bold">
+        Footer
+      </div> */}
       <ChatFooter pageType={"chat"} />
-
-      {/* show property view */}
-      {showPropertyInfoView && (
-        <PropertyDetailPage
-          property_info={RoomList[0]}
-          showPropertyInfo={showPropertyInfo}
-        />
-      )}
     </div>
   );
 };

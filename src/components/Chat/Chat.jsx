@@ -39,7 +39,7 @@ const Chat = memo(
 
     return (
       <div
-        className="w-full h-full overflow-y-auto overflow-x-hidden bg-amber-200"
+        className="w-full h-full overflow-y-auto overflow-x-hidden"
         ref={divRef}
       >
         {chat_flow.map((chatItem) => {

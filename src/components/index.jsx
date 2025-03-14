@@ -11,7 +11,7 @@ import FilterView from "./FilterView/FilterView";
 import FilterChip from "./FilterChip/FilterChip";
 import RoomCardSlider from "./RoomCardSlider/RoomCardSlider";
 import CoverView from "./CoverView/CoverView";
-import PromptFooter from "./PromptFooter/PromptFooter";
+import ChatFooter from "./ChatFooter/ChatFooter";
 import Prompt from "./Prompt/Prompt";
 
 export {
@@ -28,6 +28,6 @@ export {
   FilterChip,
   RoomCardSlider,
   CoverView,
-  PromptFooter,
+  ChatFooter,
   Prompt,
 };

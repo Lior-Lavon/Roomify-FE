@@ -10,10 +10,10 @@ const placeholders = [
   "@Lior, please send me some  ",
 ];
 
-const PromptFooter = ({ pageType }) => {
+const ChatFooter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isFocused, setIsFocused] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
   const [text, setText] = useState("");
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
@@ -47,29 +47,17 @@ const PromptFooter = ({ pageType }) => {
 
   return (
     <div
-      className={`w-full rounded-tl-2xl rounded-tr-2xl transition-all duration-500 mt-20`}
-    >
-      {/* className={`w-full ${
-        pageType == "home" && "fixed bottom-0"
-      }  rounded-tl-2xl rounded-tr-2xl transition-all duration-500 ${
-        isFocused
-          ? pageType == "home"
-            ? "h-28"
-            : "h-22"
-          : pageType == "home"
-          ? "h-18"
-          : "h-12"
+      className={`w-full rounded-tl-2xl rounded-tr-2xl transition-all duration-500 ${
+        isFocused ? "h-22" : "h-12"
       } bg-gray-100`}
-    > */}
+    >
       <div className="mx-2 relative">
         <div className="relative">
           <textarea
             onChange={handleChange}
             value={text}
             placeholder={!isFocused ? placeholders[placeholderIndex] : ""}
-            className={`w-full bg-white py-1 px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all duration-500 resize-none leading-tight pr-10 ${
-              pageType == "chat" && "mt-2"
-            }`}
+            className={`w-full bg-white py-1 px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all duration-500 resize-none leading-tight pr-10 mt-2`}
             style={{
               maxHeight: isFocused ? "70px" : "30px",
               height: isFocused ? "70px" : "30px",
@@ -92,4 +80,4 @@ const PromptFooter = ({ pageType }) => {
   );
 };
 
-export default memo(PromptFooter);
+export default memo(ChatFooter);

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Prompt, PromptFooter, RoomCard, TopBar } from "../../components";
+import { Prompt, RoomCard, TopBar } from "../../components";
 import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 
 // fixed top-[17rem]
@@ -11,18 +11,6 @@ const HomeView = () => {
     console.log("keyboardHeight : ", keyboardHeight);
   }, [isKeyboardOpen, keyboardHeight]);
 
-  const getNewHeight = () => {
-    console.log("window.innerHeight : ", window.innerHeight);
-    console.log("keyboardHeight : ", keyboardHeight);
-    const val = 350;
-    console.log("val : ", val);
-
-    return `top-[230px]`;
-  };
-
-  // ${
-  //   isKeyboardOpen ? "top-[30px]" : ""
-  // }
   return (
     <div
       className={`base:hidden sm:block md:hidden w-full h-[350px] relative text-3xl sans-regular`}
@@ -38,11 +26,7 @@ const HomeView = () => {
         </p>
       </div>
 
-      <div
-        className={`absolute ${
-          isKeyboardOpen ? getNewHeight() : ""
-        } w-full mt-30`}
-      >
+      <div className={`absolute  w-full mt-30`}>
         <Prompt />
 
         <div className="mt-10">
