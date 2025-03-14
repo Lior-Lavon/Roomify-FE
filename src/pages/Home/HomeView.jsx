@@ -17,7 +17,7 @@ const HomeView = () => {
     const val = 350;
     console.log("val : ", val);
 
-    return `top-[350px]`;
+    return `top-[230px]`;
   };
 
   // ${
@@ -41,7 +41,7 @@ const HomeView = () => {
       <div
         className={`absolute ${
           isKeyboardOpen ? getNewHeight() : ""
-        } w-full transition-all duration-1000`}
+        } w-full mt-30`}
       >
         <Prompt />
 
