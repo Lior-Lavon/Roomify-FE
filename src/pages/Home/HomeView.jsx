@@ -20,11 +20,12 @@ const HomeView = () => {
     return `top-[350px]`;
   };
 
+  // ${
+  //   isKeyboardOpen ? "top-[30px]" : ""
+  // }
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[350px] relative text-3xl sans-regular ${
-        isKeyboardOpen ? "top-[30px]" : ""
-      }`}
+      className={`base:hidden sm:block md:hidden w-full h-[350px] relative text-3xl sans-regular`}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
