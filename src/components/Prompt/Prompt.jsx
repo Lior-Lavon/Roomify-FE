@@ -42,11 +42,11 @@ const Prompt = () => {
   return (
     <div className="mx-2 relative">
       <textarea
+        className={`w-full h-[4.3rem] max-h-[4.3rem] bg-white px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 resize-none leading-tight`}
         onChange={handleChange}
         value={text}
         rows={3}
-        placeholder={placeholders[placeholderIndex]}
-        className={`w-full h-[4.3rem] max-h-[4.3rem] bg-white px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 resize-none leading-tight`}
+        // placeholder={placeholders[placeholderIndex]}
         // onFocus={() => setIsFocused(true)}
         // onBlur={() => setIsFocused(false)}
       />

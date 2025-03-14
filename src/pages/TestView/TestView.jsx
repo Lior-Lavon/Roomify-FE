@@ -1,7 +1,7 @@
 import React from "react";
 
 const TestView = () => {
-  return <div></div>;
+  return <div>TestView</div>;
 };
 
 export default TestView;
