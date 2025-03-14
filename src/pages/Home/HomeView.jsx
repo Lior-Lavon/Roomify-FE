@@ -11,10 +11,10 @@ const HomeView = () => {
     console.log("keyboardHeight : ", keyboardHeight);
   }, [isKeyboardOpen, keyboardHeight]);
 
-  const getKeyboardHeight = () => {
+  const getNewHeight = () => {
     console.log("window.innerHeight : ", window.innerHeight);
     console.log("keyboardHeight : ", keyboardHeight);
-    const val = 400;
+    const val = 350;
     console.log("val : ", val);
 
     return `top-[350px]`;
@@ -37,23 +37,23 @@ const HomeView = () => {
 
       <div
         className={`absolute ${
-          isKeyboardOpen ? getKeyboardHeight() : ""
+          isKeyboardOpen ? getNewHeight() : ""
         } w-full transition-all duration-200`}
       >
         <Prompt />
-      </div>
 
-      <div className="mt-10">
-        <p className="text-center px-2 text-lg text-black">Recent listings</p>
+        <div className="mt-10">
+          <p className="text-center px-2 text-lg text-black">Recent listings</p>
 
-        <div className="p-2 flex flex-row gap-2 overflow-auto">
-          <RoomCard />
-          <RoomCard />
-          <RoomCard />
-          <RoomCard />
-          <RoomCard />
-          <RoomCard />
-          <RoomCard />
+          <div className="p-2 flex flex-row gap-2 overflow-auto">
+            <RoomCard />
+            <RoomCard />
+            <RoomCard />
+            <RoomCard />
+            <RoomCard />
+            <RoomCard />
+            <RoomCard />
+          </div>
         </div>
       </div>
 
