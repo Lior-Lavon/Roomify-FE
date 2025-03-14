@@ -1,5 +1,4 @@
-import { IoMdCloseCircle } from "react-icons/io";
-import { RoomCardSlider } from "..";
+import { AnswerChip, RoomCardSlider } from "..";
 import ChatLoader from "../ChatLoader/ChatLoader";
 
 import ChatMessage from "../ChatMessage/ChatMessage";
@@ -11,6 +10,7 @@ const Chat = memo(
     chat_flow,
     room_list,
     chat_info,
+    removeFilter,
     filterSelection,
     showPropertyInfo,
     onCardVisible,
@@ -113,37 +113,24 @@ const Chat = memo(
             );
           } else if (chatItem.type == "FILTER_SELECTION") {
             //  show only the user selection
+
             return (
               <div
                 className="w-[96%] flex gap-1 mb-4 mx-1 mr-10 flex-col "
                 key={chatItem.id}
               >
-                <p className="text-[.65rem] pl-1 text-black">Filters:</p>
+                {filters.length > 0 && (
+                  <p className="text-[.65rem] pl-1 text-black">Filters:</p>
+                )}
+
                 <div className="w-full flex gap-2 pl-1">
                   {filters.map((filter) => {
                     return (
-                      <div className="relative" key={filter.question}>
-                        <p className="inline-block bg-white text-[.75rem] text-black border py-1 px-2 rounded-full">
-                          {(() => {
-                            switch (filter.question) {
-                              case "PROPERTY_TYPE_FILTER":
-                                return (
-                                  filter.answer.charAt(0).toUpperCase() +
-                                  filter.answer.slice(1)
-                                );
-                              case "DISTANCE_FILTER":
-                                return `${filter.answer} km`;
-                              case "PROPERTY_SIZE_FILTER":
-                                return `${filter.answer} m²`;
-                              case "PRICE_FILTER":
-                                return `$ ${filter.answer}`;
-                              default:
-                                return filter.answer;
-                            }
-                          })()}
-                        </p>
-                        <IoMdCloseCircle className="absolute w-[24px] h-[24px] right-[-10px] top-[-10px] p-[2px]" />
-                      </div>
+                      <AnswerChip
+                        filter={filter}
+                        removeFilter={removeFilter}
+                        key={filter.question}
+                      />
                     );
                   })}
                 </div>

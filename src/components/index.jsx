@@ -13,6 +13,7 @@ import RoomCardSlider from "./RoomCardSlider/RoomCardSlider";
 import CoverView from "./CoverView/CoverView";
 import ChatFooter from "./ChatFooter/ChatFooter";
 import Prompt from "./Prompt/Prompt";
+import AnswerChip from "./AnswerChip/AnswerChip";
 
 export {
   RoomCard,
@@ -30,4 +31,5 @@ export {
   CoverView,
   ChatFooter,
   Prompt,
+  AnswerChip,
 };

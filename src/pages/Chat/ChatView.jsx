@@ -143,8 +143,8 @@ const ChatView = () => {
 
         // show the answer
         let userFilter = ChatOptions.find((c) => c.type === "FILTER_SELECTION");
-        userFilter = { ...userFilter };
-        userFilter.text = value;
+        // userFilter = { ...userFilter };
+        // userFilter.text = value;
         chatArray.push(userFilter);
 
         setChatFlow(chatArray);
@@ -156,10 +156,7 @@ const ChatView = () => {
 
         // show the answer
         let userFilter = ChatOptions.find((c) => c.type === "FILTER_SELECTION");
-        userFilter = { ...userFilter };
-        userFilter.text = `${value} €`;
         chatArray.push(userFilter);
-
         setChatFlow(chatArray);
 
         break;
@@ -170,8 +167,6 @@ const ChatView = () => {
 
         // show the answer
         let userFilter = ChatOptions.find((c) => c.type === "FILTER_SELECTION");
-        userFilter = { ...userFilter };
-        userFilter.text = `${value} Km`;
         chatArray.push(userFilter);
 
         setChatFlow(chatArray);
@@ -184,9 +179,6 @@ const ChatView = () => {
 
         // show the answer
         let userFilter = ChatOptions.find((c) => c.type === "FILTER_SELECTION");
-        userFilter = { ...userFilter };
-
-        userFilter.text = `${value} m²`;
         chatArray.push(userFilter);
 
         setChatFlow(chatArray);
@@ -194,6 +186,49 @@ const ChatView = () => {
         break;
       }
     }
+    setFilterUpdate(true);
+  };
+
+  const removeFilter = (filterName) => {
+    let tmp = { ...chatInfo };
+    switch (filterName) {
+      case "PROPERTY_TYPE_FILTER": {
+        tmp.PropertyType = "";
+        break;
+      }
+      case "PRICE_FILTER": {
+        tmp.MaxPrice = 0;
+        break;
+      }
+      case "DISTANCE_FILTER": {
+        tmp.Radius = 0;
+        break;
+      }
+      case "PROPERTY_SIZE_FILTER": {
+        tmp.MinSize = 0;
+        break;
+      }
+    }
+
+    setChatInfo(tmp);
+
+    let chatArray = [...chatFlow];
+    chatArray = chatArray.filter((item) => item.type !== filterName);
+    chatArray = chatArray.filter((item) => item.type !== "SEARCH_RESULT");
+    chatArray = chatArray.filter((item) => item.type !== "FILTER_SELECTION");
+    chatArray = chatArray.filter(
+      (item) => item.type !== "PROPERTY_TYPE_FILTER"
+    );
+    chatArray = chatArray.filter((item) => item.type !== "PRICE_FILTER");
+    chatArray = chatArray.filter((item) => item.type !== "DISTANCE_FILTER");
+    chatArray = chatArray.filter(
+      (item) => item.type !== "PROPERTY_SIZE_FILTER"
+    );
+
+    let userFilter = ChatOptions.find((c) => c.type === "FILTER_SELECTION");
+    chatArray.push(userFilter);
+    setChatFlow(chatArray);
+
     setFilterUpdate(true);
   };
 
@@ -314,6 +349,7 @@ const ChatView = () => {
               chat_flow={chatFlow}
               room_list={RoomList}
               chat_info={chatInfo}
+              removeFilter={removeFilter}
               onCardVisible={onCardVisible}
               filterSelection={filterSelection}
               showPropertyInfo={showPropertyInfo}
