@@ -39,6 +39,13 @@ const Prompt = () => {
     }, 600);
   };
 
+  const onFocus = () => {
+    console.log("onFocus");
+  };
+  const onBlur = () => {
+    console.log("onBlur");
+  };
+
   return (
     <div className="mx-2 relative">
       <textarea
@@ -49,6 +56,8 @@ const Prompt = () => {
         // placeholder={placeholders[placeholderIndex]}
         // onFocus={() => setIsFocused(true)}
         // onBlur={() => setIsFocused(false)}
+        onFocus={() => onFocus()}
+        onBlur={() => onBlur()}
       />
 
       <div
