@@ -15,10 +15,48 @@ const Chat = memo(
     onCardVisible,
   }) => {
     const divRef = useRef();
+    const [filters, setFilters] = useState([]);
 
     const randId = () => {
       // Generate a random number between 0 and 100 (inclusive)
       return Math.floor(Math.random() * 10000);
+    };
+
+    const getFilterArr = (chat_info) => {
+      let retArr = [];
+      let i = 5000;
+      if (chat_info.PropertyType != "") {
+        retArr.push({
+          id: i,
+          question: "PROPERTY_TYPE_FILTER",
+          answer: chat_info.PropertyType,
+        });
+      }
+      i++;
+      if (chat_info.Radius > 0) {
+        retArr.push({
+          id: i,
+          question: "DISTANCE_FILTER",
+          answer: chat_info.Radius,
+        });
+      }
+      i++;
+      if (chat_info.MinSize > 0) {
+        retArr.push({
+          id: i,
+          question: "PROPERTY_SIZE_FILTER",
+          answer: chat_info.MinSize,
+        });
+      }
+      i++;
+      if (chat_info.MaxPrice > 0) {
+        retArr.push({
+          id: i,
+          question: "PRICE_FILTER",
+          answer: chat_info.MaxPrice,
+        });
+      }
+      return retArr;
     };
 
     const scrollToBottom = () => {
@@ -34,8 +72,9 @@ const Chat = memo(
     };
 
     useEffect(() => {
+      setFilters(getFilterArr(chat_info));
       scrollToBottom();
-    }, [chat_flow]);
+    }, [chat_flow, chat_info]);
 
     return (
       <div
@@ -74,11 +113,33 @@ const Chat = memo(
           } else if (chatItem.type == "FILTER_SELECTION") {
             //  show only the user selection
             return (
-              <div className="w-full flex gap-1 mb-4 mx-1" key={randId()}>
-                <p className="inline-block bg-black text-white py-1 px-4 rounded-full">
-                  {chatItem.text.charAt(0).toUpperCase() +
-                    chatItem.text.slice(1)}
-                </p>
+              <div className="w-full flex gap-1 mb-4 mx-1" key={chatItem.id}>
+                {filters.map((filter) => {
+                  return (
+                    <p
+                      className="inline-block bg-black text-[.65rem] text-white py-1 px-4 rounded-full"
+                      key={filter.question}
+                    >
+                      {(() => {
+                        switch (filter.question) {
+                          case "PROPERTY_TYPE_FILTER":
+                            return (
+                              filter.answer.charAt(0).toUpperCase() +
+                              filter.answer.slice(1)
+                            );
+                          case "DISTANCE_FILTER":
+                            return `${filter.answer} km`;
+                          case "PROPERTY_SIZE_FILTER":
+                            return `${filter.answer} m²`;
+                          case "PRICE_FILTER":
+                            return `$ ${filter.answer}`;
+                          default:
+                            return filter.answer;
+                        }
+                      })()}
+                    </p>
+                  );
+                })}
               </div>
             );
           }

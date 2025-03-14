@@ -24,11 +24,10 @@ const ChatView = () => {
   const { userPrompt } = useSelector((store) => store.chat);
 
   const [chatInfo, setChatInfo] = useState({
-    Prompt: "chat.userPrompt",
+    Prompt: "I am searching for a .....",
     Address: "Amsterdam",
     PropertyType: "",
     Radius: 0,
-    MinPrice: 0,
     MaxPrice: 0,
     MinSize: 0,
   });
@@ -134,6 +133,8 @@ const ChatView = () => {
     // remove the question from chatFlow
     chatArray = [...chatFlow];
     chatArray = chatArray.filter((item) => item.type !== filterName);
+    chatArray = chatArray.filter((item) => item.type !== "SEARCH_RESULT");
+    chatArray = chatArray.filter((item) => item.type !== "FILTER_SELECTION");
 
     switch (filterName) {
       case "PROPERTY_TYPE_FILTER": {
