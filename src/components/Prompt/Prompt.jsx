@@ -41,9 +41,16 @@ const Prompt = () => {
 
   const onFocus = () => {
     console.log("onFocus");
+    document.body.classList.add("fixed", "w-full", "h-full", "overflow-hidden");
   };
   const onBlur = () => {
     console.log("onBlur");
+    document.body.classList.remove(
+      "fixed",
+      "w-full",
+      "h-full",
+      "overflow-hidden"
+    );
   };
 
   return (
