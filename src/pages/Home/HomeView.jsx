@@ -38,7 +38,7 @@ const HomeView = () => {
       <div
         className={`absolute ${
           isKeyboardOpen ? getNewHeight() : ""
-        } w-full transition-all duration-200`}
+        } w-full transition-all duration-1000`}
       >
         <Prompt />
 
