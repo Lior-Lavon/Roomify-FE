@@ -22,7 +22,7 @@ const HomeView = () => {
 
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[350px] relative text-3xl sans-regular bg-red-500`}
+      className={`base:hidden sm:block md:hidden w-full h-[350px] relative text-3xl sans-regular `}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
@@ -38,12 +38,12 @@ const HomeView = () => {
       <div
         className={`absolute ${
           isKeyboardOpen ? getKeyboardHeight() : ""
-        } w-full bg-yellow-200 transition-all duration-200`}
+        } w-full transition-all duration-200`}
       >
         <Prompt />
       </div>
 
-      {/* <div className="mt-10">
+      <div className="mt-10">
         <p className="text-center px-2 text-lg text-black">Recent listings</p>
 
         <div className="p-2 flex flex-row gap-2 overflow-auto">
@@ -55,7 +55,7 @@ const HomeView = () => {
           <RoomCard />
           <RoomCard />
         </div>
-      </div> */}
+      </div>
 
       {/* <div className="text-sm">
         <p>Keyboard Open: {isKeyboardOpen ? "Yes" : "No"}</p>
