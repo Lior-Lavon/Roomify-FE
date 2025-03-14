@@ -22,7 +22,7 @@ const HomeView = () => {
 
   return (
     <div
-      className={`base:hidden sm:block md:hidden w-full h-[350px] relative text-3xl sans-regular `}
+      className={`base:hidden sm:block md:hidden w-full h-[350px] relative text-3xl sans-regular top-[100px]`}
     >
       <TopBar showAvatar={true} showLogin={true} />
 
