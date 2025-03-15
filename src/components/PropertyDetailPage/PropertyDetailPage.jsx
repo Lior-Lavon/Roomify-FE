@@ -9,7 +9,7 @@ import { FiMapPin } from "react-icons/fi";
 import { setIsFavorite } from "../../features/chat/chatSlice";
 import PropertyOnMap from "./PropertyOnMap";
 
-const PropertyDetailPage = ({ advertId, showPropertyInfo }) => {
+const PropertyDetailPage = ({ advertId, shareAdvert, showPropertyInfo }) => {
   const dispatch = useDispatch();
   const { roomList } = useSelector((store) => store.chat);
 
@@ -26,6 +26,10 @@ const PropertyDetailPage = ({ advertId, showPropertyInfo }) => {
       }
     }
   }, [advertId, roomList]);
+
+  // const shareAdvertMe = () => {
+  //   shareAdvert();
+  // };
 
   const setFavorite = () => {
     dispatch(setIsFavorite(advertInfo.Id));
@@ -69,8 +73,7 @@ const PropertyDetailPage = ({ advertId, showPropertyInfo }) => {
               <div onClick={showMapOverlay}>
                 <FiMapPin className="w-6 h-6 " />
               </div>
-              {/* onClick={shareMeAdvert} */}
-              <div>
+              <div onClick={shareAdvert}>
                 <GoShareAndroid className="w-6 h-6 " />
               </div>
             </div>

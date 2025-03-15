@@ -8,17 +8,17 @@ import BlackMarker from "../../assets/blackMarker.png";
 const PropertyOnMap = ({ poi, closeMapOverlay }) => {
   return (
     <div className="w-full h-full absolute top-0 rounded-xl p-[4px] ">
-      <div className="w-full h-full relative rounded-xl">
-        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API}>
-          <MapComponent poi={poi} />
-        </APIProvider>
-
-        <div className="w-full h-full flex justify-end p-2 absolute top-0 ">
+      <div className="w-full h-full rounded-xl flex flex-col ">
+        <div className="w-full flex justify-end p-2 ">
           <IoMdClose
             className="text-2xl text-black cursor-pointer bg-white rounded-full"
             onClick={closeMapOverlay}
           />
         </div>
+
+        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API}>
+          <MapComponent poi={poi} />
+        </APIProvider>
       </div>
     </div>
   );
@@ -38,11 +38,12 @@ const MapComponent = ({ poi }) => {
 
   return (
     <Map
-      zoom={13}
+      zoom={15}
       center={poi?.Location} // Ensure lat/lng are numbers
       mapId="DEMO_MAP_ID"
       mapTypeControl={false}
-      disableDefaultUI={true}
+      disableDefaultUI={false}
+      gestureHandling="greedy"
       onCameraChanged={handleCameraChanged}
     >
       <PoiMarkers poi={poi} />

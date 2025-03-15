@@ -390,6 +390,7 @@ const ChatView = () => {
       {showAdvertInfo.show && (
         <PropertyDetailPage
           advertId={showAdvertInfo.advertId}
+          shareAdvert={shareAdvert}
           showPropertyInfo={showPropertyInfo}
         />
       )}
