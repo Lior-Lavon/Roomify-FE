@@ -7,12 +7,14 @@ import { GoShareAndroid } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { FiMapPin } from "react-icons/fi";
 import { setIsFavorite } from "../../features/chat/chatSlice";
+import PropertyOnMap from "./PropertyOnMap";
 
 const PropertyDetailPage = ({ advertId, showPropertyInfo }) => {
   const dispatch = useDispatch();
   const { roomList } = useSelector((store) => store.chat);
 
   const [advertInfo, setAdvertInfo] = useState(null);
+  const [showMap, setShowMap] = useState(false);
 
   useEffect(() => {
     if (roomList.length > 0) {
@@ -28,10 +30,13 @@ const PropertyDetailPage = ({ advertId, showPropertyInfo }) => {
   const setFavorite = () => {
     dispatch(setIsFavorite(advertInfo.Id));
   };
+  const showMapOverlay = () => {
+    setShowMap(!showMap);
+  };
 
   return (
     <div className="w-full h-screen fixed top-0 z-100 flex justify-center items-center sans-regular bg-[rgba(0,0,0,0.1)]">
-      <div className="max-w-[600px] w-[90%] bg-white rounded-2xl border-[.02rem] border-black shadow-[10px_2px_12px_rgba(0,0,0,.3)]">
+      <div className="max-w-[600px] w-[90%] bg-white rounded-xl border-[.02rem] border-black shadow-[10px_2px_12px_rgba(0,0,0,.3)] relative">
         <div className="m-4 flex flex-col gap-1">
           <div className="w-full flex flex-row justify-between items-center">
             <div className=" text-base sans-bold">{advertInfo?.Title}</div>
@@ -61,7 +66,7 @@ const PropertyDetailPage = ({ advertId, showPropertyInfo }) => {
                   <MdFavoriteBorder className="w-6 h-6" />
                 )}
               </div>
-              <div>
+              <div onClick={showMapOverlay}>
                 <FiMapPin className="w-6 h-6 " />
               </div>
               {/* onClick={shareMeAdvert} */}
@@ -107,6 +112,11 @@ const PropertyDetailPage = ({ advertId, showPropertyInfo }) => {
             </div>
           </div>
         </div>
+
+        {/*  show map */}
+        {showMap && (
+          <PropertyOnMap poi={advertInfo} closeMapOverlay={showMapOverlay} />
+        )}
       </div>
     </div>
   );
