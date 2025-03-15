@@ -75,7 +75,7 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
                 }`}
               >
                 <div
-                  className={`w-[50%] flex items-center leading-[1.1rem] text-sm sans-regular p-2 rounded-2xl ${
+                  className={`w-[60%] flex items-center leading-[1.1rem] text-sm sans-regular p-2 rounded-2xl ${
                     chatItem.sender == "renter"
                       ? "rounded-br-xs bg-[#ff5733]"
                       : "rounded-bl-xs bg-[#d9d9d9]"
