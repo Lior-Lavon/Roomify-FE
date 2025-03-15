@@ -9,13 +9,15 @@ const ShareAdvert = ({ advertId, closeShareAdvert }) => {
   const [advertInfo, setAdvertInfo] = useState(null);
 
   useEffect(() => {
-    for (let i = 0; i < roomList.length; i++) {
-      if (roomList[i].Id == advertId) {
-        setAdvertInfo(roomList[1]);
-        break;
+    if (roomList.length > 0) {
+      for (let i = 0; i < roomList.length; i++) {
+        if (roomList[i].Id === advertId) {
+          setAdvertInfo(roomList[i]);
+          break;
+        }
       }
     }
-  }, [roomList]);
+  }, []);
 
   return (
     <div className="w-full h-screen fixed top-0 z-100 flex justify-center items-center sans-regular bg-[rgba(0,0,0,0.05)]">
@@ -30,7 +32,7 @@ const ShareAdvert = ({ advertId, closeShareAdvert }) => {
           </div>
         </div>
         <div className="mt-1">
-          <ShareAdvertCard room_info={advertInfo} />
+          <ShareAdvertCard advertInfo={advertInfo} />
         </div>
       </div>
     </div>

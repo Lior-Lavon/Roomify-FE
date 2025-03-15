@@ -8,7 +8,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 
-const ShareAdvertCard = memo(({ room_info }) => {
+const ShareAdvertCard = memo(({ advertInfo }) => {
   const cardRef = useRef(null);
 
   return (
@@ -17,10 +17,10 @@ const ShareAdvertCard = memo(({ room_info }) => {
       className={`w-full flex flex-row gap-4 items-center justify-between`}
     >
       <div className="w-full h-[6rem] flex flex-col justify-between pl-2 py-1">
-        <p className="font-bold">{room_info?.Title}</p>
+        <p className="font-bold">{advertInfo?.Title}</p>
         <p className="text-[10px]">
           <span className="text-orange-600 text-[16px] sans-bold">
-            ${room_info?.Price}
+            ${advertInfo?.Price}
           </span>
           / month
         </p>
@@ -44,9 +44,9 @@ const ShareAdvertCard = memo(({ room_info }) => {
           </div>
         </div>
       </div>
-      {room_info?.Images.length >= 1 && (
+      {advertInfo?.Images.length >= 1 && (
         <img
-          src={room_info?.Images[0]}
+          src={advertInfo?.Images[0]}
           className="w-[6.2rem] h-[5rem] object-cover rounded-lg"
         />
       )}
