@@ -25,7 +25,7 @@ const RoomCardMini = memo(
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && onVisible != undefined) {
               onVisible(advertInfo.Id); // Call the callback when fully visible
             }
           });
@@ -42,7 +42,7 @@ const RoomCardMini = memo(
           observer.unobserve(cardRef.current);
         }
       };
-    }, [advertInfo.Id, onVisible]);
+    }, [advertInfo?.Id, onVisible]);
 
     const setMeFavorite = (e) => {
       e.stopPropagation();

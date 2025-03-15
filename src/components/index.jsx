@@ -16,6 +16,7 @@ import Prompt from "./Prompt/Prompt";
 import AnswerChip from "./AnswerChip/AnswerChip";
 import ShareAdvert from "./ShareAdvert/ShareAdvert";
 import ShareAdvertCard from "./RoomCard/ShareAdvertCard";
+import ChatWithOwnerTopBar from "./ChatWithOwner/ChatWithOwnerTopBar";
 
 export {
   RoomCard,
@@ -36,4 +37,5 @@ export {
   AnswerChip,
   ShareAdvert,
   ShareAdvertCard,
+  ChatWithOwnerTopBar,
 };
