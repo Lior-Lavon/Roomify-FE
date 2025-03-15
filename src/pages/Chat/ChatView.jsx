@@ -11,18 +11,22 @@ import {
   PropertyDetailPage,
   TopBar,
   ChatFooter,
+  ShareAdvert,
 } from "../../components";
-import { useSelector } from "react-redux";
-import { RoomList } from "../../MockData/RoomList";
+import { useDispatch, useSelector } from "react-redux";
 import { ChatOptions } from "../../MockData/ChatOptions";
+import { setRoomList } from "../../features/chat/chatSlice";
 
 const ChatView = () => {
+  const dispatch = useDispatch();
   const [chatFlow, setChatFlow] = useState([]);
   const [processFilters, setProcessFilters] = useState(false);
   const [filterUpdate, setFilterUpdate] = useState(false);
-  const [roomList, setRoomList] = useState(RoomList);
+  const [shareView, setShareView] = useState({ show: false, advertId: 0 });
 
-  const { userPrompt } = useSelector((store) => store.chat);
+  const { roomList } = useSelector((store) => store.chat);
+
+  // const { userPrompt } = useSelector((store) => store.chat);
 
   const [chatInfo, setChatInfo] = useState({
     Prompt: "I am searching for a .....",
@@ -320,10 +324,17 @@ const ChatView = () => {
       if (tmpList[i].Id == advertId) {
         console.log("updated");
         tmpList[i].IsFavorite = !tmpList[i].IsFavorite;
-        setRoomList(tmpList);
+        dispatch(setRoomList(tmpList));
         break;
       }
     }
+  };
+
+  const shareAdvert = (advertId) => {
+    setShareView({ show: true, advertId: advertId });
+  };
+  const closeShareAdvert = () => {
+    setShareView({ show: false, advertId: 0 });
   };
 
   return (
@@ -367,6 +378,7 @@ const ChatView = () => {
               filterSelection={filterSelection}
               showPropertyInfo={showPropertyInfo}
               setFavorite={setFavorite}
+              shareAdvert={shareAdvert}
             />
           </div>
         </div>
@@ -380,6 +392,12 @@ const ChatView = () => {
         <PropertyDetailPage
           property_info={roomList[0]}
           showPropertyInfo={showPropertyInfo}
+        />
+      )}
+      {shareView.show && (
+        <ShareAdvert
+          closeShareAdvert={closeShareAdvert}
+          advertId={shareView.advertId}
         />
       )}
     </div>

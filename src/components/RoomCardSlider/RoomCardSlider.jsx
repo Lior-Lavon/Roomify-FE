@@ -9,6 +9,7 @@ const RoomCardSlider = memo(
     showPropertyInfo,
     setFavorite,
     onCardVisible,
+    shareAdvert,
   }) => {
     const scrollRef = useRef(null);
     const [activeDot, setActiveDot] = useState(0);
@@ -68,6 +69,7 @@ const RoomCardSlider = memo(
                   room_info={room}
                   onVisible={handleCardVisible}
                   setFavorite={setFavorite}
+                  shareAdvert={shareAdvert}
                 />
               </div>
             );

@@ -14,6 +14,8 @@ import CoverView from "./CoverView/CoverView";
 import ChatFooter from "./ChatFooter/ChatFooter";
 import Prompt from "./Prompt/Prompt";
 import AnswerChip from "./AnswerChip/AnswerChip";
+import ShareAdvert from "./ShareAdvert/ShareAdvert";
+import ShareAdvertCard from "./RoomCard/ShareAdvertCard";
 
 export {
   RoomCard,
@@ -32,4 +34,6 @@ export {
   ChatFooter,
   Prompt,
   AnswerChip,
+  ShareAdvert,
+  ShareAdvertCard,
 };

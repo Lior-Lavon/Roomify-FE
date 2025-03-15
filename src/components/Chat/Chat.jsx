@@ -15,6 +15,7 @@ const Chat = memo(
     showPropertyInfo,
     onCardVisible,
     setFavorite,
+    shareAdvert,
   }) => {
     const divRef = useRef();
     const [filters, setFilters] = useState([]);
@@ -97,6 +98,7 @@ const Chat = memo(
                 chatItem={chatItem}
                 onCardVisible={onCardVisible}
                 setFavorite={setFavorite}
+                shareAdvert={shareAdvert}
                 showPropertyInfo={showPropertyInfo}
               />
             );
