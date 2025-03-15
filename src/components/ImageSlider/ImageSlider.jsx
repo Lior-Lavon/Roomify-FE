@@ -35,7 +35,7 @@ const ImageSlider = ({ imageList, dot_count }) => {
         }}
         ref={scrollRef}
       >
-        {imageList.map((image, index) => {
+        {imageList?.map((image, index) => {
           return (
             <div key={index} className="flex items-center justify-center ">
               <img

@@ -23,7 +23,7 @@ const chatSlice = createSlice({
           break;
         }
       }
-      state.roomList = tmpList;
+      state.roomList = [...tmpList];
     },
   },
 });

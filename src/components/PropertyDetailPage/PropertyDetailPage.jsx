@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import ImageSlider from "../ImageSlider/ImageSlider";
 import { PiDivide } from "react-icons/pi";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { GoShareAndroid } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
+import { FiMapPin } from "react-icons/fi";
+import { setIsFavorite } from "../../features/chat/chatSlice";
 
-const PropertyDetailPage = ({ property_info, showPropertyInfo }) => {
+const PropertyDetailPage = ({ advertId, showPropertyInfo }) => {
+  const dispatch = useDispatch();
+  const { roomList } = useSelector((store) => store.chat);
+
+  const [advertInfo, setAdvertInfo] = useState(null);
+
+  useEffect(() => {
+    if (roomList.length > 0) {
+      for (let i = 0; i < roomList.length; i++) {
+        if (roomList[i].Id === advertId) {
+          setAdvertInfo(roomList[i]);
+          break;
+        }
+      }
+    }
+  }, [advertId, roomList]);
+
+  const setFavorite = () => {
+    dispatch(setIsFavorite(advertInfo.Id));
+  };
+
   return (
-    <div className="w-full h-screen fixed top-0 z-100 flex justify-center items-center sans-regular">
+    <div className="w-full h-screen fixed top-0 z-100 flex justify-center items-center sans-regular bg-[rgba(0,0,0,0.1)]">
       <div className="max-w-[600px] w-[90%] bg-white rounded-2xl border-[.02rem] border-black shadow-[10px_2px_12px_rgba(0,0,0,.3)]">
         <div className="m-4 flex flex-col gap-1">
           <div className="w-full flex flex-row justify-between items-center">
-            <div className=" text-base sans-bold">Room name</div>
+            <div className=" text-base sans-bold">{advertInfo?.Title}</div>
             <IoMdClose
               className="text-2xl text-gray-500 cursor-pointer"
               onClick={showPropertyInfo}
@@ -21,15 +46,34 @@ const PropertyDetailPage = ({ property_info, showPropertyInfo }) => {
             peaceful setting. Fully furnished with a comfortable bed, desk,
             wardrobe, and more, perfect for work or relaxation.
           </p>
-          <p className="text-[10px] w-full">
-            <span className="text-orange-600 text-[15px] sans-bold">
-              $2,000
-            </span>
-            /month
-          </p>
+          <div className="w-full flex items-center justify-between ">
+            <p className="text-[10px] w-full">
+              <span className="text-orange-600 text-[20px] sans-bold">
+                ${advertInfo?.Price}
+              </span>
+              /month
+            </p>
+            <div className="w-full h-8 flex items-center justify-end gap-2 text-orange-600 ">
+              <div onClick={setFavorite}>
+                {advertInfo?.IsFavorite ? (
+                  <MdFavorite className="w-6 h-6" />
+                ) : (
+                  <MdFavoriteBorder className="w-6 h-6" />
+                )}
+              </div>
+              <div>
+                <FiMapPin className="w-6 h-6 " />
+              </div>
+              {/* onClick={shareMeAdvert} */}
+              <div>
+                <GoShareAndroid className="w-6 h-6 " />
+              </div>
+            </div>
+          </div>
+
           {/* image slider */}
           <div className="mt-1">
-            <ImageSlider imageList={property_info.Images} dot_count={4} />
+            <ImageSlider imageList={advertInfo?.Images} dot_count={4} />
           </div>
           <div className="w-full text-[12px] flex flex-col gap-[.15rem]">
             <div className="flex">
@@ -59,11 +103,6 @@ const PropertyDetailPage = ({ property_info, showPropertyInfo }) => {
             <div>
               <button className="w-full bg-orange-600 text-black rounded-full py-2 cursor-pointer">
                 Contact the landlord
-              </button>
-            </div>
-            <div>
-              <button className="w-full bg-[#ffeeeb] text-orange-600 rounded-full py-2 cursor-pointer">
-                Search for similar result
               </button>
             </div>
           </div>

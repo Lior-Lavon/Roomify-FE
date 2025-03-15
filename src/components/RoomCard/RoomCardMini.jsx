@@ -17,7 +17,7 @@ const useScreenWidth = () => {
 };
 
 const RoomCardMini = memo(
-  ({ room_info, onVisible, setFavorite, shareAdvert }) => {
+  ({ advertInfo, onVisible, setFavorite, shareAdvert, showPropertyInfo }) => {
     const cardRef = useRef(null);
     const screenWidth = useScreenWidth() * 0.8;
 
@@ -26,7 +26,7 @@ const RoomCardMini = memo(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              onVisible(room_info.Id); // Call the callback when fully visible
+              onVisible(advertInfo.Id); // Call the callback when fully visible
             }
           });
         },
@@ -42,16 +42,20 @@ const RoomCardMini = memo(
           observer.unobserve(cardRef.current);
         }
       };
-    }, [room_info.Id, onVisible]);
+    }, [advertInfo.Id, onVisible]);
 
     const setMeFavorite = (e) => {
       e.stopPropagation();
-      setFavorite(room_info.Id);
+      setFavorite(advertInfo.Id);
     };
 
     const shareMeAdvert = (e) => {
       e.stopPropagation();
-      shareAdvert(room_info.Id);
+      shareAdvert(advertInfo.Id);
+    };
+
+    const onAdvertClick = () => {
+      showPropertyInfo(advertInfo.Id);
     };
 
     return (
@@ -59,18 +63,19 @@ const RoomCardMini = memo(
         ref={cardRef}
         className={` border border-orange-200 rounded-xl flex flex-row gap-4 items-center justify-between shadow-[10px_2px_12px_rgba(0,0,0,.1)]`}
         style={{ minWidth: `${screenWidth}px`, width: `85%` }}
+        onClick={onAdvertClick}
       >
         <div className="w-full h-[6rem] flex flex-col justify-between pl-2 py-1">
-          <p className="font-bold">{room_info?.Title}</p>
+          <p className="font-bold">{advertInfo?.Title}</p>
           <p className="text-[10px]">
             <span className="text-orange-600 text-[16px] sans-bold">
-              ${room_info?.Price}
+              ${advertInfo?.Price}
             </span>
             / month
           </p>
           <div className="w-full h-8 flex items-center gap-2 text-orange-600 ">
             <div onClick={setMeFavorite}>
-              {room_info?.IsFavorite ? (
+              {advertInfo?.IsFavorite ? (
                 <MdFavorite className="w-6 h-6" />
               ) : (
                 <MdFavoriteBorder className="w-6 h-6" />
@@ -81,9 +86,9 @@ const RoomCardMini = memo(
             </div>
           </div>
         </div>
-        {room_info?.Images.length >= 1 && (
+        {advertInfo?.Images.length >= 1 && (
           <img
-            src={room_info?.Images[0]}
+            src={advertInfo?.Images[0]}
             className="w-[7.2rem] h-[6rem] object-cover rounded-lg"
           />
         )}

@@ -23,6 +23,10 @@ const ChatView = () => {
   const [processFilters, setProcessFilters] = useState(false);
   const [filterUpdate, setFilterUpdate] = useState(false);
   const [shareView, setShareView] = useState({ show: false, advertId: 0 });
+  const [showAdvertInfo, setShowAdvertInfo] = useState({
+    show: false,
+    advertId: 0,
+  });
 
   const { roomList } = useSelector((store) => store.chat);
 
@@ -39,7 +43,6 @@ const ChatView = () => {
 
   const bottomContainerRef = useRef(null);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
-  const [showPropertyInfoView, setShowPropertyInfoView] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const [visibleCardId, setVisibleCardId] = useState(null);
 
@@ -310,8 +313,12 @@ const ChatView = () => {
     }
   }, []); // Empty dependency array means this runs only once after the first render
 
-  const showPropertyInfo = () => {
-    setShowPropertyInfoView(showPropertyInfoView ? false : true);
+  const showPropertyInfo = (advertId) => {
+    if (showAdvertInfo.show == false) {
+      setShowAdvertInfo({ show: true, advertId: advertId });
+    } else {
+      setShowAdvertInfo({ show: false, advertId: 0 });
+    }
   };
 
   const onCardVisible = useCallback((visibleAdvertId) => {
@@ -380,9 +387,9 @@ const ChatView = () => {
       <ChatFooter pageType={"chat"} />
 
       {/* show property view */}
-      {showPropertyInfoView && (
+      {showAdvertInfo.show && (
         <PropertyDetailPage
-          property_info={roomList[0]}
+          advertId={showAdvertInfo.advertId}
           showPropertyInfo={showPropertyInfo}
         />
       )}

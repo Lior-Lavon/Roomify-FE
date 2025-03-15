@@ -48,10 +48,7 @@ const RoomCardSlider = memo(
     };
 
     return (
-      <div
-        className="w-full flex flex-col my-2 mx-2"
-        onClick={showPropertyInfo}
-      >
+      <div className="w-full flex flex-col my-2 mx-2">
         {/* TopDiv with horizontal scrollable cards */}
         <div
           className="w-full overflow-x-auto whitespace-nowrap flex items-center gap-x-2 pb-1"
@@ -66,10 +63,11 @@ const RoomCardSlider = memo(
             return (
               <div key={room.Id} className="flex items-center justify-center ">
                 <RoomCardMini
-                  room_info={room}
+                  advertInfo={room}
                   onVisible={handleCardVisible}
                   setFavorite={setFavorite}
                   shareAdvert={shareAdvert}
+                  showPropertyInfo={showPropertyInfo}
                 />
               </div>
             );
