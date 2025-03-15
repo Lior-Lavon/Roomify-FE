@@ -90,7 +90,7 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
 
         {/* Footer */}
         <div
-          className="w-full h-12 fixed bottom-0 flex items-center justify-center"
+          className="w-full h-14 fixed bottom-0 flex items-center justify-center"
           ref={bottomRef}
         >
           <div className="w-full h-full relative mx-4 flex items-center">
@@ -98,7 +98,7 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
               type="text"
               name="chat"
               placeholder="Type your message here "
-              className="w-full h-8 bg-white resize-none align-middle border border-gray-300 rounded-full shadow-sm outline-none pl-2 pt-1 focus:border-gray-400"
+              className="w-full h-11 bg-white resize-none align-middle border border-gray-300 rounded-full shadow-sm outline-none pl-2 pt-2 focus:border-gray-400"
               // onChange={handleChange}
             />
             <div className="absolute right-2 top-1/4">
