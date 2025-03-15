@@ -14,6 +14,7 @@ export const RoomList = [
     Description: "some description",
     Images: [Image1, Image2, Image3],
     Price: 850,
+    IsFavorite: false,
     Location: { lat: 52.370216, lng: 4.895168 },
   },
   {
@@ -23,6 +24,7 @@ export const RoomList = [
     Description: "some description",
     Images: [Image2, Image3, Image5],
     Price: 700,
+    IsFavorite: false,
     Location: { lat: 52.372759, lng: 4.893604 },
   },
   {
@@ -32,6 +34,7 @@ export const RoomList = [
     Description: "some description",
     Images: [Image3, Image1, Image4],
     Price: 970,
+    IsFavorite: false,
     Location: { lat: 52.36802, lng: 4.903561 },
   },
   {
@@ -41,6 +44,7 @@ export const RoomList = [
     Description: "some description",
     Images: [Image4, Image5, Image6],
     Price: 1470,
+    IsFavorite: false,
     Location: { lat: 52.37403, lng: 4.88969 },
   },
   {
@@ -50,6 +54,7 @@ export const RoomList = [
     Description: "some description",
     Images: [Image5, Image6, Image7],
     Price: 1200,
+    IsFavorite: false,
     Location: { lat: 52.365559, lng: 4.911457 },
   },
   {
@@ -59,6 +64,7 @@ export const RoomList = [
     Description: "some description",
     Images: [Image6, Image7, Image1],
     Price: 1350,
+    IsFavorite: false,
     Location: { lat: 52.376179, lng: 4.900012 },
   },
   {
@@ -68,6 +74,7 @@ export const RoomList = [
     Description: "some description",
     Images: [Image7, Image2, Image4],
     Price: 900,
+    IsFavorite: false,
     Location: { lat: 52.366822, lng: 4.897342 },
   },
 ];

@@ -39,6 +39,16 @@ const RoomCardSlider = memo(
       onCardVisible(id);
     };
 
+    const setFavorite = (advertId) => {
+      const tmpList = [...room_list];
+      for (let i = 0; i < tmpList.length; i++) {
+        if (tmpList[i].Id == advertId) {
+          tmpList[i].IsFavorite = !tmpList[i].IsFavorite;
+          break;
+        }
+      }
+    };
+
     return (
       <div
         className="w-full flex flex-col my-2 mx-2"
@@ -57,7 +67,11 @@ const RoomCardSlider = memo(
           {room_list.map((room) => {
             return (
               <div key={room.Id} className="flex items-center justify-center ">
-                <RoomCardMini room_info={room} onVisible={handleCardVisible} />
+                <RoomCardMini
+                  room_info={room}
+                  onVisible={handleCardVisible}
+                  setFavorite={setFavorite}
+                />
               </div>
             );
           })}

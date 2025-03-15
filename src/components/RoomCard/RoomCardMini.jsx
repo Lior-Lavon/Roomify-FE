@@ -1,8 +1,25 @@
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import roomImg1 from "../../assets/room1.jpeg";
+import { GoShareAndroid } from "react-icons/go";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-const RoomCardMini = memo(({ room_info, onVisible }) => {
+const useScreenWidth = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return width;
+};
+
+const RoomCardMini = memo(({ room_info, onVisible, setFavorite }) => {
   const cardRef = useRef(null);
+  const screenWidth = useScreenWidth() * 0.8;
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,34 +44,40 @@ const RoomCardMini = memo(({ room_info, onVisible }) => {
     };
   }, [room_info.Id, onVisible]);
 
-  // const getWidth = () => {
-  //   let width = window.innerWidth;
-  //   const ret = width + "px";
-  //   console.log("ret : ", ret);
-  //   return ret;
-  // };
+  const setMeFavorite = (e) => {
+    e.stopPropagation();
+    setFavorite(room_info.Id);
+  };
 
   return (
     <div
       ref={cardRef}
-      className={`min-w-[280px] w-[280px] border border-orange-200 rounded-xl flex flex-row gap-2 items-center justify-between shadow-[10px_2px_12px_rgba(0,0,0,.1)]`}
+      className={` border border-orange-200 rounded-xl flex flex-row gap-4 items-center justify-between shadow-[10px_2px_12px_rgba(0,0,0,.1)]`}
+      style={{ minWidth: `${screenWidth}px`, width: `85%` }}
     >
-      <div className="flex flex-col items-center justify-between w-full text-left ">
-        <div className="w-full flex flex-col gap-[.05rem]">
-          <p className="font-bold">{room_info.Title}</p>
-          <p className="text-[10px]">{room_info.Address}</p>
-        </div>
-        <p className="text-[10px] w-full mt-1">
+      <div className="w-full h-[6rem] flex flex-col justify-between pl-2 py-1">
+        <p className="font-bold">{room_info.Title}</p>
+        <p className="text-[10px]">
           <span className="text-orange-600 text-[16px] sans-bold">
             ${room_info.Price}
-          </span>{" "}
+          </span>
           / month
         </p>
+        <div className="w-full h-8 flex items-center gap-2 text-orange-600 ">
+          <div onClick={setMeFavorite}>
+            {room_info.IsFavorite ? (
+              <MdFavorite className="w-6 h-6" />
+            ) : (
+              <MdFavoriteBorder className="w-6 h-6" />
+            )}
+          </div>
+          <GoShareAndroid className="w-6 h-6 " />
+        </div>
       </div>
       {room_info.Images.length >= 1 && (
         <img
           src={room_info.Images[0]}
-          className="w-[6.2rem] h-[5rem] object-cover rounded-lg"
+          className="w-[7.2rem] h-[6rem] object-cover rounded-lg"
         />
       )}
     </div>
