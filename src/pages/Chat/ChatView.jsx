@@ -20,6 +20,7 @@ const ChatView = () => {
   const [chatFlow, setChatFlow] = useState([]);
   const [processFilters, setProcessFilters] = useState(false);
   const [filterUpdate, setFilterUpdate] = useState(false);
+  const [roomList, setRoomList] = useState(RoomList);
 
   const { userPrompt } = useSelector((store) => store.chat);
 
@@ -313,6 +314,18 @@ const ChatView = () => {
     setVisibleCardId(visibleAdvertId);
   }, []);
 
+  const setFavorite = (advertId) => {
+    const tmpList = [...roomList];
+    for (let i = 0; i < tmpList.length; i++) {
+      if (tmpList[i].Id == advertId) {
+        console.log("updated");
+        tmpList[i].IsFavorite = !tmpList[i].IsFavorite;
+        setRoomList(tmpList);
+        break;
+      }
+    }
+  };
+
   return (
     <div
       className="w-full flex flex-col"
@@ -325,7 +338,7 @@ const ChatView = () => {
       <div className="w-full flex-1 flex flex-col" ref={containerRef}>
         {/* Top Div */}
         <div className="" style={{ height: heights.top }}>
-          <MapView properties={RoomList} visibleCardId={visibleCardId} />
+          <MapView properties={roomList} visibleCardId={visibleCardId} />
         </div>
 
         <div
@@ -347,12 +360,13 @@ const ChatView = () => {
           >
             <Chat
               chat_flow={chatFlow}
-              room_list={RoomList}
+              room_list={roomList}
               chat_info={chatInfo}
               removeFilter={removeFilter}
               onCardVisible={onCardVisible}
               filterSelection={filterSelection}
               showPropertyInfo={showPropertyInfo}
+              setFavorite={setFavorite}
             />
           </div>
         </div>
@@ -364,7 +378,7 @@ const ChatView = () => {
       {/* show property view */}
       {showPropertyInfoView && (
         <PropertyDetailPage
-          property_info={RoomList[0]}
+          property_info={roomList[0]}
           showPropertyInfo={showPropertyInfo}
         />
       )}

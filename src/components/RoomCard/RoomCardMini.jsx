@@ -19,7 +19,6 @@ const useScreenWidth = () => {
 const RoomCardMini = memo(({ room_info, onVisible, setFavorite }) => {
   const cardRef = useRef(null);
   const screenWidth = useScreenWidth() * 0.8;
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

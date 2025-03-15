@@ -2,7 +2,14 @@ import { useRef, useState, useEffect, memo } from "react";
 import { RoomCardMini } from "../../components";
 
 const RoomCardSlider = memo(
-  ({ room_list, dot_count, chatItem, showPropertyInfo, onCardVisible }) => {
+  ({
+    room_list,
+    dot_count,
+    chatItem,
+    showPropertyInfo,
+    setFavorite,
+    onCardVisible,
+  }) => {
     const scrollRef = useRef(null);
     const [activeDot, setActiveDot] = useState(0);
     // const timeOutRef = useRef(0);
@@ -37,16 +44,6 @@ const RoomCardSlider = memo(
 
     const handleCardVisible = (id) => {
       onCardVisible(id);
-    };
-
-    const setFavorite = (advertId) => {
-      const tmpList = [...room_list];
-      for (let i = 0; i < tmpList.length; i++) {
-        if (tmpList[i].Id == advertId) {
-          tmpList[i].IsFavorite = !tmpList[i].IsFavorite;
-          break;
-        }
-      }
     };
 
     return (
