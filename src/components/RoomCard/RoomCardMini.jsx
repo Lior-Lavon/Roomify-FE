@@ -42,8 +42,7 @@ const RoomCardMini = memo(
           observer.unobserve(cardRef.current);
         }
       };
-    }, [room_info?.Id]);
-    // }, [room_info.Id, onVisible]);
+    }, [room_info.Id, onVisible]);
 
     const setMeFavorite = (e) => {
       e.stopPropagation();

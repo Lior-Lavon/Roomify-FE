@@ -15,7 +15,7 @@ import {
 } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatOptions } from "../../MockData/ChatOptions";
-import { setRoomList } from "../../features/chat/chatSlice";
+import { setIsFavorite } from "../../features/chat/chatSlice";
 
 const ChatView = () => {
   const dispatch = useDispatch();
@@ -319,15 +319,7 @@ const ChatView = () => {
   }, []);
 
   const setFavorite = (advertId) => {
-    const tmpList = [...roomList];
-    for (let i = 0; i < tmpList.length; i++) {
-      if (tmpList[i].Id == advertId) {
-        console.log("updated");
-        tmpList[i].IsFavorite = !tmpList[i].IsFavorite;
-        dispatch(setRoomList(tmpList));
-        break;
-      }
-    }
+    dispatch(setIsFavorite(advertId));
   };
 
   const shareAdvert = (advertId) => {

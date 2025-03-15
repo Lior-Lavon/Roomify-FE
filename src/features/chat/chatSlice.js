@@ -14,11 +14,19 @@ const chatSlice = createSlice({
     setUserPrompt: (state, { payload }) => {
       state.userPrompt = payload;
     },
-    setRoomList: (state, { payload }) => {
-      console.log("setRoomList");
+    setIsFavorite: (state, { payload }) => {
+      const advertId = payload;
+      const tmpList = [...state.roomList];
+      for (let i = 0; i < tmpList.length; i++) {
+        if (tmpList[i].Id == advertId) {
+          tmpList[i].IsFavorite = !tmpList[i].IsFavorite;
+          break;
+        }
+      }
+      state.roomList = tmpList;
     },
   },
 });
 
-export const { setUserPrompt, setRoomList } = chatSlice.actions;
+export const { setUserPrompt, setIsFavorite } = chatSlice.actions;
 export default chatSlice.reducer;
