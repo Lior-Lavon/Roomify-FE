@@ -63,7 +63,7 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
 
         {/* Body (Takes up remaining space) */}
         <div
-          className="overflow-y-auto px-4 py-2 "
+          className="flex flex-col gap-1 overflow-y-auto px-4 py-2 "
           style={{ height: `${chatHeight}px` }} // Set height dynamically
         >
           {chatHistory.map((chatItem) => {
