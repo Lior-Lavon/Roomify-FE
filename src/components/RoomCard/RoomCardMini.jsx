@@ -89,7 +89,7 @@ const RoomCardMini = memo(
         {advertInfo?.Images.length >= 1 && (
           <img
             src={advertInfo?.Images[0]}
-            className="w-[7.2rem] h-[6rem] object-cover rounded-lg"
+            className="w-[7.2rem] h-[6rem] object-cover rounded-tr-lg rounded-br-lg"
           />
         )}
       </div>
