@@ -1,22 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TopBar from "../TopBar/TopBar";
 import ChatWithOwnerTopBar from "./ChatWithOwnerTopBar";
 import RoomCardMini from "../RoomCard/RoomCardMini";
 import { CiSearch } from "react-icons/ci";
+import ChatLoader from "../ChatLoader/ChatLoader";
+import { isLoadingFn } from "../../features/chat/chatSlice";
 
 const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
+  const dispatch = useDispatch();
   const topRef = useRef(null);
   const chatRef = useRef(null);
   const bottomRef = useRef(null);
   const [chatHeight, setChatHeight] = useState(0);
-  const { roomList, chatHistory } = useSelector((store) => store.chat);
+  const { roomList, chatHistory, isLoading } = useSelector(
+    (store) => store.chat
+  );
   const [advertInfo, setAdvertInfo] = useState(null);
 
   useEffect(() => {
     if (roomList.length > 0) {
       for (let i = 0; i < roomList.length; i++) {
-        if (roomList[i].Id === advertId) {
+        if (roomList[i].Id == advertId) {
           setAdvertInfo(roomList[i]);
           break;
         }
@@ -30,7 +35,22 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
       const bottomTop = bottomRef.current.getBoundingClientRect().top;
       setChatHeight(bottomTop - topBottom); // Calculate space between them
     }
+
+    setTimeout(() => {
+      dispatch(isLoadingFn(false));
+    }, 2000);
   }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      dispatch(isLoadingFn(true));
+      // Set loading to false after 2 seconds
+      const timer = setTimeout(() => {
+        dispatch(isLoadingFn(false));
+      }, 2000);
+      return () => clearTimeout(timer); // Cleanup timeout if component unmounts early
+    }
+  }, [isVisible]);
 
   const setFavorite = () => {};
   const shareAdvert = () => {};
@@ -62,26 +82,32 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
             />
           </div>
 
-          {chatHistory.map((chatItem) => {
-            return (
-              <div
-                key={chatItem.id}
-                className={`w-full flex  ${
-                  chatItem.sender == "renter" ? "justify-end" : "justify-start"
-                }`}
-              >
+          {isLoading ? (
+            <ChatLoader />
+          ) : (
+            chatHistory.map((chatItem) => {
+              return (
                 <div
-                  className={`w-[60%] flex items-center leading-[1.1rem] text-sm sans-regular p-2 rounded-2xl ${
+                  key={chatItem.id}
+                  className={`w-full flex  ${
                     chatItem.sender == "renter"
-                      ? "rounded-br-xs bg-[#ff5733]"
-                      : "rounded-bl-xs bg-[#d9d9d9]"
+                      ? "justify-end"
+                      : "justify-start"
                   }`}
                 >
-                  <p>{chatItem.text}</p>
+                  <div
+                    className={`w-[60%] flex items-center leading-[1.1rem] text-sm sans-regular p-2 rounded-2xl ${
+                      chatItem.sender == "renter"
+                        ? "rounded-br-xs bg-[#ff5733]"
+                        : "rounded-bl-xs bg-[#d9d9d9]"
+                    }`}
+                  >
+                    <p>{chatItem.text}</p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
 
         {/* Footer */}

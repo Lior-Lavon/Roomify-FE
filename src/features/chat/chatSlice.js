@@ -66,7 +66,7 @@ const initialState = {
       sender: "renter",
     },
   ],
-  isLoading: true,
+  isLoading: false,
 };
 
 const chatSlice = createSlice({
@@ -87,8 +87,11 @@ const chatSlice = createSlice({
       }
       state.roomList = [...tmpList];
     },
+    isLoadingFn: (state, { payload }) => {
+      state.isLoading = payload;
+    },
   },
 });
 
-export const { setUserPrompt, setIsFavorite } = chatSlice.actions;
+export const { setUserPrompt, setIsFavorite, isLoadingFn } = chatSlice.actions;
 export default chatSlice.reducer;

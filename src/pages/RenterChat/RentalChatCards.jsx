@@ -1,15 +1,22 @@
 import React from "react";
 import Image1 from "../../assets/room1.jpeg";
 
-const RentalChatCards = () => {
+const RentalChatCards = ({ chatId, handleChatSelect }) => {
+  const handleChatSelectMe = () => {
+    handleChatSelect(chatId);
+  };
+
   return (
-    <div className="w-full bg-white border-b-[.001rem] border-gray-300">
+    <div
+      className="w-full bg-white border-b-[.001rem] border-gray-200"
+      onClick={handleChatSelectMe}
+    >
       <div className="w-full h-full px-4 py-1 flex flex-row items-center gap-4 justify-between">
         {/* property image */}
         <img
           src={Image1}
           alt=""
-          className="flex-1 w-[4rem] h-[3.5rem]  sm:w-[5rem] sm:h-[4.5rem]  object-contain"
+          className=" w-[4rem] h-[4rem] rounded-2xl sm:w-[5rem] sm:h-[5rem] object-contain"
         />
         {/* Property Info */}
         <div className="flex-2 flex flex-col text-[.7rem] text-gray-500">
