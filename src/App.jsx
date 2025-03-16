@@ -61,7 +61,7 @@ function App() {
           ></Route>
 
           <Route path="/landing" element={<HomeView />} />
-          <Route path="/chats" element={<RenterChat />} />
+          {/* <Route path="/chats" element={<RenterChat />} /> */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/chat" element={<ChatView />} />
 
