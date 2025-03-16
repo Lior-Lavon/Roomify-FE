@@ -62,7 +62,7 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
       }`}
     >
       {/* place holder */}
-      <TopBar showAvatar={true} showLogin={true} />
+      <TopBar showAvatar={true} showLogin={false} />
       <div className="w-full h-full flex flex-col bg-white">
         {/* TopBar */}
         <div className="w-full h-[54px] bg-blue-300" ref={topRef}>
