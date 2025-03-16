@@ -1,5 +1,12 @@
 import { FaBeer } from "react-icons/fa";
-import { HomeView, ChatView, NotFound, ProtectiveRoute, SignIn } from "./pages";
+import {
+  HomeView,
+  ChatView,
+  NotFound,
+  ProtectiveRoute,
+  SignIn,
+  RenterChat,
+} from "./pages";
 import { CoverView, MapView } from "./components";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import TestMapView from "./components/TestMapView/TestMapView";
@@ -54,6 +61,7 @@ function App() {
           ></Route>
 
           <Route path="/landing" element={<HomeView />} />
+          <Route path="/chats" element={<RenterChat />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/chat" element={<ChatView />} />
 

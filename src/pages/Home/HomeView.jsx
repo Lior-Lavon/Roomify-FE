@@ -6,10 +6,10 @@ import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 const HomeView = () => {
   const { isKeyboardOpen, keyboardHeight } = useKeyboardStatus();
 
-  useEffect(() => {
-    console.log("isKeyboardOpen : ", isKeyboardOpen);
-    console.log("keyboardHeight : ", keyboardHeight);
-  }, [isKeyboardOpen, keyboardHeight]);
+  // useEffect(() => {
+  //   console.log("isKeyboardOpen : ", isKeyboardOpen);
+  //   console.log("keyboardHeight : ", keyboardHeight);
+  // }, [isKeyboardOpen, keyboardHeight]);
 
   return (
     <div

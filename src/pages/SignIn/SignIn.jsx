@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { TopBar } from "../../components";
+import { setUserLogin } from "../../features/user/userSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +30,10 @@ const SignIn = () => {
 
   const handleFacebookLogin = () => {
     console.log("Logging in with Facebook...");
+  };
+  const handleUserLogin = () => {
+    dispatch(setUserLogin());
+    navigate("/landing");
   };
 
   return (
@@ -68,6 +77,7 @@ const SignIn = () => {
             <button
               type="submit"
               className="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition"
+              onClick={handleUserLogin}
             >
               {isLogin ? "Login" : "Register"}
             </button>

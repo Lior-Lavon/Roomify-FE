@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiMapPin } from "react-icons/fi";
 import { setIsFavorite } from "../../features/chat/chatSlice";
 import PropertyOnMap from "./PropertyOnMap";
-import ChatWithOwner from "../ChatWithOwner/ChatWithOwner";
+import PropertyImageGallery from "./PropertyImageGallery";
 
 const PropertyDetailPage = ({
   advertId,
@@ -21,6 +21,7 @@ const PropertyDetailPage = ({
 
   const [advertInfo, setAdvertInfo] = useState(null);
   const [showMap, setShowMap] = useState(false);
+  const [imageGallery, setImageGallery] = useState(false);
 
   useEffect(() => {
     if (roomList.length > 0) {
@@ -46,6 +47,10 @@ const PropertyDetailPage = ({
 
   const showChatWithOwnerMe = () => {
     showChatWithOwner(advertInfo.Id);
+  };
+
+  const showImageGallery = () => {
+    setImageGallery(true);
   };
 
   return (
@@ -90,7 +95,7 @@ const PropertyDetailPage = ({
           </div>
 
           {/* image slider */}
-          <div className="mt-1">
+          <div className="mt-1" onClick={showImageGallery}>
             <ImageSlider imageList={advertInfo?.Images} dot_count={4} />
           </div>
           <div className="w-full text-[12px] flex flex-col gap-[.15rem]">
@@ -133,6 +138,9 @@ const PropertyDetailPage = ({
         {showMap && (
           <PropertyOnMap poi={advertInfo} closeMapOverlay={showMapOverlay} />
         )}
+
+        {/* show ImageGallery */}
+        {imageGallery && <PropertyImageGallery images={advertInfo?.Images} />}
       </div>
     </div>
   );

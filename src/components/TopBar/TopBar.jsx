@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { BsChat } from "react-icons/bs";
+import { IoChatbubbleOutline } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const MenuItems = [
@@ -32,6 +34,7 @@ const MenuItems = [
 ];
 
 const TopBar = (props) => {
+  const { profile } = useSelector((store) => store.user);
   const { showAvatar, showLogin } = props;
   const [isMenu, setIsMenu] = useState(false);
   const navigate = useNavigate();
@@ -45,6 +48,10 @@ const TopBar = (props) => {
 
   const handleSignIn = () => {
     navigate("/signin");
+  };
+
+  const handleChatView = () => {
+    navigate("/chats");
   };
 
   return (
@@ -87,14 +94,23 @@ const TopBar = (props) => {
       </div>
 
       <div className="w-[20%] max-w-[80px]">
-        {showLogin && (
-          <div
-            className="bg-orange-600 text-white rounded-xl px-2 py-1 text-sm text-center"
-            onClick={handleSignIn}
-          >
-            Log In
-          </div>
-        )}
+        {!profile
+          ? showLogin && (
+              <div
+                className="bg-orange-600 text-white rounded-xl px-2 py-1 text-sm text-center"
+                onClick={handleSignIn}
+              >
+                Log In
+              </div>
+            )
+          : showLogin && (
+              <div
+                className="flex items-center justify-end"
+                onClick={handleChatView}
+              >
+                <IoChatbubbleOutline className="text-2xl" />
+              </div>
+            )}
       </div>
     </div>
   );
