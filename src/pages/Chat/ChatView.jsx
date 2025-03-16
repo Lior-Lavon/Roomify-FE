@@ -16,12 +16,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { ChatOptions } from "../../MockData/ChatOptions";
 import { setIsFavorite } from "../../features/chat/chatSlice";
+import ChatWithOwner from "../../components/ChatWithOwner/ChatWithOwner";
 
 const ChatView = () => {
   const dispatch = useDispatch();
   const [chatFlow, setChatFlow] = useState([]);
   const [processFilters, setProcessFilters] = useState(false);
   const [filterUpdate, setFilterUpdate] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const [shareView, setShareView] = useState({ show: false, advertId: 0 });
   const [showAdvertInfo, setShowAdvertInfo] = useState({
     show: false,
@@ -335,71 +337,89 @@ const ChatView = () => {
   const closeShareAdvert = () => {
     setShareView({ show: false, advertId: 0 });
   };
+  const showChatWithOwner = (advertId) => {
+    showPropertyInfo(advertId);
+
+    setShowChat(!showChat);
+  };
+  const hideChatWithOwner = () => {
+    setShowChat(!showChat);
+  };
 
   return (
-    <div
-      className="w-full flex flex-col"
-      style={{ height: `${viewportHeight}px` }}
-    >
-      {/* Top Div */}
-      <TopBar showAvatar={true} showLogin={true} />
-
-      {/* Middle Div (Flexible) */}
-      <div className="w-full flex-1 flex flex-col" ref={containerRef}>
+    <div className="w-full h-full flex">
+      <div
+        className="w-full flex flex-col"
+        style={{ height: `${viewportHeight}px` }}
+      >
         {/* Top Div */}
-        <div className="" style={{ height: heights.top }}>
-          <MapView properties={roomList} visibleCardId={visibleCardId} />
-        </div>
+        <TopBar showAvatar={true} showLogin={true} />
 
-        <div
-          className="w-full relative flex flex-1 flex-col"
-          ref={bottomContainerRef}
-        >
-          <div
-            className="w-full absolute top-0 left-1/2 transform -translate-x-1/2  cursor-row-resize h-5"
-            onMouseDown={handleMouseDown}
-            onTouchStart={handleMouseDown}
-          >
-            <div className="w-[2rem] h-[.12rem] bg-gray-400 mx-auto mt-2" />
-            <div className="w-[1.5rem] h-[.12rem] bg-gray-400 mt-[.1rem] mx-auto" />
+        {/* Middle Div (Flexible) */}
+        <div className="w-full flex-1 flex flex-col" ref={containerRef}>
+          {/* Top Div */}
+          <div className="" style={{ height: heights.top }}>
+            <MapView properties={roomList} visibleCardId={visibleCardId} />
           </div>
 
           <div
-            className="w-full flex-1 absolute top-[1.25rem] "
-            style={{ height: `${bottomContainerHeight - 16}px` }}
+            className="w-full relative flex flex-1 flex-col"
+            ref={bottomContainerRef}
           >
-            <Chat
-              chat_flow={chatFlow}
-              room_list={roomList}
-              chat_info={chatInfo}
-              removeFilter={removeFilter}
-              onCardVisible={onCardVisible}
-              filterSelection={filterSelection}
-              showPropertyInfo={showPropertyInfo}
-              setFavorite={setFavorite}
-              shareAdvert={shareAdvert}
-            />
+            <div
+              className="w-full absolute top-0 left-1/2 transform -translate-x-1/2  cursor-row-resize h-5"
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleMouseDown}
+            >
+              <div className="w-[2rem] h-[.12rem] bg-gray-400 mx-auto mt-2" />
+              <div className="w-[1.5rem] h-[.12rem] bg-gray-400 mt-[.1rem] mx-auto" />
+            </div>
+
+            <div
+              className="w-full flex-1 absolute top-[1.25rem] "
+              style={{ height: `${bottomContainerHeight - 16}px` }}
+            >
+              <Chat
+                chat_flow={chatFlow}
+                room_list={roomList}
+                chat_info={chatInfo}
+                removeFilter={removeFilter}
+                onCardVisible={onCardVisible}
+                filterSelection={filterSelection}
+                showPropertyInfo={showPropertyInfo}
+                setFavorite={setFavorite}
+                shareAdvert={shareAdvert}
+              />
+            </div>
           </div>
         </div>
+
+        {/* Bottom Div */}
+        <ChatFooter pageType={"chat"} />
+
+        {/* show property view */}
+        {showAdvertInfo.show && (
+          <PropertyDetailPage
+            advertId={showAdvertInfo.advertId}
+            shareAdvert={shareAdvert}
+            showPropertyInfo={showPropertyInfo}
+            showChatWithOwner={showChatWithOwner}
+          />
+        )}
+        {shareView.show && (
+          <ShareAdvert
+            closeShareAdvert={closeShareAdvert}
+            advertId={shareView.advertId}
+          />
+        )}
       </div>
 
-      {/* Bottom Div */}
-      <ChatFooter pageType={"chat"} />
-
-      {/* show property view */}
-      {showAdvertInfo.show && (
-        <PropertyDetailPage
-          advertId={showAdvertInfo.advertId}
-          shareAdvert={shareAdvert}
-          showPropertyInfo={showPropertyInfo}
-        />
-      )}
-      {shareView.show && (
-        <ShareAdvert
-          closeShareAdvert={closeShareAdvert}
-          advertId={shareView.advertId}
-        />
-      )}
+      {/* chat with owner */}
+      <ChatWithOwner
+        advertId={showAdvertInfo.advertId}
+        isVisible={showChat}
+        closeChatWithOwner={hideChatWithOwner}
+      />
     </div>
   );
 };

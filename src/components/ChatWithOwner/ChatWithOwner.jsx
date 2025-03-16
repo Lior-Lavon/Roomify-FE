@@ -32,10 +32,6 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log("chatHeight : ", chatHeight);
-  }, [chatHeight]);
-
   const setFavorite = () => {};
   const shareAdvert = () => {};
 
