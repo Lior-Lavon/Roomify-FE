@@ -14,10 +14,7 @@ const HomeView = () => {
   // }, [isKeyboardOpen, keyboardHeight]);
 
   useEffect(() => {
-    console.log("111");
-
     if (topBarRef.current) {
-      console.log("22");
       const topBottom = topBarRef.current.getBoundingClientRect().bottom;
       // const bottomTop = bottomRef.current.getBoundingClientRect().top;
       const bottomTop = window.innerHeight;

@@ -47,30 +47,28 @@ const ChatFooter = () => {
 
   return (
     <div
-      className={`w-full rounded-tl-2xl rounded-tr-2xl transition-all duration-500 ${
+      className={`w-full transition-all duration-500 bg-white ${
         isFocused ? "h-22" : "h-12"
       } bg-gray-100`}
     >
-      <div className="mx-2 relative">
+      <div className="mx-2 pt-1 relative">
         <div className="relative">
           <textarea
             onChange={handleChange}
             value={text}
             placeholder={!isFocused ? placeholders[placeholderIndex] : ""}
-            className={`w-full bg-white py-1 px-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all duration-500 resize-none leading-tight pr-10 mt-2`}
-            style={{
-              maxHeight: isFocused ? "70px" : "30px",
-              height: isFocused ? "70px" : "30px",
-            }}
+            className={`w-[100%] h-10 mx-auto bg-white py-2 px-2 text-base border border-gray-300 rounded-full outline-none leading-tight`}
+            // style={{
+            //   maxHeight: isFocused ? "70px" : "30px",
+            //   height: isFocused ? "70px" : "30px",
+            // }}
             // onFocus={() => setIsFocused(true)}
             // onBlur={() => setIsFocused(false)}
           />
 
           <div
             onClick={submitPrompt}
-            className={`absolute bottom-3 right-1 w-8 h-6 flex items-center justify-center rounded-xl bg-orange-600 transition-all duration-500 ${
-              isFocused ? "opacity-100 scale-100" : "opacity-0 scale-75"
-            } `}
+            className={`absolute bottom-[.9rem] right-1 w-8 h-6 flex items-center justify-center rounded-xl bg-orange-600`}
           >
             <VscTriangleRight className="text-[18px] text-white" />
           </div>
@@ -81,3 +79,18 @@ const ChatFooter = () => {
 };
 
 export default memo(ChatFooter);
+
+{
+  /* <div className="w-[90%] mx-auto py-2 relative" ref={topRef}>
+  <input
+    type="text"
+    // name="chat"
+    placeholder="Search chats"
+    className="w-full h-10 bg-white border border-gray-300 rounded-full shadow-sm outline-none pl-10 "
+    // onChange={handleChange}
+  />
+  <div className="absolute left-2 top-1/2 -translate-y-1/2">
+    <CiSearch className="text-2xl text-gray-500" />
+  </div>
+</div>; */
+}
