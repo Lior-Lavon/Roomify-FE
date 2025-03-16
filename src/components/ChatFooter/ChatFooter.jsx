@@ -58,10 +58,10 @@ const ChatFooter = () => {
             value={text}
             placeholder={!isFocused ? placeholders[placeholderIndex] : ""}
             className={`w-[100%] h-10 mx-auto bg-white py-2 px-2 text-base border border-gray-300 rounded-full outline-none leading-tight`}
-            // style={{
-            //   maxHeight: isFocused ? "70px" : "30px",
-            //   height: isFocused ? "70px" : "30px",
-            // }}
+            style={{
+              maxHeight: isFocused ? "70px" : "30px",
+              height: isFocused ? "70px" : "30px",
+            }}
             // onFocus={() => setIsFocused(true)}
             // onBlur={() => setIsFocused(false)}
           />
