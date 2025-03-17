@@ -367,12 +367,11 @@ const ChatView = () => {
             ref={bottomContainerRef}
           >
             <div
-              className="w-full absolute top-0 left-1/2 transform -translate-x-1/2  cursor-row-resize h-5"
+              className="w-full flex items-center justify-center h-5"
               onMouseDown={handleMouseDown}
               onTouchStart={handleMouseDown}
             >
-              <div className="w-[2rem] h-[.12rem] bg-gray-400 mx-auto mt-2" />
-              <div className="w-[1.5rem] h-[.12rem] bg-gray-400 mt-[.1rem] mx-auto" />
+              <div className="w-[60%] max-w-[160px] h-[.4rem] rounded-full bg-gray-300" />
             </div>
 
             <div
