@@ -24,7 +24,7 @@ export default MapView;
 const MapComponent = ({ properties, visibleCardId }) => {
   const map = useMap(); // Get the map instance
   const isUserInteracting = useRef(false); // Track manual movement
-  const defaultCenter = { lat: 52.377956, lng: 4.89707 };
+  let defaultCenter = { lat: 52.377956, lng: 4.89707 };
 
   // Handle user moving the map manually
   const handleCameraChanged = () => {
