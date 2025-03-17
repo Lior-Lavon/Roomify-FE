@@ -13,6 +13,7 @@ import TestMapView from "./components/TestMapView/TestMapView";
 import TestView from "./pages/TestView/TestView";
 import { useEffect, useState } from "react";
 import { getSecurityTokenFromLocalStorage } from "./utils/localStorage";
+import usePreventPullToRefresh from "./utils/hooks/usePreventPullToRefresh.js";
 import bcrypt from "bcryptjs";
 import { store } from "./store.js";
 import {
@@ -28,32 +29,9 @@ import { Provider } from "react-redux";
 function App() {
   const [isCover, setIsCover] = useState(false);
 
+  usePreventPullToRefresh();
   useEffect(() => {
     checkSecurity();
-
-    //  block the pull down
-    let lastY = 0;
-
-    const handleTouchStart = (event) => {
-      lastY = event.touches[0].clientY;
-    };
-
-    const handleTouchMove = (event) => {
-      let yDiff = event.touches[0].clientY - lastY;
-      if (window.scrollY === 0 && yDiff > 0) {
-        event.preventDefault();
-      }
-    };
-
-    window.addEventListener("touchstart", handleTouchStart, {
-      passive: false,
-    });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-
-    return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-    };
   }, []);
 
   const checkSecurity = () => {
