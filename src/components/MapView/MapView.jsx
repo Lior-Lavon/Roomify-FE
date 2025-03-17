@@ -133,6 +133,7 @@ const PoiMarkers = ({
                         ?.Title
                     }
                   </h2>
+                  <p className="text-sm my-[.2rem]">Address :</p>
                   <p>
                     Price: $
                     {
