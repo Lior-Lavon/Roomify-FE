@@ -110,11 +110,11 @@ const PoiMarkers = ({
           <div className="relative rounded-lg shadow-md ">
             <div className="w-full flex items-center justify-end ">
               <button
-                className="rounded-full"
+                className="rounded-full m-1"
                 onClick={() => setSelectedMarkerId(null)}
               >
                 <div>
-                  <IoMdClose className="text-xl p-3" />
+                  <IoMdClose className="text-xl" />
                 </div>
               </button>
             </div>
