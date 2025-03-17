@@ -50,7 +50,7 @@ const PropertyDetailPage = ({
   };
 
   const showImageGallery = () => {
-    setImageGallery(true);
+    setImageGallery(!imageGallery);
   };
 
   return (
@@ -138,10 +138,14 @@ const PropertyDetailPage = ({
         {showMap && (
           <PropertyOnMap poi={advertInfo} closeMapOverlay={showMapOverlay} />
         )}
-
-        {/* show ImageGallery */}
-        {imageGallery && <PropertyImageGallery images={advertInfo?.Images} />}
       </div>
+      {/* show ImageGallery */}
+      {imageGallery && (
+        <PropertyImageGallery
+          images={advertInfo?.Images}
+          closePropertyImageGallery={showImageGallery}
+        />
+      )}
     </div>
   );
 };

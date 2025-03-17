@@ -79,18 +79,3 @@ const ChatFooter = () => {
 };
 
 export default memo(ChatFooter);
-
-{
-  /* <div className="w-[90%] mx-auto py-2 relative" ref={topRef}>
-  <input
-    type="text"
-    // name="chat"
-    placeholder="Search chats"
-    className="w-full h-10 bg-white border border-gray-300 rounded-full shadow-sm outline-none pl-10 "
-    // onChange={handleChange}
-  />
-  <div className="absolute left-2 top-1/2 -translate-y-1/2">
-    <CiSearch className="text-2xl text-gray-500" />
-  </div>
-</div>; */
-}
