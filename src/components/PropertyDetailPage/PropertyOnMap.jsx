@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 
 import OrangeMarker from "../../assets/orangeMarker.png";
 import BlackMarker from "../../assets/blackMarker.png";
+import MapView from "../MapView/MapView";
 
 const PropertyOnMap = ({ poi, closeMapOverlay }) => {
   return (
@@ -17,7 +18,7 @@ const PropertyOnMap = ({ poi, closeMapOverlay }) => {
         </div>
 
         <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API}>
-          <MapComponent poi={poi} />
+          <MapView properties={[poi]} visibleCardId={poi.Id} />
         </APIProvider>
       </div>
     </div>
@@ -26,42 +27,42 @@ const PropertyOnMap = ({ poi, closeMapOverlay }) => {
 
 export default PropertyOnMap;
 
-const MapComponent = ({ poi }) => {
-  // const map = useMap(); // Get the map instance
-  const isUserInteracting = useRef(false); // Track manual movement
-  const defaultCenter = { lat: 52.377956, lng: 4.89707 };
+// const MapComponent = ({ poi }) => {
+//   // const map = useMap(); // Get the map instance
+//   const isUserInteracting = useRef(false); // Track manual movement
+//   const defaultCenter = { lat: 52.377956, lng: 4.89707 };
 
-  // Handle user moving the map manually
-  const handleCameraChanged = () => {
-    isUserInteracting.current = true; // Prevent overriding manual moves
-  };
+//   // Handle user moving the map manually
+//   const handleCameraChanged = () => {
+//     isUserInteracting.current = true; // Prevent overriding manual moves
+//   };
 
-  return (
-    <Map
-      zoom={15}
-      center={poi?.Location} // Ensure lat/lng are numbers
-      mapId="DEMO_MAP_ID"
-      mapTypeControl={false}
-      disableDefaultUI={false}
-      gestureHandling="greedy"
-      onCameraChanged={handleCameraChanged}
-    >
-      <PoiMarkers poi={poi} />
-    </Map>
-  );
-};
+//   return (
+//     <Map
+//       zoom={15}
+//       center={poi?.Location} // Ensure lat/lng are numbers
+//       mapId="DEMO_MAP_ID"
+//       mapTypeControl={false}
+//       disableDefaultUI={false}
+//       gestureHandling="greedy"
+//       onCameraChanged={handleCameraChanged}
+//     >
+//       <PoiMarkers poi={poi} />
+//     </Map>
+//   );
+// };
 
-const PoiMarkers = ({ poi }) => {
-  return (
-    <>
-      <AdvancedMarker position={poi?.Location}>
-        <div className="relative flex flex-col justify-center">
-          <img src={OrangeMarker} width={50} />
-          <p className="absolute top-0 pt-[.15rem] w-full text-center text-white">
-            ${poi?.Price}
-          </p>
-        </div>
-      </AdvancedMarker>
-    </>
-  );
-};
+// const PoiMarkers = ({ poi }) => {
+//   return (
+//     <>
+//       <AdvancedMarker position={poi?.Location}>
+//         <div className="relative flex flex-col justify-center">
+//           <img src={OrangeMarker} width={50} />
+//           <p className="absolute top-0 pt-[.15rem] w-full text-center text-white">
+//             ${poi?.Price}
+//           </p>
+//         </div>
+//       </AdvancedMarker>
+//     </>
+//   );
+// };
