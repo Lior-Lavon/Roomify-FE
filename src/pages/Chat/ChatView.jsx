@@ -405,6 +405,7 @@ const ChatView = () => {
             showChatWithOwner={showChatWithOwner}
           />
         )}
+        {/* shareView */}
         {shareView.show && (
           <ShareAdvert
             closeShareAdvert={closeShareAdvert}
