@@ -114,7 +114,7 @@ const PoiMarkers = ({
                 onClick={() => setSelectedMarkerId(null)}
               >
                 <div>
-                  <IoMdClose className="text-xl" />
+                  <IoMdClose className="text-xl p-3" />
                 </div>
               </button>
             </div>
