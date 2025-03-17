@@ -28,6 +28,34 @@ import { Provider } from "react-redux";
 function App() {
   const [isCover, setIsCover] = useState(false);
 
+  useEffect(() => {
+    checkSecurity();
+
+    //  block the pull down
+    let lastY = 0;
+
+    const handleTouchStart = (event) => {
+      lastY = event.touches[0].clientY;
+    };
+
+    const handleTouchMove = (event) => {
+      let yDiff = event.touches[0].clientY - lastY;
+      if (window.scrollY === 0 && yDiff > 0) {
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener("touchstart", handleTouchStart, {
+      passive: false,
+    });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
+
   const checkSecurity = () => {
     const st = getSecurityTokenFromLocalStorage();
     if (st == null) {
@@ -43,9 +71,6 @@ function App() {
       }
     }
   };
-  useEffect(() => {
-    checkSecurity();
-  }, []);
 
   const removeSecurityHandler = (status) => {
     setIsCover(status);
