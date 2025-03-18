@@ -1,19 +1,13 @@
 import { useRef, useState, useEffect, memo } from "react";
 import { RoomCardMini } from "../../components";
+import { useSelector } from "react-redux";
 
 const RoomCardSlider = memo(
-  ({
-    room_list,
-    dot_count,
-    chatItem,
-    showPropertyInfo,
-    onCardVisible,
-    shareAdvert,
-  }) => {
+  ({ room_list, dot_count, chatItem, showPropertyInfo, shareAdvert }) => {
     const scrollRef = useRef(null);
+    const cardRefs = useRef({});
     const [activeDot, setActiveDot] = useState(0);
-    // const timeOutRef = useRef(0);
-    // const scrollStarted = useRef(false);
+    const { activeAdvert } = useSelector((store) => store.chat);
 
     const handleScroll = () => {
       if (scrollRef.current) {
@@ -35,6 +29,10 @@ const RoomCardSlider = memo(
     }, []); // ✅ Runs only once after initial render
 
     useEffect(() => {
+      scrollToCard(activeAdvert);
+    }, [activeAdvert]);
+
+    useEffect(() => {
       const scrollElement = scrollRef.current;
       if (scrollElement) {
         scrollElement.addEventListener("scroll", handleScroll);
@@ -42,8 +40,17 @@ const RoomCardSlider = memo(
       }
     }, [dot_count]); // Add dot_count as a dependency to handle changes
 
-    const handleCardVisible = (id) => {
-      onCardVisible(id);
+    // Function to scroll to a specific RoomCardMini
+    const scrollToCard = (advertId) => {
+      if (advertId == -1) return;
+
+      if (cardRefs.current[advertId]) {
+        cardRefs.current[advertId].scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
     };
 
     return (
@@ -60,10 +67,13 @@ const RoomCardSlider = memo(
         >
           {room_list.map((room) => {
             return (
-              <div key={room.Id} className="flex items-center justify-center ">
+              <div
+                ref={(el) => (cardRefs.current[room.Id] = el)}
+                key={room.Id}
+                className="flex items-center justify-center"
+              >
                 <RoomCardMini
                   advertInfo={room}
-                  onVisible={handleCardVisible}
                   shareAdvert={shareAdvert}
                   showPropertyInfo={showPropertyInfo}
                 />

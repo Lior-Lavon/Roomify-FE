@@ -46,7 +46,6 @@ const ChatView = () => {
   const bottomContainerRef = useRef(null);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [showLoading, setShowLoading] = useState(false);
-  const [visibleCardId, setVisibleCardId] = useState(null);
   const [isLoginPage, setIsLoginPage] = useState(true);
 
   const containerRef = useRef(null);
@@ -336,10 +335,6 @@ const ChatView = () => {
     }
   };
 
-  const onCardVisible = useCallback((visibleAdvertId) => {
-    setVisibleCardId(visibleAdvertId);
-  }, []);
-
   const shareAdvert = (advertId) => {
     setShareView({ show: true, advertId: advertId });
   };
@@ -368,7 +363,7 @@ const ChatView = () => {
         <div className="w-full flex-1 flex flex-col" ref={containerRef}>
           {/* Top Div */}
           <div className="" style={{ height: heights.top }}>
-            <MapView properties={roomList} visibleCardId={visibleCardId} />
+            <MapView properties={roomList} />
           </div>
 
           <div
@@ -392,7 +387,6 @@ const ChatView = () => {
                 room_list={roomList}
                 chat_info={chatInfo}
                 removeFilter={removeFilter}
-                onCardVisible={onCardVisible}
                 filterSelection={filterSelection}
                 showPropertyInfo={showPropertyInfo}
                 shareAdvert={shareAdvert}

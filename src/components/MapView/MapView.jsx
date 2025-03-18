@@ -11,11 +11,16 @@ import { IoMdClose } from "react-icons/io";
 import OrangeMarker from "../../assets/orangeMarker.png";
 import BlackMarker from "../../assets/blackMarker.png";
 import Image1 from "../../assets/room1.jpeg";
-const MapView = ({ properties, visibleCardId }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveAdvert } from "../../features/chat/chatSlice";
+
+const MapView = ({ properties }) => {
+  const { activeAdvert } = useSelector((store) => store.chat);
+
   return (
     <div className="w-full h-full">
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API}>
-        <MapComponent properties={properties} visibleCardId={visibleCardId} />
+        <MapComponent properties={properties} visibleCardId={activeAdvert} />
       </APIProvider>
     </div>
   );
@@ -26,7 +31,6 @@ export default MapView;
 const MapComponent = ({ properties, visibleCardId }) => {
   const map = useMap(); // Get the map instance
   const isUserInteracting = useRef(false); // Track manual movement
-  const [selectedMarkerId, setSelectedMarkerId] = useState(null);
 
   let defaultCenter = { lat: 52.377956, lng: 4.89707 };
 
@@ -36,22 +40,22 @@ const MapComponent = ({ properties, visibleCardId }) => {
   };
 
   // Update center when `visibleCardId` changes
-  useEffect(() => {
-    if (!map) return; // Ensure map is loaded
+  // useEffect(() => {
+  //   if (!map) return; // Ensure map is loaded
 
-    const advert = properties.find((c) => c.Id === visibleCardId);
-    if (advert && isUserInteracting.current) {
-      const newCenter = { lat: advert.Location.lat, lng: advert.Location.lng };
+  //   const advert = properties.find((c) => c.Id === visibleCardId);
+  //   if (advert && isUserInteracting.current) {
+  //     const newCenter = { lat: advert.Location.lat, lng: advert.Location.lng };
 
-      // Reset user interaction flag so next move can happen
-      isUserInteracting.current = false;
+  //     // Reset user interaction flag so next move can happen
+  //     isUserInteracting.current = false;
 
-      // Use requestAnimationFrame for smooth animation
-      requestAnimationFrame(() => {
-        map.panTo(newCenter); // Smoothly pan to new location
-      });
-    }
-  }, [visibleCardId, properties, map]);
+  //     // Use requestAnimationFrame for smooth animation
+  //     requestAnimationFrame(() => {
+  //       map.panTo(newCenter); // Smoothly pan to new location
+  //     });
+  //   }
+  // }, [visibleCardId, properties, map]);
 
   return (
     <Map
@@ -63,29 +67,26 @@ const MapComponent = ({ properties, visibleCardId }) => {
       // styles={mapStyle}
       onCameraChanged={handleCameraChanged} // Detect manual user movement
     >
-      <PoiMarkers
-        properties={properties}
-        visibleCardId={visibleCardId}
-        selectedMarkerId={selectedMarkerId}
-        setSelectedMarkerId={setSelectedMarkerId}
-      />
+      <PoiMarkers properties={properties} visibleCardId={visibleCardId} />
     </Map>
   );
 };
 
-const PoiMarkers = ({
-  properties,
-  visibleCardId,
-  selectedMarkerId,
-  setSelectedMarkerId,
-}) => {
+const PoiMarkers = ({ properties, visibleCardId }) => {
+  const dispatch = useDispatch();
   return (
     <>
       {properties.map((poi) => (
         <AdvancedMarker
           key={poi.Id}
           position={poi.Location}
-          onClick={() => setSelectedMarkerId(poi.Id)}
+          onClick={(event) => {
+            event.stop();
+            if (event.domEvent) {
+              event.domEvent.stopPropagation(); // Prevents event from bubbling
+            }
+            dispatch(setActiveAdvert(poi.Id));
+          }}
         >
           <div className="relative flex flex-col justify-center">
             <img
@@ -100,7 +101,7 @@ const PoiMarkers = ({
       ))}
 
       {/* Show InfoWindow when a marker is selected */}
-      {selectedMarkerId && (
+      {/* {selectedMarkerId && (
         <InfoWindow
           position={
             properties.find((poi) => poi.Id === selectedMarkerId)?.Location
@@ -146,7 +147,7 @@ const PoiMarkers = ({
             </div>
           </div>
         </InfoWindow>
-      )}
+      )} */}
     </>
   );
 };

@@ -18,17 +18,17 @@ const ChatFooter = () => {
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
   // Rotate placeholder text every 3 seconds when not focused
-  useEffect(() => {
-    if (!isFocused) {
-      const interval = setInterval(() => {
-        setPlaceholderIndex(
-          (prevIndex) => (prevIndex + 1) % placeholders.length
-        );
-      }, 3000);
+  // useEffect(() => {
+  //   if (!isFocused) {
+  //     const interval = setInterval(() => {
+  //       setPlaceholderIndex(
+  //         (prevIndex) => (prevIndex + 1) % placeholders.length
+  //       );
+  //     }, 3000);
 
-      return () => clearInterval(interval); // Cleanup interval on unmount
-    }
-  }, [isFocused]);
+  //     return () => clearInterval(interval); // Cleanup interval on unmount
+  //   }
+  // }, [isFocused]);
 
   const handleChange = (e) => {
     setText(e.target.value);

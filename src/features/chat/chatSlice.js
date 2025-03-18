@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { debounce } from "lodash";
 import { RoomList } from "../../MockData/RoomList";
 
 const initialState = {
   userPrompt: "some prompt",
   roomList: RoomList,
+  activeAdvert: 0,
   chatHistory: [
     {
       id: 1,
@@ -69,6 +71,15 @@ const initialState = {
   isLoading: false,
 };
 
+// Debounced function for setting active advert
+const setActiveAdvertDebounced = debounce(
+  (state, payload) => {
+    state.activeAdvert = payload;
+  },
+  500,
+  { leading: true, trailing: false }
+);
+
 const chatSlice = createSlice({
   name: "chat",
   initialState,
@@ -90,8 +101,12 @@ const chatSlice = createSlice({
     isLoadingFn: (state, { payload }) => {
       state.isLoading = payload;
     },
+    setActiveAdvert: (state, { payload }) => {
+      setActiveAdvertDebounced(state, payload);
+    },
   },
 });
 
-export const { setUserPrompt, setIsFavorite, isLoadingFn } = chatSlice.actions;
+export const { setUserPrompt, setIsFavorite, isLoadingFn, setActiveAdvert } =
+  chatSlice.actions;
 export default chatSlice.reducer;
