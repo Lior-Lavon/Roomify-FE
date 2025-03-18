@@ -40,22 +40,22 @@ const MapComponent = ({ properties, visibleCardId }) => {
   };
 
   // Update center when `visibleCardId` changes
-  // useEffect(() => {
-  //   if (!map) return; // Ensure map is loaded
+  useEffect(() => {
+    if (!map) return; // Ensure map is loaded
 
-  //   const advert = properties.find((c) => c.Id === visibleCardId);
-  //   if (advert && isUserInteracting.current) {
-  //     const newCenter = { lat: advert.Location.lat, lng: advert.Location.lng };
+    const advert = properties.find((c) => c.Id === visibleCardId);
+    if (advert && isUserInteracting.current) {
+      const newCenter = { lat: advert.Location.lat, lng: advert.Location.lng };
 
-  //     // Reset user interaction flag so next move can happen
-  //     isUserInteracting.current = false;
+      // Reset user interaction flag so next move can happen
+      isUserInteracting.current = false;
 
-  //     // Use requestAnimationFrame for smooth animation
-  //     requestAnimationFrame(() => {
-  //       map.panTo(newCenter); // Smoothly pan to new location
-  //     });
-  //   }
-  // }, [visibleCardId, properties, map]);
+      // Use requestAnimationFrame for smooth animation
+      requestAnimationFrame(() => {
+        map.panTo(newCenter); // Smoothly pan to new location
+      });
+    }
+  }, [visibleCardId, properties]);
 
   return (
     <Map
