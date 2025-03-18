@@ -13,11 +13,14 @@ import {
   ChatFooter,
   ShareAdvert,
 } from "../../components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ChatOptions } from "../../MockData/ChatOptions";
 import ChatWithOwner from "../../components/ChatWithOwner/ChatWithOwner";
+import { useParams } from "react-router-dom";
+import { setReturnToAfterLogin } from "../../features/user/userSlice";
 
 const ChatView = () => {
+  const dispatch = useDispatch();
   const [chatFlow, setChatFlow] = useState([]);
   const [processFilters, setProcessFilters] = useState(false);
   const [filterUpdate, setFilterUpdate] = useState(false);
@@ -28,9 +31,8 @@ const ChatView = () => {
     advertId: 0,
   });
 
+  const { returnToAfterLogin } = useSelector((store) => store.user);
   const { roomList } = useSelector((store) => store.chat);
-
-  // const { userPrompt } = useSelector((store) => store.chat);
 
   const [chatInfo, setChatInfo] = useState({
     Prompt: "I am searching for a .....",
@@ -45,6 +47,7 @@ const ChatView = () => {
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [showLoading, setShowLoading] = useState(false);
   const [visibleCardId, setVisibleCardId] = useState(null);
+  const [isLoginPage, setIsLoginPage] = useState(true);
 
   const containerRef = useRef(null);
   const isResizingRef = useRef(false);
@@ -90,6 +93,18 @@ const ChatView = () => {
       setFilterUpdate(false);
     }
   }, [filterUpdate]);
+
+  useEffect(() => {
+    if (returnToAfterLogin != undefined) {
+      setShowAdvertInfo({ show: true, advertId: returnToAfterLogin.advertId });
+      if (returnToAfterLogin.showChat) {
+        showChatWithOwner(returnToAfterLogin.advertId);
+      }
+      if (returnToAfterLogin.afterLogin) {
+        dispatch(setReturnToAfterLogin(null));
+      }
+    }
+  }, [returnToAfterLogin]);
 
   useEffect(() => {
     if (showLoading) {

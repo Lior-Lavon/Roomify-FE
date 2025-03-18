@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { TopBar } from "../../components";
-import { setUserLogin } from "../../features/user/userSlice";
-import { useDispatch } from "react-redux";
+import {
+  setReturnToAfterLogin,
+  setUserLogin,
+} from "../../features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
@@ -13,6 +16,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const { returnToAfterLogin } = useSelector((store) => store.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +37,17 @@ const SignIn = () => {
   };
   const handleUserLogin = () => {
     dispatch(setUserLogin());
-    navigate("/landing");
+    // check where to go back
+    if (returnToAfterLogin != null) {
+      if (returnToAfterLogin?.page == "chat") {
+        let update = { ...returnToAfterLogin, afterLogin: true };
+        dispatch(setReturnToAfterLogin(update));
+        navigate(`/chat`);
+      }
+    } else {
+      console.log("44");
+      navigate("/landing");
+    }
   };
 
   return (

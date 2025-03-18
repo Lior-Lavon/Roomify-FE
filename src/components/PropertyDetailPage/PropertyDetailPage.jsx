@@ -9,6 +9,8 @@ import { FiMapPin } from "react-icons/fi";
 import { setIsFavorite } from "../../features/chat/chatSlice";
 import PropertyOnMap from "./PropertyOnMap";
 import PropertyImageGallery from "./PropertyImageGallery";
+import { useNavigate } from "react-router-dom";
+import { setReturnToAfterLogin } from "../../features/user/userSlice";
 
 const PropertyDetailPage = ({
   advertId,
@@ -16,6 +18,8 @@ const PropertyDetailPage = ({
   showPropertyInfo,
   showChatWithOwner,
 }) => {
+  const navigate = useNavigate();
+  const { profile } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const { roomList } = useSelector((store) => store.chat);
 
@@ -26,7 +30,7 @@ const PropertyDetailPage = ({
   useEffect(() => {
     if (roomList.length > 0) {
       for (let i = 0; i < roomList.length; i++) {
-        if (roomList[i].Id === advertId) {
+        if (roomList[i].Id == advertId) {
           setAdvertInfo(roomList[i]);
           break;
         }
@@ -46,7 +50,18 @@ const PropertyDetailPage = ({
   };
 
   const showChatWithOwnerMe = () => {
-    showChatWithOwner(advertInfo.Id);
+    if (profile) {
+      showChatWithOwner(advertInfo.Id);
+    } else {
+      dispatch(
+        setReturnToAfterLogin({
+          page: "chat",
+          advertId: advertInfo.Id,
+          showChat: true,
+        })
+      );
+      navigate("/signin");
+    }
   };
 
   const showImageGallery = () => {
