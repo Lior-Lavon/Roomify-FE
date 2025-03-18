@@ -6,6 +6,7 @@ import RoomCardMini from "../RoomCard/RoomCardMini";
 import { CiSearch } from "react-icons/ci";
 import ChatLoader from "../ChatLoader/ChatLoader";
 import { isLoadingFn } from "../../features/chat/chatSlice";
+import PropertyDetailPage from "../PropertyDetailPage/PropertyDetailPage";
 
 const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
   const chatRef = useRef(null);
   const bottomRef = useRef(null);
   const [chatHeight, setChatHeight] = useState(0);
+  const [showPropertyInfo, setShowPropertyInfo] = useState(false);
   const { roomList, chatHistory, isLoading } = useSelector(
     (store) => store.chat
   );
@@ -54,6 +56,11 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
 
   const shareAdvert = () => {};
 
+  const handlePropertyClick = (e) => {
+    e.stopPropagation();
+    setShowPropertyInfo(!showPropertyInfo);
+  };
+
   return (
     <div
       className={`w-full h-full z-100 fixed top-0 right-0 transition-transform duration-500 flex flex-col ${
@@ -73,7 +80,10 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
           className="flex flex-col gap-1 overflow-y-auto px-4 py-2 "
           style={{ height: `${chatHeight}px` }} // Set height dynamically
         >
-          <div className="w-full flex justify-center">
+          <div
+            className="w-full flex justify-center"
+            onClick={handlePropertyClick}
+          >
             <RoomCardMini advertInfo={advertInfo} shareAdvert={shareAdvert} />
           </div>
 
@@ -124,6 +134,15 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
           </div>
         </div>
       </div>
+      {/* showPropertyInfo */}
+
+      {showPropertyInfo && (
+        <PropertyDetailPage
+          advertId={advertInfo?.Id}
+          showPropertyInfo={handlePropertyClick}
+          showButtons={false}
+        />
+      )}
     </div>
   );
 };

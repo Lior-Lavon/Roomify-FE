@@ -120,6 +120,7 @@ const HomeView = () => {
             shareAdvert={shareAdvert}
             showPropertyInfo={showPropertyInfo}
             showChatWithOwner={showChatWithOwner}
+            showButtons={true}
           />
         )}
         {/* shareView */}

@@ -17,6 +17,7 @@ const PropertyDetailPage = ({
   shareAdvert,
   showPropertyInfo,
   showChatWithOwner,
+  showButtons,
 }) => {
   const navigate = useNavigate();
   const { profile } = useSelector((store) => store.user);
@@ -51,7 +52,7 @@ const PropertyDetailPage = ({
 
   const showChatWithOwnerMe = () => {
     if (profile) {
-      showChatWithOwner(advertInfo.Id);
+      if (showChatWithOwner != undefined) showChatWithOwner(advertInfo.Id);
     } else {
       dispatch(
         setReturnToAfterLogin({
@@ -92,21 +93,23 @@ const PropertyDetailPage = ({
               </span>
               /month
             </p>
-            <div className="w-full h-8 flex items-center justify-end gap-2 text-orange-600 ">
-              <div onClick={setFavorite}>
-                {advertInfo?.IsFavorite ? (
-                  <MdFavorite className="w-6 h-6" />
-                ) : (
-                  <MdFavoriteBorder className="w-6 h-6" />
-                )}
+            {showButtons && (
+              <div className="w-full h-8 flex items-center justify-end gap-2 text-orange-600 ">
+                <div onClick={setFavorite}>
+                  {advertInfo?.IsFavorite ? (
+                    <MdFavorite className="w-6 h-6" />
+                  ) : (
+                    <MdFavoriteBorder className="w-6 h-6" />
+                  )}
+                </div>
+                <div onClick={showMapOverlay}>
+                  <FiMapPin className="w-6 h-6 " />
+                </div>
+                <div onClick={shareAdvert}>
+                  <GoShareAndroid className="w-6 h-6 " />
+                </div>
               </div>
-              <div onClick={showMapOverlay}>
-                <FiMapPin className="w-6 h-6 " />
-              </div>
-              <div onClick={shareAdvert}>
-                <GoShareAndroid className="w-6 h-6 " />
-              </div>
-            </div>
+            )}
           </div>
 
           {/* image slider */}
@@ -137,16 +140,18 @@ const PropertyDetailPage = ({
           </div>
 
           {/* buttons */}
-          <div className="w-full flex flex-col gap-[.4rem] mt-4 text-sm">
-            <div>
-              <button
-                className="w-full bg-orange-600 text-black rounded-full py-2 cursor-pointer"
-                onClick={showChatWithOwnerMe}
-              >
-                Contact the landlord
-              </button>
+          {showButtons && (
+            <div className="w-full flex flex-col gap-[.4rem] mt-4 text-sm">
+              <div>
+                <button
+                  className="w-full bg-orange-600 text-white rounded-full py-2 cursor-pointer"
+                  onClick={showChatWithOwnerMe}
+                >
+                  Contact the landlord
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/*  show map */}
@@ -154,6 +159,7 @@ const PropertyDetailPage = ({
           <PropertyOnMap poi={advertInfo} closeMapOverlay={showMapOverlay} />
         )}
       </div>
+
       {/* show ImageGallery */}
       {imageGallery && (
         <PropertyImageGallery

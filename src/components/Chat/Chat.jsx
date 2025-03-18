@@ -65,7 +65,7 @@ const Chat = memo(
       if (divRef.current) {
         // divRef.current.scrollIntoView({ behavior: "smooth" });
         setTimeout(() => {
-          divRef.current.scrollTo({
+          divRef.current?.scrollTo({
             top: divRef.current.scrollHeight,
             behavior: "smooth", // Smooth scroll behavior
           });

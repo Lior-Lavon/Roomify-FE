@@ -45,7 +45,6 @@ const SignIn = () => {
         navigate(`/chat`);
       }
     } else {
-      console.log("44");
       navigate("/landing");
     }
   };

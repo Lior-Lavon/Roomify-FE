@@ -58,7 +58,9 @@ const RoomCardMini = memo(
     };
 
     const onAdvertClick = () => {
-      showPropertyInfo(advertInfo.Id);
+      if (showPropertyInfo != undefined) {
+        showPropertyInfo(advertInfo.Id);
+      }
     };
 
     return (
