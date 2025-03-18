@@ -13,13 +13,11 @@ import {
   ChatFooter,
   ShareAdvert,
 } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ChatOptions } from "../../MockData/ChatOptions";
-import { setIsFavorite } from "../../features/chat/chatSlice";
 import ChatWithOwner from "../../components/ChatWithOwner/ChatWithOwner";
 
 const ChatView = () => {
-  const dispatch = useDispatch();
   const [chatFlow, setChatFlow] = useState([]);
   const [processFilters, setProcessFilters] = useState(false);
   const [filterUpdate, setFilterUpdate] = useState(false);
@@ -326,10 +324,6 @@ const ChatView = () => {
   const onCardVisible = useCallback((visibleAdvertId) => {
     setVisibleCardId(visibleAdvertId);
   }, []);
-
-  const setFavorite = (advertId) => {
-    dispatch(setIsFavorite(advertId));
-  };
 
   const shareAdvert = (advertId) => {
     setShareView({ show: true, advertId: advertId });

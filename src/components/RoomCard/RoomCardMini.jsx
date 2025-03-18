@@ -2,6 +2,8 @@ import React, { memo, useEffect, useRef, useState } from "react";
 import roomImg1 from "../../assets/room1.jpeg";
 import { GoShareAndroid } from "react-icons/go";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { setIsFavorite } from "../../features/chat/chatSlice";
 
 const useScreenWidth = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -17,9 +19,10 @@ const useScreenWidth = () => {
 };
 
 const RoomCardMini = memo(
-  ({ advertInfo, onVisible, setFavorite, shareAdvert, showPropertyInfo }) => {
+  ({ advertInfo, onVisible, shareAdvert, showPropertyInfo }) => {
     const cardRef = useRef(null);
     const screenWidth = useScreenWidth() * 0.8;
+    const dispatch = useDispatch();
 
     useEffect(() => {
       const observer = new IntersectionObserver(
@@ -46,7 +49,8 @@ const RoomCardMini = memo(
 
     const setMeFavorite = (e) => {
       e.stopPropagation();
-      setFavorite(advertInfo.Id);
+      // setFavorite(advertInfo.Id);
+      dispatch(setIsFavorite(advertInfo.Id));
     };
 
     const shareMeAdvert = (e) => {
@@ -61,7 +65,7 @@ const RoomCardMini = memo(
     return (
       <div
         ref={cardRef}
-        className={` border border-orange-200 rounded-xl flex flex-row gap-4 items-center justify-between shadow-[10px_2px_12px_rgba(0,0,0,.1)]`}
+        className={` border border-orange-200 rounded-xl flex flex-row gap-4 items-center justify-between shadow-[10px_2px_12px_rgba(0,0,0,.1)] `}
         style={{ minWidth: `${screenWidth}px`, width: `85%` }}
         onClick={onAdvertClick}
       >

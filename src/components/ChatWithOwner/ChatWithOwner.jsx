@@ -52,7 +52,6 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
     }
   }, [isVisible]);
 
-  const setFavorite = () => {};
   const shareAdvert = () => {};
 
   return (
@@ -75,11 +74,7 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
           style={{ height: `${chatHeight}px` }} // Set height dynamically
         >
           <div className="w-full flex justify-center">
-            <RoomCardMini
-              advertInfo={advertInfo}
-              setFavorite={setFavorite}
-              shareAdvert={shareAdvert}
-            />
+            <RoomCardMini advertInfo={advertInfo} shareAdvert={shareAdvert} />
           </div>
 
           {isLoading ? (

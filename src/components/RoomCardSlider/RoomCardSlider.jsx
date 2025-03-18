@@ -7,7 +7,6 @@ const RoomCardSlider = memo(
     dot_count,
     chatItem,
     showPropertyInfo,
-    setFavorite,
     onCardVisible,
     shareAdvert,
   }) => {
@@ -65,7 +64,6 @@ const RoomCardSlider = memo(
                 <RoomCardMini
                   advertInfo={room}
                   onVisible={handleCardVisible}
-                  setFavorite={setFavorite}
                   shareAdvert={shareAdvert}
                   showPropertyInfo={showPropertyInfo}
                 />
