@@ -73,32 +73,27 @@ const MapComponent = ({ properties, visibleCardId }) => {
 };
 
 const PoiMarkers = ({ properties, visibleCardId }) => {
-  const dispatch = useDispatch();
+  const tmpPoi = useRef(null);
+
   return (
     <>
-      {properties.map((poi) => (
-        <AdvancedMarker
-          key={poi.Id}
-          position={poi.Location}
-          onClick={(event) => {
-            event.stop();
-            if (event.domEvent) {
-              event.domEvent.stopPropagation(); // Prevents event from bubbling
-            }
-            dispatch(setActiveAdvert(poi.Id));
-          }}
-        >
-          <div className="relative flex flex-col justify-center">
-            <img
-              src={poi.Id !== visibleCardId ? OrangeMarker : BlackMarker}
-              width={50}
-            />
-            <p className="absolute top-0 pt-[.15rem] w-full text-center text-white">
-              ${poi.Price}
-            </p>
-          </div>
-        </AdvancedMarker>
-      ))}
+      {properties.map((poi) => {
+        if (poi.Id != visibleCardId) {
+          return (
+            <Marker key={poi.Id} poi={poi} visibleCardId={visibleCardId} />
+          );
+        } else {
+          tmpPoi.current = poi;
+        }
+      })}
+
+      {tmpPoi.current != null && (
+        <Marker
+          key={tmpPoi.current.Id}
+          poi={tmpPoi.current}
+          visibleCardId={visibleCardId}
+        />
+      )}
 
       {/* Show InfoWindow when a marker is selected */}
       {/* {selectedMarkerId && (
@@ -149,5 +144,31 @@ const PoiMarkers = ({ properties, visibleCardId }) => {
         </InfoWindow>
       )} */}
     </>
+  );
+};
+
+const Marker = ({ poi, visibleCardId }) => {
+  const dispatch = useDispatch();
+  return (
+    <AdvancedMarker
+      position={poi.Location}
+      onClick={(event) => {
+        event.stop();
+        if (event.domEvent) {
+          event.domEvent.stopPropagation(); // Prevents event from bubbling
+        }
+        dispatch(setActiveAdvert(poi.Id));
+      }}
+    >
+      <div className="relative flex flex-col justify-center">
+        <img
+          src={poi.Id !== visibleCardId ? OrangeMarker : BlackMarker}
+          width={50}
+        />
+        <p className="absolute top-0 pt-[.15rem] w-full text-center text-white">
+          ${poi.Price}
+        </p>
+      </div>
+    </AdvancedMarker>
   );
 };
