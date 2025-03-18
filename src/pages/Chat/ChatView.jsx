@@ -380,7 +380,6 @@ const ChatView = () => {
                 onCardVisible={onCardVisible}
                 filterSelection={filterSelection}
                 showPropertyInfo={showPropertyInfo}
-                setFavorite={setFavorite}
                 shareAdvert={shareAdvert}
               />
             </div>

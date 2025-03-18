@@ -49,7 +49,6 @@ const RoomCardMini = memo(
 
     const setMeFavorite = (e) => {
       e.stopPropagation();
-      // setFavorite(advertInfo.Id);
       dispatch(setIsFavorite(advertInfo.Id));
     };
 
