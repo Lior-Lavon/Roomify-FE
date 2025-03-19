@@ -1,9 +1,8 @@
 import React, { memo, useEffect, useRef, useState } from "react";
-import roomImg1 from "../../assets/room1.jpeg";
 import { GoShareAndroid } from "react-icons/go";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { setActiveAdvert, setIsFavorite } from "../../features/chat/chatSlice";
+import { setIsFavorite } from "../../features/chat/chatSlice";
 
 const useScreenWidth = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -22,29 +21,6 @@ const RoomCardMini = memo(({ advertInfo, shareAdvert, showPropertyInfo }) => {
   const cardRef = useRef(null);
   const screenWidth = useScreenWidth() * 0.8;
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            dispatch(setActiveAdvert(advertInfo.Id));
-          }
-        });
-      },
-      { threshold: 1.0 } // Fully visible
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
-    };
-  }, [advertInfo?.Id]);
 
   const setMeFavorite = (e) => {
     e.stopPropagation();

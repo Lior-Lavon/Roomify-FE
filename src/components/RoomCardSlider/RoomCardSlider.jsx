@@ -1,13 +1,49 @@
-import { useRef, useState, useEffect, memo } from "react";
+import { useRef, useState, useEffect, memo, useCallback } from "react";
 import { RoomCardMini } from "../../components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveAdvert, setIsFavorite } from "../../features/chat/chatSlice";
 
 const RoomCardSlider = memo(
   ({ room_list, dot_count, chatItem, showPropertyInfo, shareAdvert }) => {
+    const dispatch = useDispatch();
     const scrollRef = useRef(null);
     const cardRefs = useRef({});
     const [activeDot, setActiveDot] = useState(0);
     const { activeAdvert } = useSelector((store) => store.chat);
+
+    let scrollTimeout = useRef(null);
+
+    const handleScrollEnd = useCallback(() => {
+      if (!scrollRef.current) return;
+
+      const scrollContainer = scrollRef.current;
+      const containerCenter =
+        scrollContainer.scrollLeft + scrollContainer.clientWidth / 2;
+
+      let closestCard = null;
+      let closestDistance = Infinity;
+
+      Object.values(cardRefs.current).forEach((card) => {
+        if (card) {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter =
+            cardRect.left + cardRect.width / 2 + scrollContainer.scrollLeft;
+
+          const distance = Math.abs(containerCenter - cardCenter);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestCard = card;
+          }
+        }
+      });
+
+      if (closestCard) {
+        const cardId = Object.keys(cardRefs.current).find(
+          (id) => cardRefs.current[id] === closestCard
+        );
+        dispatch(setActiveAdvert(parseInt(cardId)));
+      }
+    }, []);
 
     const handleScroll = () => {
       if (scrollRef.current) {
@@ -20,11 +56,20 @@ const RoomCardSlider = memo(
         const index = Math.min(dot_count - 1, Math.floor(scrollLeft / section)); // Max index based on dot_count
         setActiveDot(index);
       }
+
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+      scrollTimeout.current = setTimeout(handleScrollEnd, 200);
     };
 
     useEffect(() => {
       if (scrollRef.current) {
         scrollRef.current.scrollLeft = chatItem.scrollPosition;
+      }
+
+      if (activeAdvert == 0) {
+        setTimeout(handleScrollEnd, 200);
       }
     }, []); // ✅ Runs only once after initial render
 

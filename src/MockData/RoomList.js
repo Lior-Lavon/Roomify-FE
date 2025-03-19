@@ -9,7 +9,7 @@ import Image7 from "../assets/room7.jpeg";
 export const RoomList = [
   {
     Id: 1,
-    Title: "Room name",
+    Title: "Room name-1",
     Address: "Address",
     Description: "some description",
     Images: [Image1, Image2, Image3],
@@ -19,7 +19,7 @@ export const RoomList = [
   },
   {
     Id: 2,
-    Title: "Room name",
+    Title: "Room name-2",
     Address: "Address",
     Description: "some description",
     Images: [Image2, Image3, Image5],
@@ -29,7 +29,7 @@ export const RoomList = [
   },
   {
     Id: 3,
-    Title: "Room name",
+    Title: "Room name-3",
     Address: "Address",
     Description: "some description",
     Images: [Image3, Image1, Image4],
@@ -39,7 +39,7 @@ export const RoomList = [
   },
   {
     Id: 4,
-    Title: "Room name",
+    Title: "Room name-4",
     Address: "Address",
     Description: "some description",
     Images: [Image4, Image5, Image6],
@@ -49,7 +49,7 @@ export const RoomList = [
   },
   {
     Id: 5,
-    Title: "Room name",
+    Title: "Room name-5",
     Address: "Address",
     Description: "some description",
     Images: [Image5, Image6, Image7],
@@ -59,7 +59,7 @@ export const RoomList = [
   },
   {
     Id: 6,
-    Title: "Room name",
+    Title: "Room name-6",
     Address: "Address",
     Description: "some description",
     Images: [Image6, Image7, Image1],
@@ -69,7 +69,7 @@ export const RoomList = [
   },
   {
     Id: 7,
-    Title: "Room name",
+    Title: "Room name-7",
     Address: "Address",
     Description: "some description",
     Images: [Image7, Image2, Image4],
