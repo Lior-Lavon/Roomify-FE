@@ -57,7 +57,7 @@ const RenterChat = () => {
   return (
     <div className="w-full h-full flex">
       <div className="w-full h-screen flex flex-col">
-        <TopBar leftIcon="burger" rightIcon="login" />
+        <TopBar leftIcon="burger" />
 
         {/* search */}
         <div className="w-[90%] mx-auto py-2 relative" ref={topRef}>
