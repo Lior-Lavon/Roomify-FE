@@ -13,8 +13,8 @@ const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@test.com");
+  const [password, setPassword] = useState("1234");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const { returnToAfterLogin } = useSelector((store) => store.user);
@@ -26,6 +26,7 @@ const SignIn = () => {
       setError("Password do not match.");
       return;
     }
+
     if (isLogin) {
       console.log("Logging in with:", { email, password });
     } else {
@@ -54,7 +55,7 @@ const SignIn = () => {
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center sans-regular">
       <div className="w-full h-screen fixed top-0">
-        <TopBar showAvatar={false} showLogin={false} />
+        <TopBar />
 
         <div className="w-full h-full bg-white p-6 flex flex-col items-center ">
           <div

@@ -357,7 +357,7 @@ const ChatView = () => {
         style={{ height: `${viewportHeight}px` }}
       >
         {/* Top Div */}
-        <TopBar showAvatar={true} showLogin={true} />
+        <TopBar leftIcon="burger" rightIcon="login" />
 
         {/* Middle Div (Flexible) */}
         <div className="w-full flex-1 flex flex-col" ref={containerRef}>

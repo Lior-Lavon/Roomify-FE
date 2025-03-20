@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsChat } from "react-icons/bs";
-import { IoChatbubbleOutline } from "react-icons/io5";
-import { RxAvatar } from "react-icons/rx";
+import { IoChatbubbleOutline, IoCloseOutline } from "react-icons/io5";
+import { RxAvatar, RxHamburgerMenu } from "react-icons/rx";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +35,7 @@ const MenuItems = [
 
 const TopBar = (props) => {
   const { profile } = useSelector((store) => store.user);
-  const { showAvatar, showLogin } = props;
+  const { leftIcon, rightIcon } = props;
   const [isMenu, setIsMenu] = useState(false);
   const navigate = useNavigate();
   const handleClick = () => {
@@ -57,13 +57,21 @@ const TopBar = (props) => {
   return (
     <div className="w-full bg-white px-2 h-14 flex flex-row items-center justify-between text-lg z-50 border-b-[1px] border-gray-300 sans-regular">
       <div className="text-3xl w-[20%]">
-        {showAvatar && (
+        {leftIcon == "burger" && (
           <div className="group relative cursor-pointer">
-            <RxAvatar onClick={handleMenu} />
+            {!isMenu ? (
+              !profile ? (
+                <RxHamburgerMenu onClick={handleMenu} />
+              ) : (
+                <RxAvatar onClick={handleMenu} />
+              )
+            ) : (
+              <IoCloseOutline onClick={handleMenu} />
+            )}
             <div
               className={`absolute z-[9999] ${
                 !isMenu ? "hidden" : "inline-block"
-              } w-[200px] rounded-md bg-white p-2 text-black text-base shadow-md`}
+              } w-[300px] rounded-md bg-white p-2 text-black text-base shadow-md`}
             >
               <ul>
                 {MenuItems.map((data) => {
@@ -94,23 +102,25 @@ const TopBar = (props) => {
       </div>
 
       <div className="w-[20%] max-w-[80px]">
-        {!profile
-          ? showLogin && (
-              <div
-                className="bg-orange-600 text-white rounded-xl px-2 py-1 text-sm text-center"
-                onClick={handleSignIn}
-              >
-                Log In
-              </div>
-            )
-          : showLogin && (
-              <div
-                className="flex items-center justify-end"
-                onClick={handleChatView}
-              >
-                <IoChatbubbleOutline className="text-2xl" />
-              </div>
-            )}
+        {rightIcon != undefined ? (
+          !profile ? (
+            <div
+              className="bg-orange-600 text-white rounded-xl px-2 py-1 text-sm text-center"
+              onClick={handleSignIn}
+            >
+              Log In
+            </div>
+          ) : (
+            <div
+              className="flex items-center justify-end"
+              onClick={handleChatView}
+            >
+              <IoChatbubbleOutline className="text-2xl" />
+            </div>
+          )
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );

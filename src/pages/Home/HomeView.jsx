@@ -68,7 +68,7 @@ const HomeView = () => {
         className={`base:hidden sm:block md:hidden w-full h-full relative text-3xl sans-regular `}
       >
         <div ref={topBarRef} className="w-full">
-          <TopBar showAvatar={true} showLogin={true} />
+          <TopBar leftIcon="burger" rightIcon="login" />
         </div>
 
         {/* body */}
