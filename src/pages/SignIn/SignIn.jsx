@@ -55,9 +55,9 @@ const SignIn = () => {
       <div className="w-full h-screen fixed top-0">
         <TopBar showAvatar={false} showLogin={false} />
 
-        <div className="w-full h-full bg-gray-300 p-6 flex flex-col items-center ">
+        <div className="w-full h-full bg-white p-6 flex flex-col items-center ">
           <div
-            className={`w-[90%] max-w-[640px] bg-red-400 ${
+            className={`w-[90%] max-w-[640px] bg-white ${
               isLogin ? "mt-6" : ""
             }`}
           >
