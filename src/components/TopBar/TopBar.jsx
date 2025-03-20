@@ -4,6 +4,7 @@ import { IoChatbubbleOutline, IoCloseOutline } from "react-icons/io5";
 import { RxAvatar, RxHamburgerMenu } from "react-icons/rx";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import FemaleImage from "../../assets/female.jpg";
 
 const MenuItems = [
   {
@@ -63,7 +64,13 @@ const TopBar = (props) => {
               !profile ? (
                 <RxHamburgerMenu onClick={handleMenu} />
               ) : (
-                <RxAvatar onClick={handleMenu} />
+                // <RxAvatar onClick={handleMenu} />
+                <img
+                  src={FemaleImage}
+                  className="w-10 h-10 object-contain rounded-full"
+                  alt=""
+                  onClick={handleMenu}
+                />
               )
             ) : (
               <IoCloseOutline onClick={handleMenu} />
@@ -97,7 +104,7 @@ const TopBar = (props) => {
           className="sans-bold tracking-wide cursor-pointer"
           onClick={handleClick}
         >
-          ROOM<span className="text-orange-600">UFI</span>
+          ROOM<span className="text-orange-600">IFY</span>
         </p>
       </div>
 
