@@ -22,8 +22,8 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
-    if (!isLogin && email !== confirmEmail) {
-      setError("Emails do not match.");
+    if (!isLogin && password !== confirmPassword) {
+      setError("Password do not match.");
       return;
     }
     if (isLogin) {
@@ -31,6 +31,7 @@ const SignIn = () => {
     } else {
       console.log("Registering with:", { email, password });
     }
+    handleUserLogin();
   };
 
   const handleFacebookLogin = () => {
@@ -71,7 +72,7 @@ const SignIn = () => {
               </p>
             </div>
             {error && (
-              <p className="text-red-500 text-center text-sm">{error}</p>
+              <p className="text-red-500 my-2 text-center text-sm">{error}</p>
             )}
             <form onSubmit={handleSubmit} className="mt-8 space-y-4">
               <div className="flex flex-col gap-2">
@@ -103,7 +104,7 @@ const SignIn = () => {
                     type="password"
                     placeholder="Confirm Password"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmEmail(e.target.value)}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     className="w-full px-4 py-2 border rounded-full focus:outline-none placeholder:text-sm placeholder:text-gray-400"
                     required
                   />
@@ -113,7 +114,7 @@ const SignIn = () => {
               <button
                 type="submit"
                 className="w-full bg-orange-600 mt-4 text-white tracking-wide text-sm py-4 rounded-full transition"
-                onClick={handleUserLogin}
+                // onClick={handleUserLogin}
               >
                 {isLogin ? "Log in" : "Register"}
               </button>
