@@ -56,7 +56,11 @@ const SignIn = () => {
         <TopBar showAvatar={false} showLogin={false} />
 
         <div className="w-full h-full bg-gray-300 p-6 flex flex-col items-center ">
-          <div className="w-[90%] max-w-[640px] bg-red-400 mt-6">
+          <div
+            className={`w-[90%] max-w-[640px] bg-red-400 ${
+              isLogin ? "mt-6" : ""
+            }`}
+          >
             <div className="w-full inline-block text-center">
               <h1 className="text-transparent bg-gradient-to-r from-[#261a18] to-[#ff5733] bg-clip-text font-bold text-2xl ">
                 Welcome to Roomify
