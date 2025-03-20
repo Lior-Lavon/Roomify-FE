@@ -68,7 +68,7 @@ const ChatWithOwner = ({ advertId, isVisible, closeChatWithOwner }) => {
       }`}
     >
       {/* place holder */}
-      <TopBar leftIcon="burger" rightIcon="login" />
+      <TopBar leftIcon="burger" />
       <div className="w-full h-full flex flex-col bg-white">
         {/* TopBar */}
         <div className="w-full h-[54px] bg-blue-300" ref={topRef}>
