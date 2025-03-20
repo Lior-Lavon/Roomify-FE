@@ -2,43 +2,80 @@ import React, { useState } from "react";
 import { BsChat } from "react-icons/bs";
 import { IoChatbubbleOutline, IoCloseOutline } from "react-icons/io5";
 import { RxAvatar, RxHamburgerMenu } from "react-icons/rx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FemaleImage from "../../assets/female.jpg";
+import { setUserLogout } from "../../features/user/userSlice";
 
-const MenuItems = [
+const LoginMenuItems = [
   {
     id: 1,
-    name: "Aaaaa",
+    name: "My Profile",
     link: "/#",
   },
   {
     id: 2,
-    name: "Bbbbb",
+    name: "My Favorite",
     link: "/#",
   },
   {
     id: 3,
-    name: "Ccccc",
+    name: "My Properties",
     link: "/#",
   },
   {
     id: 4,
-    name: "Ddddd",
+    name: "Section Name",
+    link: "/#",
+  },
+  // {
+  //   id: 5,
+  //   name: "Effff",
+  //   link: "/#",
+  // },
+];
+const MenuItems = [
+  {
+    id: 1,
+    name: "Section name",
+    link: "/#",
+  },
+  {
+    id: 2,
+    name: "Section name",
+    link: "/#",
+  },
+  {
+    id: 3,
+    name: "Section name",
+    link: "/#",
+  },
+  {
+    id: 4,
+    name: "Section name",
     link: "/#",
   },
   {
     id: 5,
-    name: "Effff",
+    name: "Section name",
+    link: "/#",
+  },
+  {
+    id: 6,
+    name: "Section name",
     link: "/#",
   },
 ];
 
 const TopBar = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { profile } = useSelector((store) => store.user);
   const { leftIcon, rightIcon } = props;
   const [isMenu, setIsMenu] = useState(false);
-  const navigate = useNavigate();
+  // const [width, setWidth] = useState(window.innerWidth);
+
   const handleClick = () => {
     navigate("/landing");
   };
@@ -53,6 +90,14 @@ const TopBar = (props) => {
 
   const handleChatView = () => {
     navigate("/chats");
+  };
+
+  const logout = () => {
+    dispatch(setUserLogout(null));
+    navigate("/landing");
+    setTimeout(() => {
+      setIsMenu(false);
+    }, 100);
   };
 
   return (
@@ -78,22 +123,61 @@ const TopBar = (props) => {
             <div
               className={`absolute z-[9999] ${
                 !isMenu ? "hidden" : "inline-block"
-              } w-[300px] rounded-md bg-white p-2 text-black text-base shadow-md`}
+              } w-screen -ml-2 min-h-[calc(100vh-2.7rem)] rounded-md bg-white text-black text-base shadow-md`}
             >
-              <ul>
-                {MenuItems.map((data) => {
-                  return (
-                    <li key={data.id} className="cursor-pointer">
-                      <a
-                        href={data.link}
-                        className="inline-block w-full rounded-md p-2"
-                      >
-                        {data.name}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
+              {profile ? (
+                <div className="w-full h-full ml-6">
+                  <div className="w-full flex flex-col items-center justify-center gap-2 mt-10">
+                    <img
+                      src={FemaleImage}
+                      className="w-20 h-20 rounded-full border-[1px] border-gray-200"
+                    />
+                    <p className="sans-bold">User Name</p>
+                  </div>
+
+                  <ul className="">
+                    {LoginMenuItems.map((data) => {
+                      return (
+                        <li
+                          key={data.id}
+                          className="cursor-pointer border-l-2 border-orange-500 my-6"
+                        >
+                          <a
+                            href={data.link}
+                            className="inline-block w-full rounded-md pl-2"
+                          >
+                            {data.name}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  <p className="fixed bottom-0 mb-6" onClick={logout}>
+                    Log out
+                  </p>
+                </div>
+              ) : (
+                <div className="w-full h-full ml-6">
+                  <ul className="mt-10">
+                    {MenuItems.map((data) => {
+                      return (
+                        <li
+                          key={data.id}
+                          className="cursor-pointer border-l-2 border-orange-500 my-6"
+                        >
+                          <a
+                            href={data.link}
+                            className="inline-block w-full rounded-md pl-2"
+                          >
+                            {data.name}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         )}

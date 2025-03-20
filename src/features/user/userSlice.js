@@ -13,11 +13,16 @@ const useSlice = createSlice({
     setUserLogin: (state) => {
       state.profile = {};
     },
+    setUserLogout: (state) => {
+      state.profile = null;
+    },
+
     setReturnToAfterLogin: (state, { payload }) => {
       state.returnToAfterLogin = payload;
     },
   },
 });
 
-export const { setUserLogin, setReturnToAfterLogin } = useSlice.actions;
+export const { setUserLogin, setUserLogout, setReturnToAfterLogin } =
+  useSlice.actions;
 export default useSlice.reducer;
