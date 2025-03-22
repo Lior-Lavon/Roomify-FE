@@ -27,7 +27,6 @@ const ChatView = () => {
     show: false,
     advertId: 0,
   });
-  const [showChat, setShowChat] = useState(false);
 
   const { returnToAfterLogin } = useSelector((store) => store.user);
   const { roomList } = useSelector((store) => store.chat);
@@ -337,15 +336,6 @@ const ChatView = () => {
     // setShowPropertyDetailPage(!showPropertyDetailPage); // lior
   };
 
-  const showChatWithOwner = (advertId) => {
-    showPropertyInfo(advertId);
-
-    setShowChat(!showChat);
-  };
-  const hideChatWithOwner = () => {
-    setShowChat(!showChat);
-  };
-
   return (
     <div className="w-full h-full flex">
       <div
@@ -405,13 +395,6 @@ const ChatView = () => {
         // showChatWithOwner={showChatWithOwner}
         showButtons={true}
       />
-
-      {/* chat with owner */}
-      {/* <ChatWithOwner
-        advertId={showAdvertInfo.advertId}
-        isVisible={showChat}
-        closeChatWithOwner={hideChatWithOwner}
-      /> */}
     </div>
   );
 };
