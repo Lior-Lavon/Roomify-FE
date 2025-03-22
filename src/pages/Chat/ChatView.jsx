@@ -11,7 +11,6 @@ import {
   PropertyDetailPage,
   TopBar,
   ChatFooter,
-  ShareAdvert,
 } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatOptions } from "../../MockData/ChatOptions";
@@ -24,12 +23,11 @@ const ChatView = () => {
   const [chatFlow, setChatFlow] = useState([]);
   const [processFilters, setProcessFilters] = useState(false);
   const [filterUpdate, setFilterUpdate] = useState(false);
-  const [showChat, setShowChat] = useState(false);
-  const [shareView, setShareView] = useState({ show: false, advertId: 0 });
-  const [showAdvertInfo, setShowAdvertInfo] = useState({
+  const [showPropertyDetailPage, setShowPropertyDetailPage] = useState({
     show: false,
     advertId: 0,
   });
+  const [showChat, setShowChat] = useState(false);
 
   const { returnToAfterLogin } = useSelector((store) => store.user);
   const { roomList } = useSelector((store) => store.chat);
@@ -94,15 +92,15 @@ const ChatView = () => {
   }, [filterUpdate]);
 
   useEffect(() => {
-    if (returnToAfterLogin != undefined) {
-      setShowAdvertInfo({ show: true, advertId: returnToAfterLogin.advertId });
-      if (returnToAfterLogin.showChat) {
-        showChatWithOwner(returnToAfterLogin.advertId);
-      }
-      if (returnToAfterLogin.afterLogin) {
-        dispatch(setReturnToAfterLogin(null));
-      }
-    }
+    // if (returnToAfterLogin != undefined) {
+    //   setShowAdvertInfo({ show: true, advertId: returnToAfterLogin.advertId });
+    //   if (returnToAfterLogin.showChat) {
+    //     showChatWithOwner(returnToAfterLogin.advertId);
+    //   }
+    //   if (returnToAfterLogin.afterLogin) {
+    //     dispatch(setReturnToAfterLogin(null));
+    //   }
+    // }
   }, [returnToAfterLogin]);
 
   useEffect(() => {
@@ -328,19 +326,17 @@ const ChatView = () => {
   }, []); // Empty dependency array means this runs only once after the first render
 
   const showPropertyInfo = (advertId) => {
-    if (showAdvertInfo.show == false) {
-      setShowAdvertInfo({ show: true, advertId: advertId });
+    if (!showPropertyDetailPage.show) {
+      setShowPropertyDetailPage({ show: true, advertId });
     } else {
-      setShowAdvertInfo({ show: false, advertId: 0 });
+      setShowPropertyDetailPage({ show: false, advertId: -1 });
     }
   };
 
-  const shareAdvert = (advertId) => {
-    setShareView({ show: true, advertId: advertId });
+  const showPropertyView = (advertId) => {
+    // setShowPropertyDetailPage(!showPropertyDetailPage); // lior
   };
-  const closeShareAdvert = () => {
-    setShareView({ show: false, advertId: 0 });
-  };
+
   const showChatWithOwner = (advertId) => {
     showPropertyInfo(advertId);
 
@@ -389,7 +385,7 @@ const ChatView = () => {
                 removeFilter={removeFilter}
                 filterSelection={filterSelection}
                 showPropertyInfo={showPropertyInfo}
-                shareAdvert={shareAdvert}
+                // shareAdvert={shareAdvert}
               />
             </div>
           </div>
@@ -397,32 +393,25 @@ const ChatView = () => {
 
         {/* Bottom Div */}
         <ChatFooter pageType={"chat"} />
-
-        {/* show property view */}
-        {showAdvertInfo.show && (
-          <PropertyDetailPage
-            advertId={showAdvertInfo.advertId}
-            shareAdvert={shareAdvert}
-            showPropertyInfo={showPropertyInfo}
-            showChatWithOwner={showChatWithOwner}
-            showButtons={true}
-          />
-        )}
-        {/* shareView */}
-        {shareView.show && (
-          <ShareAdvert
-            closeShareAdvert={closeShareAdvert}
-            advertId={shareView.advertId}
-          />
-        )}
       </div>
 
+      {/* show property view */}
+      <PropertyDetailPage
+        isVisible={showPropertyDetailPage.show}
+        advertId={showPropertyDetailPage.advertId}
+        closePropertyDetailPage={showPropertyInfo}
+        // shareAdvert={shareAdvert}
+        // showPropertyInfo={showPropertyInfo}
+        // showChatWithOwner={showChatWithOwner}
+        showButtons={true}
+      />
+
       {/* chat with owner */}
-      <ChatWithOwner
+      {/* <ChatWithOwner
         advertId={showAdvertInfo.advertId}
         isVisible={showChat}
         closeChatWithOwner={hideChatWithOwner}
-      />
+      /> */}
     </div>
   );
 };

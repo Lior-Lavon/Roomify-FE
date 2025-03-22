@@ -11,10 +11,14 @@ import PropertyOnMap from "./PropertyOnMap";
 import PropertyImageGallery from "./PropertyImageGallery";
 import { useNavigate } from "react-router-dom";
 import { setReturnToAfterLogin } from "../../features/user/userSlice";
+import TopBar from "../TopBar/TopBar";
+import PropertyDetailPageTopBar from "./PropertyDetailPageTopBar";
+import ShareAdvert from "../ShareAdvert/ShareAdvert";
 
 const PropertyDetailPage = ({
+  isVisible,
   advertId,
-  shareAdvert,
+  closePropertyDetailPage,
   showPropertyInfo,
   showChatWithOwner,
   showButtons,
@@ -23,6 +27,7 @@ const PropertyDetailPage = ({
   const { profile } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const { roomList } = useSelector((store) => store.chat);
+  const [shareView, setShareView] = useState(false);
 
   const [advertInfo, setAdvertInfo] = useState(null);
   const [showMap, setShowMap] = useState(false);
@@ -39,9 +44,9 @@ const PropertyDetailPage = ({
     }
   }, [advertId, roomList]);
 
-  // const shareAdvertMe = () => {
-  //   shareAdvert();
-  // };
+  const shareAdvertMe = () => {
+    setShareView(!shareView);
+  };
 
   const setFavorite = () => {
     dispatch(setIsFavorite(advertInfo.Id));
@@ -70,17 +75,19 @@ const PropertyDetailPage = ({
   };
 
   return (
-    <div className="w-full h-screen fixed top-0 z-100 flex justify-center items-center sans-regular bg-[rgba(0,0,0,0.1)]">
-      <div className="max-w-[600px] w-[90%] bg-white rounded-xl border-[.02rem] border-black shadow-[10px_2px_12px_rgba(0,0,0,.3)] relative">
-        <div className="m-4 flex flex-col gap-1">
-          <div className="w-full flex flex-row justify-between items-center">
-            <div className=" text-base sans-bold">{advertInfo?.Title}</div>
-            <IoMdClose
-              className="text-2xl text-gray-500 cursor-pointer"
-              onClick={showPropertyInfo}
-            />
-          </div>
-          <p className="text-[12px]">Address...</p>
+    <div
+      className={`w-full h-full z-90 fixed top-0 right-0 transition-transform duration-500 flex flex-col bg-red-500 ${
+        isVisible ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
+      {/* Top Div */}
+      <TopBar leftIcon="burger" rightIcon="login" />
+      <div className="w-full h-full flex flex-col bg-white relative">
+        <PropertyDetailPageTopBar
+          closePropertyDetailPage={closePropertyDetailPage}
+        />
+        <div className="mx-4 flex-1 flex flex-col gap-1">
+          <p className="text-[15px]">Address...</p>
           <p className="text-[11px] ">
             Cozy room for rent in the heart of the city, offering a quiet,
             peaceful setting. Fully furnished with a comfortable bed, desk,
@@ -105,14 +112,13 @@ const PropertyDetailPage = ({
                 <div onClick={showMapOverlay}>
                   <FiMapPin className="w-6 h-6 " />
                 </div>
-                <div onClick={shareAdvert}>
+                <div onClick={shareAdvertMe}>
                   <GoShareAndroid className="w-6 h-6 " />
                 </div>
               </div>
             )}
           </div>
 
-          {/* image slider */}
           <div className="mt-1" onClick={showImageGallery}>
             <ImageSlider imageList={advertInfo?.Images} dot_count={4} />
           </div>
@@ -138,27 +144,34 @@ const PropertyDetailPage = ({
               <p className="w-[50%]">Internet</p>
             </div>
           </div>
-
-          {/* buttons */}
-          {showButtons && (
-            <div className="w-full flex flex-col gap-[.4rem] mt-4 text-sm">
-              <div>
-                <button
-                  className="w-full bg-orange-600 text-white rounded-full py-2 cursor-pointer"
-                  onClick={showChatWithOwnerMe}
-                >
-                  Contact the landlord
-                </button>
-              </div>
-            </div>
-          )}
         </div>
 
-        {/*  show map */}
-        {showMap && (
-          <PropertyOnMap poi={advertInfo} closeMapOverlay={showMapOverlay} />
+        {showButtons && (
+          <div className="mx-4 h-12">
+            <button
+              className="w-full my-1 bg-orange-600 text-white rounded-full py-2 cursor-pointer"
+              onClick={showChatWithOwnerMe}
+            >
+              Contact the landlord
+            </button>
+          </div>
         )}
       </div>
+
+      {/* show map  */}
+
+      {showMap && (
+        <div className="w-[300px] h-[300px] absolute bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="w-full h-full border-1 rounded-2xl">
+            <PropertyOnMap poi={advertInfo} closeMapOverlay={showMapOverlay} />
+          </div>
+        </div>
+      )}
+
+      {/* shareView */}
+      {shareView && (
+        <ShareAdvert closeShareAdvert={shareAdvertMe} advertId={advertId} />
+      )}
 
       {/* show ImageGallery */}
       {imageGallery && (

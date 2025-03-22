@@ -20,7 +20,7 @@ const ShareAdvert = ({ advertId, closeShareAdvert }) => {
   }, []);
 
   return (
-    <div className="w-full h-screen fixed top-0 z-100 flex justify-center items-center sans-regular bg-[rgba(0,0,0,0.05)]">
+    <div className="w-full h-screen fixed top-0 z-200 flex justify-center items-center sans-regular bg-[rgba(0,0,0,0.05)]">
       <div className="w-[80%] max-w-[350px] bg-white border-[.06rem] rounded-2xl shadow-md p-2">
         <div className="w-full flex items-center justify-between">
           <p className="text-base">Share with friends :</p>
