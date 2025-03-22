@@ -6,18 +6,15 @@ import {
   ProtectiveRoute,
   SignIn,
   RenterChat,
+  FavoritesView,
+  ProfileView,
 } from "./pages";
-import { CoverView, MapView } from "./components";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
-import TestMapView from "./components/TestMapView/TestMapView";
-import TestView from "./pages/TestView/TestView";
 import { useEffect, useState } from "react";
 import { getSecurityTokenFromLocalStorage } from "./utils/localStorage";
 import usePreventPullToRefresh from "./utils/hooks/usePreventPullToRefresh.js";
 import bcrypt from "bcryptjs";
 import { store } from "./store.js";
 import {
-  BrowserRouter,
   Route,
   Routes,
   unstable_HistoryRouter as HistoryRouter,
@@ -64,6 +61,8 @@ function App() {
           ></Route>
 
           <Route path="/landing" element={<HomeView />} />
+          <Route path="/profile" element={<ProfileView />} />
+          <Route path="/favorites" element={<FavoritesView />} />
           <Route path="/chats" element={<RenterChat />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/chat" element={<ChatView />}>

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   profile: null,
   returnToAfterLogin: null,
+  favoritesList: [, 1, 2, 3, 4, 5, 6],
   isLoading: true,
 };
 

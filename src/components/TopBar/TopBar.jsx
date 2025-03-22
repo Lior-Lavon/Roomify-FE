@@ -3,7 +3,7 @@ import { BsChat } from "react-icons/bs";
 import { IoChatbubbleOutline, IoCloseOutline } from "react-icons/io5";
 import { RxAvatar, RxHamburgerMenu } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import FemaleImage from "../../assets/female.jpg";
 import { setUserLogout } from "../../features/user/userSlice";
 
@@ -11,12 +11,12 @@ const LoginMenuItems = [
   {
     id: 1,
     name: "My Profile",
-    link: "/#",
+    link: "/profile",
   },
   {
     id: 2,
     name: "My Favorite",
-    link: "/#",
+    link: "/favorites",
   },
   {
     id: 3,
@@ -74,7 +74,6 @@ const TopBar = (props) => {
   const { profile } = useSelector((store) => store.user);
   const { leftIcon, rightIcon } = props;
   const [isMenu, setIsMenu] = useState(false);
-  // const [width, setWidth] = useState(window.innerWidth);
 
   const handleClick = () => {
     navigate("/landing");
@@ -142,12 +141,12 @@ const TopBar = (props) => {
                           key={data.id}
                           className="cursor-pointer border-l-2 border-orange-500 my-6"
                         >
-                          <a
-                            href={data.link}
+                          <NavLink
+                            to={data.link}
                             className="inline-block w-full rounded-md pl-2"
                           >
                             {data.name}
-                          </a>
+                          </NavLink>
                         </li>
                       );
                     })}
@@ -166,12 +165,12 @@ const TopBar = (props) => {
                           key={data.id}
                           className="cursor-pointer border-l-2 border-orange-500 my-6"
                         >
-                          <a
-                            href={data.link}
+                          <NavLink
+                            to={data.link}
                             className="inline-block w-full rounded-md pl-2"
                           >
                             {data.name}
-                          </a>
+                          </NavLink>
                         </li>
                       );
                     })}

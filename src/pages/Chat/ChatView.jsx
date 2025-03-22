@@ -14,9 +14,6 @@ import {
 } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatOptions } from "../../MockData/ChatOptions";
-import ChatWithOwner from "../../components/ChatWithOwner/ChatWithOwner";
-import { useParams } from "react-router-dom";
-import { setReturnToAfterLogin } from "../../features/user/userSlice";
 
 const ChatView = () => {
   const dispatch = useDispatch();
@@ -390,9 +387,6 @@ const ChatView = () => {
         isVisible={showPropertyDetailPage.show}
         advertId={showPropertyDetailPage.advertId}
         closePropertyDetailPage={showPropertyInfo}
-        // shareAdvert={shareAdvert}
-        // showPropertyInfo={showPropertyInfo}
-        // showChatWithOwner={showChatWithOwner}
         showButtons={true}
       />
     </div>
