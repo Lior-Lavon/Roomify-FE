@@ -103,23 +103,21 @@ const PropertyDetailPage = ({
                 </span>
                 /month
               </p>
-              {showButtons && (
-                <div className="w-full h-8 flex items-center justify-end gap-2 text-orange-600 ">
-                  <div onClick={setFavorite}>
-                    {advertInfo?.IsFavorite ? (
-                      <MdFavorite className="w-6 h-6" />
-                    ) : (
-                      <MdFavoriteBorder className="w-6 h-6" />
-                    )}
-                  </div>
-                  <div onClick={showMapOverlay}>
-                    <FiMapPin className="w-6 h-6 " />
-                  </div>
-                  <div onClick={shareAdvertMe}>
-                    <GoShareAndroid className="w-6 h-6 " />
-                  </div>
+              <div className="w-full h-8 flex items-center justify-end gap-2 text-orange-600 ">
+                <div onClick={setFavorite}>
+                  {advertInfo?.IsFavorite ? (
+                    <MdFavorite className="w-6 h-6" />
+                  ) : (
+                    <MdFavoriteBorder className="w-6 h-6" />
+                  )}
                 </div>
-              )}
+                <div onClick={showMapOverlay}>
+                  <FiMapPin className="w-6 h-6 " />
+                </div>
+                <div onClick={shareAdvertMe}>
+                  <GoShareAndroid className="w-6 h-6 " />
+                </div>
+              </div>
             </div>
 
             <div className="mt-1" onClick={showImageGallery}>
@@ -193,6 +191,7 @@ const PropertyDetailPage = ({
         advertId={advertId}
         isVisible={showChatWithOwner}
         closeChatWithOwner={showChatWithOwnerMe}
+        allowPropertyPage={false}
       />
     </div>
   );

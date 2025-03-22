@@ -137,6 +137,7 @@ const HomeView = () => {
         advertId={showAdvertInfo.advertId}
         isVisible={showChat}
         closeChatWithOwner={hideChatWithOwner}
+        allowPropertyPage={true}
       />
     </div>
   );

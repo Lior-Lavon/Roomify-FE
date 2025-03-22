@@ -94,6 +94,7 @@ const RenterChat = () => {
         advertId={advertId.chatId}
         isVisible={advertId.show}
         closeChatWithOwner={hideChatWithOwner}
+        allowPropertyPage={true}
       />
     </div>
   );
