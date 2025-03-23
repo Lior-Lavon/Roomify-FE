@@ -154,7 +154,7 @@ const ProfileView = () => {
                     "N/A",
                   ]}
                 />
-                lior
+
                 {/* Speaks Languages (Searchable Dropdown with Tags) */}
                 <SearchableMultiSelectField
                   label="Speaks languages"
