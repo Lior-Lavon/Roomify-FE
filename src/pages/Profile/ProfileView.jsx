@@ -57,8 +57,8 @@ const ProfileView = () => {
 
       {/* body */}
       <div
-        className="w-full max-w-[640px] min-w-[300px] py-4 px-4 overflow-y-auto space-y-4"
-        style={{ height: `${height}px` }}
+        className="w-full max-w-[640px] min-w-[300px] py-4 px-4 overflow-y-auto space-y-4 bg-red-300"
+        style={{ height: `${height + 50}px` }}
       >
         <RoomCardMini />
         <RoomCardMini />
