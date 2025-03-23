@@ -57,9 +57,15 @@ const ProfileView = () => {
 
       {/* body */}
       <div
-        className="w-full max-w-[640px] min-w-[300px] py-2 px-4 overflow-y-auto space-y-4"
+        className="w-full max-w-[640px] min-w-[300px] py-4 px-4 overflow-y-auto space-y-4"
         style={{ height: `${height}px` }}
       >
+        <InputField label="Your name" value="Jacky Varsano" />
+        <InputField label="Your name" value="Jacky Varsano" />
+        <InputField label="Your name" value="Jacky Varsano" />
+        <InputField label="Your name" value="Jacky Varsano" />
+        <InputField label="Your name" value="Jacky Varsano" />
+        <InputField label="Your name" value="Jacky Varsano" />
         <InputField label="Your name" value="Jacky Varsano" />
         <InputField label="Your email" value="jackyvarsano@gmail.com" />
         {/* <InputField label="Your password" type="password" value="*********" /> */}
