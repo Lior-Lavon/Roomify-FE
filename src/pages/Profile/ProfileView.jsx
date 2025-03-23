@@ -5,7 +5,7 @@ import usePreventPullToRefresh from "../../utils/hooks/usePreventPullToRefresh";
 
 const ProfileView = () => {
   const profileImageRef = useRef(null);
-  const scrollRef = useRef(null);
+  // const scrollRef = useRef(null);
   const [height, setHeight] = useState(0);
   const [profileType, setProfileType] = useState("Landlord");
   const [showPasswordFields, setShowPasswordFields] = useState(false);
@@ -36,18 +36,18 @@ const ProfileView = () => {
     setShowPasswordFields((prev) => !prev);
   };
 
-  useEffect(() => {
-    const el = scrollRef.current;
+  // useEffect(() => {
+  //   const el = scrollRef.current;
 
-    const clampScroll = () => {
-      if (el.scrollTop > el.scrollHeight - el.clientHeight) {
-        el.scrollTop = el.scrollHeight - el.clientHeight;
-      }
-    };
+  //   const clampScroll = () => {
+  //     if (el.scrollTop > el.scrollHeight - el.clientHeight) {
+  //       el.scrollTop = el.scrollHeight - el.clientHeight;
+  //     }
+  //   };
 
-    el.addEventListener("touchstart", clampScroll);
-    return () => el.removeEventListener("touchstart", clampScroll);
-  }, []);
+  //   el.addEventListener("touchstart", clampScroll);
+  //   return () => el.removeEventListener("touchstart", clampScroll);
+  // }, []);
 
   console.log("height : ", height);
   return (
@@ -69,7 +69,7 @@ const ProfileView = () => {
       {/* body */}
       <div
         className="w-full max-w-[640px] min-w-[300px] py-4 px-4 overflow-y-auto space-y-4 bg-red-300"
-        useRef={scrollRef}
+        // useRef={scrollRef}
         // style={{ height: `${height + 1}px` }}
         style={{
           height: `${height}px`,
