@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import FemaleImage from "../../assets/female.jpg";
 import { TopBar } from "../../components";
+import usePreventPullToRefresh from "../../utils/hooks/usePreventPullToRefresh";
 
 const ProfileView = () => {
   const userNameRef = useRef(null);
   const [height, setHeight] = useState(0);
   const [profileType, setProfileType] = useState("Landlord");
   const [showPasswordFields, setShowPasswordFields] = useState(false);
+
+  usePreventPullToRefresh();
 
   const handleProfileTypeChange = (type) => {
     setProfileType(type);
