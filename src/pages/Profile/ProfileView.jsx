@@ -20,7 +20,7 @@ const ProfileView = () => {
       if (userNameRef.current) {
         const topBottom = userNameRef.current.getBoundingClientRect().bottom;
         const bottomTop = window.innerHeight;
-        setHeight(bottomTop - topBottom); // Calculate space between them
+        setHeight(bottomTop - topBottom + 20); // Calculate space between them
       }
     };
 
