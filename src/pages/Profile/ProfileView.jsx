@@ -64,7 +64,7 @@ const ProfileView = () => {
         <InputField label="Your email" value="jackyvarsano@gmail.com" />
         {/* <InputField label="Your password" type="password" value="*********" /> */}
         {/* Update Password Section */}
-        <div>
+        <div className="w-full">
           <div
             className="flex justify-between items-center cursor-pointer"
             onClick={togglePasswordFields}
@@ -81,16 +81,18 @@ const ProfileView = () => {
             </span>
           </div>
           <div
-            className={`overflow-hidden transition-max-height duration-300 space-y-4 ${
+            className={`overflow-hidden transition-max-height duration-300 space-y-4  ${
               showPasswordFields ? "max-h-50" : "max-h-0"
             }`}
           >
-            <InputField label="" placeholder="Password" type="password" />
-            <InputField
-              label="Retype password"
-              placeholder="Password"
-              type="password"
-            />
+            <div className="w-full p-2 border-1 border-gray-200 rounded-xl space-y-4">
+              <InputField label="" placeholder="Password" type="password" />
+              <InputField
+                label="Retype password"
+                placeholder="Password"
+                type="password"
+              />
+            </div>
           </div>
         </div>
 
