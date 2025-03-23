@@ -139,13 +139,11 @@ const ProfileView = () => {
               <div className="w-full space-y-4 mt-4">
                 {/* Date of Birth */}
                 <InputField label="Date of birth" type="date" />
-
                 {/* Nationality */}
                 <SelectField
                   label="Nationality"
                   options={["Arab", "Dutch", "French", "Other"]}
                 />
-
                 {/* Owner Type */}
                 <SelectField
                   label="Owner type"
@@ -156,7 +154,7 @@ const ProfileView = () => {
                     "N/A",
                   ]}
                 />
-
+                lior
                 {/* Speaks Languages (Searchable Dropdown with Tags) */}
                 <SearchableMultiSelectField
                   label="Speaks languages"
@@ -170,13 +168,11 @@ const ProfileView = () => {
                     "Italian",
                   ]}
                 />
-
                 {/* Living in Country */}
                 <SelectField
                   label="Living in country"
                   options={["Netherlands", "Germany", "France", "Spain"]}
                 />
-
                 {/* Status */}
                 <SelectField
                   label="Status"
@@ -187,13 +183,10 @@ const ProfileView = () => {
                     "Looking for a job",
                   ]}
                 />
-
                 {/* Has a Pet */}
                 <YesNoToggle label="Has a pet" />
-
                 {/* Smoking Inside */}
                 <YesNoToggle label="Smoking inside" />
-
                 {/* Member of Student Association */}
                 <YesNoToggle label="Member of student association" />
               </div>
