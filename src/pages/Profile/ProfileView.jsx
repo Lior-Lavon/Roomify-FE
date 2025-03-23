@@ -74,6 +74,7 @@ const ProfileView = () => {
         style={{
           height: `${height}px`,
           maxHeight: `${height}px`,
+          overflowY: "auto",
           WebkitOverflowScrolling: "touch",
         }}
       >
