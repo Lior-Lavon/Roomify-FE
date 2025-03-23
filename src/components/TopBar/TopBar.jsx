@@ -143,6 +143,7 @@ const TopBar = (props) => {
                         >
                           <NavLink
                             to={data.link}
+                            onClick={handleMenu}
                             className="inline-block w-full rounded-md pl-2"
                           >
                             {data.name}
