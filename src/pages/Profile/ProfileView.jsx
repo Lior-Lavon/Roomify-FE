@@ -60,9 +60,9 @@ const ProfileView = () => {
         style={{
           height: `${height}px`,
           WebkitOverflowScrolling: "touch",
-          overflowY: "auto",
         }}
       >
+        <RoomCardMini />
         <RoomCardMini />
         <RoomCardMini />
         <RoomCardMini />
