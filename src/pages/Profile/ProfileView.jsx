@@ -60,18 +60,20 @@ const ProfileView = () => {
       >
         <RoomCardMini />
         <RoomCardMini />
-
-        <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
-        <RoomCardMini />
         <RoomCardMini />
 
         <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
         <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
 
+        <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
+        <RoomCardMini />
+        <RoomCardMini />
         <RoomCardMini />
         {/* <InputField label="Your name" value="Jacky Varsano" />
         <InputField label="Your email" value="jackyvarsano@gmail.com" /> */}
