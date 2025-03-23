@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import FemaleImage from "../../assets/female.jpg";
-import { TopBar } from "../../components";
+import { RoomCardMini, TopBar } from "../../components";
 import usePreventPullToRefresh from "../../utils/hooks/usePreventPullToRefresh";
 
 const ProfileView = () => {
@@ -60,17 +60,19 @@ const ProfileView = () => {
         className="w-full max-w-[640px] min-w-[300px] py-4 px-4 overflow-y-auto space-y-4"
         style={{ height: `${height}px` }}
       >
-        <InputField label="Your name" value="Jacky Varsano" />
-        <InputField label="Your name" value="Jacky Varsano" />
-        <InputField label="Your name" value="Jacky Varsano" />
-        <InputField label="Your name" value="Jacky Varsano" />
-        <InputField label="Your name" value="Jacky Varsano" />
-        <InputField label="Your name" value="Jacky Varsano" />
-        <InputField label="Your name" value="Jacky Varsano" />
-        <InputField label="Your email" value="jackyvarsano@gmail.com" />
-        {/* <InputField label="Your password" type="password" value="*********" /> */}
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        <RoomCardMini />
+        {/* <InputField label="Your name" value="Jacky Varsano" />
+        <InputField label="Your email" value="jackyvarsano@gmail.com" /> */}
         {/* Update Password Section */}
-        <div className="w-full">
+        {/* <div className="w-full">
           <div
             className="flex justify-between items-center cursor-pointer"
             onClick={togglePasswordFields}
@@ -100,10 +102,10 @@ const ProfileView = () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Description */}
-        <div>
+        {/* <div>
           <label className="text-sm text-gray-500 block mb-1">
             Description
           </label>
@@ -112,16 +114,14 @@ const ProfileView = () => {
             rows={3}
             defaultValue="About my self About my self About my self About my self"
           />
-        </div>
+        </div> */}
 
-        {/* <InputField label="Phone number" vsalue="0625484441" /> */}
-        {/* <InputField label="Your address" value="Boogschutter 12" /> */}
-        <InputField label="City" value="Amstelveen" />
+        {/* <InputField label="City" value="Amstelveen" /> */}
 
         {/* Profile Type Toggle */}
-        <label className="text-sm text-gray-500 block mb-2">Profile type</label>
+        {/* <label className="text-sm text-gray-500 block mb-2">Profile type</label> */}
 
-        <div className="flex gap-2">
+        {/* <div className="flex gap-2">
           <button
             className={`flex-1 py-2 rounded-full text-sm ${
               profileType === "Tenant"
@@ -142,7 +142,7 @@ const ProfileView = () => {
           >
             Landlord
           </button>
-        </div>
+        </div> */}
 
         {/* Tenant properties */}
         {profileType == "Tenant" && (
@@ -204,13 +204,13 @@ const ProfileView = () => {
 
         <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
 
-        <button
+        {/* submit button */}
+        {/* <button
           className={`w-full py-2 rounded-full text-sm bg-red-50 text-red-500 font-medium`}
           onClick={() => {}}
         >
           Update
-        </button>
-        {/* </div> */}
+        </button> */}
       </div>
     </div>
   );
