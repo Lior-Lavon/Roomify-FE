@@ -25,11 +25,11 @@ const ProfileView = () => {
     };
 
     updateHeight();
-    window.addEventListener("resize", updateHeight);
 
-    return () => {
-      window.removeEventListener("resize", updateHeight);
-    };
+    // window.addEventListener("resize", updateHeight);
+    // return () => {
+    //   window.removeEventListener("resize", updateHeight);
+    // };
   }, []);
 
   const togglePasswordFields = () => {
@@ -120,7 +120,7 @@ const ProfileView = () => {
               <button
                 className={`flex-1 py-2 rounded-full text-sm ${
                   profileType === "Tenant"
-                    ? "bg-red-50 text-red-500 font-medium"
+                    ? "bg-orange-600 text-white font-medium"
                     : "bg-gray-100 text-gray-400"
                 }`}
                 onClick={() => handleProfileTypeChange("Tenant")}
@@ -130,7 +130,7 @@ const ProfileView = () => {
               <button
                 className={`flex-1 py-2 rounded-full text-sm ${
                   profileType === "Landlord"
-                    ? "bg-red-500 text-white font-medium"
+                    ? "bg-orange-600 text-white font-medium"
                     : "bg-gray-100 text-gray-400"
                 }`}
                 onClick={() => handleProfileTypeChange("Landlord")}
