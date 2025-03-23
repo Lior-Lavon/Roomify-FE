@@ -13,12 +13,20 @@ const ProfileView = () => {
   };
 
   useEffect(() => {
-    if (userNameRef.current) {
-      const topBottom = userNameRef.current.getBoundingClientRect().bottom;
-      // const bottomTop = bottomRef.current.getBoundingClientRect().top;
-      const bottomTop = window.innerHeight;
-      setHeight(bottomTop - topBottom); // Calculate space between them
-    }
+    const updateHeight = () => {
+      if (userNameRef.current) {
+        const topBottom = userNameRef.current.getBoundingClientRect().bottom;
+        const bottomTop = window.innerHeight;
+        setHeight(bottomTop - topBottom); // Calculate space between them
+      }
+    };
+
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
   }, []);
 
   const togglePasswordFields = () => {
