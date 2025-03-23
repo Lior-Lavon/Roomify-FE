@@ -49,7 +49,6 @@ const ProfileView = () => {
     return () => el.removeEventListener("touchstart", clampScroll);
   }, []);
 
-  console.log("height : ", height);
   return (
     <div className="w-full h-full">
       <TopBar leftIcon="burger" />
@@ -68,7 +67,7 @@ const ProfileView = () => {
 
       {/* body */}
       <div
-        className="w-full max-w-[640px] min-w-[300px] py-4 px-4 overflow-y-auto space-y-4 bg-red-300"
+        className="w-full max-w-[640px] min-w-[300px] py-4 px-4 overflow-y-auto space-y-4 "
         ref={scrollRef}
         // style={{ height: `${height + 1}px` }}
         style={{
@@ -78,28 +77,10 @@ const ProfileView = () => {
           WebkitOverflowScrolling: "touch",
         }}
       >
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-
-        <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-
-        <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
-        <RoomCardMini />
-        <RoomCardMini />
-        <RoomCardMini />
-        {/* <InputField label="Your name" value="Jacky Varsano" />
-        <InputField label="Your email" value="jackyvarsano@gmail.com" /> */}
+        <InputField label="Your name" value="Jacky Varsano" />
+        <InputField label="Your email" value="jackyvarsano@gmail.com" />
         {/* Update Password Section */}
-        {/* <div className="w-full">
+        <div className="w-full">
           <div
             className="flex justify-between items-center cursor-pointer"
             onClick={togglePasswordFields}
@@ -129,10 +110,10 @@ const ProfileView = () => {
               />
             </div>
           </div>
-        </div> */}
+        </div>
 
         {/* Description */}
-        {/* <div>
+        <div>
           <label className="text-sm text-gray-500 block mb-1">
             Description
           </label>
@@ -141,14 +122,14 @@ const ProfileView = () => {
             rows={3}
             defaultValue="About my self About my self About my self About my self"
           />
-        </div> */}
+        </div>
 
-        {/* <InputField label="City" value="Amstelveen" /> */}
+        <InputField label="City" value="Amstelveen" />
 
         {/* Profile Type Toggle */}
-        {/* <label className="text-sm text-gray-500 block mb-2">Profile type</label> */}
+        <label className="text-sm text-gray-500 block mb-2">Profile type</label>
 
-        {/* <div className="flex gap-2">
+        <div className="flex gap-2">
           <button
             className={`flex-1 py-2 rounded-full text-sm ${
               profileType === "Tenant"
@@ -169,7 +150,7 @@ const ProfileView = () => {
           >
             Landlord
           </button>
-        </div> */}
+        </div>
 
         {/* Tenant properties */}
         {profileType == "Tenant" && (
@@ -232,12 +213,12 @@ const ProfileView = () => {
         <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
 
         {/* submit button */}
-        {/* <button
+        <button
           className={`w-full py-2 rounded-full text-sm bg-red-50 text-red-500 font-medium`}
           onClick={() => {}}
         >
           Update
-        </button> */}
+        </button>
       </div>
     </div>
   );
