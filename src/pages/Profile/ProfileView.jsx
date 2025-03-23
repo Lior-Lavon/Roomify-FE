@@ -35,14 +35,13 @@ const ProfileView = () => {
     setShowPasswordFields((prev) => !prev);
   };
 
+  console.log("height : ", height);
   return (
     <div className="w-full h-full">
       <TopBar leftIcon="burger" />
-
       <p className="pl-4 mt-2 mb-1 text-lg sans-bold text-orange-600">
         My Profile
       </p>
-
       {/* Profile Picture and Name */}
       <div className="flex flex-col items-center" ref={profileImageRef}>
         <img
