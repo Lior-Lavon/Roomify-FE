@@ -4,7 +4,7 @@ import { TopBar } from "../../components";
 import usePreventPullToRefresh from "../../utils/hooks/usePreventPullToRefresh";
 
 const ProfileView = () => {
-  const userNameRef = useRef(null);
+  const profileImageRef = useRef(null);
   const [height, setHeight] = useState(0);
   const [profileType, setProfileType] = useState("Landlord");
   const [showPasswordFields, setShowPasswordFields] = useState(false);
@@ -17,8 +17,9 @@ const ProfileView = () => {
 
   useEffect(() => {
     const updateHeight = () => {
-      if (userNameRef.current) {
-        const topBottom = userNameRef.current.getBoundingClientRect().bottom;
+      if (profileImageRef.current) {
+        const topBottom =
+          profileImageRef.current.getBoundingClientRect().bottom;
         const bottomTop = window.innerHeight;
         setHeight(bottomTop - topBottom + 20); // Calculate space between them
       }
@@ -45,9 +46,8 @@ const ProfileView = () => {
       </p>
 
       {/* Profile Picture and Name */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center" ref={profileImageRef}>
         <img
-          ref={userNameRef}
           src={FemaleImage}
           alt="Profile"
           className="w-20 h-20 object-cover rounded-full mb-2"
