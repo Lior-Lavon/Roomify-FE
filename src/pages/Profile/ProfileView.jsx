@@ -135,12 +135,75 @@ const ProfileView = () => {
                 Landlord
               </button>
             </div>
+            {profileType == "Tenant" && (
+              <div className="w-full space-y-4 mt-4">
+                {/* Date of Birth */}
+                <InputField label="Date of birth" type="date" />
+
+                {/* Nationality */}
+                <SelectField
+                  label="Nationality"
+                  options={["Arab", "Dutch", "French", "Other"]}
+                />
+
+                {/* Owner Type */}
+                <SelectField
+                  label="Owner type"
+                  options={[
+                    "Roommate",
+                    "Private Owner",
+                    "Real Estate Agent",
+                    "N/A",
+                  ]}
+                />
+
+                {/* Speaks Languages (Searchable Dropdown with Tags) */}
+                <SearchableMultiSelectField
+                  label="Speaks languages"
+                  options={[
+                    "English",
+                    "Dutch",
+                    "Arabic",
+                    "Spanish",
+                    "French",
+                    "German",
+                    "Italian",
+                  ]}
+                />
+
+                {/* Living in Country */}
+                <SelectField
+                  label="Living in country"
+                  options={["Netherlands", "Germany", "France", "Spain"]}
+                />
+
+                {/* Status */}
+                <SelectField
+                  label="Status"
+                  options={[
+                    "Student",
+                    "Working Student",
+                    "Working",
+                    "Looking for a job",
+                  ]}
+                />
+
+                {/* Has a Pet */}
+                <YesNoToggle label="Has a pet" />
+
+                {/* Smoking Inside */}
+                <YesNoToggle label="Smoking inside" />
+
+                {/* Member of Student Association */}
+                <YesNoToggle label="Member of student association" />
+              </div>
+            )}
           </div>
 
           <div className="flex gap-2">
             <button
               className={`flex-1 py-2 rounded-full text-sm bg-red-50 text-red-500 font-medium`}
-              onClick={() => handleProfileTypeChange("Tenant")}
+              onClick={() => {}}
             >
               Update
             </button>
@@ -163,8 +226,130 @@ function InputField({ label, type = "text", value = "", placeholder = "" }) {
         defaultValue={value}
         placeholder={placeholder}
         disabled
-        className="w-full px-4 py-3 text-sm rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-red-400"
+        className="w-full px-4 py-3 text-sm rounded-full bg-gray-100 focus:outline-none"
       />
+    </div>
+  );
+}
+
+function SelectField({ label, options = [], value, onChange }) {
+  return (
+    <div className="relative">
+      <label className="text-sm text-gray-500 block mb-1">{label}</label>
+      <select
+        className="w-full appearance-none px-4 py-3 text-sm rounded-full border border-gray-300 focus:outline-none pr-10"
+        value={value}
+        onChange={onChange}
+      >
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </select>
+
+      {/* Custom arrow */}
+      <div className="pointer-events-none absolute right-3 top-1/2 text-gray-500">
+        ▼
+      </div>
+    </div>
+  );
+}
+
+function SearchableMultiSelectField({ label, options = [] }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  const handleSelect = (option) => {
+    if (!selectedItems.includes(option)) {
+      setSelectedItems([...selectedItems, option]);
+    }
+    setSearchTerm(""); // Clear search term after selection
+    setIsDropdownVisible(false); // Hide dropdown after selection
+  };
+
+  const handleRemove = (option) => {
+    setSelectedItems(selectedItems.filter((item) => item !== option));
+  };
+
+  const filteredOptions = options.filter((option) =>
+    option.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div>
+      <label className="text-sm text-gray-500 block mb-1">{label}</label>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setIsDropdownVisible(true); // Show dropdown when typing
+        }}
+        onFocus={() => setIsDropdownVisible(true)} // Show dropdown on focus
+        className="w-full px-4 py-3 text-sm rounded-lg border border-gray-300 focus:outline-none "
+      />
+      {isDropdownVisible && (
+        <div className="mt-2 border border-gray-300 rounded-lg shadow-lg bg-white">
+          {filteredOptions.map((option) => (
+            <div
+              key={option}
+              onClick={() => handleSelect(option)}
+              className="cursor-pointer hover:bg-gray-100 p-2 rounded"
+            >
+              {option}
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="mt-2 flex flex-wrap gap-2">
+        {selectedItems.map((item) => (
+          <div
+            key={item}
+            className="flex items-center bg-red-100 text-red-500 px-2 py-1 rounded-full"
+          >
+            {item}
+            <span
+              onClick={() => handleRemove(item)}
+              className="ml-2 cursor-pointer"
+            >
+              &times;
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function YesNoToggle({ label, value, onChange }) {
+  const [selected, setSelected] = useState(null);
+
+  const handleClick = (choice) => {
+    setSelected(choice);
+    onChange && onChange(choice);
+  };
+
+  return (
+    <div>
+      <label className="text-sm text-gray-500 block mb-2">{label}</label>
+      <div className="flex gap-2">
+        {["Yes", "No"].map((option) => (
+          <button
+            key={option}
+            onClick={() => handleClick(option)}
+            className={`px-4 py-1 rounded-full border text-sm ${
+              selected === option
+                ? "bg-red-100 text-red-500 border-red-400"
+                : "border-gray-300 text-gray-600"
+            }`}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

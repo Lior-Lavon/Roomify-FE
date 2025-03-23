@@ -21,12 +21,12 @@ const LoginMenuItems = [
   {
     id: 3,
     name: "My Properties",
-    link: "/#",
+    link: "",
   },
   {
     id: 4,
     name: "Section Name",
-    link: "/#",
+    link: "",
   },
   // {
   //   id: 5,
@@ -38,32 +38,32 @@ const MenuItems = [
   {
     id: 1,
     name: "Section name",
-    link: "/#",
+    link: "",
   },
   {
     id: 2,
     name: "Section name",
-    link: "/#",
+    link: "",
   },
   {
     id: 3,
     name: "Section name",
-    link: "/#",
+    link: "",
   },
   {
     id: 4,
     name: "Section name",
-    link: "/#",
+    link: "",
   },
   {
     id: 5,
     name: "Section name",
-    link: "/#",
+    link: "",
   },
   {
     id: 6,
     name: "Section name",
-    link: "/#",
+    link: "",
   },
 ];
 
