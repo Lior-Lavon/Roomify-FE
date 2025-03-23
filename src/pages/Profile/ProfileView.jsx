@@ -21,7 +21,7 @@ const ProfileView = () => {
         const topBottom =
           profileImageRef.current.getBoundingClientRect().bottom;
         const bottomTop = window.innerHeight;
-        setHeight(bottomTop - topBottom + 20); // Calculate space between them
+        setHeight(bottomTop - topBottom); // Calculate space between them
       }
     };
 
