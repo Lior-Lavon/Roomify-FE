@@ -202,14 +202,14 @@ const ProfileView = () => {
           </div>
         )}
 
-        <div className="flex gap-2">
-          <button
-            className={`flex-1 py-2 rounded-full text-sm bg-red-50 text-red-500 font-medium`}
-            onClick={() => {}}
-          >
-            Update
-          </button>
-        </div>
+        <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
+
+        <button
+          className={`w-full py-2 rounded-full text-sm bg-red-50 text-red-500 font-medium`}
+          onClick={() => {}}
+        >
+          Update
+        </button>
         {/* </div> */}
       </div>
     </div>
