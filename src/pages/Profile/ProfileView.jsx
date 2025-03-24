@@ -367,19 +367,92 @@
 import React from "react";
 
 const ProfileView = () => {
-  const cards = Array.from({ length: 20 }, (_, i) => `Card ${i + 1}`);
+  // Sample card data
+  const cards = [
+    {
+      id: 1,
+      title: "Card 1",
+      content: "This is the content for card 1",
+      color: "bg-blue-100",
+    },
+    {
+      id: 2,
+      title: "Card 2",
+      content: "This is the content for card 2",
+      color: "bg-green-100",
+    },
+    {
+      id: 3,
+      title: "Card 3",
+      content: "This is the content for card 3",
+      color: "bg-yellow-100",
+    },
+    {
+      id: 4,
+      title: "Card 4",
+      content: "This is the content for card 4",
+      color: "bg-red-100",
+    },
+    {
+      id: 5,
+      title: "Card 5",
+      content: "This is the content for card 5",
+      color: "bg-purple-100",
+    },
+    {
+      id: 6,
+      title: "Card 6",
+      content: "This is the content for card 6",
+      color: "bg-indigo-100",
+    },
+    {
+      id: 7,
+      title: "Card 7",
+      content: "This is the content for card 7",
+      color: "bg-pink-100",
+    },
+    {
+      id: 8,
+      title: "Card 8",
+      content: "This is the content for card 8",
+      color: "bg-orange-100",
+    },
+  ];
 
   return (
-    <div className="h-screen overflow-y-auto scrolling-touch bg-gray-100 p-4">
-      <div className="max-w-md mx-auto space-y-4">
-        {cards.map((card, index) => (
-          <div
-            key={index}
-            className="bg-white p-6 rounded-2xl shadow-md text-center text-lg font-medium"
-          >
-            {card}
-          </div>
-        ))}
+    <div
+      className="fixed inset-0 overflow-y-auto overscroll-contain bg-gray-50"
+      style={{
+        WebkitOverflowScrolling: "touch", // Enables momentum scrolling on iOS
+        overflowY: "auto",
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-2xl font-bold mb-6 text-center">
+          Scrollable Cards
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {cards.map((card) => (
+            <div
+              key={card.id}
+              className={`${card.color} rounded-lg shadow-md p-6 transition-transform duration-200 hover:shadow-lg`}
+            >
+              <h2 className="text-xl font-semibold mb-3">{card.title}</h2>
+              <p>{card.content}</p>
+              <p className="mt-4">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                in dui mauris. Vivamus hendrerit arcu sed erat molestie
+                vehicula.
+              </p>
+              <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors duration-200">
+                Learn More
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
