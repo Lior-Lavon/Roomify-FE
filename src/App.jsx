@@ -11,7 +11,7 @@ import {
 } from "./pages";
 import { useEffect, useState } from "react";
 import { getSecurityTokenFromLocalStorage } from "./utils/localStorage";
-import usePreventPullToRefresh from "./utils/hooks/usePreventPullToRefresh.js";
+// import usePreventPullToRefresh from "./utils/hooks/usePreventPullToRefresh.js";
 import bcrypt from "bcryptjs";
 import { store } from "./store.js";
 import {
@@ -26,7 +26,7 @@ import { Provider } from "react-redux";
 function App() {
   const [isCover, setIsCover] = useState(false);
 
-  usePreventPullToRefresh();
+  // usePreventPullToRefresh();
   useEffect(() => {
     checkSecurity();
   }, []);
