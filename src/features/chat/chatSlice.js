@@ -67,6 +67,21 @@ const initialState = {
       text: "Yes, would love to, I am working in walking distance from your address, so it seems perfect for me.",
       sender: "renter",
     },
+    {
+      id: 13,
+      text: "Yes, would love to, I am working in walking distance from your address, so it seems perfect for me.",
+      sender: "renter",
+    },
+    {
+      id: 14,
+      text: "Yes, would love to, I am working in walking distance from your address, so it seems perfect for me.",
+      sender: "renter",
+    },
+    {
+      id: 15,
+      text: "Yes, would love to, I am working in walking distance from your address, so it seems perfect for me.",
+      sender: "renter",
+    },
   ],
   isLoading: false,
 };

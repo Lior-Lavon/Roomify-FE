@@ -11,6 +11,8 @@ const FavoritesView = () => {
   });
 
   const { favoritesList } = useSelector((store) => store.user);
+  console.log("favoritesList : ", favoritesList);
+
   const { roomList } = useSelector((store) => store.chat);
 
   useEffect(() => {
