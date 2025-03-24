@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Pencil, Check } from "lucide-react";
 import FemaleImage from "../../assets/female.jpg";
 import { RoomCardMini, TopBar } from "../../components";
 import usePreventPullToRefresh from "../../utils/hooks/usePreventPullToRefresh";
@@ -77,8 +78,19 @@ const ProfileView = () => {
           WebkitOverflowScrolling: "touch",
         }}
       >
-        <InputField label="Your name" value="Jacky Varsano" />
-        <InputField label="Your email" value="jackyvarsano@gmail.com" />
+        {/* <InputField label="Your name" value="Jacky Varsano" /> */}
+        <InputFieldV2
+          label="Your name"
+          value="Jacky Varsano"
+          placeholder="Enter your name"
+          onChange={(val) => console.log("New value:", val)}
+        />
+
+        <InputField
+          label="Your email"
+          value="jackyvarsano@gmail.com"
+          isDisabled={true}
+        />
         {/* Update Password Section */}
         <div className="w-full">
           <div
@@ -124,7 +136,7 @@ const ProfileView = () => {
           />
         </div>
 
-        <InputField label="City" value="Amstelveen" />
+        {/* <InputField label="City" value="Amstelveen" /> */}
 
         {/* Profile Type Toggle */}
         <label className="text-sm text-gray-500 block mb-2">Profile type</label>
@@ -227,7 +239,13 @@ const ProfileView = () => {
 export default ProfileView;
 
 // InputField Component
-function InputField({ label, type = "text", value = "", placeholder = "" }) {
+function InputField({
+  label,
+  type = "text",
+  value = "",
+  placeholder = "",
+  isDisabled = false,
+}) {
   return (
     <div>
       <label className="text-sm text-gray-500 block mb-1">{label}</label>
@@ -235,9 +253,61 @@ function InputField({ label, type = "text", value = "", placeholder = "" }) {
         type={type}
         defaultValue={value}
         placeholder={placeholder}
-        disabled
+        disabled={isDisabled}
         className="w-full px-4 py-3 text-sm rounded-full bg-gray-100 focus:outline-none"
       />
+    </div>
+  );
+}
+
+function InputFieldV2({
+  label,
+  type = "text",
+  value = "",
+  placeholder = "",
+  isDisabled = false,
+  onChange = () => {},
+}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [inputValue, setInputValue] = useState(value);
+
+  const handleApply = () => {
+    setIsEditing(false);
+    onChange(inputValue);
+  };
+
+  return (
+    <div className="flex items-center justify-between w-full">
+      {!isEditing ? (
+        <>
+          <span className="text-sm text-gray-800">
+            {inputValue || placeholder}
+          </span>
+          <button
+            onClick={() => setIsEditing(true)}
+            className="ml-2 text-gray-500 hover:text-gray-700"
+          >
+            <Pencil size={18} />
+          </button>
+        </>
+      ) : (
+        <>
+          <input
+            type={type}
+            value={inputValue}
+            placeholder={placeholder}
+            disabled={isDisabled}
+            onChange={(e) => setInputValue(e.target.value)}
+            className="w-full px-4 py-2 text-sm rounded-full bg-gray-100 focus:outline-none"
+          />
+          <button
+            onClick={handleApply}
+            className="ml-2 text-green-500 hover:text-green-700"
+          >
+            <Check size={20} />
+          </button>
+        </>
+      )}
     </div>
   );
 }
