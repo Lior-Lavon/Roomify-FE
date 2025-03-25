@@ -117,12 +117,12 @@ const HomeView = () => {
         </div>
 
         {/* shareView */}
-        {shareView.show && (
+        {/* {shareView.show && (
           <ShareAdvert
             closeShareAdvert={closeShareAdvert}
             advertId={shareView.advertId}
           />
-        )}
+        )} */}
       </div>
 
       {/* show property view */}

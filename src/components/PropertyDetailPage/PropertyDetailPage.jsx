@@ -15,6 +15,8 @@ import PropertyDetailPageTopBar from "./PropertyDetailPageTopBar";
 import ShareAdvert from "../ShareAdvert/ShareAdvert";
 import ChatWithOwner from "../ChatWithOwner/ChatWithOwner";
 import SignIn from "../../pages/SignIn/SignIn";
+import { APIProvider } from "@vis.gl/react-google-maps";
+import MapView from "../MapView/MapView";
 
 const PropertyDetailPage = ({
   isVisible,
@@ -97,25 +99,29 @@ const PropertyDetailPage = ({
       >
         {/* Top Div */}
         <TopBar leftIcon="burger" rightIcon="login" />
+
         <div className="w-full h-full flex flex-col bg-white relative">
           <PropertyDetailPageTopBar
+            title={advertInfo?.Title}
             closePropertyDetailPage={closePropertyDetailPage}
           />
-          <div className="mx-4 flex-1 flex flex-col gap-1">
-            <p className="text-[15px]">Address...</p>
-            <p className="text-[11px] ">
-              Cozy room for rent in the heart of the city, offering a quiet,
-              peaceful setting. Fully furnished with a comfortable bed, desk,
-              wardrobe, and more, perfect for work or relaxation.
-            </p>
+
+          <div className="mt-1" onClick={showImageGallery}>
+            <ImageSlider imageList={advertInfo?.Images} dot_count={4} />
+          </div>
+
+          <div className="mx-4 flex-1 flex flex-col gap-[.3rem]">
+            {/* address */}
+            <p className="text-[14px]">{advertInfo?.Address}</p>
+
             <div className="w-full flex items-center justify-between ">
               <p className="text-[10px] w-full">
-                <span className="text-orange-600 text-[20px] sans-bold">
+                <span className="text-orange-600 text-[20px] sans-bold mr-1">
                   ${advertInfo?.Price}
                 </span>
                 /month
               </p>
-              <div className="w-full h-8 flex items-center justify-end gap-2 text-orange-600 ">
+              <div className="w-full h-6 flex items-center justify-end gap-2 text-orange-600 ">
                 <div onClick={setFavorite}>
                   {advertInfo?.IsFavorite ? (
                     <MdFavorite className="w-6 h-6" />
@@ -132,10 +138,15 @@ const PropertyDetailPage = ({
               </div>
             </div>
 
-            <div className="mt-1" onClick={showImageGallery}>
-              <ImageSlider imageList={advertInfo?.Images} dot_count={4} />
+            {/* Description */}
+            <p className="text-[11px] ">{advertInfo?.Description}</p>
+
+            {/* Map */}
+            <div className="w-full h-[100px] bg-red-500">
+              <MapView properties={[advertInfo]} />
             </div>
-            <div className="w-full text-[12px] flex flex-col gap-[.15rem]">
+
+            <div className="w-full text-[12px] flex flex-col gap-[.2rem]">
               <div className="flex">
                 <p className="w-[50%]">Shower</p>
                 <p className="w-[50%]">Stove</p>

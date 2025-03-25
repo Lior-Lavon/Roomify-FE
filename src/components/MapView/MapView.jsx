@@ -13,10 +13,14 @@ import BlackMarker from "../../assets/blackMarker.png";
 import Image1 from "../../assets/room1.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveAdvert } from "../../features/chat/chatSlice";
+import { LogIn } from "lucide-react";
 
 const MapView = ({ properties }) => {
   const { activeAdvert } = useSelector((store) => store.chat);
 
+  if (properties[0] == null) {
+    return <div></div>;
+  }
   return (
     <div className="w-full h-full">
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API}>
@@ -43,7 +47,7 @@ const MapComponent = ({ properties, visibleCardId }) => {
   useEffect(() => {
     if (!map) return; // Ensure map is loaded
 
-    const advert = properties.find((c) => c.Id === visibleCardId);
+    const advert = properties?.find((c) => c.Id === visibleCardId);
     if (advert && isUserInteracting.current) {
       const newCenter = { lat: advert.Location.lat, lng: advert.Location.lng };
 

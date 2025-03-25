@@ -6,12 +6,19 @@ const RoomCard = ({ advert, showPropertyInfo }) => {
   const handleClick = () => {
     showPropertyInfo(Id);
   };
+
+  function truncateString(str) {
+    let len = 100;
+    if (str.length <= len) return str;
+    return str.slice(0, len) + "...";
+  }
+
   return (
     <div className="border border-orange-200 rounded-xl p-4 min-w-[280px] w-[280px] shadow-[10px_2px_12px_rgba(0,0,0,.1)]">
-      <div className="text-sm flex flex-col gap-1">
-        <p className="font-bold">{Title}</p>
+      <div className="text-sm flex flex-col gap-2">
+        <p className="font-bold h-10 ">{Title}</p>
         <p className="text-[10px]">{Address}</p>
-        <p className="text-[10px]">{Description}</p>
+        <p className="text-[10px] h-11 ">{truncateString(Description)}</p>
         <p className="text-xs">
           <span className="text-sm text-orange-600">${Price}</span> / month
         </p>
