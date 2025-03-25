@@ -10,9 +10,8 @@ const placeholders = [
   "@Lior, please send me some  ",
 ];
 
-const Prompt = () => {
+const Prompt = ({ openChatView }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [text, setText] = useState("");
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
@@ -35,7 +34,7 @@ const Prompt = () => {
     dispatch(setUserPrompt(text));
 
     setTimeout(() => {
-      navigate("/chat");
+      openChatView(text);
     }, 600);
   };
 

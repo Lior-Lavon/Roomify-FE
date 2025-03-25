@@ -86,10 +86,11 @@ const ProfileView = () => {
           onChange={(val) => console.log("New value:", val)}
         />
 
-        <InputField
+        <InputFieldV2
           label="Your email"
           value="jackyvarsano@gmail.com"
-          isDisabled={true}
+          placeholder="Enter your name"
+          onChange={(val) => console.log("New value:", val)}
         />
         {/* Update Password Section */}
         <div className="w-full">

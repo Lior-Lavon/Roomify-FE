@@ -9,6 +9,7 @@ import {
 import useKeyboardStatus from "../../utils/hooks/useViewportHeight";
 import { useSelector } from "react-redux";
 import ChatWithOwner from "../../components/ChatWithOwner/ChatWithOwner";
+import ChatView from "../Chat/ChatView";
 
 // fixed top-[17rem]
 const HomeView = () => {
@@ -21,6 +22,7 @@ const HomeView = () => {
     show: false,
     advertId: 0,
   });
+  const [showChatView, setShowChatView] = useState(false);
 
   const { roomList } = useSelector((store) => store.chat);
 
@@ -62,6 +64,12 @@ const HomeView = () => {
     setShowChat(!showChat);
   };
 
+  const openChatView = (prompt) => {
+    console.log("prompt : ", prompt);
+
+    setShowChatView(true);
+  };
+
   return (
     <div className="w-full h-full flex">
       <div
@@ -86,7 +94,7 @@ const HomeView = () => {
           </div>
 
           <div className={`w-full mt-16`}>
-            <Prompt />
+            <Prompt openChatView={openChatView} />
 
             <div className="mt-10">
               <p className="text-center px-2 text-lg text-black">
@@ -108,21 +116,6 @@ const HomeView = () => {
           </div>
         </div>
 
-        {/* <div className="text-sm">
-        <p>Keyboard Open: {isKeyboardOpen ? "Yes" : "No"}</p>
-        <p>Keyboard Height: {keyboardHeight}px</p>
-      </div>
- */}
-        {/* show property view */}
-        {showAdvertInfo.show && (
-          <PropertyDetailPage
-            advertId={showAdvertInfo.advertId}
-            shareAdvert={shareAdvert}
-            showPropertyInfo={showPropertyInfo}
-            showChatWithOwner={showChatWithOwner}
-            showButtons={true}
-          />
-        )}
         {/* shareView */}
         {shareView.show && (
           <ShareAdvert
@@ -132,12 +125,19 @@ const HomeView = () => {
         )}
       </div>
 
-      {/* chat with owner */}
-      <ChatWithOwner
+      {/* show property view */}
+      <PropertyDetailPage
+        isVisible={showAdvertInfo.show}
         advertId={showAdvertInfo.advertId}
-        isVisible={showChat}
-        closeChatWithOwner={hideChatWithOwner}
-        allowPropertyPage={true}
+        closePropertyDetailPage={showPropertyInfo}
+        showPropertyInfo={showPropertyInfo}
+        showButtons={true}
+      />
+
+      {/* show property view */}
+      <ChatView
+        isVisible={showChatView}
+        closeChatViewPage={() => setShowChatView(false)}
       />
     </div>
   );

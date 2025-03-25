@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { TopBar } from "../../components";
-import {
-  setReturnToAfterLogin,
-  setUserLogin,
-} from "../../features/user/userSlice";
+import { setUserLogin } from "../../features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import googleLogo from "../../assets/google_logo.png";
 
 const SignIn = () => {
@@ -17,7 +14,6 @@ const SignIn = () => {
   const [password, setPassword] = useState("1234");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const { returnToAfterLogin } = useSelector((store) => store.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,16 +36,10 @@ const SignIn = () => {
   };
   const handleUserLogin = () => {
     dispatch(setUserLogin());
-    // check where to go back
-    if (returnToAfterLogin != null) {
-      if (returnToAfterLogin?.page == "chat") {
-        let update = { ...returnToAfterLogin, afterLogin: true };
-        dispatch(setReturnToAfterLogin(update));
-        navigate(`/chat`);
-      }
-    } else {
+
+    setTimeout(() => {
       navigate("/landing");
-    }
+    }, 200);
   };
 
   return (

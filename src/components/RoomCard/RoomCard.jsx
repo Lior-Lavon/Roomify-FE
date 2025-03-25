@@ -27,14 +27,20 @@ const RoomCard = ({ advert, showPropertyInfo }) => {
         </div>
         <div className="flex flex-row items-center justify-center gap-2 pt-2">
           <button
-            className="w-full text-xs bg-[#ffeeea] text-[#fe7d61] py-[.5rem] rounded-full"
+            className="w-full text-xs bg-orange-600 text-white py-[.5rem] rounded-full"
             onClick={handleClick}
           >
             View Room
           </button>
-          <button className="w-full text-xs bg-orange-600 text-black py-[.5rem] rounded-full">
+          {/* <button
+            className="w-full text-xs bg-[#ffeeea] text-[#fe7d61] py-[.5rem] rounded-full"
+            onClick={handleClick}
+          >
+            View Room
+          </button> */}
+          {/* <button className="w-full text-xs bg-orange-600 text-black py-[.5rem] rounded-full">
             Contact
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

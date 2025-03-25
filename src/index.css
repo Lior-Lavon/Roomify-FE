@@ -4,6 +4,7 @@
 } */
 
 @import "tailwindcss";
+@tailwindcss /typography
 
 body {
   padding: 0;
@@ -36,4 +37,15 @@ body {
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: bold;
+}
+
+/* Optional: add to your CSS file */
+.prose table {
+  @apply table-auto border-collapse w-full text-left;
+  font-size: 0.875rem; /* text-sm */
+}
+
+.prose th,
+.prose td {
+  @apply border px-4 py-2;
 }

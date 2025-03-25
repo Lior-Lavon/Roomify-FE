@@ -10,7 +10,6 @@ import { setIsFavorite } from "../../features/chat/chatSlice";
 import PropertyOnMap from "./PropertyOnMap";
 import PropertyImageGallery from "./PropertyImageGallery";
 import { useNavigate } from "react-router-dom";
-import { setReturnToAfterLogin } from "../../features/user/userSlice";
 import TopBar from "../TopBar/TopBar";
 import PropertyDetailPageTopBar from "./PropertyDetailPageTopBar";
 import ShareAdvert from "../ShareAdvert/ShareAdvert";
@@ -57,17 +56,10 @@ const PropertyDetailPage = ({
   };
 
   const showChatWithOwnerMe = () => {
-    if (profile) {
-      if (showChatWithOwner != undefined)
-        setShowChatWithOwner(!showChatWithOwner);
+    // check if user is logged in
+    if (profile != undefined) {
+      setShowChatWithOwner(!showChatWithOwner);
     } else {
-      dispatch(
-        setReturnToAfterLogin({
-          page: "chat",
-          advertId: advertInfo.Id,
-          showChat: true,
-        })
-      );
       navigate("/signin");
     }
   };

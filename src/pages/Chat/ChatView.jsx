@@ -14,8 +14,9 @@ import {
 } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatOptions } from "../../MockData/ChatOptions";
+import ChatViewTopBar from "./ChatViewTopBar";
 
-const ChatView = () => {
+const ChatView = ({ isVisible, closeChatViewPage }) => {
   const dispatch = useDispatch();
   const [chatFlow, setChatFlow] = useState([]);
   const [processFilters, setProcessFilters] = useState(false);
@@ -25,7 +26,6 @@ const ChatView = () => {
     advertId: 0,
   });
 
-  const { returnToAfterLogin } = useSelector((store) => store.user);
   const { roomList } = useSelector((store) => store.chat);
 
   const [chatInfo, setChatInfo] = useState({
@@ -86,18 +86,6 @@ const ChatView = () => {
       setFilterUpdate(false);
     }
   }, [filterUpdate]);
-
-  useEffect(() => {
-    // if (returnToAfterLogin != undefined) {
-    //   setShowAdvertInfo({ show: true, advertId: returnToAfterLogin.advertId });
-    //   if (returnToAfterLogin.showChat) {
-    //     showChatWithOwner(returnToAfterLogin.advertId);
-    //   }
-    //   if (returnToAfterLogin.afterLogin) {
-    //     dispatch(setReturnToAfterLogin(null));
-    //   }
-    // }
-  }, [returnToAfterLogin]);
 
   useEffect(() => {
     if (showLoading) {
@@ -334,13 +322,20 @@ const ChatView = () => {
   };
 
   return (
-    <div className="w-full h-full flex">
+    <div
+      className={`w-full h-full z-90 fixed top-0 right-0 transition-transform duration-500 flex flex-col bg-white ${
+        isVisible ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
       <div
         className="w-full flex flex-col"
         style={{ height: `${viewportHeight}px` }}
       >
         {/* Top Div */}
         <TopBar leftIcon="burger" rightIcon="login" />
+
+        {/* back view */}
+        <ChatViewTopBar closeChatViewPage={closeChatViewPage} />
 
         {/* Middle Div (Flexible) */}
         <div className="w-full flex-1 flex flex-col" ref={containerRef}>
