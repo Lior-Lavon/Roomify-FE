@@ -14,6 +14,7 @@ import TopBar from "../TopBar/TopBar";
 import PropertyDetailPageTopBar from "./PropertyDetailPageTopBar";
 import ShareAdvert from "../ShareAdvert/ShareAdvert";
 import ChatWithOwner from "../ChatWithOwner/ChatWithOwner";
+import SignIn from "../../pages/SignIn/SignIn";
 
 const PropertyDetailPage = ({
   isVisible,
@@ -23,15 +24,17 @@ const PropertyDetailPage = ({
   showButtons,
 }) => {
   const navigate = useNavigate();
-  const { profile } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const { roomList } = useSelector((store) => store.chat);
   const [shareView, setShareView] = useState(false);
   const [showChatWithOwner, setShowChatWithOwner] = useState(false);
+  const [showSignIn, setSignIn] = useState(false);
 
   const [advertInfo, setAdvertInfo] = useState(null);
   const [showMap, setShowMap] = useState(false);
   const [imageGallery, setImageGallery] = useState(false);
+
+  const { profile } = useSelector((store) => store.user);
 
   useEffect(() => {
     if (roomList.length > 0) {
@@ -43,6 +46,10 @@ const PropertyDetailPage = ({
       }
     }
   }, [advertId, roomList]);
+
+  useEffect(() => {
+    // console.log("useEffect profile : ", profile);
+  }, [profile]);
 
   const shareAdvertMe = () => {
     setShareView(!shareView);
@@ -57,10 +64,23 @@ const PropertyDetailPage = ({
 
   const showChatWithOwnerMe = () => {
     // check if user is logged in
-    if (profile != undefined) {
+    if (profile != null) {
       setShowChatWithOwner(!showChatWithOwner);
     } else {
-      navigate("/signin");
+      // show SignIn view
+      setSignIn(true);
+    }
+  };
+
+  // close signin
+  // if user signed -> show chatWithOwner
+  const closeSignIn = (isSuccess) => {
+    setSignIn(false);
+
+    if (isSuccess) {
+      setTimeout(() => {
+        setShowChatWithOwner(true);
+      }, 500);
     }
   };
 
@@ -185,6 +205,8 @@ const PropertyDetailPage = ({
         closeChatWithOwner={showChatWithOwnerMe}
         allowPropertyPage={false}
       />
+      {/* chat with owner */}
+      <SignIn isVisible={showSignIn} closeSignIn={closeSignIn} />
     </div>
   );
 };

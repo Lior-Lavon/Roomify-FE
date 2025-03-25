@@ -16,7 +16,7 @@ const ChatViewTopBar = ({ closeChatViewPage }) => {
           alt=""
           className="w-9 h-9 flex items-center justify-center object-cover rounded-full"
         /> */}
-        <p className="sans-regular text-lg">Chat with AI</p>
+        <p className="sans-regular text-lg">Property search</p>
       </div>
     </div>
   );

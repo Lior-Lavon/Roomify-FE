@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import FemaleImage from "../../assets/female.jpg";
 import { setUserLogout } from "../../features/user/userSlice";
+import { IoMdClose } from "react-icons/io";
 
 const LoginMenuItems = [
   {
@@ -72,7 +73,7 @@ const TopBar = (props) => {
   const navigate = useNavigate();
 
   const { profile } = useSelector((store) => store.user);
-  const { leftIcon, rightIcon } = props;
+  const { leftIcon, rightIcon, closeSignIn } = props;
   const [isMenu, setIsMenu] = useState(false);
 
   const handleClick = () => {
@@ -102,7 +103,7 @@ const TopBar = (props) => {
   return (
     <div className="w-full bg-white px-2 h-14 flex flex-row items-center justify-between text-lg z-50 border-b-[1px] border-gray-300 sans-regular">
       <div className="text-3xl w-[20%]">
-        {leftIcon == "burger" && (
+        {leftIcon == "burger" ? (
           <div className="group relative cursor-pointer">
             {!isMenu ? (
               !profile ? (
@@ -180,6 +181,10 @@ const TopBar = (props) => {
               )}
             </div>
           </div>
+        ) : (
+          <div className="" onClick={closeSignIn}>
+            {closeSignIn != undefined && <IoMdClose />}
+          </div>
         )}
       </div>
 
@@ -193,8 +198,8 @@ const TopBar = (props) => {
       </div>
 
       <div className="w-[20%] max-w-[80px]">
-        {rightIcon != undefined ? (
-          !profile ? (
+        {rightIcon != undefined &&
+          (!profile ? (
             <div
               className="bg-orange-600 text-white rounded-xl px-2 py-1 text-sm text-center"
               onClick={handleSignIn}
@@ -208,10 +213,7 @@ const TopBar = (props) => {
             >
               <IoChatbubbleOutline className="text-2xl" />
             </div>
-          )
-        ) : (
-          <div></div>
-        )}
+          ))}
       </div>
     </div>
   );
