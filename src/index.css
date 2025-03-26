@@ -49,3 +49,16 @@ body {
 .prose td {
   @apply border px-4 py-2;
 }
+
+.tight-markdown-table table {
+  table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tight-markdown-table th,
+.tight-markdown-table td {
+  padding-left: 4px;
+  padding-right: 4px;
+  white-space: nowrap;
+}
