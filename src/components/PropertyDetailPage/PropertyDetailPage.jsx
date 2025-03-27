@@ -119,10 +119,10 @@ const PropertyDetailPage = ({
           </div>
 
           <div
-            className="w-full my-2 flex flex-col gap-[.3rem] overflow-y-auto "
+            className="w-full my-2 overflow-y-auto "
             style={{ height: `${height}px` }}
           >
-            <div className="px-2">
+            <div className="px-2 flex flex-col gap-[.3rem]">
               <p className="text-lg">{advertInfo?.Title}</p>
 
               <p className="text-[14px]">{advertInfo?.Address}</p>
