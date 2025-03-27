@@ -14,12 +14,12 @@ const PropertyDetailPageTopBar = ({ title, closePropertyDetailPage }) => {
         <RiArrowLeftSLine className="text-[40px]" />
       </div>
       <div className="flex gap-1 items-center">
-        <img
+        {/* <img
           src={PropertyImg}
           alt=""
           className="w-9 h-9 flex items-center justify-center object-cover rounded-full"
-        />
-        <p className="sans-regular text-[1rem] bg-amber-300">{title}</p>
+        /> */}
+        <p className="sans-regular text-[1rem] ">{title}</p>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ const ImageSlider = ({ imageList, dot_count }) => {
     <div className="w-full flex flex-col ">
       {/* TopDiv with horizontal scrollable cards */}
       <div
-        className="w-full overflow-x-auto whitespace-nowrap flex items-center gap-x-2 pb-1"
+        className="w-full overflow-x-auto whitespace-nowrap flex items-center pb-1"
         style={{
           WebkitOverflowScrolling: "touch",
           scrollbarWidth: "none", // for Firefox
@@ -37,10 +37,13 @@ const ImageSlider = ({ imageList, dot_count }) => {
       >
         {imageList?.map((image, index) => {
           return (
-            <div key={index} className="flex items-center justify-center ">
+            <div
+              key={index}
+              className="min-w-full w-full flex items-center justify-center bg-red-400"
+            >
               <img
                 src={image}
-                className="min-w-[8.2rem] w-[8.2rem] h-[7rem] object-cover rounded-lg"
+                className="w-full h-[12rem] object-cover rounded-lg"
               />
             </div>
           );

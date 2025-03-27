@@ -128,9 +128,9 @@ const PropertyDetailPage = ({
                     <MdFavoriteBorder className="w-6 h-6" />
                   )}
                 </div>
-                <div onClick={showMapOverlay}>
+                {/* <div onClick={showMapOverlay}>
                   <FiMapPin className="w-6 h-6 " />
-                </div>
+                </div> */}
                 <div onClick={shareAdvertMe}>
                   <GoShareAndroid className="w-6 h-6 " />
                 </div>
