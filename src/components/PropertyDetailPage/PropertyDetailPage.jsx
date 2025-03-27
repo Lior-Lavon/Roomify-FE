@@ -123,15 +123,13 @@ const PropertyDetailPage = ({
             />
           </div>
 
-          <div
+          {/* <div
             className="w-full my-2 flex flex-col gap-[.3rem] overflow-y-auto"
             style={{ height: `${height}px` }}
           >
             <div className="px-2">
-              {/* Room name */}
               <p className="text-lg">{advertInfo?.Title}</p>
 
-              {/* address */}
               <p className="text-[14px]">{advertInfo?.Address}</p>
 
               <div className="w-full flex items-center justify-between ">
@@ -149,19 +147,15 @@ const PropertyDetailPage = ({
                       <MdFavoriteBorder className="w-6 h-6" />
                     )}
                   </div>
-                  {/* <div onClick={showMapOverlay}>
-                  <FiMapPin className="w-6 h-6 " />
-                </div> */}
+                  
                   <div onClick={shareAdvertMe}>
                     <GoShareAndroid className="w-6 h-6 " />
                   </div>
                 </div>
               </div>
 
-              {/* Description */}
               <p className="text-[11px] ">{advertInfo?.Description}</p>
 
-              {/* Map */}
               <div className="w-full h-[100px] bg-red-500">
                 <MapView properties={[advertInfo]} />
               </div>
@@ -189,7 +183,7 @@ const PropertyDetailPage = ({
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {showButtons && (
             <div
