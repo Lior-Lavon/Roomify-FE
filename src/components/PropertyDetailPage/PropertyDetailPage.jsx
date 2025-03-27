@@ -77,13 +77,12 @@ const PropertyDetailPage = ({
   // close signin
   // if user signed -> show chatWithOwner
   const closeSignIn = (isSuccess) => {
-    setSignIn(false);
-
     if (isSuccess) {
-      setTimeout(() => {
-        setShowChatWithOwner(true);
-      }, 500);
+      setShowChatWithOwner(true);
     }
+    setTimeout(() => {
+      setSignIn(false);
+    }, 300);
   };
 
   const showImageGallery = () => {
