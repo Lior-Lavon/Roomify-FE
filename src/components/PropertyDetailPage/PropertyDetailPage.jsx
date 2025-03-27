@@ -38,16 +38,11 @@ const PropertyDetailPage = ({
 
   const { profile } = useSelector((store) => store.user);
   const topRef = useRef(null);
-  const bottomRef = useRef(null);
 
   useEffect(() => {
     if (topRef.current) {
       const topBottom = topRef.current.getBoundingClientRect().bottom;
-      let bottomTop = window.innerHeight;
-      if (bottomRef.current)
-        bottomTop = bottomRef.current.getBoundingClientRect().top;
-
-      console.log(bottomTop - topBottom);
+      let bottomTop = window.innerHeight - 56;
 
       setHeight(bottomTop - topBottom);
     }
@@ -123,8 +118,8 @@ const PropertyDetailPage = ({
             />
           </div>
 
-          {/* <div
-            className="w-full my-2 flex flex-col gap-[.3rem] overflow-y-auto"
+          <div
+            className="w-full my-2 flex flex-col gap-[.3rem] overflow-y-auto "
             style={{ height: `${height}px` }}
           >
             <div className="px-2">
@@ -147,7 +142,7 @@ const PropertyDetailPage = ({
                       <MdFavoriteBorder className="w-6 h-6" />
                     )}
                   </div>
-                  
+
                   <div onClick={shareAdvertMe}>
                     <GoShareAndroid className="w-6 h-6 " />
                   </div>
@@ -156,7 +151,7 @@ const PropertyDetailPage = ({
 
               <p className="text-[11px] ">{advertInfo?.Description}</p>
 
-              <div className="w-full h-[100px] bg-red-500">
+              <div className="w-full h-[100px] ">
                 <MapView properties={[advertInfo]} />
               </div>
 
@@ -182,14 +177,12 @@ const PropertyDetailPage = ({
                   <p className="w-[50%]">Internet</p>
                 </div>
               </div>
+              <div className="w-full h-20 bg-white"></div>
             </div>
-          </div> */}
+          </div>
 
           {showButtons && (
-            <div
-              ref={bottomRef}
-              className="w-full h-12 fixed bottom-0 flex justify-center "
-            >
+            <div className="w-full h-12 fixed bottom-0 flex justify-center ">
               <button
                 className="w-[90%] my-1 bg-orange-600 text-white rounded-full py-2 cursor-pointer"
                 onClick={showChatWithOwnerMe}
