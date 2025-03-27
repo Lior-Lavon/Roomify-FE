@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
+import { RiArrowLeftSLine } from "react-icons/ri";
 
-const ImageSlider = ({ imageList, dot_count }) => {
+const ImageSlider = ({ imageList, dot_count, closePropertyDetailPage }) => {
   const scrollRef = useRef(null);
   const [activeDot, setActiveDot] = useState(0);
 
@@ -23,11 +24,15 @@ const ImageSlider = ({ imageList, dot_count }) => {
     }
   }, [dot_count]); // Add dot_count as a dependency to handle changes
 
+  const closePropertyDetailPageMe = (e) => {
+    e.stopPropagation();
+    closePropertyDetailPage();
+  };
+
   return (
-    <div className="w-full flex flex-col ">
-      {/* TopDiv with horizontal scrollable cards */}
+    <div className="w-full flex flex-col relative">
       <div
-        className="w-full overflow-x-auto whitespace-nowrap flex items-center pb-1"
+        className="w-full overflow-x-auto whitespace-nowrap flex items-center pb-1 to-0"
         style={{
           WebkitOverflowScrolling: "touch",
           scrollbarWidth: "none", // for Firefox
@@ -39,15 +44,21 @@ const ImageSlider = ({ imageList, dot_count }) => {
           return (
             <div
               key={index}
-              className="min-w-full w-full flex items-center justify-center bg-red-400"
+              className="min-w-full w-full flex items-center justify-center"
             >
-              <img
-                src={image}
-                className="w-full h-[12rem] object-cover rounded-lg"
-              />
+              <img src={image} className="w-full h-[12rem] object-cover" />
             </div>
           );
         })}
+      </div>
+
+      <div
+        className="w-8 h-8 z-20 ml-4 mt-2 absolute"
+        onClick={closePropertyDetailPageMe}
+      >
+        <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
+          <RiArrowLeftSLine className="text-[40px] text-black" />
+        </div>
       </div>
 
       {/* BottomDiv with dynamic dots */}

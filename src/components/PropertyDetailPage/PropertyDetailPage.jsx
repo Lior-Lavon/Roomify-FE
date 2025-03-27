@@ -11,7 +11,6 @@ import PropertyOnMap from "./PropertyOnMap";
 import PropertyImageGallery from "./PropertyImageGallery";
 import { useNavigate } from "react-router-dom";
 import TopBar from "../TopBar/TopBar";
-import PropertyDetailPageTopBar from "./PropertyDetailPageTopBar";
 import ShareAdvert from "../ShareAdvert/ShareAdvert";
 import ChatWithOwner from "../ChatWithOwner/ChatWithOwner";
 import SignIn from "../../pages/SignIn/SignIn";
@@ -100,16 +99,18 @@ const PropertyDetailPage = ({
         <TopBar leftIcon="burger" rightIcon="login" />
 
         <div className="w-full h-full flex flex-col bg-white relative">
-          <PropertyDetailPageTopBar
-            title={advertInfo?.Title}
-            closePropertyDetailPage={closePropertyDetailPage}
-          />
-
           <div className="mt-1" onClick={showImageGallery}>
-            <ImageSlider imageList={advertInfo?.Images} dot_count={4} />
+            <ImageSlider
+              imageList={advertInfo?.Images}
+              dot_count={4}
+              closePropertyDetailPage={closePropertyDetailPage}
+            />
           </div>
 
-          <div className="mx-4 flex-1 flex flex-col gap-[.3rem]">
+          <div className="mx-4 my-2 flex-1 flex flex-col gap-[.3rem]">
+            {/* Room name */}
+            <p className="text-lg">{advertInfo?.Title}</p>
+
             {/* address */}
             <p className="text-[14px]">{advertInfo?.Address}</p>
 
