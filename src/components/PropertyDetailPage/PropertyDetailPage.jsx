@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import ImageSlider from "../ImageSlider/ImageSlider";
 import { PiDivide } from "react-icons/pi";
@@ -26,6 +26,7 @@ const PropertyDetailPage = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [height, setHeight] = useState(0);
   const { roomList } = useSelector((store) => store.chat);
   const [shareView, setShareView] = useState(false);
   const [showChatWithOwner, setShowChatWithOwner] = useState(false);
@@ -36,6 +37,21 @@ const PropertyDetailPage = ({
   const [imageGallery, setImageGallery] = useState(false);
 
   const { profile } = useSelector((store) => store.user);
+  const topRef = useRef(null);
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    if (topRef.current) {
+      const topBottom = topRef.current.getBoundingClientRect().bottom;
+      let bottomTop = window.innerHeight;
+      if (bottomRef.current)
+        bottomTop = bottomRef.current.getBoundingClientRect().top;
+
+      console.log(bottomTop - topBottom);
+
+      setHeight(bottomTop - topBottom);
+    }
+  }, []);
 
   useEffect(() => {
     if (roomList.length > 0) {
@@ -99,7 +115,7 @@ const PropertyDetailPage = ({
         <TopBar leftIcon="burger" rightIcon="login" />
 
         <div className="w-full h-full flex flex-col bg-white relative">
-          <div className="mt-1" onClick={showImageGallery}>
+          <div className="mt-1" onClick={showImageGallery} ref={topRef}>
             <ImageSlider
               imageList={advertInfo?.Images}
               dot_count={4}
@@ -107,73 +123,81 @@ const PropertyDetailPage = ({
             />
           </div>
 
-          <div className="mx-4 my-2 flex-1 flex flex-col gap-[.3rem]">
-            {/* Room name */}
-            <p className="text-lg">{advertInfo?.Title}</p>
+          <div
+            className="w-full my-2 flex flex-col gap-[.3rem] overflow-y-auto"
+            style={{ height: `${height}px` }}
+          >
+            <div className="px-2">
+              {/* Room name */}
+              <p className="text-lg">{advertInfo?.Title}</p>
 
-            {/* address */}
-            <p className="text-[14px]">{advertInfo?.Address}</p>
+              {/* address */}
+              <p className="text-[14px]">{advertInfo?.Address}</p>
 
-            <div className="w-full flex items-center justify-between ">
-              <p className="text-[10px] w-full">
-                <span className="text-orange-600 text-[20px] sans-bold mr-1">
-                  ${advertInfo?.Price}
-                </span>
-                /month
-              </p>
-              <div className="w-full h-6 flex items-center justify-end gap-2 text-orange-600 ">
-                <div onClick={setFavorite}>
-                  {advertInfo?.IsFavorite ? (
-                    <MdFavorite className="w-6 h-6" />
-                  ) : (
-                    <MdFavoriteBorder className="w-6 h-6" />
-                  )}
-                </div>
-                {/* <div onClick={showMapOverlay}>
+              <div className="w-full flex items-center justify-between ">
+                <p className="text-[10px] w-full">
+                  <span className="text-orange-600 text-[20px] sans-bold mr-1">
+                    ${advertInfo?.Price}
+                  </span>
+                  /month
+                </p>
+                <div className="w-full h-6 flex items-center justify-end gap-2 text-orange-600 ">
+                  <div onClick={setFavorite}>
+                    {advertInfo?.IsFavorite ? (
+                      <MdFavorite className="w-6 h-6" />
+                    ) : (
+                      <MdFavoriteBorder className="w-6 h-6" />
+                    )}
+                  </div>
+                  {/* <div onClick={showMapOverlay}>
                   <FiMapPin className="w-6 h-6 " />
                 </div> */}
-                <div onClick={shareAdvertMe}>
-                  <GoShareAndroid className="w-6 h-6 " />
+                  <div onClick={shareAdvertMe}>
+                    <GoShareAndroid className="w-6 h-6 " />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Description */}
-            <p className="text-[11px] ">{advertInfo?.Description}</p>
+              {/* Description */}
+              <p className="text-[11px] ">{advertInfo?.Description}</p>
 
-            {/* Map */}
-            <div className="w-full h-[100px] bg-red-500">
-              <MapView properties={[advertInfo]} />
-            </div>
+              {/* Map */}
+              <div className="w-full h-[100px] bg-red-500">
+                <MapView properties={[advertInfo]} />
+              </div>
 
-            <div className="w-full text-[12px] flex flex-col gap-[.2rem]">
-              <div className="flex">
-                <p className="w-[50%]">Shower</p>
-                <p className="w-[50%]">Stove</p>
-              </div>
-              <div className="flex">
-                <p className="w-[50%]">Bathtub</p>
-                <p className="w-[50%]">Induction Cooking</p>
-              </div>
-              <div className="flex">
-                <p className="w-[50%]">Balcony</p>
-                <p className="w-[50%]">TV</p>
-              </div>
-              <div className="flex">
-                <p className="w-[50%]">Cabinet</p>
-                <p className="w-[50%]">Sofa</p>
-              </div>
-              <div className="flex">
-                <p className="w-[50%]">Bed</p>
-                <p className="w-[50%]">Internet</p>
+              <div className="w-full text-[12px] flex flex-col gap-[.2rem]">
+                <div className="flex">
+                  <p className="w-[50%]">Shower</p>
+                  <p className="w-[50%]">Stove</p>
+                </div>
+                <div className="flex">
+                  <p className="w-[50%]">Bathtub</p>
+                  <p className="w-[50%]">Induction Cooking</p>
+                </div>
+                <div className="flex">
+                  <p className="w-[50%]">Balcony</p>
+                  <p className="w-[50%]">TV</p>
+                </div>
+                <div className="flex">
+                  <p className="w-[50%]">Cabinet</p>
+                  <p className="w-[50%]">Sofa</p>
+                </div>
+                <div className="flex">
+                  <p className="w-[50%]">Bed</p>
+                  <p className="w-[50%]">Internet</p>
+                </div>
               </div>
             </div>
           </div>
 
           {showButtons && (
-            <div className="mx-4 h-12">
+            <div
+              ref={bottomRef}
+              className="w-full h-12 fixed bottom-0 flex justify-center "
+            >
               <button
-                className="w-full my-1 bg-orange-600 text-white rounded-full py-2 cursor-pointer"
+                className="w-[90%] my-1 bg-orange-600 text-white rounded-full py-2 cursor-pointer"
                 onClick={showChatWithOwnerMe}
               >
                 Contact the landlord
