@@ -52,7 +52,11 @@ const SignIn = ({ isVisible, closeSignIn }) => {
   };
 
   const closeSignInMe = () => {
-    closeSignIn(false);
+    if (closeSignIn != undefined) {
+      closeSignIn(false);
+    } else {
+      navigate("/landing");
+    }
   };
 
   return (
