@@ -115,7 +115,7 @@ const PropertyDetailPage = ({
         <TopBar leftIcon="burger" rightIcon="login" />
 
         <div className="w-full h-full flex flex-col bg-white relative">
-          <div className="mt-1" onClick={showImageGallery} ref={topRef}>
+          <div className="" onClick={showImageGallery} ref={topRef}>
             <ImageSlider
               imageList={advertInfo?.Images}
               dot_count={4}
