@@ -11,7 +11,7 @@ const MyAccount = () => {
     if (profileImageRef.current) {
       const topBottom = profileImageRef.current.getBoundingClientRect().bottom;
       let bottomTop = window.innerHeight;
-      setHeight(bottomTop - topBottom); // Calculate space between them
+      setHeight(bottomTop - topBottom - 20); // Calculate space between them
     }
 
     ///////
