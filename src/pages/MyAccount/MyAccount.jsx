@@ -1,27 +1,39 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { InputField, TopBar } from "../../components";
 import FemaleImage from "../../assets/female.jpg";
 import { IoMdCheckmark } from "react-icons/io";
 
 const MyAccount = () => {
   const profileImageRef = useRef();
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (profileImageRef.current) {
+      const topBottom = profileImageRef.current.getBoundingClientRect().bottom;
+      let bottomTop = window.innerHeight;
+      setHeight(bottomTop - topBottom); // Calculate space between them
+    }
+  }, []);
 
   return (
     <div className="w-full h-screen">
       {/* Top Div */}
       <TopBar leftIcon="burger" />
 
-      <div className="w-[90%] mx-auto mt-6 flex flex-col gap-4 ">
-        {/* Profile Picture and Name */}
-        <div className="flex flex-col items-center" ref={profileImageRef}>
-          <img
-            src={FemaleImage}
-            alt="Profile"
-            className="w-20 h-20 object-cover rounded-full mb-2"
-          />
-          <h2 className="text-xl font-semibold">Jacky Varsano</h2>
-        </div>
+      {/* Profile Picture and Name */}
+      <div className="flex flex-col items-center" ref={profileImageRef}>
+        <img
+          src={FemaleImage}
+          alt="Profile"
+          className="w-20 h-20 object-cover rounded-full mb-2"
+        />
+        <h2 className="text-xl font-semibold">Jacky Varsano</h2>
+      </div>
 
+      <div
+        className="w-full mt-4 overflow-y-auto overflow-hidden"
+        style={{ height: `${height}px` }}
+      >
         {/* account verified */}
         <div className="w-full px-4 bg-gray-100 rounded-full flex items-center justify-between text-green-500">
           <p className="my-2">This account is verified</p>
