@@ -13,7 +13,7 @@ const SignIn = ({ isVisible, closeSignIn }) => {
   // 0 == login
   // 1 == register
   // 2 == forgot your password
-  // 3 == update your password
+  // 3 == update New password
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("1234");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -303,7 +303,7 @@ const SignIn = ({ isVisible, closeSignIn }) => {
             )}
             <form onSubmit={handleSubmit} className="mt-8 space-y-4">
               <div className="flex flex-col gap-2">
-                <p className="text-gray-500 text-sm pl-2">Your password</p>
+                <p className="text-gray-500 text-sm pl-2">New password</p>
                 <input
                   type="password"
                   placeholder="Password"
