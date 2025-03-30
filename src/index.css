@@ -10,8 +10,9 @@ html,
 body {
   padding: 0;
   margin: 0;
-  overscroll-behavior: none;
-  touch-action: manipulation;
+  overscroll-behavior-y: contain; /* or 'none' */
+  height: 100%;
+  overflow: hidden;
 }
 
 .gm-style-iw button[aria-label="Close"] {

@@ -8,6 +8,23 @@ const MyAccount = () => {
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
+    const preventTouchMove = (e) => {
+      console.log("usePreventBodyScroll preventTouchMove");
+      e.preventDefault();
+    };
+
+    document.body.addEventListener("touchmove", preventTouchMove, {
+      passive: false,
+    });
+
+    return () => {
+      document.body.removeEventListener("touchmove", preventTouchMove, {
+        passive: false,
+      });
+    };
+  }, []);
+
+  useEffect(() => {
     if (profileImageRef.current) {
       const topBottom = profileImageRef.current.getBoundingClientRect().bottom;
       let bottomTop = window.innerHeight;
@@ -50,7 +67,7 @@ const MyAccount = () => {
       </div>
 
       <div
-        className="w-full mt-4 overflow-y-auto overflow-hidden bg-red-300"
+        className="w-full mt-4 overflow-y-auto overflow-hidden"
         style={{ height: `${height}px` }}
       >
         <div className="w-[90%] mx-auto flex flex-col gap-4">
