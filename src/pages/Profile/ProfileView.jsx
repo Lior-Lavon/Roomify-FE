@@ -25,29 +25,7 @@ const ProfileView = () => {
     };
 
     updateHeight();
-
-    // window.addEventListener("resize", updateHeight);
-    // return () => {
-    //   window.removeEventListener("resize", updateHeight);
-    // };
   }, []);
-
-  const togglePasswordFields = () => {
-    setShowPasswordFields((prev) => !prev);
-  };
-
-  // useEffect(() => {
-  //   const el = scrollRef.current;
-
-  //   const clampScroll = () => {
-  //     if (el.scrollTop > el.scrollHeight - el.clientHeight) {
-  //       el.scrollTop = el.scrollHeight - el.clientHeight;
-  //     }
-  //   };
-
-  //   el.addEventListener("touchstart", clampScroll);
-  //   return () => el.removeEventListener("touchstart", clampScroll);
-  // }, []);
 
   return (
     <div className="w-full h-full">
@@ -93,7 +71,7 @@ const ProfileView = () => {
           </div>
           {profileType === "Landlord" ? (
             <div
-              className="w-full flex flex-col gap-4 mt-4 overflow-y-auto overflow-hidden bg-red-300"
+              className="w-full flex flex-col gap-4 mt-4 overflow-y-auto overflow-hidden "
               style={{ height: `${height}px` }}
             >
               {/* Owner Type */}
@@ -128,7 +106,7 @@ const ProfileView = () => {
             </div>
           ) : (
             <div
-              className="w-full flex flex-col gap-4 mt-4 overflow-y-auto overflow-hidden bg-blue-300"
+              className="w-full flex flex-col gap-4 mt-4 overflow-y-auto overflow-hidden"
               style={{ height: `${height}px` }}
             >
               {/* Description */}
