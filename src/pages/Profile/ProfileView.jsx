@@ -5,7 +5,7 @@ import { InputField, RoomCardMini, TopBar } from "../../components";
 import usePreventPullToRefresh from "../../utils/hooks/usePreventPullToRefresh";
 
 const ProfileView = () => {
-  const profileImageRef = useRef(null);
+  const topRef = useRef(null);
   const scrollRef = useRef(null);
   const [height, setHeight] = useState(0);
   const [profileType, setProfileType] = useState("Landlord");
@@ -17,11 +17,10 @@ const ProfileView = () => {
 
   useEffect(() => {
     const updateHeight = () => {
-      if (profileImageRef.current) {
-        const topBottom =
-          profileImageRef.current.getBoundingClientRect().bottom;
+      if (topRef.current) {
+        const topBottom = topRef.current.getBoundingClientRect().bottom;
         const bottomTop = window.innerHeight;
-        setHeight(bottomTop - topBottom); // Calculate space between them
+        setHeight(bottomTop - topBottom - 20); // Calculate space between them
       }
     };
 
@@ -37,27 +36,29 @@ const ProfileView = () => {
     setShowPasswordFields((prev) => !prev);
   };
 
-  useEffect(() => {
-    const el = scrollRef.current;
+  // useEffect(() => {
+  //   const el = scrollRef.current;
 
-    const clampScroll = () => {
-      if (el.scrollTop > el.scrollHeight - el.clientHeight) {
-        el.scrollTop = el.scrollHeight - el.clientHeight;
-      }
-    };
+  //   const clampScroll = () => {
+  //     if (el.scrollTop > el.scrollHeight - el.clientHeight) {
+  //       el.scrollTop = el.scrollHeight - el.clientHeight;
+  //     }
+  //   };
 
-    el.addEventListener("touchstart", clampScroll);
-    return () => el.removeEventListener("touchstart", clampScroll);
-  }, []);
+  //   el.addEventListener("touchstart", clampScroll);
+  //   return () => el.removeEventListener("touchstart", clampScroll);
+  // }, []);
 
   return (
     <div className="w-full h-full">
       <TopBar leftIcon="burger" />
+
       <p className="pl-4 mt-2 mb-1 text-lg sans-bold text-orange-600">
         My Profile
       </p>
+
       {/* Profile Picture and Name */}
-      <div className="flex flex-col items-center" ref={profileImageRef}>
+      <div className="flex flex-col items-center">
         <img
           src={FemaleImage}
           alt="Profile"
@@ -66,139 +67,140 @@ const ProfileView = () => {
         <h2 className="text-xl font-semibold">Jacky Varsano</h2>
       </div>
 
-      {/* body */}
-      <div
-        className="w-full max-w-[640px] min-w-[300px] py-4 px-4 overflow-y-auto space-y-4 "
-        ref={scrollRef}
-        // style={{ height: `${height + 1}px` }}
-        style={{
-          height: `${height}px`,
-          maxHeight: `${height}px`,
-          overflowY: "auto",
-          WebkitOverflowScrolling: "touch",
-        }}
-      >
-        {/* <InputField label="Your name" value="Jacky Varsano" /> */}
-        <InputFieldV2
-          label="Your name"
-          value="Jacky Varsano"
-          placeholder="Enter your name"
-          onChange={(val) => console.log("New value:", val)}
-        />
-
-        <InputFieldV2
-          label="Your email"
-          value="jackyvarsano@gmail.com"
-          placeholder="Enter your name"
-          onChange={(val) => console.log("New value:", val)}
-        />
-        {/* Description */}
-        <div>
-          <label className="text-sm text-gray-500 block mb-1">
-            Description
-          </label>
-          <textarea
-            className="w-full rounded-2xl border border-gray-300 p-3 text-sm"
-            rows={3}
-            defaultValue="About my self About my self About my self About my self"
-          />
-        </div>
-
-        {/* <InputField label="City" value="Amstelveen" /> */}
-
-        {/* Profile Type Toggle */}
-        <label className="text-sm text-gray-500 block mb-2">Profile type</label>
-
-        <div className="flex gap-2">
-          <button
-            className={`flex-1 py-2 rounded-full text-sm ${
-              profileType === "Tenant"
-                ? "bg-orange-600 text-white font-medium"
-                : "bg-gray-100 text-gray-400"
-            }`}
-            onClick={() => handleProfileTypeChange("Tenant")}
-          >
-            Tenant
-          </button>
-          <button
-            className={`flex-1 py-2 rounded-full text-sm ${
-              profileType === "Landlord"
-                ? "bg-orange-600 text-white font-medium"
-                : "bg-gray-100 text-gray-400"
-            }`}
-            onClick={() => handleProfileTypeChange("Landlord")}
-          >
-            Landlord
-          </button>
-        </div>
-
-        {/* Tenant properties */}
-        {profileType == "Tenant" && (
-          <div className="w-full space-y-4 mt-4">
-            {/* Date of Birth */}
-            <InputField label="Date of birth" type="date" />
-            {/* Nationality */}
-            <SelectField
-              label="Nationality"
-              options={["Arab", "Dutch", "French", "Other"]}
-            />
-            {/* Owner Type */}
-            <SelectField
-              label="Owner type"
-              options={[
-                "Roommate",
-                "Private Owner",
-                "Real Estate Agent",
-                "N/A",
-              ]}
-            />
-
-            {/* Speaks Languages (Searchable Dropdown with Tags) */}
-            <SearchableMultiSelectField
-              label="Speaks languages"
-              options={[
-                "English",
-                "Dutch",
-                "Arabic",
-                "Spanish",
-                "French",
-                "German",
-                "Italian",
-              ]}
-            />
-            {/* Living in Country */}
-            <SelectField
-              label="Living in country"
-              options={["Netherlands", "Germany", "France", "Spain"]}
-            />
-            {/* Status */}
-            <SelectField
-              label="Status"
-              options={[
-                "Student",
-                "Working Student",
-                "Working",
-                "Looking for a job",
-              ]}
-            />
-            {/* Has a Pet */}
-            <YesNoToggle label="Has a pet" />
-            {/* Smoking Inside */}
-            <YesNoToggle label="Smoking inside" />
-            {/* Member of Student Association */}
-            <YesNoToggle label="Member of student association" />
+      <div className="w-full h-full">
+        <div className="m-4">
+          <div className="flex gap-2" ref={topRef}>
+            <button
+              className={`flex-1 py-2 rounded-full text-sm ${
+                profileType === "Tenant"
+                  ? "bg-orange-600 text-white font-medium"
+                  : "bg-gray-100 text-gray-400"
+              }`}
+              onClick={() => handleProfileTypeChange("Tenant")}
+            >
+              Tenant
+            </button>
+            <button
+              className={`flex-1 py-2 rounded-full text-sm ${
+                profileType === "Landlord"
+                  ? "bg-orange-600 text-white font-medium"
+                  : "bg-gray-100 text-gray-400"
+              }`}
+              onClick={() => handleProfileTypeChange("Landlord")}
+            >
+              Landlord
+            </button>
           </div>
-        )}
+          {profileType === "Landlord" ? (
+            <div
+              className="w-full flex flex-col gap-4 mt-4 overflow-y-auto overflow-hidden bg-red-300"
+              style={{ height: `${height}px` }}
+            >
+              {/* Owner Type */}
+              <SelectField
+                label="Owner type"
+                options={[
+                  "Roommate",
+                  "Private Owner",
+                  "Real Estate Agent",
+                  "N/A",
+                ]}
+              />
 
-        <div className="w-full h-[.25rem] bg-gray-200 rounded-full"></div>
+              {/* Description */}
+              <div>
+                <label className="text-sm text-gray-500 block mb-1">
+                  Description
+                </label>
+                <textarea
+                  className="w-full rounded-2xl border border-gray-300 p-3 text-sm"
+                  rows={4}
+                  defaultValue="About my self About my self About my self About my self"
+                />
+              </div>
 
-        {/* submit button */}
-        <button
-          className={`w-full py-2 rounded-full text-sm bg-red-50 text-red-500 font-medium`}
-          onClick={() => {}}
-        >
-          Update
-        </button>
+              {/* Living in property */}
+              <YesNoToggle label="Living in property" />
+
+              <button className="w-full mt-4 border border-[#ff5733] text-[#ff5733] rounded-full py-2 ">
+                Save changes
+              </button>
+            </div>
+          ) : (
+            <div
+              className="w-full flex flex-col gap-4 mt-4 overflow-y-auto overflow-hidden bg-blue-300"
+              style={{ height: `${height}px` }}
+            >
+              {/* Description */}
+              <div>
+                <label className="text-sm text-gray-500 block mb-1">
+                  Description
+                </label>
+                <textarea
+                  className="w-full rounded-2xl border border-gray-300 p-3 text-sm"
+                  rows={4}
+                  defaultValue="About my self About my self About my self About my self"
+                />
+              </div>
+
+              {/* Date of Birth */}
+              <InputField label="Date of birth" type="date" />
+
+              {/* Spoken Languages (Searchable Dropdown with Tags) */}
+              <SearchableMultiSelectField
+                label="Spoken languages"
+                options={[
+                  "English",
+                  "Dutch",
+                  "Arabic",
+                  "Spanish",
+                  "French",
+                  "German",
+                  "Italian",
+                ]}
+              />
+
+              {/* Living in Country */}
+              <SelectField
+                label="Country of residence"
+                options={["Netherlands", "Germany", "France", "Spain"]}
+              />
+
+              {/* Nationality */}
+              <SelectField
+                label="Nationality"
+                options={["Arab", "Dutch", "French", "Other"]}
+              />
+
+              {/* Status */}
+              <SelectField
+                label="Student"
+                options={[
+                  "Student",
+                  "Working Student",
+                  "Working",
+                  "Looking for a job",
+                ]}
+              />
+
+              {/* Education level */}
+              <SelectField
+                label="Status"
+                options={["College", "Bachelor", "Master", "...."]}
+              />
+
+              {/* Has a Pet */}
+              <YesNoToggle label="Pet" />
+
+              {/* Smoking Inside */}
+              <YesNoToggle label="Smoking" />
+
+              <button className="w-full mt-6 border border-[#ff5733] text-[#ff5733] rounded-full py-2 ">
+                Save changes
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -263,7 +265,7 @@ function SelectField({ label, options = [], value, onChange }) {
     <div className="relative">
       <label className="text-sm text-gray-500 block mb-1">{label}</label>
       <select
-        className="w-full appearance-none px-4 py-3 text-sm rounded-full border border-gray-300 focus:outline-none pr-10"
+        className="w-full appearance-none px-4 py-3 text-sm rounded-2xl border border-gray-300 focus:outline-none pr-10"
         value={value}
         onChange={onChange}
       >
@@ -334,7 +336,7 @@ function SearchableMultiSelectField({ label, options = [] }) {
         {selectedItems.map((item) => (
           <div
             key={item}
-            className="flex items-center bg-red-100 text-red-500 px-2 py-1 rounded-full"
+            className="flex items-center text-[0.6rem] bg-white text-red-500 px-2 py-1 rounded-full border border-red-500"
           >
             {item}
             <span
@@ -362,7 +364,7 @@ function YesNoToggle({ label, value, onChange }) {
     <div>
       <label className="text-sm text-gray-500 block mb-2">{label}</label>
       <div className="flex gap-2">
-        {["Yes", "No"].map((option) => (
+        {["Yes", "No", "N/A"].map((option) => (
           <button
             key={option}
             onClick={() => handleClick(option)}
