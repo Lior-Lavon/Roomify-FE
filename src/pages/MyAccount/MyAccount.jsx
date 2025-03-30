@@ -8,23 +8,6 @@ const MyAccount = () => {
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    const preventTouchMove = (e) => {
-      console.log("usePreventBodyScroll preventTouchMove");
-      e.preventDefault();
-    };
-
-    document.body.addEventListener("touchmove", preventTouchMove, {
-      passive: false,
-    });
-
-    return () => {
-      document.body.removeEventListener("touchmove", preventTouchMove, {
-        passive: false,
-      });
-    };
-  }, []);
-
-  useEffect(() => {
     if (profileImageRef.current) {
       const topBottom = profileImageRef.current.getBoundingClientRect().bottom;
       let bottomTop = window.innerHeight;
