@@ -17,7 +17,10 @@ const MyAccount = () => {
     ///////
     const handleBlur = () => {
       // Give the keyboard a moment to close before resetting
+      console.log("handleBlur 1");
+
       setTimeout(() => {
+        console.log("handleBlur 2");
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 100);
     };
