@@ -62,3 +62,8 @@ body {
   padding-right: 4px;
   white-space: nowrap;
 }
+
+/* Tailwind example */
+.min-h-screen-ios {
+  min-height: -webkit-fill-available;
+}

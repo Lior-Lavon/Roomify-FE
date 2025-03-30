@@ -16,7 +16,7 @@ const MyAccount = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-screen min-h-screen-ios">
       {/* Top Div */}
       <TopBar leftIcon="burger" />
 
