@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Pencil, Check } from "lucide-react";
 import FemaleImage from "../../assets/female.jpg";
-import { RoomCardMini, TopBar } from "../../components";
+import { InputField, RoomCardMini, TopBar } from "../../components";
 import usePreventPullToRefresh from "../../utils/hooks/usePreventPullToRefresh";
 
 const ProfileView = () => {
@@ -92,39 +92,6 @@ const ProfileView = () => {
           placeholder="Enter your name"
           onChange={(val) => console.log("New value:", val)}
         />
-        {/* Update Password Section */}
-        <div className="w-full">
-          <div
-            className="flex justify-between items-center cursor-pointer"
-            onClick={togglePasswordFields}
-          >
-            <label className="text-sm text-gray-500 block mb-2">
-              Update password
-            </label>
-            <span
-              className={`transform transition-transform duration-300 ${
-                showPasswordFields ? "rotate-180" : ""
-              }`}
-            >
-              ▼
-            </span>
-          </div>
-          <div
-            className={`overflow-hidden transition-max-height duration-300 space-y-4  ${
-              showPasswordFields ? "max-h-50" : "max-h-0"
-            }`}
-          >
-            <div className="w-full p-2 border-1 border-gray-200 rounded-xl space-y-4">
-              <InputField label="" placeholder="Password" type="password" />
-              <InputField
-                label="Retype password"
-                placeholder="Password"
-                type="password"
-              />
-            </div>
-          </div>
-        </div>
-
         {/* Description */}
         <div>
           <label className="text-sm text-gray-500 block mb-1">
@@ -238,28 +205,6 @@ const ProfileView = () => {
 };
 
 export default ProfileView;
-
-// InputField Component
-function InputField({
-  label,
-  type = "text",
-  value = "",
-  placeholder = "",
-  isDisabled = false,
-}) {
-  return (
-    <div>
-      <label className="text-sm text-gray-500 block mb-1">{label}</label>
-      <input
-        type={type}
-        defaultValue={value}
-        placeholder={placeholder}
-        disabled={isDisabled}
-        className="w-full px-4 py-3 text-sm rounded-full bg-gray-100 focus:outline-none"
-      />
-    </div>
-  );
-}
 
 function InputFieldV2({
   label,

@@ -6,6 +6,7 @@ import SignIn from "./SignIn/SignIn";
 import RenterChat from "./RenterChat/RenterChat";
 import FavoritesView from "./Favorites/FavoritesView";
 import ProfileView from "./Profile/ProfileView";
+import MyAccount from "./MyAccount/MyAccount";
 
 export {
   HomeView,
@@ -16,4 +17,5 @@ export {
   RenterChat,
   FavoritesView,
   ProfileView,
+  MyAccount,
 };

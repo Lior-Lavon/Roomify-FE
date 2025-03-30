@@ -17,6 +17,7 @@ import AnswerChip from "./AnswerChip/AnswerChip";
 import ShareAdvert from "./ShareAdvert/ShareAdvert";
 import ShareAdvertCard from "./RoomCard/ShareAdvertCard";
 import ChatWithOwnerTopBar from "./ChatWithOwner/ChatWithOwnerTopBar";
+import InputField from "./InputField/InputField";
 
 export {
   RoomCard,
@@ -38,4 +39,5 @@ export {
   ShareAdvert,
   ShareAdvertCard,
   ChatWithOwnerTopBar,
+  InputField,
 };

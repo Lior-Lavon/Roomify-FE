@@ -8,6 +8,7 @@ import {
   RenterChat,
   FavoritesView,
   ProfileView,
+  MyAccount,
 } from "./pages";
 import { useEffect, useState } from "react";
 import { getSecurityTokenFromLocalStorage } from "./utils/localStorage";
@@ -62,6 +63,7 @@ function App() {
 
           <Route path="/landing" element={<HomeView />} />
           <Route path="/profile" element={<ProfileView />} />
+          <Route path="/account" element={<MyAccount />} />
           <Route path="/favorites" element={<FavoritesView />} />
           <Route path="/chats" element={<RenterChat />} />
           <Route path="/signin" element={<SignIn />} />

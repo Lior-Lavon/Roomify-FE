@@ -11,22 +11,22 @@ import { IoMdClose } from "react-icons/io";
 const LoginMenuItems = [
   {
     id: 1,
+    name: "My Account",
+    link: "/account",
+  },
+  {
+    id: 2,
     name: "My Profile",
     link: "/profile",
   },
   {
-    id: 2,
+    id: 3,
     name: "My Favorite",
     link: "/favorites",
   },
   {
-    id: 3,
-    name: "My Properties",
-    link: "",
-  },
-  {
     id: 4,
-    name: "Section Name",
+    name: "My Properties",
     link: "",
   },
   // {
