@@ -21,7 +21,7 @@ const MyAccount = () => {
       <TopBar leftIcon="burger" />
 
       {/* Profile Picture and Name */}
-      <div className="flex flex-col items-center" ref={profileImageRef}>
+      <div className="flex mt-4 flex-col items-center" ref={profileImageRef}>
         <img
           src={FemaleImage}
           alt="Profile"
@@ -34,17 +34,21 @@ const MyAccount = () => {
         className="w-full mt-4 overflow-y-auto overflow-hidden"
         style={{ height: `${height}px` }}
       >
-        {/* account verified */}
-        <div className="w-full px-4 bg-gray-100 rounded-full flex items-center justify-between text-green-500">
-          <p className="my-2">This account is verified</p>
-          <IoMdCheckmark className="w-5 h-5" />
-        </div>
+        <div className="w-[90%] mx-auto">
+          {/* account verified */}
+          <div className="w-full px-4 bg-gray-100 rounded-full flex items-center justify-between text-green-500">
+            <p className="my-2">This account is verified</p>
+            <IoMdCheckmark className="w-5 h-5" />
+          </div>
 
-        {/* Email */}
-        <div className="flex flex-col">
-          <label className="text-sm text-gray-500 block mb-1">Your email</label>
-          <div className="w-full px-4 bg-gray-100 rounded-full flex items-center justify-between text-gray-600">
-            <p className="my-2">jacky@gmail.com</p>
+          {/* Email */}
+          <div className="flex flex-col">
+            <label className="text-sm text-gray-500 block mb-1">
+              Your email
+            </label>
+            <div className="w-full px-4 bg-gray-100 rounded-full flex items-center justify-between text-gray-600">
+              <p className="my-2">jacky@gmail.com</p>
+            </div>
           </div>
         </div>
 
