@@ -3,6 +3,8 @@ import { Pencil, Check } from "lucide-react";
 import FemaleImage from "../../assets/female.jpg";
 import { InputField, RoomCardMini, TopBar } from "../../components";
 import usePreventPullToRefresh from "../../utils/hooks/usePreventPullToRefresh";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 const ProfileView = () => {
   const topRef = useRef(null);
@@ -10,6 +12,7 @@ const ProfileView = () => {
   const [height, setHeight] = useState(0);
   const [profileType, setProfileType] = useState("Landlord");
   const [showPasswordFields, setShowPasswordFields] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
 
   const handleProfileTypeChange = (type) => {
     setProfileType(type);
@@ -122,7 +125,17 @@ const ProfileView = () => {
               </div>
 
               {/* Date of Birth */}
-              <InputField label="Date of birth" type="date" />
+              {/* <InputField label="Date of birth" type="date" /> */}
+              <div className="flex flex-col">
+                <label className="text-sm text-gray-500 block mb-1">
+                  Date of birth
+                </label>
+                <DatePicker
+                  className="w-full border border-gray-300 rounded-2xl py-2 pl-2"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                />
+              </div>
 
               {/* Spoken Languages (Searchable Dropdown with Tags) */}
               <SearchableMultiSelectField
@@ -137,19 +150,16 @@ const ProfileView = () => {
                   "Italian",
                 ]}
               />
-
               {/* Living in Country */}
               <SelectField
                 label="Country of residence"
                 options={["Netherlands", "Germany", "France", "Spain"]}
               />
-
               {/* Nationality */}
               <SelectField
                 label="Nationality"
                 options={["Arab", "Dutch", "French", "Other"]}
               />
-
               {/* Status */}
               <SelectField
                 label="Student"
@@ -160,19 +170,15 @@ const ProfileView = () => {
                   "Looking for a job",
                 ]}
               />
-
               {/* Education level */}
               <SelectField
                 label="Status"
                 options={["College", "Bachelor", "Master", "...."]}
               />
-
               {/* Has a Pet */}
               <YesNoToggle label="Pet" />
-
               {/* Smoking Inside */}
               <YesNoToggle label="Smoking" />
-
               <button className="w-full mt-6 border border-[#ff5733] text-[#ff5733] rounded-full py-2 ">
                 Save changes
               </button>
