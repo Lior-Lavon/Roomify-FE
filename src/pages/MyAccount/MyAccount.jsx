@@ -17,10 +17,7 @@ const MyAccount = () => {
     ///////
     const handleBlur = () => {
       // Give the keyboard a moment to close before resetting
-      console.log("handleBlur 1");
-
       setTimeout(() => {
-        console.log("handleBlur 2");
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 100);
     };
@@ -37,6 +34,10 @@ const MyAccount = () => {
     <div className="w-full h-screen min-h-screen-ios">
       {/* Top Div */}
       <TopBar leftIcon="burger" />
+
+      <p className="pl-4 mt-2 mb-1 text-lg sans-bold text-orange-600">
+        My Account
+      </p>
 
       {/* Profile Picture and Name */}
       <div className="flex mt-4 flex-col items-center" ref={profileImageRef}>
