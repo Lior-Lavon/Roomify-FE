@@ -50,7 +50,7 @@ const MyAccount = () => {
       </div>
 
       <div
-        className="w-full mt-4 overflow-y-auto overflow-hidden"
+        className="w-full mt-4 overflow-y-auto overflow-hidden bg-red-300"
         style={{ height: `${height}px` }}
       >
         <div className="w-[90%] mx-auto flex flex-col gap-4">
