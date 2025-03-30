@@ -34,7 +34,7 @@ const MyAccount = () => {
         className="w-full mt-4 overflow-y-auto overflow-hidden"
         style={{ height: `${height}px` }}
       >
-        <div className="w-[90%] mx-auto">
+        <div className="w-[90%] mx-auto flex flex-col gap-4">
           {/* account verified */}
           <div className="w-full px-4 bg-gray-100 rounded-full flex items-center justify-between text-green-500">
             <p className="my-2">This account is verified</p>
@@ -50,40 +50,44 @@ const MyAccount = () => {
               <p className="my-2">jacky@gmail.com</p>
             </div>
           </div>
-        </div>
 
-        {/* Password */}
-        <div className="flex flex-col">
-          <label className="text-sm text-gray-500 block mb-1">
-            New password
-          </label>
-          <InputField label="" placeholder="New password" type="password" />
-        </div>
+          {/* Password */}
+          <div className="flex flex-col">
+            <label className="text-sm text-gray-500 block mb-1">
+              New password
+            </label>
+            <InputField label="" placeholder="New password" type="password" />
+          </div>
 
-        {/* Password */}
-        <div className="flex flex-col">
-          <label className="text-sm text-gray-500 block mb-1">
-            Repeat password
-          </label>
-          <InputField label="" placeholder="Repeat password" type="password" />
-        </div>
+          {/* Password */}
+          <div className="flex flex-col">
+            <label className="text-sm text-gray-500 block mb-1">
+              Repeat password
+            </label>
+            <InputField
+              label=""
+              placeholder="Repeat password"
+              type="password"
+            />
+          </div>
 
-        {/* Phone number */}
-        <div className="flex flex-col">
-          <label className="text-sm text-gray-500 block mb-1">
-            Phone number
-          </label>
-          <InputField label="" placeholder="Phone number" type="text" />
-        </div>
+          {/* Phone number */}
+          <div className="flex flex-col">
+            <label className="text-sm text-gray-500 block mb-1">
+              Phone number
+            </label>
+            <InputField label="" placeholder="Phone number" type="text" />
+          </div>
 
-        {/* Save changes */}
-        <div className="w-full flex flex-col gap-4 mb-10 mt-4">
-          <button className="border border-[#ff5733] text-[#ff5733] rounded-full py-2">
-            Save changes
-          </button>
-          <button className="bg-[#fff6f6] text-[#c10002] rounded-full py-2">
-            Delete account
-          </button>
+          {/* Save changes */}
+          <div className="w-full flex flex-col gap-4 mb-10 mt-4">
+            <button className="border border-[#ff5733] text-[#ff5733] rounded-full py-2">
+              Save changes
+            </button>
+            <button className="bg-[#fff6f6] text-[#c10002] rounded-full py-2">
+              Delete account
+            </button>
+          </div>
         </div>
       </div>
     </div>
