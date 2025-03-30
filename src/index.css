@@ -6,9 +6,12 @@
 @import "tailwindcss";
 @tailwindcss /typography
 
+html,
 body {
   padding: 0;
   margin: 0;
+  overscroll-behavior: none;
+  touch-action: manipulation;
 }
 
 .gm-style-iw button[aria-label="Close"] {
