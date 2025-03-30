@@ -13,6 +13,21 @@ const MyAccount = () => {
       let bottomTop = window.innerHeight;
       setHeight(bottomTop - topBottom); // Calculate space between them
     }
+
+    ///////
+    const handleBlur = () => {
+      // Give the keyboard a moment to close before resetting
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
+    };
+
+    const inputs = document.querySelectorAll("input, textarea");
+    inputs.forEach((input) => input.addEventListener("blur", handleBlur));
+
+    return () => {
+      inputs.forEach((input) => input.removeEventListener("blur", handleBlur));
+    };
   }, []);
 
   return (
