@@ -33,158 +33,174 @@ const ProfileView = () => {
   return (
     <div className="w-full h-full">
       <TopBar leftIcon="burger" />
-
-      <p className="pl-4 mt-2 mb-1 text-lg sans-bold text-orange-600">
+      <p
+        ref={topRef}
+        className="pl-4 mt-2 mb-1 text-lg sans-bold text-orange-600"
+      >
         My Profile
       </p>
 
-      {/* Profile Picture and Name */}
-      <div className="flex flex-col items-center">
-        <img
-          src={FemaleImage}
-          alt="Profile"
-          className="w-20 h-20 object-cover rounded-full mb-2"
-        />
-        <h2 className="text-xl font-semibold">Jacky Varsano</h2>
-      </div>
+      <div
+        className="w-full h-full flex flex-col gap-4 overflow-y-auto
+      overflow-hidden px-4"
+        style={{ height: `${height}px` }}
+      >
+        {/* Profile Picture and Name */}
+        <div className="flex flex-col items-center">
+          <img
+            src={FemaleImage}
+            alt="Profile"
+            className="w-20 h-20 object-cover rounded-full mb-2"
+          />
+          <h2 className="text-xl font-semibold">Jacky Varsano</h2>
+        </div>
 
-      <div className="w-full h-full">
-        <div className="m-4">
-          <div className="flex gap-2" ref={topRef}>
-            <button
-              className={`flex-1 py-2 rounded-full text-sm ${
-                profileType === "Tenant"
-                  ? "bg-orange-600 text-white font-medium"
-                  : "bg-gray-100 text-gray-400"
-              }`}
-              onClick={() => handleProfileTypeChange("Tenant")}
-            >
-              Tenant
-            </button>
-            <button
-              className={`flex-1 py-2 rounded-full text-sm ${
-                profileType === "Landlord"
-                  ? "bg-orange-600 text-white font-medium"
-                  : "bg-gray-100 text-gray-400"
-              }`}
-              onClick={() => handleProfileTypeChange("Landlord")}
-            >
-              Landlord
+        <input
+          type="text"
+          name="First name"
+          placeholder="First name"
+          className="w-full border border-gray-300 py-2 px-4 rounded-xl"
+          // onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="Last name"
+          placeholder="Last name"
+          className="w-full border border-gray-300 py-2 px-4 rounded-xl"
+          // onChange={handleChange}
+        />
+
+        <SelectField label="Gender" options={["Male", "Female", "N/A"]} />
+
+        <div className="flex gap-2">
+          <button
+            className={`flex-1 py-2 rounded-full text-sm ${
+              profileType === "Tenant"
+                ? "bg-orange-600 text-white font-medium"
+                : "bg-gray-100 text-gray-400"
+            }`}
+            onClick={() => handleProfileTypeChange("Tenant")}
+          >
+            Tenant
+          </button>
+          <button
+            className={`flex-1 py-2 rounded-full text-sm ${
+              profileType === "Landlord"
+                ? "bg-orange-600 text-white font-medium"
+                : "bg-gray-100 text-gray-400"
+            }`}
+            onClick={() => handleProfileTypeChange("Landlord")}
+          >
+            Landlord
+          </button>
+        </div>
+
+        {profileType === "Landlord" ? (
+          <div className="w-full flex flex-col gap-4">
+            {/* Description */}
+            <div>
+              <label className="text-sm text-gray-500 block mb-1">
+                Description
+              </label>
+              <textarea
+                className="w-full rounded-2xl border border-gray-300 p-3 text-sm"
+                rows={4}
+                defaultValue="About my self About my self About my self About my self"
+              />
+            </div>
+
+            {/* Owner Type */}
+            <SelectField
+              label="Owner type"
+              options={[
+                "Roommate",
+                "Private Owner",
+                "Real Estate Agent",
+                "N/A",
+              ]}
+            />
+
+            {/* Living in property */}
+            <YesNoToggle label="Living in property" />
+
+            <button className="w-full mt-4 border border-[#ff5733] text-[#ff5733] rounded-full py-2 ">
+              Save changes
             </button>
           </div>
-          {profileType === "Landlord" ? (
-            <div
-              className="w-full flex flex-col gap-4 mt-4 overflow-y-auto overflow-hidden "
-              style={{ height: `${height}px` }}
-            >
-              {/* Owner Type */}
-              <SelectField
-                label="Owner type"
-                options={[
-                  "Roommate",
-                  "Private Owner",
-                  "Real Estate Agent",
-                  "N/A",
-                ]}
+        ) : (
+          <div className="w-full flex flex-col gap-4 mt-4">
+            {/* Description */}
+            <div>
+              <label className="text-sm text-gray-500 block mb-1">
+                Description
+              </label>
+              <textarea
+                className="w-full rounded-2xl border border-gray-300 p-3 text-sm"
+                rows={4}
+                defaultValue="About my self About my self About my self About my self"
               />
-
-              {/* Description */}
-              <div>
-                <label className="text-sm text-gray-500 block mb-1">
-                  Description
-                </label>
-                <textarea
-                  className="w-full rounded-2xl border border-gray-300 p-3 text-sm"
-                  rows={4}
-                  defaultValue="About my self About my self About my self About my self"
-                />
-              </div>
-
-              {/* Living in property */}
-              <YesNoToggle label="Living in property" />
-
-              <button className="w-full mt-4 border border-[#ff5733] text-[#ff5733] rounded-full py-2 ">
-                Save changes
-              </button>
             </div>
-          ) : (
-            <div
-              className="w-full flex flex-col gap-4 mt-4 overflow-y-auto overflow-hidden"
-              style={{ height: `${height}px` }}
-            >
-              {/* Description */}
-              <div>
-                <label className="text-sm text-gray-500 block mb-1">
-                  Description
-                </label>
-                <textarea
-                  className="w-full rounded-2xl border border-gray-300 p-3 text-sm"
-                  rows={4}
-                  defaultValue="About my self About my self About my self About my self"
-                />
-              </div>
 
-              {/* Date of Birth */}
-              {/* <InputField label="Date of birth" type="date" /> */}
-              <div className="flex flex-col">
-                <label className="text-sm text-gray-500 block mb-1">
-                  Date of birth
-                </label>
-                <DatePicker
-                  className="w-full border border-gray-300 rounded-2xl py-2 pl-2"
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-              </div>
-
-              {/* Spoken Languages (Searchable Dropdown with Tags) */}
-              <SearchableMultiSelectField
-                label="Spoken languages"
-                options={[
-                  "English",
-                  "Dutch",
-                  "Arabic",
-                  "Spanish",
-                  "French",
-                  "German",
-                  "Italian",
-                ]}
+            {/* Date of Birth */}
+            {/* <InputField label="Date of birth" type="date" /> */}
+            <div className="flex flex-col">
+              <label className="text-sm text-gray-500 block mb-1">
+                Date of birth
+              </label>
+              <DatePicker
+                className="w-full border border-gray-300 rounded-2xl py-2 pl-2"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
               />
-              {/* Living in Country */}
-              <SelectField
-                label="Country of residence"
-                options={["Netherlands", "Germany", "France", "Spain"]}
-              />
-              {/* Nationality */}
-              <SelectField
-                label="Nationality"
-                options={["Arab", "Dutch", "French", "Other"]}
-              />
-              {/* Status */}
-              <SelectField
-                label="Student"
-                options={[
-                  "Student",
-                  "Working Student",
-                  "Working",
-                  "Looking for a job",
-                ]}
-              />
-              {/* Education level */}
-              <SelectField
-                label="Status"
-                options={["College", "Bachelor", "Master", "...."]}
-              />
-              {/* Has a Pet */}
-              <YesNoToggle label="Pet" />
-              {/* Smoking Inside */}
-              <YesNoToggle label="Smoking" />
-              <button className="w-full mt-6 border border-[#ff5733] text-[#ff5733] rounded-full py-2 ">
-                Save changes
-              </button>
             </div>
-          )}
-        </div>
+
+            {/* Spoken Languages (Searchable Dropdown with Tags) */}
+            <SearchableMultiSelectField
+              label="Spoken languages"
+              options={[
+                "English",
+                "Dutch",
+                "Arabic",
+                "Spanish",
+                "French",
+                "German",
+                "Italian",
+              ]}
+            />
+            {/* Living in Country */}
+            <SelectField
+              label="Country of residence"
+              options={["Netherlands", "Germany", "France", "Spain"]}
+            />
+            {/* Nationality */}
+            <SelectField
+              label="Nationality"
+              options={["Arab", "Dutch", "French", "Other"]}
+            />
+            {/* Status */}
+            <SelectField
+              label="Student"
+              options={[
+                "Student",
+                "Working Student",
+                "Working",
+                "Looking for a job",
+              ]}
+            />
+            {/* Education level */}
+            <SelectField
+              label="Status"
+              options={["College", "Bachelor", "Master", "...."]}
+            />
+            {/* Has a Pet */}
+            <YesNoToggle label="Pet" />
+            {/* Smoking Inside */}
+            <YesNoToggle label="Smoking" />
+            <button className="w-full mt-6 border border-[#ff5733] text-[#ff5733] rounded-full py-2 ">
+              Save changes
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -246,7 +262,7 @@ function InputFieldV2({
 
 function SelectField({ label, options = [], value, onChange }) {
   return (
-    <div className="relative">
+    <div className="w-full relative">
       <label className="text-sm text-gray-500 block mb-1">{label}</label>
       <select
         className="w-full appearance-none px-4 py-3 text-sm rounded-2xl border border-gray-300 focus:outline-none pr-10"

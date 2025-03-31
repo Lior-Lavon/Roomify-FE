@@ -126,13 +126,13 @@ const TopBar = (props) => {
               } w-screen -ml-2 min-h-[calc(100vh-2.7rem)] rounded-md bg-white text-black text-base shadow-md`}
             >
               {profile ? (
-                <div className="w-full h-full ml-6">
-                  <div className="w-full flex flex-col items-center justify-center gap-2 mt-10">
+                <div className="w-full h-full px-4">
+                  <div className="w-full flex flex-col items-center justify-center gap-2 mt-10 ">
                     <img
                       src={FemaleImage}
                       className="w-20 h-20 rounded-full border-[1px] border-gray-200"
                     />
-                    <p className="sans-bold">User Name</p>
+                    <p className="sans-bold">Full name</p>
                   </div>
 
                   <ul className="">
