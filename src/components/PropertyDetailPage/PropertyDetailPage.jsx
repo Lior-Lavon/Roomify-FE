@@ -117,12 +117,12 @@ const PropertyDetailPage = ({
               closePropertyDetailPage={closePropertyDetailPage}
             />
           </div>
-          {console.log(height)}
+
           <div
             className="w-full my-2 overflow-y-auto overflow-hidden"
-            style={{ height: `${420}px` }}
+            // style={{ height: `${420}px` }}
           >
-            <div className="px-2 flex flex-col gap-[.3rem]">
+            <div className="px-4 flex flex-col gap-[.3rem]">
               <p className="text-lg">{advertInfo?.Title}</p>
 
               <p className="text-[14px]">{advertInfo?.Address}</p>
