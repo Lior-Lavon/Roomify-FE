@@ -66,9 +66,9 @@ const RoomCardMini = memo(
             <div className="flex gap-3 ">
               <div onClick={setMeFavorite}>
                 {advertInfo?.IsFavorite ? (
-                  <MdFavorite className="w-[1.15rem] h-[1.15rem]" />
+                  <MdFavorite className="w-[1.15rem] h-[1.15rem] text-orange-500" />
                 ) : (
-                  <MdFavoriteBorder className="w-[1.15rem] h-[1.15rem]" />
+                  <MdFavoriteBorder className="w-[1.15rem] h-[1.15rem] text-orange-500" />
                 )}
               </div>
               {showShare != undefined && showShare == true && (
