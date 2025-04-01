@@ -43,13 +43,13 @@ const RoomCardMini = memo(
     return (
       <div
         ref={cardRef}
-        className={`border border-orange-200 rounded-xl flex flex-row gap-2 items-center justify-between shadow-[10px_2px_12px_rgba(0,0,0,.1)] `}
+        className={`h-[6rem] border border-orange-200 rounded-xl flex flex-row gap-2 items-center justify-between shadow-[10px_2px_12px_rgba(0,0,0,.1)] `}
         style={{
           width: screenWidth,
         }}
         onClick={onAdvertClick}
       >
-        <div className="w-full h-[6.5rem] flex flex-col justify-between gap-1 pl-2 py-1 ">
+        <div className="w-full h-full flex flex-col justify-between gap-1 pl-2">
           <div className="w-full max-w-[350px] whitespace-normal break-words flex flex-col gap-1">
             <p className="text-[13px] font-bold">{advertInfo?.Title}</p>
             <p className="text-[11px]">{advertInfo?.Address}</p>
