@@ -42,7 +42,7 @@ const PropertyDetailPage = ({
   useEffect(() => {
     if (topRef.current) {
       const topBottom = topRef.current.getBoundingClientRect().bottom;
-      let bottomTop = window.innerHeight - 56;
+      let bottomTop = window.innerHeight;
 
       setHeight(bottomTop - topBottom);
     }
@@ -102,25 +102,25 @@ const PropertyDetailPage = ({
   return (
     <div>
       <div
-        className={`w-full h-full z-90 fixed top-0 right-0 transition-transform duration-500 flex flex-col bg-red-500 ${
+        className={`w-full h-full z-90 fixed top-0 right-0 transition-transform duration-500 flex flex-col bg-white ${
           isVisible ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Top Div */}
         <TopBar leftIcon="burger" rightIcon="login" />
 
-        <div className="w-full h-full flex flex-col bg-white relative">
-          <div className="" onClick={showImageGallery} ref={topRef}>
+        <div className="w-full flex flex-col bg-white relative">
+          <div onClick={showImageGallery} ref={topRef}>
             <ImageSlider
               imageList={advertInfo?.Images}
               dot_count={4}
               closePropertyDetailPage={closePropertyDetailPage}
             />
           </div>
-
+          {console.log(height)}
           <div
-            className="w-full my-2 overflow-y-auto "
-            style={{ height: `${height}px` }}
+            className="w-full my-2 overflow-y-auto overflow-hidden"
+            style={{ height: `${420}px` }}
           >
             <div className="px-2 flex flex-col gap-[.3rem]">
               <p className="text-lg">{advertInfo?.Title}</p>
