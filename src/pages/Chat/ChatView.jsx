@@ -15,6 +15,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { ChatOptions } from "../../MockData/ChatOptions";
 import ChatViewTopBar from "./ChatViewTopBar";
+import { RiArrowLeftSLine } from "react-icons/ri";
 
 const ChatView = ({ isVisible, closeChatViewPage }) => {
   const dispatch = useDispatch();
@@ -334,14 +335,21 @@ const ChatView = ({ isVisible, closeChatViewPage }) => {
         {/* Top Div */}
         <TopBar leftIcon="burger" rightIcon="login" />
 
-        {/* back view */}
-        <ChatViewTopBar closeChatViewPage={closeChatViewPage} />
-
+        {/* <ChatViewTopBar closeChatViewPage={closeChatViewPage} /> */}
         {/* Middle Div (Flexible) */}
         <div className="w-full flex-1 flex flex-col" ref={containerRef}>
-          {/* Top Div */}
-          <div className="" style={{ height: heights.top }}>
+          <div className="w-full relative" style={{ height: heights.top }}>
+            {/* Top Div */}
             <MapView properties={roomList} />
+
+            <div
+              className="w-8 h-8 z-20 ml-4 mt-2 rounded-full absolute top-0"
+              onClick={closeChatViewPage}
+            >
+              <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
+                <RiArrowLeftSLine className="text-[40px] text-black" />
+              </div>
+            </div>
           </div>
 
           <div
@@ -372,7 +380,6 @@ const ChatView = ({ isVisible, closeChatViewPage }) => {
             </div>
           </div>
         </div>
-
         {/* Bottom Div */}
         <ChatFooter pageType={"chat"} />
       </div>
