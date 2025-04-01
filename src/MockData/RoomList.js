@@ -9,8 +9,8 @@ import Image7 from "../assets/room7.jpeg";
 export const RoomList = [
   {
     Id: 1,
-    Title: "Cozy Studio in City Center",
-    Address: "Damrak 1, 1012 LG Amsterdam",
+    Title: "Cozy Studio in City Center kjhk kjhjij",
+    Address: "Damrak 1, 1012 LG Amsterdam jhg jhgjgjh ",
     Description:
       "A compact, fully furnished studio located in the heart of Amsterdam. Ideal for singles or students, just minutes away from shops, cafes, and public transport. Includes private kitchenette and en-suite bathroom.",
     Images: [Image1, Image2, Image3],
@@ -20,8 +20,8 @@ export const RoomList = [
   },
   {
     Id: 2,
-    Title: "Bright Room with Canal View",
-    Address: "Prinsengracht 267, 1016 GV Amsterdam",
+    Title: "Bright Room with Canal View lior lavon",
+    Address: "Prinsengracht 267, 1016 GV Amsterdam jhg jg j",
     Description:
       "Spacious and sunlit room overlooking the beautiful Prinsengracht canal. Comes with a comfortable bed, desk, and ample closet space. Shared kitchen and bathroom in a quiet, well-maintained apartment.",
     Images: [Image2, Image3, Image5],

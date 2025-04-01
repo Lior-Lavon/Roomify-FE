@@ -376,7 +376,6 @@ const ChatView = ({ isVisible, closeChatViewPage }) => {
         {/* Bottom Div */}
         <ChatFooter pageType={"chat"} />
       </div>
-
       {/* show property view */}
       <PropertyDetailPage
         isVisible={showPropertyDetailPage.show}

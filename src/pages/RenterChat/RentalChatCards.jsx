@@ -22,7 +22,7 @@ const RentalChatCards = ({ chatId, handleChatSelect }) => {
         <div className="flex-2 flex flex-col text-[.7rem] text-gray-500">
           <p className="text-sm">Room name</p>
           <p className="">Address ...</p>
-          <p className="">Landlord name</p>
+          <p className="">Landlord name !!</p>
         </div>
         {/* Last message */}
         <div className="w-[20%] flex flex-col gap-2 justify-end text-sm text-gray-500">
