@@ -155,7 +155,7 @@ const PropertyDetailPage = ({
                 <MapView properties={[advertInfo]} />
               </div>
 
-              <div className="w-full text-[12px] flex flex-col gap-[.2rem]">
+              {/* <div className="w-full text-[12px] flex flex-col gap-[.2rem]">
                 <div className="flex">
                   <p className="w-[50%]">Shower</p>
                   <p className="w-[50%]">Stove</p>
@@ -176,8 +176,8 @@ const PropertyDetailPage = ({
                   <p className="w-[50%]">Bed</p>
                   <p className="w-[50%]">Internet</p>
                 </div>
-              </div>
-              <div className="w-full h-20 bg-white"></div>
+              </div> */}
+              {/* <div className="w-full h-20 bg-white"></div> */}
             </div>
           </div>
 
